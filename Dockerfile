@@ -21,7 +21,7 @@ RUN apt-get update && \
     update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100 && \
     rm -rf /var/lib/apt/lists/*
 
-FROM artifactory.galois.com:5004/tob-llvm-wedlock:155b9cdb as tob-llvm-wedlock
+FROM ghcr.io/trailofbits/llvm-wedlock:c2993fa3ff6ecf27eadabb5c725e8a572c28dd76 as tob-llvm-wedlock
 FROM base as dev
 
 # TODO(lb): Remove the last three lines of dependencies and download pre-built
