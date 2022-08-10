@@ -1,4 +1,7 @@
-"""Request and response models for the CHESS challenge broker's APIs."""
+"""Request and response models for the CHESS challenge broker's APIs.
+
+See doc/hacking.rst#History.
+"""
 
 import enum
 from typing import Dict, List, Optional

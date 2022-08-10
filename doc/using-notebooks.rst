@@ -7,14 +7,14 @@ MATE Python Notebooks
 
 MATE provides a `Jupyter Notebook <https://jupyter.org/>`_ server for creating notebooks that can be used to write custom queries in Python of the MATE code property graph.
 
-The MATE notebook server is exposed via web interface: `<http://YOUR_CHESS_SYSTEM:8889/>`_
+The MATE notebook server is exposed via web interface: `<http://localhost:8889/>`_
 
 
 *****************
 Create a notebook
 *****************
 
-Navigate to the MATE notebook server at `<http://YOUR_CHESS_SYSTEM:8889/>`_ and use the "New" dropdown to create a new Python3 notebook.
+Navigate to the MATE notebook server at `<http://localhost:8889/>`_ and use the "New" dropdown to create a new Python3 notebook.
 
 .. figure:: assets/create-notebook.png
    :scale: 35
@@ -34,7 +34,7 @@ Load the desired code property graph
 
 Within a python notebook, you need to identify the Code Property Graph you wish to query.
 You'll need the Build Id for the target you're interested in.
-You can copy it from the MATE dashboard: `<http://YOUR_CHESS_SYSTEM:8050/>`_
+You can copy it from the MATE dashboard: `<http://localhost:8050/>`_
 
 .. figure:: assets/get-build-id.png
    :scale: 35

@@ -31,14 +31,14 @@ The UsageFinder UI leverages the built-in `Jupyter widgets <https://ipywidgets.r
 Accessing UsageFinder
 *********************
 
-UsageFinder is included with MATE, and is available from the ``For Expert->Notebooks`` link on the MATE dashboard: `<http://YOUR_CHESS_SYSTEM:8050/>`_
+UsageFinder is included with MATE, and is available from the ``For Expert->Notebooks`` link on the MATE dashboard: `<http://localhost:8050/>`_
 
 .. figure:: assets/mate-dashboard-notebooks.png
    :scale: 35
 
    Access MATE Notebooks from the Dashboard
 
-Then in the Jupyter interface (also available via `<http://YOUR_CHESS_SYSTEM:8889/>`_), open ``examples/usage-finder.ipynb``:
+Then in the Jupyter interface (also available via `<http://localhost:8889/>`_), open ``examples/usage-finder.ipynb``:
 
 .. figure:: assets/jupyter-list-usagefinder.png
    :scale: 35

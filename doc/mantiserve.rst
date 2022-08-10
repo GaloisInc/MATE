@@ -26,12 +26,12 @@ Usage
 .. _mantiserve-usage:
 
 The primary usage of Mantiserve is through the REST API located at
-`<http://YOUR_CHESS_SYSTEM:8666/api/v1/>`_, which you can visit on your browser for a nicely
+`<http://localhost:8666/api/v1/>`_, which you can visit on your browser for a nicely
 formatted FastAPI help page where you can hit the endpoints and peruse the different message
 schemas.
 
 Each Mantiserve task kind requires a ``build_id`` (listed next to each target on the MATE Dashboard
-at `<http://YOUR_CHESS_SYSTEM:8050/build>`_). This build ID is used to determine Manticore's target
+at `<http://localhost:8050/build>`_). This build ID is used to determine Manticore's target
 binary, as well as the Docker image to isolate Manticore's execution within (unless
 overridden by :ref:`docker_image <specifying-a-docker_image>`).
 

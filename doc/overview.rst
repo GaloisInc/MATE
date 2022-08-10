@@ -112,13 +112,12 @@ inputs that demonstrate the insecurity of the program. See :doc:`Using Flowfinde
 Symbolic Execution with Manticore
 =================================
 
-One of the goals of the CHESS program is to not only find bugs, but generate
-proofs of vulnerability (PoVs) that demonstrate the problems in the target
-programs. MATE's approach to assisted PoV generation uses binary-level symbolic
-execution with Manticore (developed by Trail of Bits). While MATE must have
-access to the program source and does extensive analysis at that level,
-binary-level symbolic execution helps ensure that MATE only generates true
-exploits.
+One of the goals of MATE is to not only find bugs, but generate proofs of
+vulnerability (PoVs) that demonstrate the problems in the target programs.
+MATE's approach to assisted PoV generation uses binary-level symbolic execution
+with Manticore (developed by Trail of Bits). While MATE must have access to the
+program source and does extensive analysis at that level, binary-level symbolic
+execution helps ensure that MATE only generates true exploits.
 
 Symbolic execution is incredibly powerful, in that it can solve complicated
 constraints and generate inputs to a program that cause very specific behavior.

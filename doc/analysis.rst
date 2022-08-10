@@ -59,8 +59,7 @@ Here are examples of how to call each endpoint directly.
 
 .. TIP::
   Replace ``localhost:8666`` as needed with the IP and port number of the MATE
-  API service in your local environment (e.g. the integrated CHESS system serves
-  this on port 8666 by default).
+  API service in your local environment.
 
 ..
     Note(AC): This section should change as soon as there is a MATE client (#939).

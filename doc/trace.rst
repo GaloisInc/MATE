@@ -44,7 +44,7 @@ Collect traces for ``example_1``::
 To generate an interesting trace, you'll need to send inputs to the running binary. First start the
 instrumented binary running by executing the above command.
 
-To interact with ``example_1``, and likely all other challenge problems, you need to open another
+To interact with ``example_1``, and likely all other programs, you need to open another
 shell into the same docker image and use ``netcat``. You can do this by doing ``docker ps``,
 finding the image name (ie, it'll be something like ``musing-jackson``), and then doing ``docker
 exec -it <NAME> /bin/bash``. Once in the docker image, use ``netcat``::
@@ -75,4 +75,3 @@ with ``mate trace instrument``.
 To build an instrumented binary of ``example_1`` but not collect traces, run::
 
     mate trace instrument submodules/mate-tests/tests/example_1/challenge_bin/example_1.bin.ll
-
