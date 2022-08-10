@@ -15,3 +15,11 @@ jobs:
       - name: mate-dev
         run: |
           docker build --target dev -t mate-dev .
+
+      - name: bdist
+        run: |
+          docker run --rm -v $(pwd):/mate -it mate-dev:latest ./shake.sh -j bdist
+
+      - name: mate-bdist
+        run: |
+          docker build --target dist -t mate-dist .
