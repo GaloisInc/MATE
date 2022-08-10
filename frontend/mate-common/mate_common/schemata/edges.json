@@ -1,0 +1,710 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$comment": "Comments in this schema are about the implementation of the schema itself, rather than the data it describes, which are covered by the 'description' and 'title' fields.",
+    "definitions": {
+        "base": {
+            "type": "object",
+            "properties": { "edge_kind": { "type": "string" } },
+            "required": ["edge_kind"]
+        },
+        "mod_ref_behavior": {
+            "enum": [
+                "DoesNotAccessMemory",
+                "OnlyReadsArgumentPointees",
+                "OnlyAccessesArgumentPointees",
+                "OnlyAccessesInaccessibleMem",
+                "OnlyReadsMemory",
+                "DoesNotReadMemory"
+            ]
+        }
+    },
+    "oneOf": [
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "These edges map LLVM-level functions to source-level local variables that the corresponding source-level function allocates.",
+                "properties": { "edge_kind": { "enum": [ "FunctionToLocalVariable" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects a function to its argument nodes.",
+                "properties": { "edge_kind": { "enum": [ "FunctionToArgument" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Functions have a unique first basic block, which is always executed when that function is called.",
+                "properties": { "edge_kind": { "enum": [ "FunctionToEntryBlock" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects a basic block to its enclosing function.",
+                "properties": { "edge_kind": { "enum": [ "BlockToParentFunction" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "A block has a set of successor blocks, which is where control flow may transfer to from its terminator instruction.",
+                "backref_description": "A block has a set of predecessor blocks, which may transfer control flow to this block's entry.",
+                "properties": { "edge_kind": { "enum": [ "BlockToSuccessorBlock" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "An instruction's (control-flow) successors are the instructions that can execute immediately after it.",
+                "backref_description": "An instruction's (control-flow) predecessors are the instructions that can execute immediately before it.",
+                "properties": {
+                    "edge_kind": { "enum": [ "InstructionToSuccessorInstruction" ] },
+                    "condition": {
+                        "description": "Conditions appear on successor edges out of block terminator instructions such as 'br', which may transfer control to multiple targets.",
+                        "anyOf": [
+                            { "type": "null" },
+                            {
+                                "description": "TODO(lb)",
+                                "type": "object",
+                                "properties": {
+                                    "expression": { "type": "integer" },
+                                    "value": {
+                                        "oneOf": [
+                                            { "type": "integer" },
+                                            { "type": "boolean" },
+                                            { "type": "null" }
+                                        ]
+                                    }
+                                },
+                                "required": ["expression"],
+                                "additionalProperties": false
+                            }
+                        ]
+                    }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects a basic block to its first instrution.",
+                "properties": { "edge_kind": { "enum": [ "BlockToEntryInstruction" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects a basic block to its last instruction.",
+                "properties": { "edge_kind": { "enum": [ "BlockToTerminatorInstruction" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Every instruction belongs to one block",
+                "properties": { "edge_kind": { "enum": [ "InstructionToParentBlock" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Every LLVM 'Value' has a type, this edge captures that relationship.",
+                "properties": { "edge_kind": { "enum": [ "HasLLVMType" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge relates a function to functions it may call.",
+                "backref_description": "This edge relates a function to functions that may call it.",
+                "properties": {
+                    "edge_kind": { "enum": [ "Callgraph" ] },
+                    "caller_context": { "type": "string" },
+                    "callee_context": { "type": "string" },
+                    "mod_ref_behavior": { "$ref": "#/definitions/mod_ref_behavior" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "caller_context", "callee_context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge relates a 'call' or 'invoke' instruction to the function being called based on the pointer analysis.",
+                "backref_description": "This edge relates a function to the 'call' or 'invoke' instructions that call it based on the pointer analysis.",
+                "properties": {
+                    "edge_kind": { "enum": [ "CallToFunction" ] },
+                    "caller_context": { "type": "string" },
+                    "callee_context": { "type": "string" },
+                    "mod_ref_behavior": { "$ref": "#/definitions/mod_ref_behavior" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "caller_context", "callee_context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "LLVM middle-end functions are paired with the corresponding LLVM IR function",
+                "properties": {
+                    "edge_kind": { "enum": [ "MIFunctionToIRFunction" ] }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge relates a middle-end function to each of the formal parameters that occur in the function's original source",
+                "properties": {
+                    "edge_kind": { "enum": [ "MIFunctionToDWARFArgument" ] }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge relates a middle-end function to each of the local variables that occur in the function's original source",
+                "properties": {
+                    "edge_kind": { "enum": [ "MIFunctionToDWARFLocalVariable" ] }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge relates a middle-end function to its virtual table entries",
+                "properties": {
+                    "edge_kind": { "enum": [ "MIFunctionToVTable" ] }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "LLVM middle-end basic blocks are paired with the corresponding LLVM IR basic block where possible",
+                "properties": { "edge_kind": { "enum": [ "MIBlockToIRBlock" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "x86_64 basic blocks are paired with the corresponding LLVM middle-end basic block where possible",
+                "properties": { "edge_kind": { "enum": [ "MIBlockToASMBlock" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects a basic block to all basic blocks whose execution may depend on the control-flow exiting the block.",
+                "backref_description": "Connects a basic block to blocks that its execution may depend on.",
+                "properties": {
+                    "edge_kind": { "enum": [ "BlockToControlDependentBlock" ] },
+                    "condition": {
+                        "enum": [ "true", "false", "other" ],
+                        "description": "The value of the branch condition when leaving the terminating instruction of the block."
+                    },
+                    "controls": {
+                        "type": "boolean",
+                        "description": "True if execution of the control dependent block is entirely dependent on the control-flow exiting the block."
+                    }
+                },
+                "required": ["condition", "controls"],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects a branching instruction to all instructions whose execution depends on the control-flow exiting the instruction.",
+                "backref_description": "Connects an instruction to branching instructions that its execution depends on.",
+                "properties": {
+                    "edge_kind": { "enum": [ "TerminatorInstructionToControlDependentInstruction" ] },
+                    "condition": {
+                        "enum": [ "true", "false", "other" ],
+                        "description": "The value of the branch condition when leaving the terminating instruction."
+                    },
+                    "controls": {
+                        "type": "boolean",
+                        "description": "True if execution of the control instruction block is entirely dependent on the control-flow exiting the terminator instruction."
+                    }
+                },
+                "required": ["condition", "controls"],
+                "additionalProperties": false
+            }
+        ] },
+    { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects a function to all basic blocks whose execution depends solely on control-flow entering the function.",
+                "backref_description": "Connects a basic block to all functions for which the block's execution depends solely on control-flow entering the function.",
+                "properties": {
+                    "edge_kind": { "enum": [ "FunctionEntryToControlDependentBlock" ] },
+                    "condition": { "enum": [ "other" ] },
+                    "controls": {
+                        "type": "boolean",
+                        "description": "True if execution of the control dependent block is entirely dependent on the control-flow entering the function."
+                    }
+                },
+                "required": ["condition", "controls"],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects a function to all instructions whose execution depends solely on control-flow entering the function.",
+                "backref_description": "Connects an instruction to all functions for which the instructions's execution depends solely on control-flow entering the function.",
+                "properties": {
+                    "edge_kind": { "enum": [ "FunctionEntryToControlDependentInstruction" ] },
+                    "condition": { "enum": [ "other" ] },
+                    "controls": {
+                        "type": "boolean",
+                        "description": "True if execution of the control dependent instruction is entirely dependent on the control-flow entering the function."
+                    }
+                },
+                "required": ["condition", "controls"],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge is similar to LLVM's Use class, it connects a LLVM User with the LLVM Value it uses. This is a generic concept and applies in particular to e.g. an instruction 'using' its operands.",
+                "properties": {
+                    "edge_kind": { "enum": [ "ValueDefinitionToUse" ] },
+                    "operand_number": { "type": "integer" },
+                    "incoming_block": { "type": "integer" },
+                    "is_callee": {
+                        "type": "boolean",
+                        "description": "Is the value being used a function being called by this ``invoke`` or ``call`` instruction?"
+                    },
+                    "is_argument_operand": {
+                        "type": "boolean",
+                        "description": "Is the value being used as an argument to the function being called by this ``invoke`` or ``call`` instruction?"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a 'call' or 'invoke' instruction to all the relevant 'ParamBinding' nodes.",
+                "backref_description": "Connects a 'ParamBinding' node to the relevant 'call' or 'invoke' instruction.",
+                "properties": {
+                    "edge_kind": { "enum": [ "CallToParamBinding" ] },
+                    "caller_context": { "type": "string" },
+                    "callee_context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind","caller_context","callee_context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a value used as an argument to an 'Argument' node, via a 'ParamBinding' node.",
+                "properties": {
+                    "edge_kind": { "enum": [ "OperandToParamBinding" ] },
+                    "caller_context": { "type": "string" },
+                    "callee_context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind","caller_context","callee_context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a value used as an argument to an 'Argument' node, via a 'ParamBinding' node.",
+                "properties": {
+                    "edge_kind": { "enum": [ "ParamBindingToArg" ] },
+                    "caller_context": { "type": "string" },
+                    "callee_context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind","caller_context","callee_context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a 'ParamBinding' node with a 'CallReturn' node that corresponds to the same call site.",
+                "properties": { "edge_kind": { "enum": [ "SameCall" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a value used in a return instruction to the corresponding callsite, via a 'CallReturn' node.",
+                "properties": {
+                    "edge_kind": { "enum": [ "ReturnValueToCallReturn" ] },
+                    "caller_context": { "type": "string" },
+                    "callee_context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind","caller_context","callee_context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a return instruction to the corresponding callsite, via a 'CallReturn' node.",
+                "properties": {
+                    "edge_kind": { "enum": [ "ReturnInstructionToCallReturn" ] },
+                    "caller_context": { "type": "string" },
+                    "callee_context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind","caller_context","callee_context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a value used in a return statement to the corresponding callsite, via a 'CallReturn' node.",
+                "properties": {
+                    "edge_kind": { "enum": [ "CallReturnToCaller" ] },
+                    "caller_context": { "type": "string" },
+                    "callee_context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind","caller_context","callee_context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects a node representing a pointer to memory locations it might refer to.",
+                "properties": {
+                    "edge_kind": { "enum": [ "PointsTo" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects two abstract memory locations that could represent the same field or array index if they abstract the same concrete memory object. For example, 'buf[*]' and 'buf[0]'.",
+                "properties": { "edge_kind": { "enum": [ "MayAlias" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects two abstract memory locations that must represent the same field or array index if they abstract the same concrete memory object.",
+                "properties": { "edge_kind": { "enum": [ "MustAlias" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects an abstract memory location to memory locations that are its immediate subobjects. For example, 'buf[1]' is a subobject of 'buf'.",
+                "properties": { "edge_kind": { "enum": [ "Subregion" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects an abstract memory location to memory locations that it contains, recursively. For example, 'buf[1]' is a subobject of 'buf'.",
+                "properties": { "edge_kind": { "enum": [ "Contains" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects an instruction to memory locations it may store to.",
+                "backref_description": "Connects a memory location to instructions that may store to it.",
+                "properties": {
+                    "edge_kind": { "enum": [ "StoreMemory" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "Connects an instruction to memory locations it may load from.",
+                "backref_description": "Connects a memory location to instructions that may load it",
+                "properties": {
+                    "edge_kind": { "enum": [ "LoadMemory" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects an 'alloca' instruction or call to 'malloc' with an abstract memory location.",
+                "properties": {
+                    "edge_kind": { "enum": [ "Allocates" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge links an `alloca` to the Variable it creates",
+                "properties": {
+            "edge_kind": { "enum": [ "CreatesVar" ] }
+        },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "TODO(lb)",
+                "properties": { "edge_kind": { "enum": [ "ValueToStorePointer" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "TODO(lb)",
+                "properties": { "edge_kind": { "enum": [ "LoadPointerToValue" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "TODO(lb)",
+                "properties": { "edge_kind": { "enum": [ "DefinitionToValueLoad" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "TODO(lb)",
+                "properties": { "edge_kind": { "enum": [ "ClobberInstructionToValueLoad" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects variables (and function arguments) to their DWARF type information",
+                "properties": { "edge_kind": { "enum": ["HasDWARFType"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a DWARF derived type to its \"base\" type (or a \"base\" type to its deriving type(s))",
+                "properties": { "edge_kind": { "enum": ["DWARFTypeToBaseType"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a recursive DWARF type to its initial type definition",
+                "properties": { "edge_kind": { "enum": ["DWARFTypeToRecursiveType"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a DWARF type to its constituent member types (fields, union variants, etc.)",
+                "properties": { "edge_kind": { "enum": ["DWARFTypeToMemberType"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a DWARF type to its constituent template parameter types",
+                "properties": { "edge_kind": { "enum": ["DWARFTypeToTemplateParamType"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a DWARF type to its constituent function return type",
+                "properties": { "edge_kind": { "enum": ["DWARFTypeToReturnType"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a DWARF type to its constituent function parameter types",
+                "properties": { "edge_kind": { "enum": ["DWARFTypeToParamType"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a DWARF type to the parent class or structure that it inherits from",
+                "properties": { "edge_kind": { "enum": ["DWARFTypeToParentType"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects global variables to their (constant) initializers",
+                "properties": { "edge_kind": { "enum": ["GlobalToInitializer"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects the main LLVM module to each of its constituent translation units",
+                "properties": { "edge_kind": { "enum": ["ModuleToTranslationUnit"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects an LLVM-level local variable to its DWARF counterpart",
+                "properties": { "edge_kind": { "enum": ["LocalVariableToDWARFLocalVariable"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects an LLVM-level function argument to its DWARF counterpart",
+                "properties": { "edge_kind": { "enum": ["ArgumentToDWARFArgument"] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge represents dataflows that are external to the program and included via signatures",
+                "properties": {
+                    "edge_kind": { "enum": [ "DataflowSignature" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge represents dataflows that are external to the program and included via signatures; this is a direct flow, meaning the target value is computed from the source value.",
+                "properties": {
+                    "edge_kind": { "enum": [ "DirectDataflowSignature" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge represents dataflows that are external to the program and included via signatures; this is an indirect flow, meaning the target's value changes depending on the source value, but it is not computed from the source value.",
+                "properties": {
+                    "edge_kind": { "enum": [ "IndirectDataflowSignature" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge represents dataflows that are external to the program and included via signatures; this is a control flow, meaning the source value effects whether the target value is computed.",
+                "properties": {
+                    "edge_kind": { "enum": [ "ControlDataflowSignature" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a dataflow signature with the callsite it models",
+                "properties": {
+                    "edge_kind": { "enum": [ "DataflowSignatureForCallSite" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a dataflow signature with the function it models",
+                "properties": {
+                    "edge_kind": { "enum": [ "DataflowSignatureForFunction" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind", "context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects an LLVM-level function to its PLT stub in the compiled program, if it has one",
+                "properties": {
+                    "edge_kind": { "enum": [ "FunctionToPLTStub" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "This edge connects a PLT stub to the virtual tables that it's present in, if any",
+                "properties": {
+                    "edge_kind": { "enum": [ "PLTStubToVTable" ] },
+                    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["edge_kind"]
+            }
+        ] }
+    ]
+}

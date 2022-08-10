@@ -1,0 +1,23 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+.NodeTooltip {
+  bottom: auto;
+  right: auto;
+  position: absolute;
+  z-index: 100;
+
+  .list-group {
+    padding: 0;
+
+    .list-group-item {
+      padding: 0.5em;
+      line-height: 1;
+      font-size: 0.85rem;
+      &:hover {
+        background-color: $gray-200;
+        cursor: pointer;
+      }
+    }
+  }
+}

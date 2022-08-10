@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+import sys
+
+from mate.mate import run_mate
+
+if __name__ == "__main__":
+    run_mate(sys.argv[1:])

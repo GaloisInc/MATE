@@ -1,0 +1,28 @@
+.Builds {
+  padding-top: 1em;
+
+  .build-results {
+
+  .table-hover {
+    tr {
+      cursor: pointer;
+    }
+  }
+
+    .spinner-border {
+      width: 1em;
+      height: 1em;
+      border-width: 0.1em;
+    }
+  }
+
+  .filters {
+    display: inline-flex;
+    width: 100%;
+
+    .Paginator {
+      flex-grow: 2;
+      vertical-align: middle;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+# Run an IPython (Jupyter) shell from the command-line, without using the MATE
+# Notebooks service. Run with:
+#
+#    docker-compose -f docker-compose.yml -f docker-compose.clients.yml run shell
+#
+# See the MATE documentation for more details.
+
+version: "3.7"
+services:
+  shell:
+    networks:
+      - mate
+    image: ${MATE_DOCKER_REGISTRY}mate-dist${MATE_DOCKER_TAG}
+    entrypoint: "mate -v pgshell"
+
+networks:
+  mate:

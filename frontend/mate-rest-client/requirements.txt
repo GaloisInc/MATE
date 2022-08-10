@@ -1,0 +1,6 @@
+pydantic~=1.9.0
+requests~=2.27
+urllib3~=1.26
+
+# NOTE: This should be constrained.
+mate-common

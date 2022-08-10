@@ -1,0 +1,16 @@
+ignored:
+  # We set the shell to bash at the top of our Dockerfile, false positives ensue
+  - SC2039 # In POSIX sh, set option pipefail is undefined
+  # This one gives false positives.
+  - DL4006 # Set the SHELL option -o pipefail
+  # Unnecessary for our test Docker images
+  - DL3002 # Always tag the version of an image explicitly
+  # We don't care about the security of the CHESS system, root is simpler.
+  - DL3006 # Last USER should not be root
+
+  # These should all be enabled at some point...
+  - DL3003 # Use WORKDIR to switch to a directory
+  - DL3008 # Pin versions in apt get install. Instead of `apt-get install <package>` use `apt-get install <package>=<version>`
+  - DL3015 # Avoid additional packages by specifying `--no-install-recommends`
+  - DL3025 # Use arguments JSON notation for CMD and ENTRYPOINT arguments
+  - SC2164 # Use 'cd ... || exit' or 'cd ... || return' in case cd fails.

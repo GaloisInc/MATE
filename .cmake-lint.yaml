@@ -1,0 +1,3 @@
+lint:
+  disabled_codes:
+    - C0113 # Missing COMMENT in statement which allows it

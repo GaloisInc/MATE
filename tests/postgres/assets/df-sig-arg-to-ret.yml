@@ -1,0 +1,8 @@
+- name: '^df_sig_arg_to_ret$'
+  signatures:
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []

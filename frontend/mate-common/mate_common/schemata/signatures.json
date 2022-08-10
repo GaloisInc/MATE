@@ -1,0 +1,373 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "definitions": {
+        "a number": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "a string": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1,
+            "maxItems": 1
+        },
+        "an empty array": { "type": "array", "minItems": 0, "maxItems": 0 },
+        "arg": {
+            "type": "object",
+            "properties": { "arg": { "$ref": "#/definitions/a number" } },
+            "required": ["arg"]
+        },
+        "arg_points_to": {
+            "type": "object",
+            "properties": {
+                "arg_points_to": { "$ref": "#/definitions/a number" }
+            },
+            "required": ["arg_points_to"]
+        },
+        "arg_points_to_aggregate": {
+            "type": "object",
+            "properties": {
+                "arg_points_to_aggregate": { "$ref": "#/definitions/a number" }
+            },
+            "required": ["arg_points_to_aggregate"]
+        },
+        "arg_reachable": {
+            "type": "object",
+            "properties": {
+                "arg_reachable": { "$ref": "#/definitions/a number" }
+            },
+            "required": ["arg_reachable"]
+        },
+	"format_string_reads": {
+            "type": "object",
+            "properties": {
+                "format_string_reads": { "$ref": "#/definitions/a number" }
+            },
+            "required": ["format_string_reads"]
+        },
+        "format_string_writes": {
+            "type": "object",
+            "properties": {
+                "format_string_writes": { "$ref": "#/definitions/a number" }
+            },
+            "required": ["format_string_writes"]
+        },
+        "dataflow": {
+            "type": "object",
+            "properties": {
+                "dataflow": {
+                    "type": "object",
+                    "properties": {
+                        "tags": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        },
+                        "from": { 
+                            "type": "object",
+                            "properties": {
+                                "direct": {"$ref": "#/definitions/selectors" },
+                                "indirect": {"$ref": "#/definitions/selectors" },
+                                "control": {"$ref": "#/definitions/selectors" }
+                            }
+                        },
+                        "to": { "$ref": "#/definitions/selectors" }
+                    },
+                    "required": ["from", "to"]
+                }
+            },
+            "required": ["dataflow"]
+        },
+        "global": {
+            "type": "object",
+            "properties": {
+                "global": { "$ref": "#/definitions/a string" }
+            },
+            "required": ["global"]
+        },
+        "input": {
+            "type": "object",
+            "properties": {
+                "input": {
+                    "type": "object",
+                    "properties": {
+                        "tags": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        },
+                        "to": { "$ref": "#/definitions/selectors" }
+                    },
+                    "required": ["to"]
+                }
+            },
+            "required": ["input"]
+        },
+        "output": {
+            "type": "object",
+            "properties": {
+                "output": {
+                    "type": "object",
+                    "properties": {
+                        "tags": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        },
+                        "from": { "$ref": "#/definitions/selectors" }
+                    },
+                    "required": ["from"]
+                }
+            },
+            "required": ["output"]
+        },
+        "pts_arg_alloc": {
+            "type": "object",
+            "properties": {
+                "pts_arg_alloc": { "$ref": "#/definitions/a number" }
+            },
+            "required": ["pts_arg_alloc"]
+        },
+        "pts_arg_alloc_once": {
+            "type": "object",
+            "properties": {
+                "pts_arg_alloc_once": { "$ref": "#/definitions/a number" }
+            },
+            "required": ["pts_arg_alloc_once"]
+        },
+        "pts_arg_memcpy_arg": {
+            "type": "object",
+            "properties": {
+                "pts_arg_memcpy_arg": {
+                    "type": "array",
+                    "items": [
+                        {"type": "number"},
+                        {"type": "number"}
+                    ]
+                }
+            },
+            "required": ["pts_arg_memcpy_arg"]
+        },
+        "pts_arg_memcpy_arg_reachable": {
+            "type": "object",
+            "properties": {
+                "pts_arg_memcpy_arg_reachable": {
+                    "type": "array",
+                    "items": [
+                        {"type": "number"},
+                        {"type": "number"}
+                    ]
+                }
+            },
+            "required": ["pts_arg_memcpy_arg_reachable"]
+        },
+        "pts_arg_memcpy_global": {
+            "type": "object",
+            "properties": {
+                "pts_arg_memcpy_global": {
+                    "type": "array",
+                    "items": [
+                        {"type": "number"},
+                        {"type": "string"}
+                    ]
+                }
+            },
+            "required": ["pts_arg_memcpy_global"]
+        },
+        "pts_arg_memcpy_global_reachable": {
+            "type": "object",
+            "properties": {
+                "pts_arg_memcpy_global_reachable": {
+                    "type": "array",
+                    "items": [
+                        {"type": "number"},
+                        {"type": "string"}
+                    ]
+                }
+            },
+            "required": ["pts_arg_memcpy_global_reachable"]
+        },
+        "pts_arg_points_to_global": {
+            "type": "object",
+            "properties": {
+                "pts_arg_points_to_global": {
+                    "type": "array",
+                    "items": [
+                        {"type": "number"},
+                        {"type": "string"}
+                    ]
+                }
+            },
+            "required": ["pts_arg_points_to_global"]
+        },
+        "pts_global_memcpy_arg": {
+            "type": "object",
+            "properties": {
+                "pts_global_memcpy_arg": {
+                    "type": "array",
+                    "items": [
+                        {"type": "string"},
+                        {"type": "number"}
+                    ]
+                }
+            },
+            "required": ["pts_global_memcpy_arg"]
+        },
+        "pts_global_memcpy_arg_reachable": {
+            "type": "object",
+            "properties": {
+                "pts_global_memcpy_arg_reachable": {
+                    "type": "array",
+                    "items": [
+                        {"type": "string"},
+                        {"type": "number"}
+                    ]
+                }
+            },
+            "required": ["pts_global_memcpy_arg_reachable"]
+        },
+        "pts_none": {
+            "type": "object",
+            "properties": {
+                "pts_none": { "$ref": "#/definitions/an empty array" }
+            },
+            "required": ["pts_none"]
+        },
+        "pts_return_aliases_arg": {
+            "type": "object",
+            "properties": {
+                "pts_return_aliases_arg": { "$ref": "#/definitions/a number" }
+            },
+            "required": ["pts_return_aliases_arg"]
+        },
+        "pts_return_aliases_arg_reachable": {
+            "type": "object",
+            "properties": {
+                "pts_return_aliases_arg": { "$ref": "#/definitions/a number" }
+            },
+            "required": ["pts_return_aliases_arg_reachable"]
+        },
+        "pts_return_aliases_global": {
+            "type": "object",
+            "properties": {
+                "pts_return_aliases_global": { "$ref": "#/definitions/a string" }
+            },
+            "required": ["pts_return_aliases_global"]
+        },
+        "pts_return_aliases_global_reachable": {
+            "type": "object",
+            "properties": {
+                "pts_return_aliases_global_reachable": {
+                    "$ref": "#/definitions/a string"
+                }
+            },
+            "required": ["pts_return_aliases_global_reachable"]
+        },
+        "pts_return_alloc": {
+            "type": "object",
+            "properties": {
+                "pts_return_alloc": { "$ref": "#/definitions/an empty array" }
+            },
+            "required": ["pts_return_alloc"]
+        },
+        "pts_return_alloc_once": {
+            "type": "object",
+            "properties": {
+                "pts_return_alloc_once": {
+                    "$ref": "#/definitions/an empty array"
+                }
+            },
+            "required": ["pts_return_alloc_once"]
+        },
+        "pts_return_points_to_global": {
+            "type": "object",
+            "properties": {
+                "pts_return_points_to_global": {
+                    "$ref": "#/definitions/a string"
+                }
+            },
+            "required": ["pts_return_points_to_global"]
+        },
+        "return": {
+            "type": "object",
+            "properties": {
+                "return": { "$ref": "#/definitions/an empty array" }
+            },
+            "required": ["return"]
+        },
+        "return_points_to": {
+            "type": "object",
+            "properties": {
+                "return_points_to": { "$ref": "#/definitions/an empty array" }
+            },
+            "required": ["return_points_to"]
+        },
+        "return_points_to_aggregate": {
+            "type": "object",
+            "properties": {
+                "return_points_to_aggregate": { "$ref": "#/definitions/an empty array" }
+            },
+            "required": ["return_points_to_aggregate"]
+        },
+        "return_reachable": {
+            "type": "object",
+            "properties": {
+                "return_reachable": { "type": "array", "minItems": 0, "maxItems": 0 }
+            },
+            "required": ["return_reachable"]
+        },
+        "selector": {
+            "oneOf": [
+                { "$ref": "#/definitions/arg" },
+                { "$ref": "#/definitions/arg_points_to" },
+		{ "$ref": "#/definitions/arg_points_to_aggregate" },
+                { "$ref": "#/definitions/arg_reachable" },
+		{ "$ref": "#/definitions/format_string_reads" },
+                { "$ref": "#/definitions/format_string_writes" },
+                { "$ref": "#/definitions/global" },
+                { "$ref": "#/definitions/return" },
+                { "$ref": "#/definitions/return_points_to" },
+		{ "$ref": "#/definitions/return_points_to_aggregate" },
+                { "$ref": "#/definitions/return_reachable" }
+            ]
+        },
+        "selectors": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/selector" },
+            "minLength": 1
+        }
+    },
+    "items": {
+        "type": "object",
+        "properties": {
+            "name": { "type": "string" },
+            "signatures": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                      { "$ref": "#/definitions/dataflow" },
+                      { "$ref": "#/definitions/input" },
+                      { "$ref": "#/definitions/output" },
+                      { "$ref": "#/definitions/pts_arg_alloc" },
+                      { "$ref": "#/definitions/pts_arg_alloc_once" },
+                      { "$ref": "#/definitions/pts_arg_memcpy_arg" },
+                      { "$ref": "#/definitions/pts_arg_memcpy_arg_reachable" },
+                      { "$ref": "#/definitions/pts_arg_memcpy_global" },
+                      { "$ref": "#/definitions/pts_arg_memcpy_global_reachable" },
+                      { "$ref": "#/definitions/pts_arg_points_to_global" },
+                      { "$ref": "#/definitions/pts_global_memcpy_arg" },
+                      { "$ref": "#/definitions/pts_global_memcpy_arg_reachable" },
+                      { "$ref": "#/definitions/pts_none" },
+                      { "$ref": "#/definitions/pts_return_aliases_arg" },
+                      { "$ref": "#/definitions/pts_return_aliases_arg_reachable" },
+                      { "$ref": "#/definitions/pts_return_aliases_global" },
+                      { "$ref": "#/definitions/pts_return_aliases_global_reachable" },
+                      { "$ref": "#/definitions/pts_return_alloc" },
+                      { "$ref": "#/definitions/pts_return_alloc_once" },
+                      { "$ref": "#/definitions/pts_return_points_to_global" }
+                  ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+.Paginator {
+  .pagination {
+    justify-content: right;
+    padding: 0;
+    margin: 0;
+
+    .page-size {
+      .page-link {
+        padding: 0.15em;
+      }
+    }
+    .page-place {
+      padding: 0.5em;
+    }
+  }
+}

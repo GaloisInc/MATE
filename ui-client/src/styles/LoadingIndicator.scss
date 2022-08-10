@@ -1,0 +1,9 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+.LoadingIndicator {
+  .modal-body {
+    color: $blue;
+    text-align: center;
+  }
+}

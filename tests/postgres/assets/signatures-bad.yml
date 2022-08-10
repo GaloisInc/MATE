@@ -1,0 +1,3 @@
+- name: '^mate_return_alloc_test$'
+  signatures:
+  - pts_return_alloc: ["invalid"]

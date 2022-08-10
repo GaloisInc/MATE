@@ -1,0 +1,21 @@
+# Manticore
+capstone @ git+https://github.com/aquynh/capstone.git@1766485c0c32419e9a17d6ad31f9e218ef4f018f#subdirectory=bindings/python&egg=capstone
+crytic-compile==0.1.7
+cytoolz==0.10.1
+eth-hash==0.2.0
+eth-typing==2.2.1
+eth-utils==1.8.4
+future==0.18.2
+ply==3.11
+intervaltree==3.1.0
+protobuf==3.15.8
+prettytable==0.7.2
+psutil==5.7.0
+pyevmasm==0.2.0
+pysha3==1.0.2
+PyYAML==5.4.1
+rlp==1.2.0
+toolz==0.10.0
+unicorn>=2.0.0-rc7
+wasm==1.2
+z3-solver==4.8.7.0

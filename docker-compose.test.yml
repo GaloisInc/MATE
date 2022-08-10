@@ -1,0 +1,66 @@
+# MATE tests, for MATE developers only. See doc/testing.rst.
+
+version: "3.7"
+
+services:
+  test:
+    networks:
+      - mate
+    image: ${MATE_DOCKER_REGISTRY}mate-dev${MATE_DOCKER_TAG}
+    entrypoint: >
+      wait-for-it db:5432 -- ./shake.sh postgres-tests
+    volumes:
+      # NOTE(ww): These are vital for containerized builds.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - mate-scratch:/opt/mate-scratch/
+    depends_on:
+      - db
+      - storage
+
+  dwarfcore-test:
+    networks:
+      - mate
+    image: ${MATE_DOCKER_REGISTRY}mate-dev${MATE_DOCKER_TAG}
+    entrypoint: >
+      wait-for-it db:5432 -- ./shake.sh dwarfcore-tests
+    depends_on:
+      - db
+      - storage
+
+  mantiserve-test:
+    networks:
+      - mate
+    image: ${MATE_DOCKER_REGISTRY}mate-dev${MATE_DOCKER_TAG}
+    entrypoint: >
+      wait-for-it db:5432 -- ./shake.sh mantiserve-tests
+    depends_on:
+      - db
+      - storage
+
+  challenge-test:
+    networks:
+      - mate
+    image: ${MATE_DOCKER_REGISTRY}mate-dev${MATE_DOCKER_TAG}
+    entrypoint: >
+      wait-for-it db:5432 -- ./shake.sh challenge-tests
+    volumes:
+      # NOTE(ww): These are vital for containerized builds.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - mate-scratch:/opt/mate-scratch/
+    depends_on:
+      - db
+      - storage
+
+  poi-test:
+    networks:
+      - mate
+    image: ${MATE_DOCKER_REGISTRY}mate-dev${MATE_DOCKER_TAG}
+    entrypoint: >
+      wait-for-it db:5432 -- ./shake.sh poi-tests
+    volumes:
+      # NOTE(ww): These are vital for containerized builds.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - mate-scratch:/opt/mate-scratch/
+    depends_on:
+      - db
+      - storage

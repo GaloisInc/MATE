@@ -1,0 +1,3 @@
+disable=SC2207
+enable=avoid-nullary-conditions
+enable=require-variable-braces

@@ -1,0 +1,3 @@
+-e frontend/mate-common
+-e frontend/mate-rest-client
+-e frontend/mate-cli

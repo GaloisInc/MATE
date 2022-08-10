@@ -1,0 +1,5 @@
+BasedOnStyle: Google
+AlignAfterOpenBracket: AlwaysBreak
+BinPackArguments: false
+BinPackParameters: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: true

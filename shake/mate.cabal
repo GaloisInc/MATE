@@ -1,0 +1,20 @@
+cabal-version: 2.2
+name: mate
+version: 0.1.0.0
+
+executable mate
+  hs-source-dirs: exe, src
+  main-is: Mate.hs
+  other-modules:
+    Development.Shake.BuildConfig
+    Development.Shake.Changes
+    Development.Shake.Hybrid
+    Development.Shake.Lint
+  build-depends: base,
+                 containers,
+                 directory,
+                 shake >=0.18.4 && <0.19,
+                 process,
+                 split
+  default-language: Haskell2010
+  ghc-options: -Wall -Werror -fno-warn-name-shadowing -fno-warn-orphans -fno-warn-type-defaults

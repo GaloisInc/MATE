@@ -1,0 +1,66 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+.Graph {
+  .centerToggle {
+    color: $gray-700;
+    position: absolute;
+    z-index: 10;
+    cursor: pointer;
+  }
+  .layoutToggle {
+    color: $gray-700;
+    position: absolute;
+    z-index: 10;
+    left: 20px;
+    cursor: pointer;
+  }
+  .collapseAll {
+    color: $gray-700;
+    position: absolute;
+    z-index: 10;
+    left: 40px;
+    cursor: pointer;
+  }
+  .expandAll {
+    color: $gray-700;
+    position: absolute;
+    z-index: 10;
+    left: 60px;
+    cursor: pointer;
+  }
+  .largeLayoutWarning {
+    color: $red;
+    position: absolute;
+    z-index: 10;
+    left: 80px;
+  }
+  .ProcessingIndicator {
+    color: $red;
+    position: absolute;
+    z-index: 10;
+    left: 100px;
+  }
+  .graphKey {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+
+    ul {
+      margin-right: 1em;
+      display: inline;
+      position: relative;
+      :not(:last-child) {
+        margin-right: 0.5em;
+      }
+
+      li {
+        font-size: 0.65em;
+        display: inline;
+        &::before {
+          content: "\2588\00a0";
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.Compilations {
+  padding-top: 1em;
+
+  .table-hover {
+    tr {
+      cursor: pointer;
+    }
+  }
+
+  .filters {
+    display: inline-flex;
+    width: 100%;
+
+    .Paginator {
+      flex-grow: 2;
+      vertical-align: middle;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+.POIs {
+  padding-top: 1em;
+
+  th {
+    min-width: 100px;
+  }
+
+  .table-hover {
+    tr {
+      cursor: pointer;
+    }
+  }
+
+  .analysisTasks {
+    .spinner-border {
+      width: 1em;
+      height: 1em;
+      border-width: 0.1em;
+    }
+  }
+
+  .filters {
+    display: inline-flex;
+    width: 100%;
+
+    .ToggleSwitch {
+      margin: auto;
+    }
+
+    .analysisFilter {
+      display: inline;
+      width: auto;
+      margin-left: 0.5em;
+      vertical-align: middle;
+
+      .form-control {
+        display: inline;
+        width: auto;
+      }
+    }
+
+    .NotebookButton {
+      margin-left: 1em;
+      height: 38px;
+    }
+
+    .paginationFilter {
+      flex-grow: 2;
+      vertical-align: middle;
+    }
+  }
+}

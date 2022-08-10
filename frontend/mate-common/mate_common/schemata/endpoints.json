@@ -1,0 +1,955 @@
+{
+  "FunctionToEntryBlock": [
+    {
+      "sources": ["Function"],
+      "targets": ["Block"]
+    },
+    {
+      "sources": ["MachineFunction"],
+      "targets": ["MachineBasicBlock"]
+    }
+  ],
+  "BlockToParentFunction": [
+    {
+      "sources": ["Block"],
+      "targets": ["Function"]
+    },
+    {
+      "sources": ["MachineBasicBlock"],
+      "targets": ["MachineFunction"]
+    }
+  ],
+  "BlockToSuccessorBlock": [
+    {
+      "sources": ["Block"],
+      "targets": ["Block"]
+    },
+    {
+      "sources": ["MachineBasicBlock"],
+      "targets": ["MachineBasicBlock"]
+    }
+  ],
+  "BlockToEntryInstruction": [
+    {
+      "sources": ["Block"],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    },
+    {
+      "sources": ["MachineBasicBlock"],
+      "targets": ["MachineInstr"]
+    },
+    {
+      "sources": ["ASMBlock"],
+      "targets": ["ASMInst"]
+    }
+  ],
+  "BlockToTerminatorInstruction": [
+    {
+      "sources": ["Block"],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    },
+    {
+      "sources": ["MachineBasicBlock"],
+      "targets": ["MachineInstr"]
+    },
+    {
+      "sources": ["ASMBlock"],
+      "targets": ["ASMInst"]
+    }
+  ],
+  "InstructionToParentBlock": [
+    {
+      "sources": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ],
+      "targets": ["Block"]
+    },
+    {
+      "sources": ["MachineInstr"],
+      "targets": ["MachineBasicBlock"]
+    },
+    {
+      "sources": ["ASMInst"],
+      "targets": ["ASMBlock"]
+    }
+  ],
+  "InstructionToSuccessorInstruction": [
+    {
+      "sources": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    },
+    {
+      "sources": ["MachineInstr"],
+      "targets": ["MachineInstr"]
+    },
+    {
+      "sources": ["ASMInst"],
+      "targets": ["ASMInst"]
+    }
+  ],
+  "ValueDefinitionToUse": [
+    {
+      "sources": [
+        "Argument",
+        "Block",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "Function",
+        "GlobalVariable",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset",
+        "LocalVariable",
+        "UnclassifiedNode"
+      ],
+      "targets": [
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "GlobalVariable",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    }
+  ],
+  "LoadPointerToValue": [
+    {
+      "sources": [
+        "Argument",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "GlobalVariable",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    }
+  ],
+  "ValueToStorePointer": [
+    {
+      "sources": [
+        "Argument",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset",
+        "Function"
+      ],
+      "targets": [
+        "Argument",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "GlobalVariable",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    }
+  ],
+  "BlockToControlDependentBlock": [
+    {
+      "sources": ["Block"],
+      "targets": ["Block"]
+    }
+  ],
+  "FunctionEntryToControlDependentBlock": [
+    {
+      "sources": ["Function"],
+      "targets": ["Block"]
+    }
+  ],
+  "TerminatorInstructionToControlDependentInstruction": [
+    {
+      "sources": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    }
+  ],
+  "FunctionEntryToControlDependentInstruction": [
+    {
+      "sources": ["Function"],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    }
+  ],
+  "ClobberInstructionToValueLoad": [
+    {
+      "sources": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    }
+  ],
+  "DefinitionToValueLoad": [
+    {
+      "sources": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset"
+      ]
+    }
+  ],
+  "CallToFunction": [
+    {
+      "sources": ["Instruction", "Call", "Invoke", "Memcpy", "Memset"],
+      "targets": ["Function"]
+    }
+  ],
+  "Callgraph": [
+    {
+      "sources": ["Function"],
+      "targets": ["Function"]
+    }
+  ],
+  "Allocates": [
+    {
+      "sources": [
+        "GlobalVariable",
+        "Alloca",
+        "Call",
+        "Invoke"
+      ],
+      "targets": ["MemoryLocation"]
+    }
+  ],
+  "CreatesVar": [
+    {
+      "sources": ["Alloca"],
+      "targets": [
+        "Argument",
+        "LocalVariable"
+      ]
+    }
+  ],
+  "MayAlias": [
+    {
+      "sources": ["MemoryLocation"],
+      "targets": ["MemoryLocation"]
+    }
+  ],
+  "MustAlias": [
+    {
+      "sources": ["MemoryLocation"],
+      "targets": ["MemoryLocation"]
+    }
+  ],
+  "Subregion": [
+    {
+      "sources": ["MemoryLocation"],
+      "targets": ["MemoryLocation"]
+    }
+  ],
+  "Contains": [
+    {
+      "sources": ["MemoryLocation"],
+      "targets": ["MemoryLocation"]
+    }
+  ],
+  "PointsTo": [
+    {
+      "sources": [
+        "Argument",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Memset",
+        "Memcpy",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "MemoryLocation"
+      ],
+      "targets": ["MemoryLocation"]
+    }
+  ],
+  "LoadMemory": [
+    {
+      "sources": ["MemoryLocation"],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Memset",
+        "Memcpy",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store"
+      ]
+    }
+  ],
+  "StoreMemory": [
+    {
+      "sources": ["Store"],
+      "targets": ["MemoryLocation"]
+    }
+  ],
+  "DataflowSignature": [
+    {
+      "sources": [
+        "Function",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "MemoryLocation",
+        "Argument",
+        "LocalVariable",
+        "GlobalVariable",
+        "DataflowSignature",
+        "InputSignature",
+        "Memset",
+        "Memcpy"
+      ],
+      "targets": [
+        "Function",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "MemoryLocation",
+        "Argument",
+        "LocalVariable",
+        "GlobalVariable",
+        "DataflowSignature",
+        "OutputSignature",
+        "Memset",
+        "Memcpy"
+      ]
+    }
+  ],
+  "DirectDataflowSignature": [
+    {
+      "sources": [
+        "Function",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "MemoryLocation",
+        "Argument",
+        "LocalVariable",
+        "GlobalVariable",
+        "DataflowSignature",
+        "InputSignature",
+        "Memset",
+        "Memcpy"
+      ],
+      "targets": [
+        "Function",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "MemoryLocation",
+        "Argument",
+        "LocalVariable",
+        "GlobalVariable",
+        "DataflowSignature",
+        "OutputSignature",
+        "Memset",
+        "Memcpy"
+      ]
+    }
+  ],
+    "IndirectDataflowSignature": [
+    {
+      "sources": [
+        "Function",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "MemoryLocation",
+        "Argument",
+        "LocalVariable",
+        "GlobalVariable",
+        "DataflowSignature",
+        "InputSignature",
+        "Memset",
+        "Memcpy"
+      ],
+      "targets": [
+        "Function",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "MemoryLocation",
+        "Argument",
+        "LocalVariable",
+        "GlobalVariable",
+        "DataflowSignature",
+        "OutputSignature",
+        "Memset",
+        "Memcpy"
+      ]
+    }
+  ],
+  "ControlDataflowSignature": [
+    {
+      "sources": [
+        "Function",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "MemoryLocation",
+        "Argument",
+        "LocalVariable",
+        "GlobalVariable",
+        "DataflowSignature",
+        "InputSignature",
+        "Memset",
+        "Memcpy"
+      ],
+      "targets": [
+        "Function",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "MemoryLocation",
+        "Argument",
+        "LocalVariable",
+        "GlobalVariable",
+        "DataflowSignature",
+        "OutputSignature",
+        "Memset",
+        "Memcpy"
+      ]
+    }
+  ],
+  "DataflowSignatureForCallSite": [
+    {
+      "sources": ["DataflowSignature","InputSignature","OutputSignature"],
+      "targets": [
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Memcpy",
+        "Memset",
+        "Resume",
+        "Ret",
+        "Store"
+      ]
+    }
+  ],
+  "DataflowSignatureForFunction": [
+    {
+      "sources": ["DataflowSignature","InputSignature","OutputSignature"],
+      "targets": ["Function"]
+    }
+  ],
+  "FunctionToArgument": [
+    {
+      "sources": ["Function"],
+      "targets": ["Argument"]
+    }
+  ],
+  "FunctionToLocalVariable": [
+    {
+      "sources": ["Function"],
+      "targets": ["LocalVariable"]
+    }
+  ],
+  "CallToParamBinding": [
+    {
+      "sources": ["Instruction", "Call", "Invoke", "Memcpy", "Memset"],
+      "targets": ["ParamBinding"]
+    }
+  ],
+  "OperandToParamBinding": [
+    {
+      "sources": [
+        "Argument",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "Function",
+        "GlobalVariable",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Memset",
+        "Memcpy",
+        "Invoke",
+        "Load",
+        "Store"
+      ],
+      "targets": ["ParamBinding"]
+    }
+  ],
+  "ParamBindingToArg": [
+    {
+      "sources": ["ParamBinding"],
+      "targets": ["Argument"]
+    }
+  ],
+  "ReturnInstructionToCallReturn": [
+    {
+      "sources": ["Instruction", "Resume", "Ret"],
+      "targets": ["CallReturn"]
+    }
+  ],
+  "ReturnValueToCallReturn": [
+    {
+      "sources": [
+        "Argument",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Memset",
+        "Memcpy",
+        "Invoke",
+        "Load",
+        "Store"
+      ],
+      "targets": ["CallReturn"]
+    }
+  ],
+  "CallReturnToCaller": [
+    {
+      "sources": ["CallReturn"],
+      "targets": ["Instruction", "Call", "Invoke", "Memcpy", "Memset"]
+    }
+  ],
+  "SameCall": [
+    {
+      "sources": ["ParamBinding"],
+      "targets": ["CallReturn"]
+    }
+  ],
+  "HasLLVMType": [
+    {
+      "sources": [
+        "Argument",
+        "Block",
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+        "Function",
+        "GlobalVariable",
+        "Instruction",
+        "Alloca",
+        "Call",
+        "Invoke",
+        "Load",
+        "Resume",
+        "Ret",
+        "Store",
+        "Memcpy",
+        "Memset",
+        "LocalVariable",
+        "UnclassifiedNode"
+      ],
+      "targets": [
+        "LLVMType"
+      ]
+    }
+  ],
+  "MIBlockToIRBlock": [
+    {
+      "sources": ["MachineBasicBlock"],
+      "targets": ["Block"]
+    }
+  ],
+  "MIBlockToASMBlock": [
+    {
+      "sources": ["MachineBasicBlock"],
+      "targets": ["ASMBlock"]
+    }
+  ],
+  "MIFunctionToIRFunction": [
+    {
+      "sources": ["MachineFunction"],
+      "targets": ["Function"]
+    }
+  ],
+  "MIFunctionToDWARFArgument" : [
+    {
+      "sources": ["MachineFunction"],
+      "targets": ["DWARFArgument"]
+    }
+  ],
+  "MIFunctionToDWARFLocalVariable" : [
+    {
+      "sources": ["MachineFunction"],
+      "targets": ["DWARFLocalVariable"]
+    }
+  ],
+  "MIFunctionToVTable" : [
+    {
+      "sources": ["MachineFunction"],
+      "targets": ["VTable"]
+    }
+  ],
+  "HasDWARFType": [
+    {
+      "sources": [
+        "DWARFLocalVariable",
+        "DWARFArgument",
+        "ASMGlobalVariable",
+        "MachineFunction"
+      ],
+      "targets": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"]
+    }
+  ],
+  "DWARFTypeToBaseType": [
+    {
+      "sources": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"],
+      "targets": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"]
+    }
+  ],
+  "DWARFTypeToMemberType": [
+    {
+      "sources": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"],
+      "targets": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"]
+    }
+  ],
+  "DWARFTypeToRecursiveType": [
+    {
+      "sources": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"],
+      "targets": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"]
+    }
+  ],
+  "DWARFTypeToTemplateParamType": [
+    {
+      "sources": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"],
+      "targets": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"]
+    }
+  ],
+  "DWARFTypeToReturnType": [
+    {
+      "sources": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"],
+      "targets": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"]
+    }
+  ],
+  "DWARFTypeToParamType": [
+    {
+      "sources": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"],
+      "targets": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"]
+    }
+  ],
+  "DWARFTypeToParentType": [
+    {
+      "sources": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"],
+      "targets": ["DWARFType", "BasicType", "CompositeType", "CompositeCachedType", "StructureType", "ArrayType", "EnumType", "UnionType", "ClassType", "DerivedType", "SubroutineType"]
+    }
+  ],
+  "GlobalToInitializer": [
+    {
+      "sources": ["GlobalVariable"],
+      "targets": [
+        "Constant",
+        "ConstantFP",
+        "ConstantInt",
+        "ConstantString",
+        "ConstantUndef",
+	"Function",
+        "GlobalVariable"
+      ]
+    }
+  ],
+  "ModuleToTranslationUnit": [
+    {
+      "sources": ["Module"],
+      "targets": ["TranslationUnit"]
+    }
+  ],
+  "LocalVariableToDWARFLocalVariable": [
+    {
+      "sources": ["LocalVariable"],
+      "targets": ["DWARFLocalVariable"]
+    }
+  ],
+  "ArgumentToDWARFArgument": [
+    {
+      "sources": ["Argument"],
+      "targets": ["DWARFArgument"]
+    }
+  ],
+  "FunctionToPLTStub": [
+    {
+      "sources": ["Function"],
+      "targets": ["PLTStub"]
+    }
+  ],
+  "PLTStubToVTable": [
+    {
+      "sources": ["PLTStub"],
+      "targets": ["VTable"]
+    }
+  ]
+}

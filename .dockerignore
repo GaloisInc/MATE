@@ -1,0 +1,10 @@
+*
+
+!ui-client
+ui-client/node_modules
+!.out
+!jupyter
+!shake/mate.cabal
+!dev-requirements.txt
+!tests/integration/apogee-example-1-e2e/src/example_1.c
+!tests/integration/apogee-example-1-e2e/example_1_cfg_paths.py

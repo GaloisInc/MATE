@@ -1,0 +1,24 @@
+# MATE web UI. Run with:
+#
+#    docker-compose -f docker-compose.yml -f docker-compose.ui.yml up
+#
+# See the MATE documentation for more details.
+
+version: "3.7"
+
+services:
+  ui:
+    networks:
+      - mate
+    image: ${MATE_DOCKER_REGISTRY}mate-ui${MATE_DOCKER_TAG}
+    entrypoint: |
+      npm start
+    ports:
+      - 3000:3000
+    depends_on:
+      - server
+      - storage
+      - db
+
+networks:
+  mate:

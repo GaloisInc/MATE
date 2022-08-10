@@ -1,0 +1,392 @@
+# NOTE(lb): The master/stable branch distinction is documented in
+# doc/hacking.rst under "CI and Git Branches".
+stages:
+  - cleanup
+  - prepare
+  - lint
+  - build
+  - test
+  - test-sanitized
+  - dist
+  - integration
+
+variables:
+  GIT_STRATEGY: fetch
+  GIT_SUBMODULE_STRATEGY: none
+  # Carbon (the test runner) has 32 cores, but jobs are often running in
+  # parallel so we set parallelism to 16 to reduce contention.
+  PARALLELISM: 16
+  CI_CACHE_TAG: $CI_COMMIT_REF_SLUG
+  CI_TAG: $CI_COMMIT_SHA
+  GIT_CLEAN_FLAGS: -ffdx -e .shake/
+  COMPOSE_HTTP_TIMEOUT: 600
+
+default:
+  interruptible: true
+
+# Jobs that extend this ruleset are typically integration tests that should
+# only be run on "stable", MRs into "stable", or on schedules
+.on-stable:
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "stable" || $CI_COMMIT_BRANCH == "stable" || $SCHEDULE'
+
+# Like on-stable, but only for scheduled actions.
+.on-schedule:
+  rules:
+    - if: '$SCHEDULE'
+
+# Most jobs that don't extend ".on-stable" should extend this. This ruleset
+# prevents the creation of "detached" pipelines on merge requests (MRs) into
+# branches other than "stable", while ensuring that _all_ jobs run on MRs into
+# stable.
+#
+# See the following Gitlab documentation:
+# https://docs.gitlab.com/ee/ci/yaml/README.html#exclude-jobs-with-rules-from-certain-pipelines
+.default-rules:
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "stable"'
+      when: never
+    - when: on_success
+
+.build-docker:
+  extends: .default-rules
+  tags: [docker]
+  image: docker:stable
+  before_script:
+    - ./ci/docker_login.sh
+
+.prepare:
+  extends: .build-docker
+  stage: prepare
+  dependencies: []
+
+prepare:docker:
+  extends: .prepare
+  script:
+    - ./ci/docker_build.sh "mate-dev" "dev"
+
+lint:
+  stage: lint
+  image: $REGISTRY_HOST/mate-dev:$CI_TAG
+  needs: ["prepare:docker"]
+  extends: .default-rules
+  dependencies: []
+  before_script:
+    - . ./ci/ssh.sh
+    - git submodule sync --recursive
+    - git submodule update --init --recursive llvm/PointerAnalysis
+  script:
+    - git fetch origin master
+    - ./shake.sh -j$PARALLELISM lint
+  artifacts:
+    paths:
+      - shake/dist-newstyle
+
+build:docker:bdist:
+  stage: build
+  image: $REGISTRY_HOST/mate-dev:$CI_TAG
+  needs: ["prepare:docker", "lint"]
+  extends: .default-rules
+  before_script:
+    - . ./ci/ssh.sh
+    - git submodule sync --recursive
+    - git submodule update --init --recursive llvm/PointerAnalysis
+    - git submodule update --init --recursive submodules/manticore
+  script:
+    - |
+      if ./ci/on-stable.sh; then
+        ./shake.sh --release-build -j$PARALLELISM bdist
+      else
+        ./shake.sh -j$PARALLELISM bdist
+      fi
+  artifacts:
+    paths:
+      - shake/dist-newstyle
+      - .shake
+      - .out/bdist
+
+.alt-build:
+  stage: build
+  image: $REGISTRY_HOST/mate-dev:$CI_TAG
+  needs: ["prepare:docker", "lint"]
+  extends: .on-stable
+  before_script:
+    - . ./ci/ssh.sh
+    - git submodule sync --recursive
+    - git submodule update --init --recursive llvm/PointerAnalysis
+    - git submodule update --init --recursive submodules/manticore
+  artifacts:
+    paths:
+      - .shake
+      - .out/bdist
+
+build:docker:scan-build:
+  extends: .alt-build
+  script:
+    - >
+      ./shake.sh -j$PARALLELISM --scan-build
+      .out/bdist/local/lib/{libSoufflePA,libPAPass,libMATE,LLVMNomina,LLVMHeadache}.so
+
+build:docker:address-sanitizer-build:
+  extends: .alt-build
+  script:
+    - ./shake.sh -j$PARALLELISM --sanitize=address bdist
+
+build:docker:undefined-behavior-sanitizer-build:
+  extends: .alt-build
+  script:
+    - ./shake.sh -j$PARALLELISM --sanitize=undefined bdist
+
+.sanitize-docker:
+  stage: test-sanitized
+  image: $REGISTRY_HOST/mate-dev:$CI_TAG
+  extends: .on-stable
+  script:
+    - ./shake.sh -j$PARALLELISM --skip=build -k pytests -- -- -vv -x --show-capture=all
+  artifacts:
+    paths:
+      - shake/dist-newstyle
+      - .out/build/pytests.junit.xml
+    reports:
+      junit: .out/build/pytests.junit.xml
+
+sanitize:docker:address-sanitizer-pytests:
+  needs: ["build:docker:address-sanitizer-build"]
+  extends: .sanitize-docker
+  before_script:
+    - export MATE_SANITIZERS=address
+
+sanitize:docker:undefined-behavior-sanitizer-pytests:
+  needs: ["build:docker:undefined-behavior-sanitizer-build"]
+  extends: .sanitize-docker
+  before_script:
+    - export MATE_SANITIZERS=undefined
+
+.compose-service:
+  image: $REGISTRY_HOST/docker-with-compose
+  extends: .default-rules
+
+.test-docker:
+  stage: test
+  image: $REGISTRY_HOST/mate-dev:$CI_TAG
+  needs: ["build:docker:bdist"]
+  extends: .default-rules
+
+test:docker:pytests:
+  extends: .test-docker
+  before_script:
+    - |
+      if ./ci/on-stable.sh; then
+        export MATE_INTEGRATION_TESTS=1
+      fi
+  script:
+    - ./shake.sh -j$PARALLELISM --skip=build -k pytests -- -- -n $PARALLELISM  -x
+  artifacts:
+    paths:
+      - shake/dist-newstyle
+      - .out/build/pytests.junit.xml
+    reports:
+      junit: .out/build/pytests.junit.xml
+
+test:docker:postgres:
+  stage: test
+  image: $REGISTRY_HOST/docker-with-compose
+  needs: ["build:docker:bdist"]
+  extends: .default-rules
+  before_script:
+    - ./ci/docker_login.sh
+    - |
+      if ./ci/on-stable.sh; then
+        export MATE_INTEGRATION_TESTS=1
+      fi
+    - docker-compose -p "MATE_test_${CI_COMMIT_SHORT_SHA}" up -d -V db storage mate-runtime-state
+  script:
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose -p "MATE_test_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      run
+      -e MATE_INTEGRATION_TESTS
+      -v /builds:/builds
+      -w ${PWD}
+      test --skip=build -- -- -n $PARALLELISM -x
+  after_script:
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose
+      -p "MATE_test_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      stop
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose
+      -p "MATE_test_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      down --volumes --remove-orphans
+
+# These tests invoke manticore and can take a while
+test:docker:dwarfcore:
+  stage: test
+  image: $REGISTRY_HOST/docker-with-compose
+  needs: ["build:docker:bdist"]
+  extends: .default-rules
+  before_script:
+    - ./ci/docker_login.sh
+    - docker-compose -p "MATE_test_dwarfcore_${CI_COMMIT_SHORT_SHA}" up -d -V db storage
+  script:
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG
+      docker-compose -p "MATE_test_dwarfcore_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      run
+      -e MATE_INTEGRATION_TESTS
+      -v /builds:/builds
+      -w ${PWD}
+      dwarfcore-test --skip=build -- -- -n $PARALLELISM -x
+  after_script:
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose
+      -p "MATE_test_dwarfcore_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      stop
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose
+      -p "MATE_test_dwarfcore_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      down --volumes --remove-orphans
+
+test:docker:mantiserve:
+  stage: test
+  image: $REGISTRY_HOST/docker-with-compose
+  needs: ["build:docker:bdist"]
+  extends: .default-rules
+  before_script:
+    - ./ci/docker_login.sh
+    - docker-compose -p "MATE_test_mantiserve_${CI_COMMIT_SHORT_SHA}" up -d -V db storage
+  script:
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG
+      docker-compose -p "MATE_test_mantiserve_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      run
+      -e MATE_INTEGRATION_TESTS
+      -v /builds:/builds
+      -w ${PWD}
+      mantiserve-test --skip=build -- -- -n $PARALLELISM  -x
+  after_script:
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose
+      -p "MATE_test_mantiserve_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      stop
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose
+      -p "MATE_test_mantiserve_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      down --volumes --remove-orphans
+
+dist:doc:
+  stage: dist
+  rules:
+    - if: "$SCHEDULE"
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "stable" || $CI_COMMIT_BRANCH == "master"'
+  image: $REGISTRY_HOST/mate-dev:$CI_TAG
+  needs: ["build:docker:bdist"]
+  before_script:
+    - . ./ci/ssh.sh
+  script:
+    - |
+      if [ "${CI_COMMIT_BRANCH}" == "master" ]; then
+        ssh stockfish@scholomance.galois.com "mkdir /srv/www/mate.galois.com/public_html/$CI_COMMIT_SHORT_SHA"
+        scp -r .out/bdist/local/doc/html/* stockfish@scholomance.galois.com:/srv/www/mate.galois.com/public_html/$CI_COMMIT_SHORT_SHA/
+      fi
+    - ssh stockfish@scholomance.galois.com "ln -sfn /srv/www/mate.galois.com/public_html/$CI_COMMIT_SHORT_SHA /srv/www/mate.galois.com/public_html/$CI_COMMIT_REF_SLUG"
+
+dist:docker:image:
+  extends: .build-docker
+  stage: dist
+  needs: ["test:docker:dwarfcore", "test:docker:mantiserve", "test:docker:pytests", "build:docker:bdist"]
+  dependencies: ["build:docker:bdist"]
+  script:
+    - ./ci/docker_build.sh "mate-dist" "dist"
+    - ./ci/docker_build.sh "mate-notebook" "notebook"
+    - ./ci/docker_build.sh "mate-ui" "ui"
+
+integration:challenges:
+  stage: integration
+  image: $REGISTRY_HOST/docker-with-compose
+  needs: ["dist:docker:image"]
+  before_script:
+    - . ./ci/ssh.sh
+    - apk add git
+    - git submodule update --init submodules/mate-tests
+    - git submodule update --init --recursive submodules/manticore
+    - docker-compose -p "MATE_challenge_${CI_COMMIT_SHORT_SHA}" up -d -V db storage mate-runtime-state
+  extends: .on-stable
+  script:
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose -p "MATE_challenge_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      run
+      -e MATE_INTEGRATION_TESTS
+      -v /builds:/builds -w ${PWD}
+      poi-test
+      --skip=build
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose -p "MATE_challenge_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      run
+      -e MATE_INTEGRATION_TESTS
+      -v /builds:/builds -w ${PWD}
+      challenge-test
+      --skip=build
+  after_script:
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose
+      -p "MATE_challenge_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      stop
+    - >
+      MATE_DOCKER_TAG=:$CI_TAG docker-compose
+      -p "MATE_challenge_${CI_COMMIT_SHORT_SHA}"
+      -f docker-compose.yml
+      -f docker-compose.test.yml
+      down --volumes --remove-orphans
+
+
+cleanup:docker-state:
+  stage: cleanup
+  image: $REGISTRY_HOST/docker-with-compose
+  when: manual
+  allow_failure: true
+  script:
+    - >
+      docker network prune --force
+      --filter label=com.galois.mate.ci-safe-to-remove
+    - >
+      docker volume prune --force
+      --filter label=com.galois.mate.bdist-volume
+    - >
+      docker volume prune --force
+      --filter label=com.galois.mate.scratch-volume
+    - >
+      docker ps
+      --filter "label=com.docker.compose.project" -q
+      | xargs -r docker inspect
+      --format='{{index .Config.Labels "com.docker.compose.project"}}'
+      | sort
+      | uniq
+      | xargs
+      -I{} -n1 docker-compose --project-name {} down --volumes --remove-orphans
+    - >
+      docker system prune --volumes --force

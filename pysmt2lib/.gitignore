@@ -1,0 +1,5 @@
+SMTLIBv2.*
+SMTLIBv2Lexer.*
+SMTLIBv2Listener.*
+SMTLIBv2Parser.*
+!SMTLIBv2.g4

@@ -1,0 +1,258 @@
+settings:
+  all_files: &all_files !settings
+    included:
+      - ~+/*
+    excluded: []
+    allow_ignore: yes
+
+  tests_only: &tests_only !settings
+    included:
+      - ~+/test/*
+    excluded: []
+    allow_ignore: yes
+
+  excluding_tests: &excluding_tests !settings
+    included:
+      - ~+/*
+    excluded:
+      - ~+/test/*
+    allow_ignore: yes
+
+  assert_settings: &assert_settings !settings
+    included:
+      - ~+/*
+    excluded:
+      - ~+/test/*
+      - ~+/mate-query/mate_query/db.py
+      - ~+/mate-common/mate_common/utils.py
+      - ~+/mate-common/mate_common/models/bytes.py
+      - ~+/mate-cli/mate_cli/cli.py
+      - ~+/mate/mate/build/tob_chess_utils/*
+    allow_ignore: yes
+
+  node_kind_settings: &node_kind_settings !settings
+    included:
+      - ~+/*
+    excluded:
+      - ~+/mate/mate/cpg/models/core.py
+      - ~+/mate/mate/cpg/models_old.py
+      - ~+/test/invariant_test.py
+    allow_ignore: yes
+
+  cli: &cli !settings
+    included:
+      - ~+/mate/mate/context/cli.py
+    excluded: []
+    allow_ignore: yes
+
+  rest_routes: &rest_routes !settings
+    included:
+      - ~+/mate/mate/server/api/*/routes.py
+    excluded: []
+    allow_ignore: yes
+
+default_settings: *all_files
+
+rules:
+  NodeKind:
+    description: Access of "node_kind" attribute
+    expr: //Subscript[slice/Index/value/Constant[@value="node_kind"] and value/Attribute[@attr="attributes"]]
+    example: |
+      node.attributes["node_kind"]
+    instead: |
+      node.kind
+    settings: *node_kind_settings
+
+  EdgeKind:
+    description: Access of "edge_kind" attribute
+    expr: //Subscript[slice/Index/value/Constant[@value="edge_kind"] and value/Attribute[@attr="attributes"]]
+    example: |
+      edge.attributes["edge_kind"]
+    instead: |
+      edge.kind
+    settings: *node_kind_settings
+
+  filter_by:
+    description: Use SQLAlchemy's filter_by for brevity
+    # Find calls to "filter" that:
+    #
+    # - are chained after a call to "query" with one argument,
+    # - have one argument,
+    # - which is an equality comparison
+    #   * which has a LHS which is an attribute access on a name
+    expr:
+      //Call[ ./func/Attribute[ @attr='filter'
+                                and ./value/Call[./func/Attribute[@attr='query']
+                                and ./args[count(child::*) = 1]]
+                              ]
+              and ./args[count(child::*) = 1]
+              and ./args/Compare[ ./ops/Eq
+                                  and ./left/Attribute[ @attr != 'attributes'
+                                                        and ./value/Name
+                                                      ]
+                                ]
+            ]
+    example: |
+      cpg.query(Model).filter(Model.attr == baz)
+    instead: |
+      cpg.query(Model).filter_by(attr = baz)
+    settings: *all_files
+
+  stringified_types:
+    description: |
+      Use "from __future__ import annotations" instead of stringified types
+
+      See: https://www.python.org/dev/peps/pep-0563
+    expr: //FunctionDef/returns/Constant[@value]
+    example: |
+      def f() -> "T":
+        pass
+    instead: |
+      def f() -> T:
+        pass
+    settings: *all_files
+
+  yaml_load:
+    description: |
+      Use yaml.safe_load, not yaml.load
+
+      See: https://bandit.readthedocs.io/en/latest/plugins/b506_yaml_load.html
+    expr:
+      //Call[ ./func/Attribute[ @attr='load'
+                                and ./value/Name[@id='yaml']
+                              ]
+            ]
+    example: |
+      yaml.load(file)
+    instead: |
+      yaml.safe_load(file)
+    settings: *all_files
+
+  assert:
+    description: Prefer use of mate_assert to assert
+    expr: //Assert
+    example: |
+      assert some_condition, f"Some condition was not met: {details}"
+    instead: |
+      mate_assert(some_condition, f"Some condition was not met: {details}")
+    settings: *assert_settings
+
+  not_null:
+    description: |
+      No MATE database columns should ever hold NULL.
+    expr:
+      //Call[ ./func//Name[@id="Column"]
+              and ( not(./keywords//keyword[@arg="primary_key"])
+                    and not(./keywords//keyword[@arg="nullable"])
+                  )
+            ]
+    example: |
+      Column(String)
+    instead: |
+      Column(String, nullable=False)
+    settings: *all_files
+
+  hyphens_in_cli_flags:
+    description: Use hyphens/kebab-case in CLI flags.
+    # Oof, XPath is 1-indexed...
+    expr: //Constant[substring(@value, 1, 2) = "--" and contains(@value, "_")]
+    example: |
+      parser.add_argument("-m", "--multi_word_option")
+    instead: |
+      parser.add_argument("-m", "--multi-word-option")
+    settings: *cli
+
+  enum_validate_strings:
+    description: Use SQLAlchemy's validate_strings for enumerations
+    expr:
+      //Call[ ./func//Name[@id="SAEnum" or @id="Enum"]
+              and not(./keywords//keyword[@arg="validate_strings"])
+            ]
+    example: |
+      Column("foo", SAEnum(SomeEnum, values_callable=lambda e: [x.value for x in e]))
+    instead: |
+      Column("foo", SAEnum(SomeEnum, values_callable=lambda e: [x.value for x in e], validate_strings=True))
+    settings: *all_files
+
+  no_stringified_relationships:
+    description: Don't use stringified classes in relationships
+    expr:
+      //Call[ ./func//Name[@id="relationship"]
+              and ( (./args)[1]/Constant
+                    or ./keywords//keyword[@arg="primaryjoin" and ./value[./Constant]]
+                    or ./keywords//keyword[@arg="secondaryjoin" and ./value[./Constant]]
+                  )
+            ]
+    example: |
+      relationship("Foo", primaryjoin="Blah.baz == Boo.quux")
+    instead: |
+      relationship(Foo, primaryjoin=lambda: Blah.baz == Boo.quux)
+    settings: *all_files
+
+  location_header_symbolic_function:
+    description: Don't use stringified functions in request.url_for
+    expr:
+      //Call[ ./func/Attribute[ @attr='url_for'
+                                and ./value/Name[@id='request']
+                              ]
+              and (./args)[1]/Constant
+            ]
+    example: |
+      request.url_for("some_function")
+    instead: |
+      request.url_for(some_function.__name__)
+
+  rest_endpoints_are_private:
+    description: FastAPI request routes should be _underscore_prefixed
+    expr:
+      //FunctionDef [
+        ./decorator_list//Call[ ./func/Attribute[ ./value/Name[@id='router'] ] ]
+        and not(starts-with(@name, '_'))
+      ]
+    example: |
+      @router.get("/foo")
+      def foo():
+        ...
+    instead: |
+      @router.get("/foo")
+      def _foo():
+        ...
+    settings: *rest_routes
+
+  set_join_collapse_limit:
+    description: Use mate.db.join_collapse_limit
+    expr:
+      //Call[ ./func/Attribute[ @attr='execute' ]
+              and ./args[1]/Constant[ @value='SET join_collapse_limit=1' ]
+            ]
+    example: |
+      session.execute("SET join_collapse_limit=1")
+    instead: |
+      from mate.db import join_collapse_limit
+      with join_collapse_limit(session):
+          pass
+    settings: *assert_settings
+
+  reset_join_collapse_limit:
+    description: Use mate.db.join_collapse_limit
+    expr:
+      //Call[ ./func/Attribute[ @attr='execute' ]
+              and ./args[1]/Constant[ @value='RESET join_collapse_limit' ]
+            ]
+    example: |
+      session.execute("RESET join_collapse_limit")
+    instead: |
+      from mate.db import join_collapse_limit
+      with join_collapse_limit(session):
+          pass
+    settings: *assert_settings
+
+  bot:
+    description: Use mate.db.BOT
+    expr:
+      //Constant[ @value='$' ]
+    example: |
+      literal("$")
+    instead: |
+      literal(BOT)
+    settings: *assert_settings

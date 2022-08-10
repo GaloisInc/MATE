@@ -1,0 +1,138 @@
+# Base docker-compose file for running MATE services on especially powerful
+# hosts.
+
+version: "3.7"
+
+services:
+  server:
+    networks:
+      - mate
+    image: ${MATE_DOCKER_REGISTRY}mate-dist${MATE_DOCKER_TAG}
+    depends_on:
+      - db
+    # The database MUST come online before the REST server, since the REST
+    # server is solely responsible for initializing the DB during normal
+    # deployments.
+    entrypoint: |
+      wait-for-it db:5432 -- mate -vv serve
+    ports:
+      - 8666:8000
+    environment:
+      - MATE_SERVER_CONCURRENCY=16
+
+  db:
+    networks:
+      - mate
+    image: postgres:14.2
+    # NOTE(ww): Postgres defaults to 100 connections and 128MB of shared buffer.
+    # These are relatively small limits to MATE's usecase, which (when fully
+    # deployed as part of CHESS) can include dozens of long-running connections
+    # performing CPG builds complemented by dozens of short connections performing
+    # API requests (e.g., to Flowfinder and Mantiserve).
+    # See: https://gitlab-ext.galois.com/mate/MATE/-/merge_requests/1573
+    command: |
+      postgres -c max_connections=512
+               -c shared_buffers=16GB
+               -c work_mem=512MB
+               -c temp_buffers=512MB
+               -c maintenance_work_mem=64MB
+               -c effective_cache_size=16GB
+               -c max_wal_size=4GB
+               -c min_wal_size=512MB
+               -c max_parallel_workers=16
+               -c max_parallel_workers_per_gather=4
+               -c parallel_leader_participation=off
+               -c default_statistics_target=10000
+               -c geqo_effort=7
+               -c shared_preload_libraries='auto_explain'
+               -c auto_explain.log_min_duration=1s
+               -c auto_explain.log_analyze=on
+               -c auto_explain.log_buffers=on
+               -c auto_explain.log_wal=on
+               -c auto_explain.log_timing=on
+               -c auto_explain.log_verbose=on
+               -c auto_explain.log_settings=on
+               -c auto_explain.log_nested_statements=on
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=mate
+      - POSTGRES_USER=mate
+
+  storage:
+    networks:
+      - mate
+    image: minio/minio:RELEASE.2020-08-08T04-50-06Z
+    volumes:
+      - artifacts:/mate/artifacts
+    command: server --address :9000 /mate/artifacts
+    environment:
+      - MINIO_ACCESS_KEY=${MATE_STORAGE_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MATE_STORAGE_SECRET_KEY}
+
+  broker:
+    image: rabbitmq:3.8.12
+    networks:
+      - mate
+
+  executor:
+    image: ${MATE_DOCKER_REGISTRY}mate-dist${MATE_DOCKER_TAG}
+    # The executor assumes an initialized DB, and therefore must NOT come online
+    # before the server has a chance to initialize it.
+    # Similarly, the executor needs the broker to properly function.
+    entrypoint: |
+      wait-for-it server:8000 --
+      wait-for-it broker:5672 --
+      celery -A mate.tasks:executor worker --loglevel=DEBUG
+    environment:
+      # NOTE(ww): Our Celery container runs as root and uses pickle for
+      # serialization (see the NOTE in tasks/__init__.py).
+      # This is an insecure configuration; we use C_FORCE_ROOT to allow it.
+      - C_FORCE_ROOT=1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - mate-scratch:/opt/mate-scratch/
+    networks:
+      - mate
+
+  # HACK(ww): This container plays an important role in MATE's handling of
+  # containerized challenges: it exits as soon as it's done starting, but
+  # creates a volume (`mate-bdist`) in the background that contains a complete
+  # copy of MATE's runtime environment. We then mount that volume into
+  # each challenge's container, giving us access to our build instrumentation,
+  # custom compiler toolchain, Manticore, and so forth.
+  # In an ideal world, Docker would allow us to pre-populate the `mate-bdist`
+  # volume up front, without creating an ephemeral service here. But we're
+  # not so lucky, and this is the best hack we currently have.
+  mate-runtime-state:
+    image: ${MATE_DOCKER_REGISTRY}mate-dist${MATE_DOCKER_TAG}
+    entrypoint: /bin/true
+    volumes:
+      - mate-bdist:/opt/mate
+
+networks:
+  # HACK(ww): When running MATE as a set of docker-compose services in the CI,
+  # we need to routinely prune the "mate" network to ensure that we don't
+  # slowly exhaust the GitLab CI server's network resources. Doing
+  # an unconditional prune of all networks is potentially unsafe, so
+  # we use the label defined below to filter down to only networks
+  # that are safe to prune.
+  mate:
+    labels:
+      - com.galois.mate.ci-safe-to-remove
+
+volumes:
+  artifacts:
+  # HACK(ww): Another woe with Docker's volumes is that they are namespaced
+  # to their originating network. In our local deployment this is the
+  # `mate` network, but in the CHESS deployment it's `chess_net`. To avoid
+  # having to test both networks for our volumes at runtime, we give each volume
+  # that needs to be dynamically mounted a custom label that we know how to
+  # search for.
+  # See `docker_volume_by_label` in `build/common.py` for our strategy
+  # for retrieving volumes by their labels.
+  mate-bdist:
+    labels:
+      - com.galois.mate.bdist-volume
+  mate-scratch:
+    labels:
+      - com.galois.mate.scratch-volume

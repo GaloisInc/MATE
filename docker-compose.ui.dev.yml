@@ -1,0 +1,22 @@
+# MATE web UI development environment, for MATE developers only. See
+# doc/hacking.rst.
+
+version: "3.7"
+
+services:
+  ui:
+    networks:
+      - mate
+    build:
+      context: .
+      target: ui
+    image: ${MATE_DOCKER_REGISTRY}mate-ui${MATE_DOCKER_TAG}
+    environment:
+      - NODE_ENV=development
+    ports:
+      - 3000:3000
+    volumes:
+      - ./ui-client/src:/ui-client/src
+
+networks:
+  mate:

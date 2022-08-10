@@ -1,0 +1,82 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+$background-color: $gray-100;
+
+.PanelGrid {
+  display: flex;
+  align-content: stretch;
+  align-items: stretch;
+  height: calc(100vh - 56px); // 56px == header height
+
+  .rightSidebar {
+    background-color: $background-color;
+    display: flex;
+    align-content: stretch;
+    align-items: stretch;
+    overflow-y: scroll;
+
+    &.rightSidebar {
+      justify-content: flex-start;
+
+      .sidebarContent {
+        width: 100vw;
+        padding: 1em 1em 1em 0;
+
+        .col {
+          height: 100%;
+
+          .row {
+            height: calc(100% / 4);
+          }
+        }
+      }
+    }
+
+    .handleBox {
+      display: flex;
+
+      .handle {
+        cursor: pointer;
+        color: $gray-700;
+      }
+    }
+  }
+
+  .body {
+    background-color: $background-color;
+    display: flex;
+    align-content: stretch;
+    align-items: stretch;
+    flex-direction: column;
+
+    .graphWindow {
+      background-color: $background-color;
+
+      .bodyContent {
+        height: calc(100% - var(--handle-icon-height));
+      }
+
+      .verticalHandleBox {
+        display: flex;
+        justify-content: center;
+        box-shadow: 0 -2px 1px $gray-300;
+
+        .verticalHandle {
+          cursor: row-resize;
+        }
+      }
+    }
+
+    .graphCardWindow {
+      overflow: scroll;
+      padding: 1em;
+
+      .card-group {
+        display: flex;
+        flex-direction: row;
+        flex-flow: wrap;
+      }
+    }
+  }
+}

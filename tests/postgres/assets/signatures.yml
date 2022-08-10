@@ -1,0 +1,78 @@
+- name: '^mate_return_alloc_test$'
+  signatures:
+  - pts_return_alloc: []
+  - input:
+      tags: [test_input]
+      to:
+        - return_points_to: []
+
+- name: '^mate_return_alloc_override_test$'
+  signatures:
+  - pts_return_alloc: []
+  - input:
+      to:
+        - return_points_to: []
+
+- name: '^mate_return_alloc_once_test$'
+  signatures:
+  - pts_return_alloc_once: []
+
+- name: '^mate_return_aliases_arg_test$'
+  signatures:
+  - pts_return_aliases_arg: [ 1 ]
+
+- name: '^mate_return_aliases_arg_test_neg$'
+  signatures:
+  - dataflow:
+      tags: [test1,test2]
+      from:
+        direct:
+          - arg_points_to: [ 1 ]
+        control:
+          - arg_points_to: [ 0 ]
+      to:
+        - arg_points_to: [ 2 ]
+
+- name: '^mate_return_aliases_arg_reachable_test$'
+  signatures:
+  - pts_return_aliases_arg_reachable: [ 2 ]
+
+- name: '^mate_return_points_to_global_test$'
+  signatures:
+  - pts_return_points_to_global: [ global_int ]
+
+- name: '^mate_return_aliases_global_test$'
+  signatures:
+  - pts_return_aliases_global: [ global_ptr ]
+
+- name: '^mate_return_aliases_global_reachable_test$'
+  signatures:
+  - pts_return_aliases_global_reachable: [ global_ptr ]
+
+- name: '^mate_arg_alloc_test$'
+  signatures:
+  - pts_arg_alloc: [ 0 ]
+
+- name: '^mate_arg_alloc_once_test$'
+  signatures:
+  - pts_arg_alloc_once: [ 0 ]
+
+- name: '^mate_arg_memcpy_arg_test$'
+  signatures:
+  - pts_arg_memcpy_arg: [ 0, 1 ]
+
+- name: '^mate_arg_memcpy_arg_reachable_test$'
+  signatures:
+  - pts_arg_memcpy_arg_reachable: [ 0, 1 ]
+
+- name: '^mate_arg_points_to_global_test$'
+  signatures:
+  - pts_arg_points_to_global: [ 0, global_int ]
+
+- name: '^mate_arg_memcpy_global_test$'
+  signatures:
+  - pts_arg_memcpy_global: [ 0, global_struct ]
+
+- name: '^mate_arg_memcpy_global_reachable_test$'
+  signatures:
+  - pts_arg_memcpy_global_reachable: [ 0, global_struct ]

@@ -1,0 +1,6 @@
+.NodeSelector {
+  box-shadow: var(--sidebar-shadow);
+  .form-group:not(:last-child) {
+    padding-bottom: 1em;
+  }
+}

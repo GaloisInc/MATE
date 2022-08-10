@@ -1,0 +1,2193 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$comment": "Comments in this schema are about the implementation of the schema itself, rather than the data it describes, which are covered by the 'description' and 'title' fields.",
+    "definitions": {
+        "base": {
+            "$comment": "Every branch in the main 'oneOf' disjunction should obey this schema.",
+            "description": "Every node in the CPG should have a 'node_kind', which determines what other attributes are valid/required/present.",
+            "type": "object",
+            "properties": {
+                "node_kind": { "type": "string" }
+            },
+            "required": ["node_kind"]
+        },
+        "dwarf_type_kind": {
+            "properties": {
+                "node_kind": { "type": "string" },
+                "pretty_string": { "type": "string" },
+                "dwarf_type": { "$ref": "#/definitions/dwarf_type" }
+            },
+            "required": ["node_kind", "dwarf_type"],
+            "additional_properties": false
+        },
+        "constant": {
+            "properties": {
+                "constant_data_subclass": {
+                    "description": "If this constant had a type that was a subclass of the LLVM class ConstantData, which subclass was it?",
+                    "type": "string",
+                    "enum": [
+                        "ConstantAggregateZero",
+                        "ConstantDataArray",
+                        "ConstantDataVector",
+                        "ConstantFP",
+                        "ConstantInt",
+                        "ConstantPointerNull",
+                        "ConstantTokenNone",
+                        "UndefValue"
+                    ]
+                },
+                "is_null_value": {
+                    "type": "boolean",
+                    "description": "true if this is the value that would be returned by LLVM's getNullValue"
+                },
+                "is_one_value": {
+                    "type": "boolean",
+                    "description": "true if the value is one"
+                },
+                "is_all_ones_value": {
+                    "type": "boolean",
+                    "description": "true if this is the value that would be returned by LLVM's getAllOnesValue"
+                },
+                "is_zero_value": {
+                    "type": "boolean",
+                    "description": "true if the value is negative zero or null value"
+                },
+                "is_normal_fp": {
+                    "type": "boolean",
+                    "description": "true if this is a normal (as opposed to denormal) floating-point scalar constant or a vector constant with all normal elements"
+                },
+                "is_nan": {
+                    "type": "boolean",
+                    "description": " true if this is a floating-point NaN constant or a vector floating-point constant with all NaN elements"
+                },
+                "contains_undef": {
+                    "type": "boolean",
+                    "description": "true if this is a vector constant that includes any undefined elements"
+                },
+                "can_trap": {
+                    "type": "boolean",
+                    "description": "true if evaluation of this constant could trap"
+                },
+                "pretty_string": { "type": "string" }
+            }
+        },
+        "instruction": {
+            "properties": {
+                "location": { "$ref": "#/definitions/location" },
+                "might_be_null": {
+                    "type": "boolean",
+                    "description": "True when the pointer analysis determines the value could be a null pointer"
+                },
+                "opcode": {
+                    "type": "string",
+                    "enum": [
+                        "ret",
+                        "br",
+                        "switch",
+                        "indirectbr",
+                        "invoke",
+                        "resume",
+                        "unreachable",
+                        "cleanupret",
+                        "catchret",
+                        "catchpad",
+                        "catchswitch",
+                        "fneg",
+                        "add",
+                        "fadd",
+                        "sub",
+                        "fsub",
+                        "mul",
+                        "fmul",
+                        "udiv",
+                        "sdiv",
+                        "fdiv",
+                        "urem",
+                        "srem",
+                        "frem",
+                        "and",
+                        "or",
+                        "xor",
+                        "alloca",
+                        "load",
+                        "store",
+                        "atomiccmpxchg",
+                        "atomicrmw",
+                        "fence",
+                        "getelementptr",
+                        "trunc",
+                        "zext",
+                        "sext",
+                        "fptrunc",
+                        "fpext",
+                        "fptoui",
+                        "fptosi",
+                        "uitofp",
+                        "sitofp",
+                        "inttoptr",
+                        "ptrtoint",
+                        "bitcast",
+                        "addrspacecast",
+                        "icmp",
+                        "fcmp",
+                        "phi",
+                        "select",
+                        "call",
+                        "shl",
+                        "lshr",
+                        "ashr",
+                        "vaarg",
+                        "extractelement",
+                        "insertelement",
+                        "shufflevector",
+                        "extractvalue",
+                        "insertvalue",
+                        "landingpad",
+                        "cleanuppad"
+                    ]
+                },
+                "ssa_name": {
+                    "description": "The name of the SSA variable that this instruction 'returns' to, if set",
+                    "type": "string"
+                },
+                "intrinsic": {
+                    "description": "If this field is set, this instruction is a call to an LLVM intrinsic function, and this field is the ID of that intrinsic.",
+                    "type": "integer"
+                }
+            },
+            "required": ["opcode"]
+        },
+        "location": {
+            "description": "A location in a source-language file",
+            "type": "object",
+            "properties": {
+                "file": { "type": "string" },
+                "dir": { "type": "string" },
+                "column": { "type": "integer" },
+                "line": { "type": "integer" },
+                "function": { "type": "string" },
+                "compressed_id": { "type": "string" }
+            },
+            "additionalProperties": false,
+            "required": [ "file", "dir" ]
+        },
+        "definition_location": {
+            "description": "A definition location for a global variable in a source-language file",
+            "type": "object",
+            "properties": {
+                "directory": { "type": "string" },
+                "filename": { "type": "string" },
+                "line": { "type": "integer" }
+            },
+            "additionalProperties": false,
+            "required": [ "directory", "filename", "line"]
+        },
+        "dwarf_location": {
+            "description": "Location of this variable in memory, expressed as either an absolute address or an offset from a register",
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "$comment": "TODO(lb)"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "begin_offset": {
+                                "type": "integer",
+                                "description": "Beginning of instruction counter/offset range when this location is accurate"
+                            },
+                            "end_offset": {
+                                "type": "integer",
+                                "description": "End of instruction counter/offset range when this location is accurate"
+                            },
+                            "location": {
+                                "type": "object",
+                                "description": "An offset from a register, or an absolute address."
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "dwarf_type_common_info": {
+            "description": "A subobject common to every variant of dwarf_type",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the type, or empty if inapplicable"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "The DWARF tag (DW_TAG_*) for the type"
+                },
+                "size": {
+                    "type": "integer",
+                    "description": "The size of the type, in bytes"
+                },
+                "align": {
+                    "type": "integer",
+                    "description": "The alignment of the type, in bytes"
+                },
+                "offset": {
+                    "type": "integer",
+                    "description": "The offset of this type within its parent, if applicable"
+                },
+                "forward_decl": {
+                    "type": "boolean",
+                    "description": "Whether or not this type is forward-declared"
+                },
+                "virtual": {
+                    "type": "boolean",
+                    "description": "Whether or not this type is virtual"
+                },
+                "artificial": {
+                    "type": "boolean",
+                    "description": "Whether or not this type is artificial (i.e., not present in source)"
+                }
+            },
+            "required": [
+                "name",
+                "tag",
+                "size",
+                "align",
+                "offset",
+                "forward_decl",
+                "virtual",
+                "artificial"
+            ],
+            "additionalProperties": false
+        },
+        "dwarf_template_param": {
+            "description": "A C++ template type or value parameter",
+            "type": "object",
+            "oneOf": [
+                {
+                    "description": "A C++ template type parameter",
+                    "properties": {
+                        "kind": { "enum": [ "type_parameter" ] },
+                        "name": { "type": "string" },
+                        "type": { "type": "string" }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "name",
+                        "type"
+                    ]
+                },
+                {
+                    "description": "A C++ template value parameter",
+                    "properties": {
+                        "kind": { "enum": [ "value_parameter" ] },
+                        "name": { "type": "string" },
+                        "type": { "type": "string" },
+                        "value": { "$ref": "#/definitions/dwarf_template_param_value" }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "name",
+                        "type",
+                        "value"
+                    ]
+                }
+            ]
+        },
+        "dwarf_template_param_value": {
+            "description": "A value in a C++ template value parameter",
+            "type": "object",
+            "oneOf": [
+                {
+                    "description": "An integral C++ template value parameter",
+                    "properties": {
+                        "int": {
+                            "type": "object",
+                            "properties": {
+                                "value": { "type": "integer" }
+                            },
+                            "additionalProperties": false,
+                            "required": [ "value" ]
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [ "int" ]
+                },
+                {
+                    "description": "An string C++ template value parameter",
+                    "properties": {
+                        "string": {
+                            "type": "object",
+                            "properties": {
+                                "value": { "type": "string" }
+                            },
+                            "additionalProperties": false,
+                            "required": [ "value" ]
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [ "string" ]
+                },
+                {
+                    "description": "An integral array C++ template value parameter",
+                    "properties": {
+                        "array": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": { "type": "integer" }
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required": [ "value" ]
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [ "array" ]
+                },
+                {
+                    "description": "An unknown constant C++ template value parameter",
+                    "properties": {
+                        "_unknown_constant": {
+                            "type": "null",
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [ "_unknown_constant" ]
+                },
+                {
+                    "description": "An unknown non-constant C++ template value parameter",
+                    "properties": {
+                        "_unknown_value": {
+                            "type": "null",
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [ "_unknown_value" ]
+                }
+            ]
+        },
+        "dwarf_type": {
+            "description": "A structured representation of C types, using DWARF identifiers.",
+            "type": "object",
+            "oneOf": [
+                {
+                    "description": "A basic type, like int or float",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "basic" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "unsigned": {
+                            "description": "Whether this basic type is unsigned. false if signedness does not apply to a type.",
+                            "type": "boolean"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "unsigned"
+                    ]
+                },
+                {
+                    "description": "A composite type, not otherwise specialized",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "composite" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "base_type": {
+                            "description": "The base type ID for this composite",
+                            "type": "string"
+                        },
+                        "elements": {
+                            "description": "The type IDs for the members that make up this composite type",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "base_type",
+                        "elements"
+                    ]
+                },
+                {
+                    "description": "A composite type, cached for recursion or space purposes",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "composite_cached" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "name": {
+                            "description": "The name of the cached composite, corresponding to the name of some fully expanded composite",
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "name"
+                    ]
+                },
+                {
+                    "description": "A structure (struct) composite",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "structure" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "base_type": {
+                            "description": "The base type ID for this struct",
+                            "type": "string"
+                        },
+                        "parents": {
+                            "description": "The type IDs for the structs that this struct inherits from",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "members": {
+                            "description": "The type IDs for the members that make up this struct",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "base_type",
+                        "parents",
+                        "members"
+                    ]
+                },
+                {
+                    "description": "An array composite",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "array" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "base_type": {
+                            "description": "The base type ID for this array",
+                            "type": "string"
+                        },
+                        "subrange": {
+                            "description": "The constant or variable that provides this array's range",
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "description": "The value of the constant that provides this array's range",
+                                    "type": "integer"
+                                },
+                                "global_variable": {
+                                    "description": "The global variable that provides this array's range",
+                                    "type": "object",
+                                    "properties": {
+                                        "name": { "type": "string" },
+                                        "local_to_unit": { "type": "boolean" },
+                                        "display_name": { "type": "string" },
+                                        "linkage_name": { "type": "string" }
+                                    },
+                                    "additionalProperties": false,
+                                    "required": [
+                                        "name",
+                                        "local_to_unit",
+                                        "display_name",
+                                        "linkage_name"
+                                    ]
+                                },
+                                "local_variable": {
+                                    "description": "The local variable that provides this array's range",
+                                    "type": "object",
+                                    "properties": {
+                                        "name": { "type": "string" },
+                                        "parameter": { "type": "boolean" },
+                                        "arg": { "type": "integer" },
+                                        "artificial": { "type": "boolean" },
+                                        "object_pointer": { "type": "boolean" }
+                                    },
+                                    "additionalProperties": false,
+                                    "required": [
+                                        "name",
+                                        "parameter",
+                                        "arg",
+                                        "artificial",
+                                        "object_pointer"
+                                    ]
+                                }
+                            },
+                            "oneOf": [
+                                { "required": ["count"] },
+                                { "required": ["global_variable"] },
+                                { "required": ["local_variable"] }
+                            ],
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "base_type",
+                        "subrange"
+                    ]
+                },
+                {
+                    "description": "An enum composite",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "enum" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "base_type": {
+                            "description": "The base type ID for this array",
+                            "type": "string"
+                        },
+                        "enumerators": {
+                            "description": "The names and values for this enum",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of this enumerator",
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "description": "The integral value of this enumerator",
+                                        "type": "integer"
+                                    },
+                                    "unsigned": {
+                                        "description": "Whether this enumerator is unsigned",
+                                        "type": "boolean"
+                                    }
+                                },
+                                "additionalProperties": false,
+                                "required": [
+                                    "name",
+                                    "value",
+                                    "unsigned"
+                                ]
+                            }
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "base_type",
+                        "enumerators"
+                    ]
+                },
+                {
+                    "description": "A union composite",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "union" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "base_type": {
+                            "description": "The base type ID for this union",
+                            "type": "string"
+                        },
+                        "members": {
+                            "description": "The type IDs for the members that make up this union",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "base_type",
+                        "members"
+                    ]
+                },
+                {
+                    "description": "A class composite",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "class" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "base_type": {
+                            "description": "The base type ID for this class",
+                            "type": "string"
+                        },
+                        "parents": {
+                            "description": "The type IDs for the classes that this class inherits from",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "members": {
+                            "description": "The type IDs for the members that make up this class",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "template_params": {
+                            "description": "The template parameters that this class was expanded with",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dwarf_template_param"
+                            }
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "base_type",
+                        "parents",
+                        "members",
+                        "template_params"
+                    ]
+                },
+                {
+                    "description": "A derived type",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "derived" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "base_type": {
+                            "description": "The base type ID for this derived type",
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "base_type"
+                    ]
+                },
+                {
+                    "description": "A subroutine (function) type",
+                    "properties": {
+                        "kind": {
+                            "type": "string",
+                            "enum": [ "subroutine" ]
+                        },
+                        "common": { "$ref": "#/definitions/dwarf_type_common_info" },
+                        "params": {
+                            "description": "The type IDs for the parameters that this function takes",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "return": {
+                            "description": "The type ID for this function's return type",
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "kind",
+                        "common",
+                        "params",
+                        "return"
+                    ]
+                },
+                {
+                    "$comment": "TODO(ww): Is this still necessary?",
+                    "description": "An empty type, indicating the end of a type expansion",
+                    "additionalProperties": false
+                }
+            ]
+        },
+        "source_scope": {
+            "description": "Source scoping information using DWARF",
+            "type": "object",
+            "properties": {
+                "filename": {
+                    "type": "string",
+                    "description": "The basename of the source file that this scope appears in"
+                },
+                "directory": {
+                    "type": "string",
+                    "description": "The directory of the source file that this scope appears in"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The scope's name, if named"
+                },
+                "linkage_name": {
+                    "type": "string",
+                    "description": "The scope's linkage name, if available and named"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "The DWARF tag corresponding to the scope kind"
+                },
+                "parent_scope": { "$ref": "#/definitions/source_scope" }
+            },
+            "additionalProperties": false,
+            "required": [ "filename", "directory", "name", "tag" ]
+        },
+        "dwarf_scope": {
+            "description": "A representation of the nearest enclosing lexical scope. The enclosing scope will also contain VA range information, unless it has been optimized away.",
+            "type": "object",
+            "properties": {
+                "tag": {
+                    "type": "string",
+                    "description": "The DWARF tag for this scope"
+                },
+                "line": {
+                    "type": "integer",
+                    "description": "The source line that the scope starts on"
+                },
+                "contiguous": {
+                    "type": "boolean",
+                    "description": "Whether the scope is laid out continuously in the binary"
+                },
+                "inlined": {
+                    "type": "boolean",
+                    "description": "Whether the scope has been inlined"
+                },
+                "va_start": {
+                    "type": "integer",
+                    "description": "The start virtual address for the scope, if contiguous and not inlined"
+                },
+                "va_end": {
+                    "type": "integer",
+                    "description": "The end virtual address for the scope, if contiguous and not inlined"
+                },
+                "range_list": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": { "type": "integer" }
+                    },
+                    "description": "A list of virtual address ranges, if the scope is non-contiguous and not inlined"
+                }
+            },
+            "additionalProperties": false,
+            "required": ["tag", "line", "contiguous", "inlined"]
+        },
+        "source_location": {
+            "$comment": "TODO(ww): This is redundant with location and should be merged with it.",
+            "description": "The source location for a program feature",
+            "type": "object",
+            "properties": {
+                "line": {
+                    "type": "integer",
+                    "description": "The source line"
+                },
+                "column": {
+                    "type": "integer",
+                    "description": "The source column"
+                },
+                "probably_optimized_away": {
+                    "type": "boolean",
+                    "description": "Whether this location was probably optimized away"
+                },
+                "llvm_func_name": {
+                    "type": "string",
+                    "description": "The LLVM-level name of the function that this location is in"
+                },
+                "func_name": {
+                    "type": "string",
+                    "description": "The binary-level name of the function that this location is in"
+                },
+                "bb_operand": {
+                    "type": "string",
+                    "description": "The LLVM-level basic block operand that this location is in"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "line",
+                "column",
+                "probably_optimized_away",
+                "func_name",
+                "bb_operand"
+            ]
+        },
+        "llvm_type": {
+            "$comment": "NB: This schema is recursive.",
+            "description": "A structured representation of types in the LLVM type system. See https://llvm.org/docs/LangRef.html#type-system.",
+            "oneOf": [
+                {
+                    "type": "string",
+                    "enum": [
+                        "double",
+                        "float",
+                        "void",
+                        "label"
+                    ]
+                },
+                {
+                    "description": "A type that is not yet recognized/interpreted by MATE",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["unknown"],
+                    "properties": {
+                        "unknown": { "type": "string" }
+                    }
+                },
+                {
+                    "description": "A reference to a named struct type, read the same way as the literal name of the struct in C",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["ref"],
+                    "properties": {
+                        "ref": {
+                            "description": "The name of the referenced struct type",
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "description": "Read the same way as '*' in C",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["pointer"],
+                    "properties": {
+                        "pointer": { "$ref": "#/definitions/llvm_type" }
+                    }
+                },
+                {
+                    "description": "Read the same way as (postfix) '[]' in C",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["array", "array_size"],
+                    "properties": {
+                        "array": {"$ref": "#/definitions/llvm_type"},
+                        "array_size" : {"type" : "integer"}
+                    }
+                },
+                {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["int"],
+                    "properties": {
+                        "int": {
+                            "description": "The bit width of the integer type. Unlike C, LLVM has integers of all integer bit widths (for some fairly large definition of 'all').",
+                            "type": "integer"
+                        }
+                    }
+                },
+                {
+                    "description": "This schema encompasses both named and anonymous structs.",
+                    "type": "object",
+                    "required": ["struct"],
+                    "properties": {
+                        "name": {
+                            "description": "The name of this type, if it is a named struct",
+                            "type": "string"
+                        },
+                        "struct": {
+                            "description": "The definition of this type, whether or not it is named",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": ["field"],
+                                "properties": {
+                                    "field": {
+                                        "$comment": "Struct fields are currently encoded as JSON objects with only one field ('type'), but might have another field ('name') in the future. Field names are present in the C/C++ source, but not at the LLVM level.",
+                                        "type": "object",
+                                        "properties": {
+                                            "type": { "$ref": "#/definitions/llvm_type" }
+                                        },
+                                        "required": ["type"],
+                                        "additionalProperties": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "description": "A function type",
+                    "type": "object",
+                    "required": ["function"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "function": {
+                            "type": "object",
+                            "required": ["parameters", "return"],
+                            "additionalProperties": false,
+                            "properties": {
+                                "parameters": {
+                                    "description": "An ordered array of the types of this function's arguments",
+                                    "type": "array",
+                                    "items": { "$ref": "#/definitions/llvm_type" }
+                                },
+                                "return": {
+                                    "description": "The function's return type, which may be 'void' as described above",
+                                    "$ref": "#/definitions/llvm_type"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "value": {
+            "description": "Generally an instance of LLVM's 'Value' class, these have associated unstructured, human-readable string representations",
+            "type": "object",
+            "properties": {
+                "pretty_string": { "type": "string" }
+            }
+        },
+        "symbol": {
+            "description": "A symbol in the compiled program's symbol table (.symtab)",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The symbol's name"
+                },
+                "va": {
+                    "type": "integer",
+                    "description": "The symbol's target address"
+                },
+                "size": {
+                    "type": "integer",
+                    "description": "The size, in bytes, of the entity represented by this symbol"
+                },
+                "binding": {
+                    "type": "string",
+                    "enum": [
+                        "STB_LOCAL",
+                        "STB_GLOBAL",
+                        "STB_WEAK",
+                        "STB_NUM",
+                        "STB_LOOS",
+                        "STB_HIOS",
+                        "STB_LOPROC",
+                        "STB_HIPROC"
+                    ],
+                    "description": "The symbol's binding"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "STT_NOTYPE",
+                        "STT_OBJECT",
+                        "STT_FUNC",
+                        "STT_SECTION",
+                        "STT_FILE",
+                        "STT_COMMON",
+                        "STT_TLS",
+                        "STT_NUM",
+                        "STT_RELC",
+                        "STT_SRELC",
+                        "STT_LOOS",
+                        "STT_HIOS",
+                        "STT_LOPROC",
+                        "STT_HIPROC"
+                    ],
+                    "description": "The symbol's type"
+                },
+                "visibility": {
+                    "type": "string",
+                    "enum": [
+                        "STV_DEFAULT",
+                        "STV_INTERNAL",
+                        "STV_HIDDEN",
+                        "STV_PROTECTED",
+                        "STV_EXPORTED",
+                        "STV_SINGLETON",
+                        "STV_ELIMINATE"
+                    ],
+                    "description": "The symbol's visibility"
+                }
+            },
+            "required": [
+                "name",
+                "va",
+                "size",
+                "binding",
+                "type",
+                "visibility"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "oneOf": [
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            { "$ref": "#definitions/value" },
+            {
+                "description": "An LLVM-level stack-local variable",
+                "properties": {
+                    "pretty_string": { "type": "string" },
+                    "name": {
+                        "type": "string",
+                        "description": "The source-level name of this local variable"
+                    },
+                    "location": {
+                        "$ref": "#/definitions/location",
+                        "description": "The variable's location"
+                    },
+                    "node_kind": { "enum": [ "LocalVariable" ] }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "A DWARF-level stack-local variable",
+                "properties": {
+                    "node_kind": { "enum": [ "DWARFLocalVariable" ] },
+                    "name": { "type": "string" },
+                    "kind": {
+                        "$comment": "TODO(ww): Remove this.",
+                        "enum": [ "local" ]
+                    },
+                    "arg": {
+                        "$comment": "TODO(ww): Remove this.",
+                        "enum": [ 0 ]
+                    },
+                    "parameter": {
+                        "$comment": "TODO(ww): Remove this.",
+                        "enum": [ false ]
+                    },
+                    "type_id": {
+                        "type": "string",
+                        "description": "A compressed representation of the function's DWARF type"
+                    },
+                    "dwarf_scope": {
+                        "$ref": "#/definitions/dwarf_scope",
+                        "description": "The variable's DWARF scope"
+                    },
+                    "source_location": {
+                        "$ref": "#/definitions/source_location",
+                        "description": "The variable's source location"
+                    },
+                    "source_scope": {
+                        "$ref": "#/definitions/source_scope",
+                        "description": "The variable's source scope"
+                    },
+                    "artificial": {
+                        "type": "boolean",
+                        "description": "Whether the variable is artificial"
+                    },
+                    "dwarf_location": {
+                        "description": "The memory location of this local variable, if not optimized away",
+                        "$ref": "#/definitions/dwarf_location"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "A program global variable at the binary level",
+                "properties": {
+                    "node_kind": { "enum": [ "ASMGlobalVariable" ] },
+                    "pretty_string": { "type": "string" },
+                    "thread_local": { "type": "boolean" },
+                    "definition_location": { "$ref": "#/definitions/definition_location" },
+                    "definition": {
+                        "type": "boolean",
+                        "description": "Indicates whether this visitation of the global variable is a definition"
+                    },
+                    "local_to_unit": {
+                        "type": "boolean",
+                        "description": "Indicates whether or not this global variable is local to this translation unit"
+                    },
+                    "source_scope": { "$ref": "#/definitions/source_scope" },
+                    "type_id": { "type": "string" },
+                    "name": {
+                        "type": "string",
+                        "description": "The source-level name of this global variable"
+                    },
+                    "dwarf_location": { "$ref": "#/definitions/dwarf_location" },
+                    "va": { "type": "integer" }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            {
+                "description": "LLVM IR functions",
+                "properties": {
+                    "node_kind": { "enum": [ "Function" ] },
+                    "name": {
+                        "description": "The name of the LLVM function. For functions generated by compiling C code, this is often the same name that appears in the source, e.g. '@recv' (at the LLVM level) corresponds to 'recv' (at the C level). However, compiled from other languages, the names will often be mangled. The source-level name will generally appear as a substring in the LLVM-level name.",
+                        "type": "string"
+                    },
+                    "demangled_name": {
+                        "description": "The demangled name of the function.",
+                        "type": "string"
+                    },
+                    "is_declaration": {
+                        "type": "boolean",
+                        "description": "True if this function has no definition."
+                    },
+                    "alignment": { "type": "integer" },
+                    "section": { "type": "string" },
+                    "location": { "$ref": "#/definitions/location" },
+                    "pretty_string": { "type": "string" }
+                },
+                "required": ["alignment", "node_kind", "name"],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            { "$ref": "#definitions/value" },
+            {
+                "description": "A formal parameter to an LLVM function",
+                "properties": {
+                    "pretty_string": { "type": "string" },
+                    "name": {
+                        "type": "string",
+                        "description": "The source-level name of this formal parameter"
+                    },
+                    "node_kind": { "enum": [ "Argument" ] },
+                    "location": { "$ref": "#/definitions/location" },
+                    "might_be_null": {
+                        "type": "boolean",
+                        "description": "True when the pointer analysis determines the parameter could be a null pointer"
+                    },
+                    "argument_number": { "type": "integer" }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "A DWARF-level formal parameter to a function",
+                "properties": {
+                    "node_kind": { "enum": [ "DWARFArgument" ] },
+                    "kind": {
+                        "$comment": "TODO(ww): Remove this.",
+                        "enum": [ "local" ]
+                    },
+                    "arg": {
+                        "$comment": "TODO(ww): Remove this.",
+                        "type": "integer"
+                    },
+                    "parameter": {
+                        "$comment": "TODO(ww): Remove this.",
+                        "enum": [ true ]
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The source-level name of this formal parameter"
+                    },
+                    "dwarf_location": {
+                        "description": "The memory location of this formal parameter, if not optimized away",
+                        "$ref": "#/definitions/dwarf_location"
+                    },
+                    "type_id": { "type": "string" },
+                    "dwarf_scope": { "$ref": "#/definitions/dwarf_scope" },
+                    "source_location": { "$ref": "#/definitions/source_location" },
+                    "source_scope": { "$ref": "#/definitions/source_scope" },
+                    "artificial": { "type": "boolean" },
+                    "from_variadic_template": {
+                        "type": "boolean",
+                        "description": "True if this parameter is from a variadic template expansion; does not exist otherwise"
+                    },
+                    "original_name": {
+                        "type": "string",
+                        "description": "The original name of this argument, with no variadic index suffix"
+                    },
+                    "parameter_index": {
+                        "type": "integer",
+                        "description": "The index of this argument into the overall list of arguments to the enclosing function"
+                    },
+                    "variadic_index": {
+                        "type": "integer",
+                        "description": "The index of this argument into all variadic arguments of this function"
+                    },
+                    "template_index": {
+                        "type": "integer",
+                        "description": "The index of this argument into the variadic arguments of its group (i.e., those with the same name)"
+                    }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            {
+                "description": "LLVM IR basic blocks",
+                "properties": {
+                    "node_kind": { "enum": [ "Block" ] },
+                    "pretty_string": { "type": "string" },
+                    "label": { "type": "string" }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            {
+
+                "description": "A program global variable at the LLVM level",
+                "properties": {
+                    "node_kind": { "enum": [ "GlobalVariable" ] },
+                    "is_constant": { "type": "boolean" },
+                    "is_declaration": {
+                        "type": "boolean",
+                        "description": "True if this global variable has no definition."
+                    },
+                    "has_initializer": { "type": "boolean" },
+                    "name": { "type": "string" },
+                    "alignment": { "type": "integer" },
+                    "section": { "type": "string" },
+                    "location": { "$ref": "#/definitions/location" },
+                    "pretty_string": { "type": "string" }
+                },
+                "required": ["alignment", "is_constant", "has_initializer", "name"],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            { "$ref": "#/definitions/instruction" },
+            {
+                "description": "LLVM IR instructions",
+                "properties": {
+                    "node_kind": { "enum": [ "Instruction" ] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            { "$ref": "#/definitions/instruction" },
+            {
+                "description": "LLVM IR ``alloca`` instructions",
+                "properties": {
+                    "node_kind": { "enum": [ "Alloca" ] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            { "$ref": "#/definitions/instruction" },
+            {
+                "description": "LLVM IR ``call`` instructions",
+                "properties": {
+                    "node_kind": { "enum": [ "Call" ] },
+                    "is_direct": {
+                        "type": "boolean",
+                        "doc": "Is this a direct call?"
+                    }
+                },
+                "required": ["node_kind", "is_direct"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            { "$ref": "#/definitions/instruction" },
+            {
+                "description": "LLVM IR ``invoke`` instructions",
+                "properties": {
+                    "node_kind": { "enum": [ "Invoke" ] },
+                    "is_direct": {
+                        "type": "boolean",
+                        "doc": "Is this a direct call?"
+                    }
+                },
+                "required": ["node_kind", "is_direct"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            { "$ref": "#/definitions/instruction" },
+            {
+                "description": "LLVM IR ``memcpy`` intrinsics",
+                "properties": {
+                    "node_kind": { "enum": [ "Memcpy" ] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            { "$ref": "#/definitions/instruction" },
+            {
+                "description": "LLVM IR ``memset`` intrinsics",
+                "properties": {
+                    "node_kind": { "enum": [ "Memset" ] }
+                }
+            }
+        ] },
+        { "allOf": [
+          { "$ref": "#/definitions/base" },
+          { "$ref": "#/definitions/value" },
+          { "$ref": "#/definitions/instruction" },
+          {
+            "description": "LLVM IR ``load`` instructions",
+            "properties": {
+              "node_kind": { "enum": [ "Load" ] }
+            }
+          }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            { "$ref": "#/definitions/instruction" },
+            {
+                "description": "LLVM IR ``resume`` instructions",
+                "properties": {
+                    "node_kind": { "enum": [ "Resume" ] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            { "$ref": "#/definitions/instruction" },
+            {
+                "description": "LLVM IR ``ret`` instructions",
+                "properties": {
+                    "node_kind": { "enum": [ "Ret" ] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/value" },
+            { "$ref": "#/definitions/instruction" },
+            {
+                "description": "LLVM IR ``store`` instructions",
+                "properties": {
+                    "node_kind": { "enum": [ "Store" ] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "type": "object",
+                "description": "A type in the LLVM type system. See https://llvm.org/docs/LangRef.html#type-system for details.",
+                "properties": {
+                    "node_kind": { "enum": [ "LLVMType" ] },
+                    "definition": { "$ref": "#/definitions/llvm_type" },
+                    "size_in_bits": {
+                        "type": "integer",
+                        "description": "The number of bits necessary to hold the specified type. The following table (taken from the LLVM source code, see \"Legal\" in the documentation) contrasts this field with other size-related fields.\n\n::\n\n   /// Size examples:\n   ///\n   /// Type        SizeInBits  StoreSizeInBits  AllocSizeInBits[*]\n   /// ----        ----------  ---------------  ---------------\n   ///  i1            1           8                8\n   ///  i8            8           8                8\n   ///  i19          19          24               32\n   ///  i32          32          32               32\n   ///  i100        100         104              128\n   ///  i128        128         128              128\n   ///  Float        32          32               32\n   ///  Double       64          64               64\n   ///  X86_FP80     80          80               96\n   ///\n   /// [*] The alloc size depends on the alignment, and thus on the target.\n   ///     These values are for x86-32 linux."
+                    },
+                    "store_size_in_bits": {
+                        "type": "integer",
+                        "description": "the maximum number of bits that may be overwritten by storing the specified type; always a multiple of 8"
+                    },
+                    "alloc_size_in_bits": {
+                        "type": "integer",
+                        "description": "the offset in bits between successive objects of the specified type, including alignment padding; always a multiple of 8"
+                    },
+                    "abi_type_alignment": {
+                        "type": "integer",
+                        "description": "the minimum ABI-required alignment for this type"
+                    },
+                    "pretty_string": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["definition"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            { "$ref": "#definitions/value" },
+            { "$ref": "#definitions/constant" },
+            {
+                "description": "A constant value in the LLVM IR",
+                "properties": {
+                    "node_kind": { "enum": [ "Constant" ] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            { "$ref": "#definitions/value" },
+            {
+                "description": "A variable in the LLVM IR",
+                "properties": {
+                    "node_kind": { "enum": [
+                        "Variable",
+                        "Argument",
+                        "LocalVariable",
+                        "GlobalVariable"
+                    ] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            { "$ref": "#definitions/value" },
+            { "$ref": "#definitions/constant" },
+            {
+                "description": "A constant int value in the LLVM IR",
+                "properties": {
+                    "node_kind": { "enum": [ "ConstantInt" ] },
+                    "constant_data_subclass": { "enum": ["ConstantInt"] },
+                    "constant_int_value": {
+                        "type": "integer",
+                        "description": "The value of this integer constant."
+                    }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            { "$ref": "#definitions/value" },
+            { "$ref": "#definitions/constant" },
+            {
+                "description": "A constant floating point value in the LLVM IR",
+                "properties": {
+                    "node_kind": { "enum": [ "ConstantFP" ] },
+                    "constant_data_subclass": { "enum": ["ConstantFP"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            { "$ref": "#definitions/value" },
+            { "$ref": "#definitions/constant" },
+            {
+                "description": "A constant string value in the LLVM IR",
+                "properties": {
+                    "node_kind": { "enum": [ "ConstantString" ] },
+                    "string_value": { "type": "string" }
+                },
+                "required": ["string_value"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            { "$ref": "#definitions/value" },
+            { "$ref": "#definitions/constant" },
+            {
+                "description": "An undef value in the LLVM IR",
+                "properties": {
+                    "node_kind": { "enum": [ "ConstantUndef" ] },
+                    "constant_data_subclass": { "enum": ["UndefValue"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "An as-of-yet underspecified node of the LLVM AST",
+                "properties": {
+                    "node_kind": { "enum": [ "UnclassifiedNode" ] },
+                    "pretty_string": { "type": "string" }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "Named after the eponymous LLVM class, these nodes represent the LLVM middle-end's concept of a function.",
+                "properties": {
+                    "node_kind": { "enum": [ "MachineFunction" ] },
+		            "offset": {
+                        "description": "The offset into the binary itself where this function is located.",
+                        "type": "integer"
+                    },
+                    "va_start": {
+                        "description": "The VA (Virtual Address) tells us where this function is located in the binary.",
+                        "type": "integer"
+                    },
+                    "va_end": {
+                        "description": "The VA (Virtual Address) tells us the last VA where the function is located in the binary.",
+                        "type": "integer"
+                    },
+                    "prologues": {
+                        "description": "Pairs of VA (Virtual Address) ranges where the function contains prologue code (e.g., stack setup)",
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": { "type": "integer" }
+                        }
+                    },
+                    "epilogues": {
+                        "description": "Pairs of VA (Virtual Address) ranges where the function contains epilogue code (e.g., stack teardown)",
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": { "type": "integer" }
+                        }
+                    },
+                    "operand": {
+                        "$comment": "TODO(lb): need help from ww for description",
+                        "description": "TODO(lb)",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "The corresponding LLVM IR function's name",
+                        "type": "string"
+                    },
+                    "is_mangled": {
+                        "description": "Whether or not this function's name has been mangled",
+                        "type": "boolean"
+                    },
+                    "demangled_name": {
+                        "description": "The demangled function name, or the regular name if not mangled",
+                        "type": "string"
+                    },
+                    "frame_info": {
+                        "description": "Information about this function's stack frame",
+                        "type": "object",
+                        "properties": {
+                            "has_stack_objects": {
+                                "description": "Whether or not there are any stack objects in this function",
+                                "type": "boolean"
+                            },
+                            "has_variadic_objects": {
+                                "description": "Whether or not there are any variadic stack objects in this function",
+                                "type": "boolean"
+                            },
+                            "is_frame_address_taken": {
+                                "description": "Whether or not the address of this stack frame is taken",
+                                "type": "boolean"
+                            },
+                            "is_return_address_taken": {
+                                "description": "Whether or not the return address of this stack frame is taken",
+                                "type": "boolean"
+                            },
+                            "num_objects": {
+                                "description": "The number of objects in this stack frame",
+                                "type": "integer"
+                            },
+                            "num_fixed_objects": {
+                                "description": "The number of fixed-sized objects in this stack frame",
+                                "type": "integer"
+                            },
+                            "stack_size": {
+                                "description": "The size, in bytes, required to hold all fixed-sized objects in this stack frame",
+                                "type": "integer"
+                            },
+                            "adjusts_stack": {
+                                "description": "Whether or not this function adjusts the stack",
+                                "type": "boolean"
+                            }
+                        },
+                        "required": [
+                            "has_stack_objects",
+                            "has_variadic_objects",
+                            "is_frame_address_taken",
+                            "is_return_address_taken",
+                            "num_objects",
+                            "num_fixed_objects",
+                            "stack_size",
+                            "adjusts_stack"
+                        ],
+                        "additionalProperties": false
+                    },
+                    "type_id": {
+                        "type": "string",
+                        "description": "A compressed representation of the function's DWARF type"
+                    },
+                    "pretty_string": {
+                        "type": "string",
+                        "description": "A pretty representation of the function"
+                    },
+                    "source": {
+                        "type": "array",
+                        "description": "A list of source entries for this function"
+                    },
+                    "symbols": {
+                        "type": "array",
+                        "items": { "type": "string" },
+                        "description": "The function's binary symbols"
+                    }
+                },
+                "required": [
+                    "node_kind",
+                    "pretty_string",
+                    "name",
+                    "operand",
+                    "va_start",
+                    "va_end",
+                    "prologues",
+                    "epilogues",
+                    "offset"
+                ],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "Named after the eponymous LLVM class, these nodes represent the LLVM middle-end's concept of a basic block.",
+                "properties": {
+                    "node_kind": { "enum": [ "MachineBasicBlock" ] },
+                    "pretty_string": { "type": "string" },
+                    "number": {
+                        "description": "The numeric identifier for this basic block",
+                        "type": "integer"
+                    },
+                    "symbol": {
+                        "description": "The machine-addressable symbol for this basic block",
+                        "type": "string"
+                    },
+                    "can_fallthrough": {
+                        "description": "Whether or not this basic block can implicitly transfer control flow by falling through to the next",
+                        "type": "boolean"
+                    },
+                    "ends_in_return": {
+                        "description": "Whether or not this basic block ends in a return",
+                        "type": "boolean"
+                    },
+                    "is_epilogue_insertion_block": {
+                        "description": "Whether or not this basic block will contain generated epilogue code (e.g., for stack cleanup)",
+                        "type": "boolean"
+                    },
+                    "is_prologue_insertion_block": {
+                        "description": "Whether or not this basic block will contain generated prologue code (e.g., for stack setup)",
+                        "type": "boolean"
+                    },
+                    "address_taken": {
+                        "description": "Whether or not this basic block is potentially a target of an indirect branch",
+                        "type": "boolean"
+                    },
+                    "has_inline_asm": {
+                        "description": "Whether or not this block contains inlined assembly statements",
+                        "type": "boolean"
+                    },
+                    "preds": {
+                        "description": "The array of predecessor blocks, identified by their symbols",
+                        "$comment": "TODO(ww): Document the struct of each member here",
+                        "type": "array"
+                    },
+                    "succs": {
+                        "description": "The array of successor blocks, identified by their symbols",
+                        "$comment": "TODO(ww): Document the struct of each member here",
+                        "type": "array"
+                    },
+                    "instrs": {
+                        "description": "The array of middle-end instructions in this block",
+                        "$comment": "TODO(ww): Document the struct of each member here",
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "node_kind",
+                    "symbol",
+                    "can_fallthrough",
+                    "ends_in_return",
+                    "address_taken",
+                    "has_inline_asm",
+                    "preds",
+                    "succs",
+                    "instrs"
+                ]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "Named after the eponymous LLVM class, these nodes represent the LLVM middle-end's concept of an instruction.",
+                "$comment": "TODO(lb): Can this have additional properties? If so, specify them. If not, say so.",
+                "properties": {
+                    "node_kind": { "enum": [ "MachineInstr" ] },
+                    "pretty_string": { "type": "string" },
+                    "opcode": { "type": "integer" },
+                    "flags": { "type": "integer" }
+                },
+                "required": ["node_kind", "opcode", "flags"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "An x86_64 instruction in the binary, including layout and semantic information",
+                "properties": {
+                    "node_kind": { "enum": [ "ASMInst" ] },
+                    "pretty_string": { "type": "string" },
+                    "va": { "type": "integer" },
+                    "size": {
+                        "description": "The decoded size of this instruction, in bytes",
+                        "type": "integer"
+                    },
+                    "mnemonic": {
+                        "description": "The assembly mnemonic for this instruction",
+                        "type": "string"
+                    },
+                    "asm": {
+                        "description": "The disassembled instruction, in Intel format",
+                        "type": "string"
+                    },
+                    "used_registers": {
+                        "description": "An array of register use information for this instruction",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "register": {
+                                    "description": "the symbolic register name, e.g. RAX",
+                                    "type": "string"
+                                },
+                                "access": {
+                                    "description": "the kind of access, e.g. READ or COND_READ",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [ "register", "access" ],
+                            "additionalProperties": false
+                        }
+                    },
+                    "used_memory": {
+                        "description": "An array of memory use information for this instruction",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "segment": {
+                                    "description": "the effective segment register, or NONE if not applicable",
+                                    "type": "string"
+                                },
+                                "base": {
+                                    "description": "the effective base register, or NONE if not applicable",
+                                    "type": "string"
+                                },
+                                "index": {
+                                    "description": "the effective index register, or NONE if not applicable",
+                                    "type": "string"
+                                },
+                                "scale": {
+                                    "description": "the index scale factor",
+                                    "type": "integer"
+                                },
+                                "displacement": {
+                                    "description": "the relative displacement",
+                                    "type": "integer"
+                                },
+                                "memory_size": {
+                                    "description": "the size of the memory access in bytes, or 0 if not accessed or unknown",
+                                    "type": "integer"
+                                },
+                                "access": {
+                                    "description": "the kind of access, e.g. READ or COND_READ",
+                                    "type": "string"
+                                },
+                                "vsib_size": {
+                                    "description": "the VSIB size, or 0 if not applicable",
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "segment",
+                                "base",
+                                "index",
+                                "scale",
+                                "displacement",
+                                "memory_size",
+                                "access",
+                                "vsib_size"
+                            ],
+                            "additionalProperties": false
+                        }
+                    }
+                },
+                "required": [
+                    "node_kind",
+                    "pretty_string",
+                    "va",
+                    "size",
+                    "mnemonic",
+                    "asm",
+                    "used_registers",
+                    "used_memory"
+                ],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "A basic block in the x86_64 binary",
+                "$comment": "TODO(ek): Fill out source object and fix llvm_type.",
+                "properties": {
+                    "node_kind": { "enum": [ "ASMBlock" ] },
+                    "pretty_string": { "type": "string" },
+                    "unpaired": { "type": "boolean" },
+                    "va": { "type": "integer" },
+                    "va_end": { "type": "integer" },
+                    "size": {
+                        "description": "The size of this basic block, in bytes",
+                        "type": "integer"
+                    },
+                    "offset": { "type": "integer" },
+                    "func_offset": { "type": "integer" },
+                    "func_reference": { "type": "string" },
+                    "source": { "type": "array" },
+                    "filename": { "type": "string" }
+                },
+                "additionalProperties": false,
+                "required": ["node_kind", "unpaired", "va", "va_end", "size", "offset"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "A node which connects argument values with formal parameters",
+                "properties": {
+                    "node_kind":  { "enum": [ "ParamBinding" ] },
+                    "arg_op_number" : { "type" : "integer" }
+                },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#definitions/base" },
+            {
+                "description": "A node that connects a value used in a return statement to the corresponding call site.",
+                "properties": { "node_kind":  { "enum": [ "CallReturn" ] } },
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "An abstract memory location represents a set of runtime heap locations.",
+                "properties": {
+                    "node_kind": { "enum": [ "MemoryLocation" ] },
+                    "pretty_string": { "type": "string" },
+                    "alias_set_identifier": { "type": "string" },
+                    "allocation_context": { "type": "string" },
+                    "allocation_size_bytes": {
+                        "description": "The number of bytes allocated on the heap, as determined by the points-to analysis.",
+                        "type": "integer"
+                    }
+                },
+                "additionalProperties": false,
+		"required": ["node_kind", "pretty_string", "alias_set_identifier", "allocation_context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "Abstract representation of a dataflow derived from a signature",
+                "properties": {
+                    "node_kind": { "enum": [ "DataflowSignature" ] },
+                    "tags": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                    },
+		    "context": { "type": "string" },
+                    "deallocator": { "type": "string" }
+                },
+                "additionalProperties": false,
+		"required": ["node_kind","context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "Abstract representation of a dataflow input derived from a signature",
+                "properties": {
+                    "node_kind": { "enum": [ "InputSignature" ] },
+                    "tags": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                    },
+		    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+		"required": ["node_kind","context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "Abstract representation of a dataflow output derived from a signature",
+                "properties": {
+                    "node_kind": { "enum": [ "OutputSignature" ] },
+                    "tags": {
+                        "type": "array",
+                        "items": { "type": "string" }
+                    },
+		    "context": { "type": "string" }
+                },
+                "additionalProperties": false,
+		"required": ["node_kind","context"]
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "The DWARF representation of a type in the program",
+                "properties": {
+                    "node_kind": { "enum": ["DWARFType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A basic DWARF type, corresponding to basic C or C++ types like ``int``.",
+                "properties": {
+                    "node_kind": { "enum": ["BasicType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A composite DWARF type.",
+                "properties": {
+                    "node_kind": { "enum": ["CompositeType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A composite cached DWARF type.",
+                "properties": {
+                    "node_kind": { "enum": ["CompositeCachedType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A DWARF struct type, corresponding to a C or C++ ``struct``.",
+                "properties": {
+                    "node_kind": { "enum": ["StructureType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A DWARF array type, corresponding to a C or C++ array type.",
+                "properties": {
+                    "node_kind": { "enum": ["ArrayType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A DWARF enumeration type, corresponding to a C or C++ ``enum`` type.",
+                "properties": {
+                    "node_kind": { "enum": ["EnumType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A DWARF union type, corresponding to a C or C++ ``union`` type.",
+                "properties": {
+                    "node_kind": { "enum": ["UnionType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A DWARF class type, corresponding to a C++ ``class``.",
+                "properties": {
+                    "node_kind": { "enum": ["ClassType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A DWARF derived type.",
+                "properties": {
+                    "node_kind": { "enum": ["DerivedType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            { "$ref": "#/definitions/dwarf_type_kind" },
+            {
+                "description": "A DWARF subroutine type, corresponding to a C or C++ function or method type.",
+                "properties": {
+                    "node_kind": { "enum": ["SubroutineType"] }
+                }
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "The unified LLVM bitcode module that the program was compiled from",
+                "properties": {
+                    "node_kind": { "enum": ["Module"] },
+                    "module_name": {
+                        "type": "string",
+                        "description": "The name of the LLVM module"
+                    },
+                    "source_file": {
+                        "description": "The source file that this module was loaded from, if from a single source file",
+                        "type": "string"
+                    },
+                    "target_triple": {
+                        "type": "string",
+                        "description": "The LLVM target triple"
+                    },
+                    "data_layout": {
+                        "type": "string",
+                        "description": "The LLVM datalayout string"
+                    },
+                    "symbols": {
+                        "type": "array",
+                        "items": { "$ref": "#/definitions/symbol" },
+                        "description": "A list of all symbols in the module"
+                    }
+                },
+                "required": [
+                    "module_name",
+                    "source_file",
+                    "target_triple",
+                    "data_layout"
+                ],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "A translation unit in the compiled program",
+                "properties": {
+                    "node_kind": { "enum": ["TranslationUnit"] },
+                    "source_language": {
+                        "$comment": "TODO(ww): This could probably a DW_LANG_* enum",
+                        "description": "The source language for this translation unit, as a ``DW_LANG_`` constant",
+                        "type": "string"
+                    },
+                    "producer": {
+                        "description": "An identifier for the compiler or tool that produced this translation unit",
+                        "type": "string"
+                    },
+                    "flags": {
+                        "description": "The command line arguments that produced this translation unit",
+                        "type": "string"
+                    },
+                    "filename": {
+                        "description": "The input/source filename for this translation unit",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "source_language",
+                    "producer",
+                    "flags",
+                    "filename"
+                ],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "A stub for a function that's accessed through the binary's Procedure Linkage Table",
+                "properties": {
+                    "node_kind": { "enum": ["PLTStub"] },
+                    "symbol": {
+                        "description": "The linker symbol for this PLT entry",
+                        "type": "string"
+                    },
+                    "va": {
+                        "description": "The virtual address of this PLT entry",
+                        "type": "integer"
+                    }
+                },
+                "required": [ "symbol", "va" ],
+                "additionalProperties": false
+            }
+        ] },
+        { "allOf": [
+            { "$ref": "#/definitions/base" },
+            {
+                "description": "A virtual table for a C++ class",
+                "properties": {
+                    "node_kind": { "enum": ["VTable"] },
+                    "va": {
+                        "description": "The virtual address for the virtual table itself",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "description": "The size of the virtual table, in bytes. This includes the RTTI and 'offset to base' fields",
+                        "type": "integer"
+                    },
+                    "symbol": {
+                        "description": "The linker symbol for this virtual table",
+                        "type": "string"
+                    },
+                    "class_name": {
+                        "description": "The name of the C++ class that this virtual table belongs to",
+                        "type": "string"
+                    },
+                    "rtti_va": {
+                        "description": "The virtual address to the RTTI entry for this virtual table",
+                        "type": "integer"
+                    },
+                    "members": {
+                        "description": "The virtual addresses for each entry in the virtual table",
+                        "type": "array",
+                        "items": { "type": "integer" }
+                    }
+                },
+                "required": [ "symbol", "va" ],
+                "additionalProperties": false
+            }
+        ] }
+    ]
+}

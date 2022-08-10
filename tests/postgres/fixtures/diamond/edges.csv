@@ -1,0 +1,4 @@
+"AB","InstructionToSuccessorInstruction","A","B",{}
+"AC","InstructionToSuccessorInstruction","A","C",{}
+"BD","InstructionToSuccessorInstruction","B","D",{}
+"CD","InstructionToSuccessorInstruction","C","D",{}

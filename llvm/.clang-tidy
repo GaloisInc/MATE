@@ -1,0 +1,16 @@
+# -*- yaml -*-
+---
+Checks: >
+  -*,
+  modernize-*,
+  performance-*,
+  readability-const-return-type,
+  readability-delete-null-pointer,
+  readability-else-after-return,
+  readability-non-const-parameter,
+  readability-redundant-smartptr-get,
+  readability-redundant-string-cstr,
+  readability-string-compare
+WarningsAsErrors: '*'
+
+

@@ -1,0 +1,26 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+.FlowFinder {
+  .WarningAlert,
+  .ErrorAlert {
+    position: absolute;
+    top: var(--header-height);
+    z-index: 100;
+  }
+
+  .NotebookButton {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+
+  .Annotations {
+    .annotation {
+      margin-left: 2em;
+    }
+    .add {
+      cursor: pointer;
+      color: $gray-700;
+    }
+  }
+}

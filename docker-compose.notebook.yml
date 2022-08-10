@@ -1,0 +1,21 @@
+# MATE Jupyter/IPython notebook server. Run with:
+#
+#    docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
+#
+# See the MATE documentation for more details.
+
+version: "3.7"
+
+services:
+  notebook-server:
+    networks:
+      - mate
+    image: ${MATE_DOCKER_REGISTRY}mate-notebook${MATE_DOCKER_TAG}
+    ports:
+      - 8889:8889
+    depends_on:
+      - server
+      - db
+
+networks:
+  mate:

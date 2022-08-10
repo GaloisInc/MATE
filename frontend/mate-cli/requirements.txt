@@ -1,0 +1,6 @@
+halo==0.0.31
+pydantic~=1.9.0
+
+# NOTE: This should be constrained.
+mate-common
+mate-rest-client

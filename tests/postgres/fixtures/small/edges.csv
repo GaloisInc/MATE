@@ -1,0 +1,10 @@
+"I1I2_cfg","InstructionToSuccessorInstruction","I1","I2",{}
+"I1I2_cdg","TerminatorInstructionToControlDependentInstruction","I1","I2",{}
+"I1I2_dfg","ValueDefinitionToUse","I1","I2",{}
+"I1B1","InstructionToParentBlock","I1","B1",{}
+"B1F1","BlockToParentFunction","B1","F1",{}
+"F1F2","Callgraph","F1","F2",{}
+"F2F3","Callgraph","F2","F3",{}
+"I1M1","PointsTo","I1","M1",{}
+"I2M1","PointsTo","I2","M1",{}
+"I2M2","PointsTo","I2","M2",{}

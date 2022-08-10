@@ -1,0 +1,52 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+.Header {
+  background-color: #2d78bd;
+  color: $gray-100;
+
+  .navbar-brand {
+    margin-left: 1em;
+    color: $gray-100;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 500;
+
+    svg {
+      margin-right: 0.3em;
+    }
+
+    &:focus {
+      color: $gray-300;
+    }
+  }
+
+  .nav-link {
+    color: $gray-100;
+
+    &.selected,
+    &:focus,
+    &:hover {
+      font-weight: 300;
+    }
+  }
+
+  .navbar-text {
+    margin-right: 1.5em;
+    color: $gray-100;
+  }
+
+  .dropdown {
+    .nav-link {
+      color: $gray-700;
+
+      &:focus,
+      &:hover {
+        color: $gray-900;
+      }
+
+      &.dropdown-toggle {
+        color: $gray-100;
+      }
+    }
+  }
+}

@@ -1,0 +1,3823 @@
+# ------------------------------------------------------------------------------
+# C Standard Library
+# ------------------------------------------------------------------------------
+
+# Comments describing function behavior adapted from
+# https://linux.die.net/man and https://refspecs.linuxbase.org.
+
+- name: '^_IO_getc$'
+  # int _IO_getc(_IO_FILE *__fp)
+  #
+  # _IO_getc reads the next character from __fp and returns it as an
+  # unsigned char cast to an int, or EOF on end of file or error.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+  - input:
+      tags: [filesystem,user_input]
+      to:
+        - return: []
+
+- name: '^__assert_fail$'
+  # void __assert_fail(const char * assertion, const char * file,
+  # unsigned int line, const char * function)
+  #
+  # _assert_fail shall print the given file filename, line line
+  # number, function function name and a message on the standard error
+  # stream in an unspecified format, and abort program execution via
+  # the abort() function.
+  signatures:
+  - pts_none: []
+  - output:
+      from:
+        - arg_points_to: [0]
+        - arg_points_to: [1]
+        - arg: [2]
+        - arg_points_to: [3]
+
+- name: '^__ctype_b_loc$'
+  # const unsigned short * * __ctype_b_loc (void)
+  #
+  # __ctype_b_loc shall return a pointer to the array of characters to
+  # be used for the ctype() family of functions (see <ctype.h>).
+  signatures:
+  - pts_return_alloc_once: []
+    # All calls should return a pointer to the same allocation.
+
+- name: '^__errno_location$'
+  # int * __errno_location(void)
+  #
+  # __errno_location shall return the address of the errno variable
+  # for the current thread.
+  signatures:
+  - pts_return_points_to_global: [errno]
+
+- name: '^__sysv_signal$'
+  # __sighandler_t __sysv_signal(int sig, __sighandler_t handler)
+  #
+  # Has the same behavior as signal().
+  #  signal() returns the previous value of the signal handler, or
+  #  SIG_ERR on error.  In the event of an error, errno is set to
+  #  indicate the cause.
+  signatures:
+  - pts_none: []
+  # TODO: dataflow? control-flow?
+
+- name: '^__xpg_basename$'
+  # char * __xpg_basename(const char * path)
+  #
+  # __xpg_basename shall return a pointer to the final component of
+  # the pathname named by path.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg_points_to: [0]
+      to:
+        - return: []
+
+- name: '^abort$'
+  # void abort(void)
+  #
+  # The abort() function first unblocks the SIGABRT signal, and then
+  # raises that signal for the calling process (as though raise(3) was
+  # called).  This results in the abnormal termination of the process
+  # unless the SIGABRT signal is caught and the signal handler does
+  # not return (see longjmp(3)).
+  signatures:
+  - pts_none: []
+  # TODO: figure out how to handle this...
+
+- name: '^accept$'
+  # int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen)
+  #
+  # accept extracts the first connection request on the queue of
+  # pending connections for the listening socket, sockfd, creates a
+  # new connected socket, and returns a new file descriptor referring
+  # to that socket.
+  #
+  # The argument addr is a pointer to a sockaddr structure.  This
+  # structure is filled in with the address of the peer socket, as
+  # known to the communications layer.  The exact format of the
+  # address returned addr is determined by the socket's address
+  # family (see socket(2) and the respective protocol man pages).
+  # When addr is NULL, nothing is filled in; in this case, addrlen is
+  # not used, and should also be NULL.
+
+  # The addrlen argument is a value-result argument: the caller must
+  # initialize it to contain the size (in bytes) of the structure
+  # pointed to by addr; on return it will contain the actual size of
+  # the peer address.
+  signatures:
+  - pts_none: []
+    # While both the addr and addrlen arguments may be written to by
+    # this function, no pointers are modified and no memory is
+    # allocated.
+  - input:
+      tags: [network]
+      to:
+        - arg_points_to_aggregate: [1]
+        - arg_points_to_aggregate: [2]
+  - output:
+      tags: [network]
+      from:
+        - arg: [0]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+        - arg_points_to_aggregate: [1]
+        - arg_points_to_aggregate: [2]
+
+- name: '^access$'
+  # int access(const char *pathname, int mode)
+  #
+  # checks whether the calling process can access the file pathname.
+  # If pathname is a symbolic link, it is dereferenced.
+  # The mode specifies the accessibility check(s) to be performed.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [filesystem,access_control]
+      from:
+        control:
+          - arg: [0]
+        indirect:
+          - arg_points_to: [0]
+          - arg: [1]
+      to:
+        - return: []
+  - input:
+      tags: [filesystem,access_control]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem,access_control,maybe_path_traversal]
+      from:
+        - arg_points_to: [0]
+  - output:
+      tags: [filesystem,access_control]
+      from:
+        - arg: [1]
+
+- name: '^asprintf$'
+  # int asprintf(char **strp, const char *fmt, ...)
+  #
+  # The functions asprintf() and vasprintf() are analogs of sprintf(3)
+  # and vsprintf(3), except that they allocate a string large enough
+  # to hold the output including the terminating null byte, and return
+  # a pointer to it via the first argument.
+  signatures:
+  - pts_arg_alloc: [0]
+  - dataflow:
+      tags: [format_string]
+      from:
+        indirect:
+          - format_string_reads: [1]
+      to:
+        - return: []
+  - dataflow:
+      tags: [format_string]
+      from:
+        direct:
+          - format_string_reads: [1]
+      to:
+        - arg_reachable: [0]
+        - format_string_writes: [1]
+
+- name: '^atoi$'
+  # int atoi(const char *nptr)
+  #
+  # The atoi() function converts the initial portion of the string
+  # pointed to by nptr to int.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to: [0]
+        indirect:
+          - arg: [0]
+      to:
+      - return: []
+
+- name: '^bind$'
+  # int bind(int socket, const struct sockaddr *address, socklen_t address_len)
+  #
+  # When a socket is created with socket(2), it exists in a name space
+  # (address family) but has no address assigned to it. bind assigns
+  # the address specified by addr to the socket referred to by the
+  # file descriptor sockfd. addrlen specifies the size, in bytes, of
+  # the address structure pointed to by addr.
+  signatures:
+  - pts_none: []
+    # the addr argument is read from but not otherwise changed
+  - output:
+      tags: [network]
+      from:
+        - arg: [0]
+        - arg_points_to_aggregate: [1]
+        - arg: [2]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to_aggregate: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^calloc$'
+  # void *calloc(size_t nmemb, size_t size)
+  #
+  # The calloc() function allocates memory for an array of nmemb
+  # elements of size bytes each and returns a pointer to the allocated
+  # memory. The memory is set to zero. If nmemb or size is 0, then
+  # calloc() returns either NULL, or a unique pointer value that can
+  # later be successfully passed to free().
+  signatures:
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^chdir$'
+  # int chdir(const char *path)
+  #
+  # Changes the current working directory of the calling process to
+  # the directory specified in path.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg_points_to: [0]
+      to:
+        - return: []
+  - input:
+      tags: [filesystem]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem,path_traversal]
+      from:
+        - arg_points_to: [0]
+
+- name: '^clearerr$'
+  # void clearerr(FILE *stream)
+  #
+  # The function void clearerr(FILE *stream) clears the end-of-file
+  # and error indicators for the stream pointed to by stream.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [0]
+
+- name: '^close$'
+  # int close(int fd)
+  #
+  # The close() function shall deallocate the file descriptor
+  # indicated by fd.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^closedir$'
+  # int closedir(DIR *dirp)
+  #
+  # Closes the directory stream associated with dirp. A successful
+  # call to closedir() also closes the underlying file descriptor
+  # associated with dirp. The directory stream descriptor dirp is not
+  # available after this call.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^connect$'
+  # int connect(int socket, const struct sockaddr *address,
+  #             socklen_t address_len)
+  #
+  # The connect() function shall attempt to make a connection on a
+  # socket. The function takes the following arguments:
+  #   socket:
+  #     Specifies the file descriptor associated with the socket.
+  #   address:
+  #     Points to a sockaddr structure containing the peer
+  #     address. The length and format of the address depend on the
+  #     address family of the socket.
+  #   address_len:
+  #     Specifies the length of the sockaddr structure pointed to by
+  #     the address argument.
+  #
+  #  The connect() system call connects the socket referred to by the
+  #  file descriptor sockfd to the address specified by addr.  The
+  #  addrlen argument specifies the size of addr.  The format of the
+  #  address in addr is determined by the address space of the socket
+  #  sockfd; see socket(2) for further details.
+  #
+  #  If the socket sockfd is of type SOCK_DGRAM, then addr is the
+  #  address to which datagrams are sent by default, and the only
+  #  address from which datagrams are received.  If the socket is of
+  #  type SOCK_STREAM or SOCK_SEQPACKET, this call attempts to make a
+  #  connection to the socket that is bound to the address specified
+  #  by addr.
+  signatures:
+  - pts_none: []
+    # all the pointer arguments are read-only
+  - input:
+      tags: [network]
+      to:
+        - return: []
+  - output:
+      tags: [network]
+      from:
+        - arg: [0]
+        - arg_points_to_aggregate: [1]
+        - arg: [2]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to_aggregate: [1]
+          - arg: [2]
+      to:
+        - arg: [1]
+        - arg_points_to_aggregate: [1]
+        - return: []
+
+- name: '^ctime$'
+  # char *ctime(const time_t *timep)
+  #
+  # The ctime(), gmtime() and localtime() functions all take an
+  # argument of data type time_t which represents calendar time.
+  # The call ctime(t) is equivalent to asctime(localtime(t)). It
+  # converts the calendar time t into a null-terminated string of the
+  # form "Wed Jun 30 21:49:08 1993\n".
+  #
+  # The return value points to a statically allocated string which
+  # might be overwritten by subsequent calls to any of the date and
+  # time functions.
+  signatures:
+  - pts_return_alloc_once: []
+    # multiple calls may see the same allocation
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to_aggregate: [0]
+      to:
+        - return_points_to: []
+
+- name: '^dup$'
+  # int dup(int fildes)
+  #
+  # The dup() system call creates a copy of the file descriptor
+  # oldfd, using the lowest-numbered unused file descriptor for the
+  # new descriptor.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^exit$'
+  # void exit(int status)
+  #
+  # The exit() function causes normal process termination and the
+  # value of status & 0377 is returned to the parent (see wait(2)).
+  signatures:
+  - pts_none: []
+  - output:
+      from:
+        - arg: [0]
+
+- name: '^fclose$'
+  # int fclose(FILE *fp)
+  #
+  # The fclose() function flushes the stream pointed to by fp (writing
+  # any buffered output data using fflush(3)) and closes the
+  # underlying file descriptor.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [0]
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^fdopen$'
+  # FILE *fdopen(int fd, const char *mode)
+  #
+  # The fopen() function opens the file whose name is the string
+  # pointed to by path and associates a stream with it.
+  signatures:
+  - pts_return_alloc: []
+  - input:
+      tags: [filesystem]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [0]
+  - output:
+      tags: [filesystem,maybe_path_traversal]
+      from:
+        - arg_points_to: [1]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        direct:
+          - arg: [0]
+        control:
+          - arg_points_to: [1]
+      to:
+        - return: []
+
+- name: '^feof$'
+  # int feof(FILE *stream)
+  #
+  # The function feof() tests the end-of-file indicator for the stream
+  # pointed to by stream, returning nonzero if it is set.  The end-of-
+  # file indicator can be cleared only by the function clearerr().
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+        - arg: [0]
+        - arg_points_to: [0]
+      to:
+        - return: []
+
+- name: '^ferror$'
+  # int ferror(FILE *stream)
+  #
+  # The function ferror() tests the error indicator for the stream
+  # pointed to by stream, returning nonzero if it is set. The error
+  # indicator can only be reset by the clearerr() function.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^fflush$'
+  # int fflush(FILE *stream)
+  #
+  # For output streams, fflush() forces a write of all user-space
+  # buffered data for the given output or update stream via the
+  # stream's underlying write function. For input streams, fflush()
+  # discards any buffered data that has been fetched from the
+  # underlying file, but has not been consumed by the application. The
+  # open status of the stream is unaffected.
+  #
+  # If the stream argument is NULL, fflush() flushes all open output
+  # streams.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+      - return: []
+  # TODO: handle NULL case
+
+- name: '^gets$'
+  # char *gets(char *s)
+  #  Never use this function.
+  #  gets() reads a line from stdin into the buffer pointed to by s
+  #  until either a terminating newline or EOF, which it replaces with
+  #  a null byte ('\0').
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - input:
+      tags: [dangerous, stdin, user_input]
+      to:
+        - arg_points_to: [0]
+        - return_points_to: []
+  - dataflow:
+      tags: [dangerous, stdin]
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^fgets$'
+  # char *fgets(char *s, int size, FILE *stream)
+  #
+  # fgets() reads in at most one less than size characters from stream
+  # and stores them into the buffer pointed to by s. Reading stops
+  # after an EOF or a newline. If a newline is read, it is stored into
+  # the buffer. A terminating null byte (aq\0aq) is stored after the
+  # last character in the buffer.
+  #
+  # gets() and fgets() return s on success, and NULL on error or when
+  # end of file occurs while no characters have been read.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  # TODO: return can be NULL
+  - input:
+      tags: [filesystem, user_input]
+      to:
+        - arg_points_to: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        direct:
+          - arg_points_to: [0]
+        indirect:
+          - arg: [1]
+          - arg: [2]
+      to:
+        - arg_points_to: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+# NOTE: This signature should be identical to that of '_IO_getc' above.
+- name: '^fgetc$'
+  # int fgetc(_IO_FILE *__fp)
+  #
+  # fgetc() reads the next character from stream and returns it as an unsigned
+  # char cast to an int, or EOF on end of file or error.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+  - input:
+      tags: [filesystem,user_input]
+      to:
+        - return: []
+
+- name: '^fileno$'
+  # int fileno(FILE *stream)
+  #
+  # The function fileno() examines the argument stream and returns its
+  # integer descriptor. In case fileno() detects that its argument is
+  # not a valid stream, it must return -1 and set errno to EBADF.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^fopen$'
+  # FILE *fopen(const char *path, const char *mode)
+  #
+  # The fopen() function opens the file whose name is the string
+  # pointed to by path and associates a stream with it.
+  signatures:
+  - pts_return_alloc: []
+  - input:
+      tags: [filesystem]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem,path_traversal]
+      from:
+        - arg_points_to: [0]
+  - output:
+      tags: [filesystem]
+      from:
+        - arg_points_to: [1]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg_points_to: [0]
+          - arg_points_to: [1]
+      to:
+        - return: []
+
+- name: '^fprintf$'
+  # int fprintf(FILE *stream, const char *format, ...)
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem,format_string]
+      from:
+        - arg: [0]
+  - output:
+      tags: [filesystem,format_string,user_output]
+      from:
+        - format_string_reads: [1]
+  - dataflow:
+      tags: [filesystem,format_string]
+      from:
+        indirect:
+          - format_string_reads: [1]
+      to:
+        - return: []
+  - dataflow:
+      tags: [filesystem,format_string]
+      from:
+        direct:
+          - format_string_reads: [1]
+      to:
+        - format_string_writes: [1]
+
+- name: '^fputc$'
+  # int fputc(int c, FILE *stream)
+  #
+  # fputc() writes the character c, cast to an unsigned char, to stream.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem,user_output]
+      from:
+        - arg: [0]
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [1]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^fputs$'
+  # int fputs(const char *s, FILE *stream)
+  #
+  # fputs() writes the string s to stream, without its terminating
+  # null byte.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem,user_output]
+      from:
+        - arg_points_to: [0]
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [1]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^fread$'
+  # size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
+  #
+  # The function fread() reads nmemb elements of data, each size bytes
+  # long, from the stream pointed to by stream, storing them at the
+  # location given by ptr. On success, fread() returns the number of
+  # items read or written.
+  signatures:
+  - pts_none: []
+  - input:
+      tags: [filesystem,user_input]
+      to:
+        - arg_points_to_aggregate: [0]
+  - input:
+      tags: [filesystem]
+      to:
+        - return: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [1]
+          - arg: [2]
+          - arg: [3]
+      to:
+        - arg_points_to_aggregate: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+          - arg: [3]
+      to:
+        - return: []
+
+- name: '^freeaddrinfo$'
+  # void freeaddrinfo(struct addrinfo *res)
+  #
+  # The freeaddrinfo() function frees the memory that was allocated
+  # for the dynamically allocated linked list res.
+  signatures:
+  - pts_none: []
+  # TODO: handle custom free routines?
+
+- name: '^fseek$'
+  # int fseek(FILE *stream, long offset, int whence)
+  #
+  # The fseek() function sets the file position indicator for the
+  # stream pointed to by stream. The new position, measured in bytes,
+  # is obtained by adding offset bytes to the position specified by
+  # whence. If whence is set to SEEK_SET, SEEK_CUR, or SEEK_END, the
+  # offset is relative to the start of the file, the current position
+  # indicator, or end-of-file, respectively. A successful call to the
+  # fseek() function clears the end-of-file indicator for the stream
+  # and undoes any effects of the ungetc(3) function on the same
+  # stream.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [0]
+        - arg: [1]
+        - arg: [2]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+# NOTE(lb): This signature should be identical to 'fseek' above.
+- name: '^fseeko$'
+  # int fseeko(FILE *stream, off_t offset, int whence)
+  #
+  # The fseeko() and ftello() functions are identical to fseek(3) and
+  # ftell(3) (see fseek(3)), respectively, except that the offset
+  # argument of fseeko() and the return value of ftello() is of type
+  # off_t instead of long.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [0]
+        - arg: [1]
+        - arg: [2]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^ftell$'
+  # long ftell(FILE *stream)
+  #
+  # The ftell() function obtains the current value of the file
+  # position indicator for the stream pointed to by stream.
+  signatures:
+  - pts_none: []
+  - input:
+      tags: [filesystem]
+      to:
+        - return: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+# NOTE(lb): This signature should be identical to 'ftell' above.
+- name: '^ftello$'
+  # off_t ftello(FILE *stream)
+  #
+  # The fseeko() and ftello() functions are identical to fseek(3) and
+  # ftell(3) (see fseek(3)), respectively, except that the offset
+  # argument of fseeko() and the return value of ftello() is of type
+  # off_t instead of long.
+  signatures:
+  - pts_none: []
+  - input:
+      tags: [filesystem]
+      to:
+        - return: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^fwrite$'
+  # size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream)
+  #
+  # The function fwrite() writes nmemb elements of data, each size
+  # bytes long, to the stream pointed to by stream, obtaining them
+  # from the location given by ptr.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem,user_output]
+      from:
+        - arg_points_to_aggregate: [0]
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [1]
+        - arg: [2]
+        - arg: [3]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+          - arg: [3]
+          - arg_points_to_aggregate: [0]
+      to:
+        - return: []
+
+- name: '^gai_strerror$'
+  # const char *gai_strerror(int errcode)
+  #
+  # The gai_strerror() function translates error codes from
+  # getaddrinfo to a human readable string, suitable for error
+  # reporting.
+  signatures:
+  - pts_return_alloc_once: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return_points_to: []
+
+- name: '^getaddrinfo$'
+  # int getaddrinfo(const char *node, const char *service,
+  #                 const struct addrinfo *hints,
+  #                 struct addrinfo **res)
+  #
+  # Given node and service, which identify an Internet host and a
+  # service, getaddrinfo() returns one or more addrinfo structures,
+  # each of which contains an Internet address that can be specified
+  # in a call to bind(2) or connect(2). The getaddrinfo() function
+  # combines the functionality provided by the gethostbyname(3) and
+  # getservbyname(3) functions into a single interface, but unlike the
+  # latter functions, getaddrinfo() is reentrant and allows programs
+  # to eliminate IPv4-versus-IPv6 dependencies.
+  signatures:
+  - pts_arg_alloc: [3]
+  - dataflow:
+      tags: [network]
+      from:
+        direct:
+          - arg_points_to: [0]
+          - arg_points_to: [1]
+        indirect:
+          - arg_points_to_aggregate: [2]
+      to:
+        - arg_reachable: [3]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg_points_to: [0]
+          - arg_points_to: [1]
+          - arg_points_to_aggregate: [2]
+      to:
+        - return: []
+
+# NOTE: This signature should be identical to that of 'fgetc'
+- name: '^getc$'
+  # int getc(_IO_FILE *__fp)
+  #
+  # getc() is equivalent to fgetc() except that it may be implemented as a macro
+  # which evaluates stream more than once.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+  - input:
+      tags: [filesystem,user_input]
+      to:
+        - return: []
+
+- name: '^getegid$'
+  # gid_t getegid(void);
+  #
+  # The getegid() function shall return the effective group ID of the
+  # calling process.
+  signatures:
+  - pts_none: []
+  - input:
+      tags: [access_control]
+      to:
+        - return: []
+
+- name: '^getenv$'
+  # char *getenv(const char *name)
+  #
+  # The getenv() function searches the environment list to find the
+  # environment variable name, and returns a pointer to the
+  # corresponding value string.
+  #
+  # As typically implemented, getenv() returns a pointer to a string
+  # within the environment list. The caller must take care not to
+  # modify this string, since that would change the environment of the
+  # process.
+  #
+  # The implementation of getenv() is not required to be
+  # reentrant. The string pointed to by the return value of getenv()
+  # may be statically allocated, and can be modified by a subsequent
+  # call to getenv(), putenv(3), setenv(3), or unsetenv(3).
+  signatures:
+  - pts_return_alloc: []
+  - input:
+      tags: [environment]
+      to:
+        - return_points_to: []
+  - dataflow:
+      tags: [environment]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+      to:
+        - return: []
+        - return_points_to: []
+
+- name: '^getgrgid$'
+  # struct group *getgrgid(gid_t gid)
+  #
+  # The getgrgid() function returns a pointer to a structure
+  # containing the broken-out fields of the record in the group
+  # database that matches the group ID gid.
+  #
+  # The getgrnam() and getgrgid() functions return a pointer to a
+  # group structure, or NULL if the matching entry is not found or an
+  # error occurs. If an error occurs, errno is set appropriately. If
+  # one wants to check errno after the call, it should be set to zero
+  # before the call.
+  #
+  # The return value may point to a static area, and may be
+  # overwritten by subsequent calls to getgrent(3), getgrgid(), or
+  # getgrnam(). (Do not pass the returned pointer to free(3).)
+  signatures:
+  - pts_return_alloc_once: []
+  - input:
+      tags: [access_control]
+      to:
+        - return_reachable: []
+  - dataflow:
+      tags: [access_control]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return_reachable: []
+
+- name: '^gethostbyname$'
+  # struct hostent *gethostbyname(const char *name)
+  #
+  # The gethostbyname() function returns a structure of type hostent
+  # for the given host name. The functions gethostbyname() and
+  # gethostbyaddr() may return pointers to static data, which may be
+  # overwritten by later calls. Copying the struct hostent does not
+  # suffice, since it contains pointers; a deep copy is required.
+  signatures:
+  - pts_return_alloc_once: []
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+        direct:
+          - arg_points_to: [0]
+      to:
+        - return_reachable: []
+
+- name: '^gethostname$'
+  # int gethostname(char *name, size_t len)
+  #
+  # gethostname() returns the null-terminated hostname in the
+  # character array name, which has a length of len bytes. If the
+  # null-terminated hostname is too large to fit, then the name is
+  # truncated, and no error is returned (but see NOTES
+  # below). POSIX.1-2001 says that if such truncation occurs, then it
+  # is unspecified whether the returned buffer includes a terminating
+  # null byte.
+  signatures:
+  - pts_none: []
+  - input:
+      tags: [network]
+      to:
+        - arg_points_to: [0]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [1]
+      to:
+        - arg_points_to: [0]
+        - return: []
+
+- name: '^getline$'
+  # ssize_t getline(char **lineptr, size_t *n, FILE *stream)
+  #
+  # getline() reads an entire line from stream, storing the address of
+  # the buffer containing the text into *lineptr. The buffer is
+  # null-terminated and includes the newline character, if one was
+  # found.
+  #
+  # If *lineptr is NULL, then getline() will allocate a buffer for
+  # storing the line, which should be freed by the user program. (In
+  # this case, the value in *n is ignored.)
+  #
+  # On success, getline() and getdelim() return the number of
+  # characters read, including the delimiter character, but not
+  # including the terminating null byte. This value can be used to
+  # handle embedded null bytes in the line read.
+  signatures:
+  - pts_arg_alloc: [0]
+  - input:
+      tags: [filesystem,user_input]
+      to:
+        - arg_reachable: [0]
+  - input:
+      tags: [filesystem]
+      to:
+        - arg_points_to: [1]
+        - return: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg_points_to: [0]
+          - arg_points_to: [1]
+          - arg: [2]
+      to:
+        - arg_points_to: [0]
+        - arg_points_to: [1]
+        - return: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^getopt$'
+  # int getopt(int argc, char * const argv[], const char *optstring);
+  #
+  # The getopt() function parses the command-line arguments. Its
+  # arguments argc and argv are the argument count and array as passed
+  # to the main() function on program invocation. An element of argv
+  # that starts with '-' (and is not exactly "-" or "--") is an option
+  # element. The characters of this element (aside from the initial
+  # '-') are option characters. If getopt() is called repeatedly, it
+  # returns successively each of the option characters from each of
+  # the option elements.
+  #
+  # The variable optind is the index of the next element to be
+  # processed in argv. The system initializes this value to 1. The
+  # caller can reset it to 1 to restart scanning of the same argv, or
+  # when scanning a new argument vector.
+  #
+  # If getopt() finds another option character, it returns that
+  # character, updating the external variable optind and a static
+  # variable nextchar so that the next call to getopt() can resume the
+  # scan with the following option character or argv-element.
+  #
+  # If there are no more option characters, getopt() returns -1. Then
+  # optind is the index in argv of the first argv-element that is not
+  # an option.
+  #
+  # optstring is a string containing the legitimate option
+  # characters. If such a character is followed by a colon, the option
+  # requires an argument, so getopt() places a pointer to the
+  # following text in the same argv-element, or the text of the
+  # following argv-element, in optarg. Two colons mean an option takes
+  # an optional arg; if there is text in the current argv-element
+  # (i.e., in the same word as the option name itself, for example,
+  # "-oarg"), then it is returned in optarg, otherwise optarg is set
+  # to zero. This is a GNU extension. If optstring contains W followed
+  # by a semicolon, then -W foo is treated as the long option
+  # --foo. (The -W option is reserved by POSIX.2 for implementation
+  # extensions.) This behavior is a GNU extension, not available with
+  # libraries before glibc 2.
+  #
+  # By default, getopt() permutes the contents of argv as it scans, so
+  # that eventually all the nonoptions are at the end. Two other modes
+  # are also implemented. If the first character of optstring is '+'
+  # or the environment variable POSIXLY_CORRECT is set, then option
+  # processing stops as soon as a nonoption argument is
+  # encountered. If the first character of optstring is '-', then each
+  # nonoption argv-element is handled as if it were the argument of an
+  # option with character code 1. (This is used by programs that were
+  # written to expect options and other argv-elements in any order and
+  # that care about the ordering of the two.) The special argument
+  # "--" forces an end of option-scanning regardless of the scanning
+  # mode.
+  #
+  # If getopt() does not recognize an option character, it prints an
+  # error message to stderr, stores the character in optopt, and
+  # returns '?'. The calling program may prevent the error message by
+  # setting opterr to 0.
+  #
+  # If getopt() finds an option character in argv that was not
+  # included in optstring, or if it detects a missing option argument,
+  # it returns '?' and sets the external variable optopt to the actual
+  # option character. If the first character (following any optional
+  # '+' or '-' described above) of optstring is a colon (':'), then
+  # getopt() returns ':' instead of '?' to indicate a missing option
+  # argument. If an error was detected, and the first character of
+  # optstring is not a colon, and the external variable opterr is
+  # nonzero (which is the default), getopt() prints an error message.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [environment]
+      from:
+        indirect:
+          - arg: [0]
+          - global: [optind]
+        direct:
+          - arg_reachable: [1]
+          - arg_points_to: [2]
+      to:
+        - global: [optind]
+        - global: [opterr]
+        - global: [optopt]
+  - dataflow:
+      tags: [environment]
+      from:
+        indirect:
+          - arg: [0]
+          - global: [optind]
+          - arg_reachable: [1]
+          - arg_points_to: [2]
+      to:
+        - return: []
+
+- name: '^getpwnam$'
+  # struct passwd *getpwnam(const char *name)
+  #
+  # The getpwnam() function returns a pointer to a structure
+  # containing the broken-out fields of the record in the password
+  # database (e.g., the local password file /etc/passwd, NIS, and
+  # LDAP) that matches the username name.
+  #
+  # The getpwnam() and getpwuid() functions return a pointer to a
+  # passwd structure, or NULL if the matching entry is not found or an
+  # error occurs. If an error occurs, errno is set appropriately. If
+  # one wants to check errno after the call, it should be set to zero
+  # before the call.
+  #
+  # The return value may point to a static area, and may be
+  # overwritten by subsequent calls to getpwent(3), getpwnam(), or
+  # getpwuid(). (Do not pass the returned pointer to free(3).)
+  signatures:
+  - pts_return_alloc_once: []
+  - output:
+      tags: [access_control]
+      from:
+        - arg_points_to: [0]
+  - input:
+      tags: [access_control]
+      to:
+        - return_reachable: []
+  - dataflow:
+      tags: [access_control]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+      to:
+        - return_reachable: []
+
+- name: '^getpwuid$'
+  # struct passwd *getpwuid(uid_t uid)
+  #
+  # The getpwuid() function returns a pointer to a structure
+  # containing the broken-out fields of the record in the password
+  # database that matches the user ID uid.
+  #
+  # The getpwnam() and getpwuid() functions return a pointer to a
+  # passwd structure, or NULL if the matching entry is not found or an
+  # error occurs. If an error occurs, errno is set appropriately. If
+  # one wants to check errno after the call, it should be set to zero
+  # before the call.
+  #
+  # The return value may point to a static area, and may be
+  # overwritten by subsequent calls to getpwent(3), getpwnam(), or
+  # getpwuid(). (Do not pass the returned pointer to free(3).)
+  signatures:
+  - pts_return_alloc_once: []
+  - output:
+      tags: [access_control]
+      from:
+        - arg: [0]
+  - dataflow:
+      tags: [access_control]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return_reachable: []
+
+- name: '^gmtime$'
+  # struct tm *gmtime(const time_t *timep);
+  #
+  # The gmtime() function converts the calendar time timep to broken-down time
+  # representation, expressed in Coordinated Universal Time (UTC). It may return
+  # NULL when the year does not fit into an integer. The return value points to
+  # a statically allocated struct which might be overwritten by subsequent calls
+  # to any of the date and time functions. The gmtime_r() function does the
+  # same, but stores the data in a user-supplied struct.
+  signatures:
+  - pts_return_alloc_once: []
+  - dataflow:
+      from:
+        direct:
+        - arg_points_to: [0]
+      to:
+      - return_points_to: []
+
+- name: '^htonl$'
+  # uint32_t htonl(uint32_t hostlong)
+  #
+  # The htonl() function converts the unsigned integer hostlong from
+  # host byte order to network byte order.
+  signatures:
+  - dataflow:
+      tags: [network]
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^htons$'
+  # uint16_t htons(uint16_t hostshort)
+  #
+  # The htons() function converts the unsigned short integer hostshort
+  # from host byte order to network byte order.
+  signatures:
+  - dataflow:
+      tags: [network]
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^isatty$'
+  # int isatty(int fd)
+  #
+  # The isatty() function tests whether fd is an open file descriptor
+  # referring to a terminal.
+  signatures:
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^link$'
+  # int link(const char *path1, const char *path2)
+  #
+  # The link() function shall create a new link (directory entry) for
+  # the existing file, path1.
+  #
+  # Upon successful completion, 0 shall be returned. Otherwise, -1
+  # shall be returned and errno set to indicate the error.
+  signatures:
+  - output:
+      tags: [filesystem,path_traversal]
+      from:
+        - arg_points_to: [0]
+        - arg_points_to: [1]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg_points_to: [1]
+      to:
+        - return: []
+
+- name: '^listen$'
+  # int listen(int socket, int backlog)
+  #
+  # The listen() function shall mark a connection-mode socket,
+  # specified by the socket argument, as accepting connections.
+  #
+  # The backlog argument provides a hint to the implementation which
+  # the implementation shall use to limit the number of outstanding
+  # connections in the socket's listen queue.
+  #
+  # Upon successful completions, listen() shall return 0; otherwise,
+  # -1 shall be returned and errno set to indicate the error.
+  signatures:
+  - output:
+      tags: [network]
+      from:
+        - arg: [0]
+        - arg: [1]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^llvm.memcpy.p0i8.p0i8.i64$'
+  # void *memcpy(void *dest, const void *src, size_t n)
+  #
+  # The memcpy() function copies n bytes from memory area src to
+  # memory area dest. The memory areas must not overlap. Use
+  # memmove(3) if the memory areas do overlap.
+  #
+  # Note: cclyzer already includes points-to signatures for this LLVM intrinsic
+  signatures:
+  - dataflow:
+      tags: [intrinsic]
+      from:
+        indirect:
+          - arg: [1]
+          - arg: [2]
+        direct:
+          - arg_points_to_aggregate: [1]
+      to:
+        - arg_points_to_aggregate: [0]
+        - return_points_to_aggregate: []
+  - dataflow:
+      tags: [intrinsic]
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^llvm.memset.p0i8.i64$'
+  # void *memset(void *s, int c, size_t n)
+  #
+  # The memset() function fills the first n bytes of the memory area
+  # pointed to by s with the constant byte c.
+  #
+  # Note: cclyzer already includes points-to signatures for this LLVM intrinsic
+  signatures:
+  - dataflow:
+      tags: [intrinsic]
+      from:
+        direct:
+          - arg: [1]
+        indirect:
+          - arg: [2]
+      to:
+        - arg_points_to_aggregate: [0]
+        - return_points_to_aggregate: []
+  - dataflow:
+      tags: [intrinsic]
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^localtime$'
+  # struct tm *localtime(const time_t *timep)
+  #
+  # localtime() functions all take an argument of data type time_t
+  # which represents calendar time. When interpreted as an absolute
+  # time value, it represents the number of seconds elapsed since the
+  # Epoch, 1970-01-01 00:00:00 +0000 (UTC).
+  #
+  # The return value points to a statically allocated struct which
+  # might be overwritten by subsequent calls to any of the date and
+  # time functions.
+  signatures:
+  - pts_return_alloc_once: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+        direct:
+          - arg_points_to_aggregate: [0]
+      to:
+        - return_points_to_aggregate: []
+
+- name: '^lseek$'
+  # off_t lseek(int fildes, off_t offset, int whence)
+  #
+  # The lseek() function shall set the file offset for the open file
+  # description associated with the file descriptor fildes.
+  #
+  # Upon successful completion, the resulting offset, as measured in
+  # bytes from the beginning of the file, shall be
+  # returned. Otherwise, (off_t)-1 shall be returned, errno shall be
+  # set to indicate the error, and the file offset shall remain
+  # unchanged.
+  signatures:
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [0]
+        - arg: [1]
+        - arg: [2]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^lstat$'
+  # int lstat(const char *restrict path, struct stat *restrict buf)
+  #
+  # The lstat() function shall be equivalent to stat(), except when
+  # path refers to a symbolic link. In that case lstat() shall return
+  # information about the link, while stat() shall return information
+  # about the file the link references.
+  #
+  # Upon successful completion, lstat() shall return 0. Otherwise, it
+  # shall return -1 and set errno to indicate the error.
+  signatures:
+  - input:
+      tags: [filesystem]
+      to:
+        - arg_points_to_aggregate: [1]
+        - return: []
+  - output:
+      tags: [filesystem,maybe_path_traversal]
+      from:
+        - arg_points_to: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+      to:
+        - arg_points_to_aggregate: [1]
+        - return: []
+
+- name: '^malloc$'
+  # void *malloc(size_t size)
+  #
+  # The malloc() function allocates size bytes and returns a pointer
+  # to the allocated memory. The memory is not initialized. If size is
+  # 0, then malloc() returns either NULL, or a unique pointer value
+  # that can later be successfully passed to free().
+  signatures:
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+      deallocator: 'free'
+
+- name: '^memchr$'
+  # void *memchr(const void *s, int c, size_t n)
+  #
+  # The memchr() function scans the initial n bytes of the memory area pointed
+  # to by s for the first instance of c. Both c and the bytes of the memory area
+  # pointed to by s are interpreted as unsigned char.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^memcmp$'
+  # int memcmp(const void *s1, const void *s2, size_t n)
+  #
+  # The memcmp() function compares the first n bytes (each interpreted
+  # as unsigned char) of the memory areas s1 and s2.
+  #
+  # The memcmp() function returns an integer less than, equal to, or
+  # greater than zero if the first n bytes of s1 is found,
+  # respectively, to be less than, to match, or be greater than the
+  # first n bytes of s2.
+  #
+  # For a nonzero return value, the sign is determined by the sign of
+  # the difference between the first pair of bytes (interpreted as
+  # unsigned char) that differ in s1 and s2.
+  signatures:
+  - dataflow:
+      from:
+        indirect:
+          - arg_points_to_aggregate: [0]
+          - arg_points_to_aggregate: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^mkdir$'
+  # int mkdir(const char *path, mode_t mode)
+  #
+  # The mkdir() function shall create a new directory with name
+  # path. The file permission bits of the new directory shall be
+  # initialized from mode. These file permission bits of the mode
+  # argument shall be modified by the process' file creation mask.
+  #
+  # Upon successful completion, mkdir() shall return 0. Otherwise, -1
+  # shall be returned, no directory shall be created, and errno shall
+  # be set to indicate the error.
+  signatures:
+  - output:
+      tags: [filesystem,path_traversal]
+      from:
+        - arg_points_to: [0]
+        - arg: [1]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^open$'
+  # int open(const char *path, int oflag, < mode_t mode > )
+  #
+  # The open() function shall establish the connection between a file
+  # and a file descriptor. It shall create an open file description
+  # that refers to a file and a file descriptor that refers to that
+  # open file description. The file descriptor is used by other I/O
+  # functions to refer to that file. The path argument points to a
+  # pathname naming the file.
+  #
+  # Upon successful completion, the function shall open the file and
+  # return a non-negative integer representing the lowest numbered
+  # unused file descriptor. Otherwise, -1 shall be returned and errno
+  # set to indicate the error. No files shall be created or modified
+  # if the function returns -1.
+  signatures:
+  - input:
+      tags: [filesystem]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem,path_traversal]
+      from:
+        - arg_points_to: [0]
+  - output:
+      tags: [filesystem]
+      from:
+        - arg: [1]
+        - arg: [2]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^opendir$'
+  # DIR *opendir(const char *name)
+  #
+  # The opendir() function opens a directory stream corresponding to
+  # the directory name, and returns a pointer to the directory
+  # stream. The stream is positioned at the first entry in the
+  # directory.
+  signatures:
+  - pts_return_alloc: []
+  - input:
+      tags: [filesystem]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem,path_traversal]
+      from:
+        - arg_points_to: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+      to:
+        - return: []
+
+- name: '^pipe$'
+  # int pipe(int fildes[2])
+  #
+  # The pipe() function shall create a pipe and place two file
+  # descriptors, one each into the arguments fildes[0] and fildes[1],
+  # that refer to the open file descriptions for the read and write
+  # ends of the pipe. Their integer values shall be the two lowest
+  # available at the time of the pipe() call. The O_NONBLOCK and
+  # FD_CLOEXEC flags shall be clear on both file descriptors. (The
+  # fcntl() function can be used to set both these flags.)
+  #
+  # Data can be written to the file descriptor fildes[1] and read from
+  # the file descriptor fildes[0]. A read on the file descriptor
+  # fildes[0] shall access data written to the file descriptor
+  # fildes[1] on a first-in-first-out basis. It is unspecified whether
+  # fildes[0] is also open for writing and whether fildes[1] is also
+  # open for reading.
+  #
+  # A process has the pipe open for reading (correspondingly writing)
+  # if it has a file descriptor open that refers to the read end,
+  # fildes[0] (write end, fildes[1]).
+  #
+  # Upon successful completion, 0 shall be returned; otherwise, -1
+  # shall be returned and errno set to indicate the error.
+  signatures:
+  - input:
+      tags: [filesystem]
+      to:
+        - arg_points_to_aggregate: [0]
+        - return: []
+
+- name: '^popen$'
+  # FILE *popen(const char *command, const char *type);
+  #
+  #  descriptor; see the description of the O_CLOEXEC flag in open(2)
+  #  for reasons why this may be useful.
+  #
+  # The return value from popen() is a normal standard I/O stream in
+  # all respects save that it must be closed with pclose() rather than
+  # fclose(3). Writing to such a stream writes to the standard input
+  # of the command; the command's standard output is the same as that
+  # of the process that called popen(), unless this is altered by the
+  # command itself. Conversely, reading from a "popened" stream reads
+  # the command's standard output, and the command's standard input is
+  # the same as that of the process that called popen().
+  signatures:
+  - pts_return_alloc: []
+  - output:
+      tags: [command_injection]
+      from:
+        - arg: [0]
+        - arg: [1]
+        - arg_points_to: [1]
+  - output:
+      tags: [command_injection]
+      from:
+        - arg_points_to: [0]
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg_points_to: [1]
+      to:
+        - return_points_to: []
+
+- name: '^printf$'
+  # int printf(const char *format, ...)
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem,format_string,stdout,user_output]
+      from:
+        - format_string_reads: [0]
+  - dataflow:
+      tags: [filesystem,format_string,stdout]
+      from:
+        indirect:
+          - format_string_reads: [0]
+      to:
+        - return: []
+        - format_string_writes: [0]
+
+- name: '^read$'
+  # ssize_t read(int fildes, void *buf, size_t nbyte)
+  #
+  # The read() function shall attempt to read nbyte bytes from the
+  # file associated with the open file descriptor, fildes, into the
+  # buffer pointed to by buf. The behavior of multiple concurrent
+  # reads on the same pipe, FIFO, or terminal device is unspecified.
+  #
+  # Upon successful completion, read() and pread() shall return a
+  # non-negative integer indicating the number of bytes actually
+  # read. Otherwise, the functions shall return -1 and set errno to
+  # indicate the error.
+  signatures:
+  - pts_none: []
+  - input:
+      tags: [filesystem,network,user_input]
+      to:
+        - arg_points_to_aggregate: [1]
+  - input:
+      tags: [filesystem,network]
+      to:
+        - return: []
+  - dataflow:
+      tags: [filesystem,network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [2]
+      to:
+        - arg_points_to_aggregate: [1]
+  - dataflow:
+      tags: [filesystem,network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^readdir$'
+  # int readdir_r(DIR *dirp, struct dirent *entry, struct dirent **result)
+  #
+  # The readdir() function returns a pointer to a dirent structure
+  # representing the next directory entry in the directory stream
+  # pointed to by dirp. It returns NULL on reaching the end of the
+  # directory stream or if an error occurred.
+  #
+  # The data returned by readdir() may be overwritten by subsequent
+  # calls to readdir() for the same directory stream.
+  signatures:
+  - pts_arg_alloc_once: [2]
+  - input:
+      tags: [filesystem]
+      to:
+        - arg_reachable: [2]
+        - return: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg_points_to_aggregate: [1]
+      to:
+        - arg_reachable: [2]
+        - return: []
+
+- name: '^realloc$'
+  # void *realloc(void *ptr, size_t size)
+  #
+  # The realloc() function changes the size of the memory block
+  # pointed to by ptr to size bytes. The contents will be unchanged in
+  # the range from the start of the region up to the minimum of the
+  # old and new sizes. If the new size is larger than the old size,
+  # the added memory will not be initialized. If ptr is NULL, then the
+  # call is equivalent to malloc(size), for all values of size; if
+  # size is equal to zero, and ptr is not NULL, then the call is
+  # equivalent to free(ptr). Unless ptr is NULL, it must have been
+  # returned by an earlier call to malloc(), calloc() or realloc(). If
+  # the area pointed to was moved, a free(ptr) is done.
+  signatures:
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg: [1]
+      to:
+        - return: []
+  # Points-to related flows should already be handled in cclyzer...
+
+- name: '^realpath$'
+  # char *realpath(const char *path, char *resolved_path)
+  #
+  # realpath() expands all symbolic links and resolves references to
+  # /./, /../ and extra '/' characters in the null-terminated string
+  # named by path to produce a canonicalized absolute pathname. The
+  # resulting pathname is stored as a null-terminated string, up to a
+  # maximum of PATH_MAX bytes, in the buffer pointed to by
+  # resolved_path. The resulting path will have no symbolic link, /./
+  # or /../ components.
+  #
+  # If resolved_path is specified as NULL, then realpath() uses
+  # malloc(3) to allocate a buffer of up to PATH_MAX bytes to hold the
+  # resolved pathname, and returns a pointer to this buffer. The
+  # caller should deallocate this buffer using free(3).
+  #
+  # If there is no error, realpath() returns a pointer to the resolved_path.
+  #
+  # Otherwise, it returns a NULL pointer, the contents of the array
+  # resolved_path are undefined, and errno is set to indicate the
+  # error.
+  signatures:
+  - pts_return_alloc: []
+  - pts_return_aliases_arg: [1]
+  - input:
+      tags: [filesystem]
+      to:
+        - arg_points_to: [1]
+        - return: []
+        - return_points_to: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+        direct:
+          - arg: [1]
+      to:
+        - return: []
+  - dataflow:
+      tags: [filesystem]
+      from:
+        direct:
+          - arg_points_to: [0]
+      to:
+        - arg_points_to: [1]
+        - return_points_to: []
+
+- name: '^recv$'
+  # ssize_t recv(int socket, void *buffer, size_t length, int flags)
+  #
+  # The recv() function shall receive a message from a connection-mode
+  # or connectionless-mode socket. It is normally used with connected
+  # sockets because it does not permit the application to retrieve the
+  # source address of received data.
+  #
+  # The recv() function shall return the length of the message written
+  # to the buffer pointed to by the buffer argument.
+  #
+  # Upon successful completion, recv() shall return the length of the
+  # message in bytes. If no messages are available to be received and
+  # the peer has performed an orderly shutdown, recv() shall return
+  # 0. Otherwise, -1 shall be returned and errno set to indicate the
+  # error.
+  signatures:
+  - pts_none: []
+  - input:
+      tags: [network,user_input]
+      to:
+        - arg_points_to_aggregate: [1]
+  - input:
+      tags: [network]
+      to:
+        - return: []
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [2]
+          - arg: [3]
+      to:
+        - arg_points_to_aggregate: [1]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+          - arg: [3]
+      to:
+        - return: []
+
+- name: '^remove$'
+  # int remove(const char *pathname)
+  #
+  # remove() deletes a name from the file system. It calls unlink(2)
+  # for files, and rmdir(2) for directories.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem,path_traversal]
+      from:
+        - arg_points_to: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+      to:
+        - return: []
+
+- name: '^rename$'
+  # int rename(const char *old, const char *new)
+  #
+  # The rename() function shall change the name of a file. The old
+  # argument points to the pathname of the file to be renamed. The new
+  # argument points to the new pathname of the file.
+  #
+  # Upon successful completion, rename() shall return 0; otherwise, -1
+  # shall be returned, errno shall be set to indicate the error, and
+  # neither the file named by old nor the file named by new shall be
+  # changed or created.
+  signatures:
+  - pts_none: []
+  - input:
+      tags: [filesystem]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem,path_traversal]
+      from:
+        - arg_points_to: [0]
+        - arg_points_to: [1]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg_points_to: [1]
+      to:
+        - return: []
+
+- name: '^rewind$'
+  # void rewind(FILE *stream);
+  #
+  # The rewind() function sets the file position indicator for the stream
+  # pointed to by stream to the beginning of the file. It is equivalent to:
+  #
+  #       (void) fseek(stream, 0L, SEEK_SET)
+  #
+  # except that the error indicator for the  stream  is  also  cleared
+  # (see clearerr(3)).
+  signatures:
+  - pts_none: []
+
+- name: '^send$'
+  # ssize_t send(int socket, const void *buffer, size_t length, int flags)
+  #
+  # The send() function shall initiate transmission of a message from
+  # the specified socket to its peer. The send() function shall send a
+  # message only when the socket is connected (including when the peer
+  # of a connectionless socket has been set via connect()).
+  #
+  # Upon successful completion, send() shall return the number of
+  # bytes sent. Otherwise, -1 shall be returned and errno set to
+  # indicate the error.
+  signatures:
+  - pts_none: []
+  - input:
+      tags: [network]
+      to:
+        - return: []
+  - output:
+      tags: [network]
+      from:
+        - arg: [0]
+        - arg: [2]
+        - arg: [3]
+  - output:
+      tags: [network,user_output]
+      from:
+        - arg_points_to: [1]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg_points_to: [1]
+          - arg: [2]
+          - arg: [3]
+      to:
+        - return: []
+
+- name: '^setegid$'
+  # int setegid(gid_t gid)
+  #
+  # If gid is equal to the real group ID or the saved set-group-ID, or
+  # if the process has appropriate privileges, setegid() shall set the
+  # effective group ID of the calling process to gid; the real group
+  # ID, saved set-group-ID, and any supplementary group IDs shall
+  # remain unchanged.
+  #
+  # Upon successful completion, 0 shall be returned; otherwise, -1
+  # shall be returned and errno set to indicate the error.
+  signatures:
+  - input:
+      tags: [filesystem,access_control]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem,access_control]
+      from:
+        - arg: [0]
+  - dataflow:
+      tags: [filesystem,access_control]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^seteuid$'
+  # int seteuid(uid_t uid)
+  #
+  # If uid is equal to the real user ID or the saved set-user-ID, or
+  # if the process has appropriate privileges, seteuid() shall set the
+  # effective user ID of the calling process to uid; the real user ID
+  # and saved set-user-ID shall remain unchanged.
+  #
+  # Upon successful completion, 0 shall be returned; otherwise, -1
+  # shall be returned and errno set to indicate the error.
+  signatures:
+  - input:
+      tags: [filesystem,access_control]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem,access_control]
+      from:
+        - arg: [0]
+  - dataflow:
+      tags: [filesystem,access_control]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^setsockopt$'
+  # int setsockopt(int socket, int level, int option_name,
+  #                const void *option_value, socklen_t option_len)
+  #
+  # The setsockopt() function shall set the option specified by the
+  # option_name argument, at the protocol level specified by the level
+  # argument, to the value pointed to by the option_value argument for
+  # the socket associated with the file descriptor specified by the
+  # socket argument.
+  #
+  # Upon successful completion, setsockopt() shall return
+  # 0. Otherwise, -1 shall be returned and errno set to indicate the
+  # error.
+  signatures:
+  - input:
+      tags: [network]
+      to:
+        - return: []
+  - output:
+      tags: [network]
+      from:
+        - arg: [0]
+        - arg: [1]
+        - arg: [2]
+        - arg_reachable: [3]
+        - arg: [4]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+          - arg: [3]
+          - arg_reachable: [3]
+          - arg: [4]
+      to:
+        - return: []
+
+- name: '^setvbuf$'
+  # int setvbuf(FILE *stream, char *buf, int mode, size_t size)
+  #
+  # The setvbuf() function may be used on any open stream to change
+  # its buffer. The mode argument must be one of the following three
+  # macros:
+  #   _IONBF: unbuffered
+  #   _IOLBF: line buffered
+  #   _IOFBF: fully buffered
+  # Except for unbuffered files, the buf argument should point to a
+  # buffer at least size bytes long; this buffer will be used instead
+  # of the current buffer. If the argument buf is NULL, only the mode
+  # is affected; a new buffer will be allocated on the next read or
+  # write operation. The setvbuf() function may only be used after
+  # opening a stream and before any other operations have been
+  # performed on it.
+  #
+  # The function setvbuf() returns 0 on success. It returns nonzero on
+  # failure (mode is invalid or the request cannot be honored). It may
+  # set errno on failure.
+  signatures:
+  - pts_none: []
+  - output:
+      from:
+        - arg: [2]
+        - arg: [3]
+        - arg: [0]
+        - arg: [1]
+        - arg_points_to_aggregate: [1]
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg_points_to_aggregate: [1]
+          - arg: [2]
+          - arg: [3]
+      to:
+        - return: []
+
+# #signal TODO handle signals!
+
+- name: '^snprintf$'
+  # int snprintf(char *str, size_t size, const char *format, ...)
+  #
+  # The function snprintf() works like printf but writes at most size
+  # bytes (including the terminating null byte ('\0')) to str.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [filesystem,format_string]
+      from:
+        indirect:
+          - arg: [1]
+        direct:
+          - format_string_reads: [2]
+      to:
+        - arg_points_to: [0]
+  - dataflow:
+      tags: [filesystem,format_string]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+          - format_string_reads: [2]
+      to:
+        - return: []
+        - format_string_writes: [2]
+
+- name: '^sprintf$'
+  # int snprintf(char *str, const char *format, ...)
+  #
+  # The function sprintf() works like printf but writes
+  # its output to str.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [filesystem,format_string]
+      from:
+        direct:
+          - format_string_reads: [1]
+      to:
+        - arg_points_to: [0]
+  - dataflow:
+      tags: [filesystem,format_string]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - format_string_reads: [1]
+      to:
+        - return: []
+        - format_string_writes: [1]
+
+- name: '^socket$'
+  # int socket(int domain, int type, int protocol)
+  #
+  # The socket() function shall create an unbound socket in a
+  # communications domain, and return a file descriptor that can be
+  # used in later function calls that operate on sockets.
+  #
+  # Upon successful completion, socket() shall return a non-negative
+  # integer, the socket file descriptor. Otherwise, a value of -1
+  # shall be returned and errno set to indicate the error.
+  signatures:
+  - input:
+      tags: [filesystem, network]
+      to:
+        - return: []
+  - output:
+      tags: [filesystem, network]
+      from:
+        - arg: [0]
+        - arg: [1]
+        - arg: [2]
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^stat$'
+  # int stat(const char *restrict path, struct stat *restrict buf)
+  #
+  # The stat() function shall obtain information about the named file
+  # and write it to the area pointed to by the buf argument. The path
+  # argument points to a pathname naming a file. Read, write, or
+  # execute permission of the named file is not required. An
+  # implementation that provides additional or alternate file access
+  # control mechanisms may, under implementation-defined conditions,
+  # cause stat() to fail. In particular, the system may deny the
+  # existence of the file specified by path.
+  #
+  # Upon successful completion, lstat() shall return 0. Otherwise, it
+  # shall return -1 and set errno to indicate the error.
+  signatures:
+  - input:
+      tags: [filesystem]
+      to:
+        - arg_points_to_aggregate: [1]
+        - return: []
+  - output:
+      tags: [filesystem,maybe_path_traversal]
+      from:
+      - arg_points_to: [0]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        direct:
+          - arg_points_to: [0]
+      to:
+        - arg_points_to_aggregate: [1]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        indirect:
+          - arg_points_to: [0]
+      to:
+        - return: []
+
+- name: '^strcat$'
+  #  char *strcat(char *dest, const char *src);
+  #
+  # The strcat() function appends the src string to the dest string,
+  # overwriting the terminating null byte ('\0') at the end of dest, and
+  # then adds a terminating null byte.  The strings may not overlap, and
+  # the dest string must have enough space for the result.  If dest is
+  # not large enough, program behavior is unpredictable; buffer overruns
+  # are a favorite avenue for attacking secure programs.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to: [1]
+      to:
+        - arg_points_to: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^strncat$'
+  #  char *strncat(char *dest, const char *src, size_t n);
+  #
+  # The strcat() function appends the src string to the dest string,
+  # overwriting the terminating null byte ('\0') at the end of dest, and
+  # then adds a terminating null byte.  The strings may not overlap, and
+  # the dest string must have enough space for the result.  If dest is
+  # not large enough, program behavior is unpredictable; buffer overruns
+  # are a favorite avenue for attacking secure programs.
+  #
+  # The strncat() function is similar, except that
+  #  *  it will use at most n bytes from src; and
+  #  *  src does not need to be null-terminated if it contains n or more
+  #     bytes.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to: [1]
+        indirect:
+          - arg: [2]
+      to:
+        - arg_points_to: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^strcasecmp$'
+  # int strcasecmp(const char *s1, const char *s2)
+  #
+  # The strcasecmp() function compares the two strings s1 and s2,
+  # ignoring the case of the characters. It returns an integer less
+  # than, equal to, or greater than zero if s1 is found, respectively,
+  # to be less than, to match, or be greater than s2.
+  #
+  # The strcasecmp() and strncasecmp() functions return an integer
+  # less than, equal to, or greater than zero if s1 (or the first n
+  # bytes thereof) is found, respectively, to be less than, to match,
+  # or be greater than s2.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg_points_to: [1]
+      to:
+        - return: []
+
+- name: '^strncasecmp$'
+  # int strncasecmp(const char *s1, const char *s2, size_t n)
+  #
+  # The strncasecmp() function is similar to strcasecmp, except it
+  # only compares the first n bytes of s1.
+  #
+  # The strcasecmp() and strncasecmp() functions return an integer
+  # less than, equal to, or greater than zero if s1 (or the first n
+  # bytes thereof) is found, respectively, to be less than, to match,
+  # or be greater than s2.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg_points_to: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^strchr$'
+  # char *strchr(const char *s, int c)
+  #
+  # The strchr() function returns a pointer to the first occurrence of
+  # the character c in the string s.
+  #
+  # The strchr() and strrchr() functions return a pointer to the
+  # matched character or NULL if the character is not found.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg_points_to: [0]
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^strrchr$'
+  # char *strchr(const char *s, int c)
+  #
+  # The strchr() function returns a pointer to the last occurrence of
+  # the character c in the string s.
+  #
+  # The strchr() and strrchr() functions return a pointer to the
+  # matched character or NULL if the character is not found.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg_points_to: [0]
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^strcmp$'
+  # int strcmp(const char *s1, const char *s2)
+  #
+  # The strcmp() function compares the two strings s1 and s2. It
+  # returns an integer less than, equal to, or greater than zero if s1
+  # is found, respectively, to be less than, to match, or be greater
+  # than s2.
+  #
+  # The strcmp() and strncmp() functions return an integer less than,
+  # equal to, or greater than zero if s1 (or the first n bytes
+  # thereof) is found, respectively, to be less than, to match, or be
+  # greater than s2.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg_points_to: [1]
+      to:
+      - return: []
+
+- name: '^strncmp$'
+  # int strncmp(const char *s1, const char *s2, size_t n)
+  #
+  # The strncmp() function is similar to strcmp, except it only
+  # compares the first (at most) n bytes of s1 and s2.
+  #
+  # The strcmp() and strncmp() functions return an integer less than,
+  # equal to, or greater than zero if s1 (or the first n bytes
+  # thereof) is found, respectively, to be less than, to match, or be
+  # greater than s2.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg_points_to: [1]
+          - arg: [2]
+      to:
+        - return: []
+
+- name: '^strcpy$'
+  # char *strcpy(char *dest, const char *src)
+  #
+  # The strcpy() function copies the string pointed to by src,
+  # including the terminating null byte ('\0'), to the buffer pointed
+  # to by dest. The strings may not overlap, and the destination
+  # string dest must be large enough to receive the copy. Beware of
+  # buffer overruns! (See BUGS.)
+  #
+  # The strcpy() and strncpy() functions return a pointer to the
+  # destination string dest.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - pts_arg_memcpy_arg: [0, 1]
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to: [1]
+      to:
+        - arg_points_to: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^strncpy$'
+  # char *strncpy(char *dest, const char *src, size_t n)
+  #
+  # The strncpy() function is similar to strcpy, except that at most n
+  # bytes of src are copied. Warning: If there is no null byte among
+  # the first n bytes of src, the string placed in dest will not be
+  # null-terminated.
+  #
+  # The strcpy() and strncpy() functions return a pointer to the
+  # destination string dest.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - pts_arg_memcpy_arg: [0, 1]
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to: [1]
+        indirect:
+          - arg: [2]
+      to:
+      - arg_points_to: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+      to:
+      - return: []
+
+- name: '^strdup$'
+  # char *strdup(const char *s)
+  #
+  # The strdup() function returns a pointer to a new string which is a
+  # duplicate of the string s. Memory for the new string is obtained
+  # with malloc(3), and can be freed with free(3).
+  #
+  # The strdup() function returns a pointer to the duplicated string,
+  # or NULL if insufficient memory was available.
+  signatures:
+  - pts_return_alloc: []
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to: [0]
+      to:
+        - return_points_to: []
+
+- name: '^strndup$'
+  # char *strndup(const char *s, size_t n)
+  #
+  # The strndup() function is similar to strdup, but only copies at
+  # most n bytes. If s is longer than n, only n bytes are copied, and
+  # a terminating null byte ('\0') is added.
+  #
+  # The strndup() function returns a pointer to the duplicated string,
+  # or NULL if insufficient memory was available.
+  signatures:
+  - pts_return_alloc: []
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+      to:
+        - return: []
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to: [0]
+        indirect:
+          - arg: [1]
+      to:
+        - return_points_to: []
+
+- name: '^strerror$'
+  # char *strerror(int errnum)
+  #
+  # The strerror() function returns a pointer to a string that
+  # describes the error code passed in the argument errnum, possibly
+  # using the LC_MESSAGES part of the current locale to select the
+  # appropriate language. (For example, if errnum is EINVAL, the
+  # returned description will "Invalid argument".) This string must
+  # not be modified by the application, but may be modified by a
+  # subsequent call to strerror(). No library function, including
+  # perror(3), will modify this string.
+  signatures:
+  - pts_return_alloc_once: []
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return_points_to: []
+
+- name: '^strlen$'
+  # size_t strlen(const char *s)
+  #
+  # The strlen() function calculates the length of the string s,
+  # excluding the terminating null byte.
+  #
+  # NOTE: dataflow should maybe be indirect, but this complicates
+  # some POI queries...
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to: [0]
+      to:
+        - return: []
+
+- name: '^strnlen$'
+  # size_t strnlen(const char *s, size_t maxlen)
+  #
+  # The strnlen() function returns the number of bytes in the string
+  # pointed to by s, excluding the terminating null bye ('\0'), but at
+  # most maxlen. In doing this, strnlen() looks only at the first
+  # maxlen bytes at s and never beyond s+maxlen.
+  #
+  # NOTE: dataflow should maybe be indirect, but this complicates
+  # some POI queries...
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        direct:
+          - arg_points_to: [0]
+        direct:
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^strsep$'
+  # char *strsep(char **stringp, const char *delim)
+  #
+  # If *stringp is NULL, the strsep() function returns NULL and does
+  # nothing else. Otherwise, this function finds the first token in
+  # the string *stringp, where tokens are delimited by symbols in the
+  # string delim. This token is terminated by overwriting the
+  # delimiter with a null byte ('\0') and *stringp is updated to point
+  # past the token. In case no delimiter was found, the token is taken
+  # to be the entire string *stringp, and *stringp is made NULL.
+  #
+  # The strsep() function returns a pointer to the token, that is, it
+  # returns the original value of *stringp.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        control:
+          - arg: [0]
+        direct:
+          - arg_reachable: [0]
+        indirect:
+          - arg_points_to: [1]
+      to:
+        - arg_reachable: [0]
+        - arg_points_to: [1]
+        - return: []
+
+- name: '^strstr$'
+  # char *strstr(const char *haystack, const char *needle)
+  #
+  # The strstr() function finds the first occurrence of the substring
+  # needle in the string haystack. The terminating null bytes (aq\0aq)
+  # are not compared.
+  #
+  # Returns a pointer to the beginning of the substring, or NULL if
+  # the substring is not found.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      from:
+        direct:
+          - arg: [1]
+        indirect:
+          - arg_points_to: [0]
+          - arg_points_to: [1]
+      to:
+        - return: []
+
+- name: '^strtod$'
+  # double strtod(const char *restrict nptr, char **restrict endptr)
+  #
+  # The strtod(), strtof(), and strtold() functions convert the initial portion
+  # of the string pointed to by nptr to double, float, and long double
+  # representation, respectively.
+  #
+  # TODO: arg_points_to_arg signature for endptr. Currently unsound!
+  signatures:
+  - dataflow:
+      tags: [parsing]
+      from:
+        direct:
+          - arg: [0]
+        control:
+          - arg: [1]
+      to:
+        - return: []
+        - arg_points_to_aggregate: [1]
+
+- name: '^strtof$'
+  # float strtof(const char *restrict nptr, char **restrict endptr)
+  #
+  # The strtod(), strtof(), and strtold() functions convert the initial portion
+  # of the string pointed to by nptr to double, float, and long double
+  # representation, respectively.
+  #
+  # TODO: arg_points_to_arg signature for endptr. Currently unsound!
+  signatures:
+  - dataflow:
+      tags: [parsing]
+      from:
+        direct:
+          - arg: [0]
+        control:
+          - arg: [1]
+      to:
+        - return: []
+        - arg_points_to_aggregate: [1]
+
+- name: '^strtok$'
+  # char *strtok(char *str, const char *delim)
+  #
+  # The strtok() function parses a string into a sequence of
+  # tokens. On the first call to strtok() the string to be parsed
+  # should be specified in str. In each subsequent call that should
+  # parse the same string, str should be NULL.
+  #
+  # The delim argument specifies a set of bytes that delimit the
+  # tokens in the parsed string. The caller may specify different
+  # strings in delim in successive calls that parse the same string.
+  #
+  # Each call to strtok() returns a pointer to a null-terminated
+  # string containing the next token. This string does not include the
+  # delimiting byte. If no more tokens are found, strtok() returns
+  # NULL.
+  #
+  # A sequence of two or more contiguous delimiter bytes in the parsed
+  # string is considered to be a single delimiter. Delimiter bytes at
+  # the start or end of the string are ignored. Put another way: the
+  # tokens returned by strtok() are always nonempty strings.
+  #
+  # The strtok() and strtok_r() functions return a pointer to the next
+  # token, or NULL if there are no more tokens.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      tags: [parsing]
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg_points_to: [0]
+          - arg_points_to: [1]
+      to:
+        - return: []
+  - dataflow:
+      tags: [parsing]
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg_points_to: [0]
+          - arg_points_to: [1]
+      to:
+        - return: []
+  # TODO: unsound for multiple calls to strtok!
+
+- name: '^strtol$'
+  # long int strtol(const char *nptr, char **endptr, int base)
+  #
+  # The strtol() function converts the initial part of the string in
+  # nptr to a long integer value according to the given base, which
+  # must be between 2 and 36 inclusive, or be the special value 0.
+  #
+  # The string may begin with an arbitrary amount of white space (as
+  # determined by isspace(3)) followed by a single optional '+' or '-'
+  # sign. If base is zero or 16, the string may then include a "0x"
+  # prefix, and the number will be read in base 16; otherwise, a zero
+  # base is taken as 10 (decimal) unless the next character is '0', in
+  # which case it is taken as 8 (octal).
+  #
+  # The remainder of the string is converted to a long int value in
+  # the obvious manner, stopping at the first character which is not a
+  # valid digit in the given base. (In bases above 10, the letter 'A'
+  # in either upper or lower case represents 10, 'B' represents 11,
+  # and so forth, with 'Z' representing 35.)
+  #
+  # If endptr is not NULL, strtol() stores the address of the first
+  # invalid character in *endptr. If there were no digits at all,
+  # strtol() stores the original value of nptr in *endptr (and returns
+  # 0). In particular, if *nptr is not '\0' but **endptr is '\0' on
+  # return, the entire string is valid.
+  #
+  # The strtoll() function works just like the strtol() function but
+  # returns a long long integer value.
+  #
+  # The strtol() function returns the result of the conversion, unless
+  # the value would underflow or overflow. If an underflow occurs,
+  # strtol() returns LONG_MIN. If an overflow occurs, strtol() returns
+  # LONG_MAX. In both cases, errno is set to ERANGE. Precisely the
+  # same holds for strtoll() (with LLONG_MIN and LLONG_MAX instead of
+  # LONG_MIN and LONG_MAX).
+  #
+  # TODO: arg_points_to_arg signature for endptr. Currently unsound!
+  signatures:
+  - dataflow:
+      tags: [parsing]
+      from:
+        direct:
+          - arg: [0]
+        control:
+          - arg: [1]
+        indirect:
+          - arg: [2]
+      to:
+        - return: []
+        - arg_points_to_aggregate: [1]
+
+- name: '^strtold'
+  # long double strtold(const char *restrict nptr, char **restrict endptr)
+  #
+  # The strtod(), strtof(), and strtold() functions convert the initial portion
+  # of the string pointed to by nptr to double, float, and long double
+  # representation, respectively.
+  #
+  # TODO: arg_points_to_arg signature for endptr. Currently unsound!
+  signatures:
+  - dataflow:
+      tags: [parsing]
+      from:
+        direct:
+          - arg: [0]
+        control:
+          - arg: [1]
+      to:
+        - return: []
+        - arg_points_to_aggregate: [1]
+
+- name: '^strtoll$'
+  # long long strtoll(const char *restrict nptr, char **restrict endptr, int base);
+  #
+  # The strtoll() function works just like the strtol() function but returns a
+  # long long integer value.
+  #
+  # TODO: arg_points_to_arg signature for endptr. Currently unsound!
+  signatures:
+  - dataflow:
+      tags: [parsing]
+      from:
+        direct:
+          - arg: [0]
+        control:
+          - arg: [1]
+        indirect:
+          - arg: [2]
+      to:
+        - return: []
+        - arg_points_to_aggregate: [1]
+
+- name: '^strtoul$'
+  # unsigned long int strtoul(const char *nptr, char **endptr, int base)
+  #
+  # Similar to strtol but for unsigned numbers.
+  #
+  # TODO: arg_points_to_arg signature for endptr. Currently unsound!
+  signatures:
+  - dataflow:
+      tags: [parsing]
+      from:
+        direct:
+          - arg: [0]
+        control:
+          - arg: [1]
+        indirect:
+          - arg: [2]
+      to:
+        - return: []
+        - arg_points_to_aggregate: [1]
+
+- name: '^strtoull$'
+  # unsigned long long strtoull(const char *restrict nptr, char **restrict endptr, int base)
+  #
+  # The strtoull() function works just like the strtoul() function but re- turns
+  # an unsigned long long value.
+  #
+  # TODO: arg_points_to_arg signature for endptr. Currently unsound!
+  signatures:
+  - dataflow:
+      tags: [parsing]
+      from:
+        direct:
+          - arg: [0]
+        control:
+          - arg: [1]
+        indirect:
+          - arg: [2]
+      to:
+        - return: []
+        - arg_points_to_aggregate: [1]
+
+- name: '^symlink$'
+  # int symlink(const char *path1, const char *path2)
+  #
+  # The symlink() function shall create a symbolic link called path2
+  # that contains the string pointed to by path1 ( path2 is the name
+  # of the symbolic link created, path1 is the string contained in the
+  # symbolic link).
+  #
+  # The string pointed to by path1 shall be treated only as a
+  # character string and shall not be validated as a pathname.
+  #
+  # Upon successful completion, symlink() shall return 0; otherwise,
+  # it shall return -1 and set errno to indicate the error.
+  signatures:
+  - output:
+      tags: [filesystem,path_traversal]
+      from:
+        - arg_points_to: [0]
+        - arg_points_to: [1]
+  - dataflow:
+      tags: [filesystem]
+      from:
+        direct:
+          - arg: [0]
+          - arg_points_to: [0]
+          - arg: [1]
+          - arg_points_to: [1]
+      to:
+        - return: []
+
+- name: '^time$'
+  # time_t time(time_t *t)
+  #
+  # time() returns the time as the number of seconds since the Epoch,
+  # 1970-01-01 00:00:00 +0000 (UTC).
+  #
+  # If t is non-NULL, the return value is also stored in the memory
+  # pointed to by t.
+  signatures:
+  - input:
+      to:
+        - arg_points_to_aggregate: [0]
+        - return: []
+
+- name: '^vasprintf$'
+  # int vasprintf(char **strp, const char *fmt, va_list ap)
+  #
+  # The functions asprintf() and vasprintf() are analogs of sprintf(3)
+  # and vsprintf(3), except that they allocate a string large enough
+  # to hold the output including the terminating null byte, and return
+  # a pointer to it via the first argument.
+  signatures:
+  - pts_arg_alloc: [0]
+  - dataflow:
+      tags: [filesystem,format_string]
+      from:
+        indirect:
+          - arg_points_to: [1]
+          - arg_reachable: [2]
+      to:
+        - arg_reachable: [0]
+        - arg_reachable: [2]
+        - return: []
+
+- name: '^vfprintf$'
+  # int vfprintf(FILE *stream, const char *format, va_list ap)
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem,format_string]
+      from:
+        - arg: [0]
+        - arg_points_to: [1]
+        - arg_reachable: [2]
+  - dataflow:
+      tags: [filesystem,format_string]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [1]
+          - arg_reachable: [2]
+      to:
+      - return: []
+      - arg_reachable: [2]
+
+- name: '^write$'
+  # ssize_t write(int fildes, const void *buf, size_t nbyte)
+  #
+  # The write() function shall attempt to write nbyte bytes from the
+  # buffer pointed to by buf to the file associated with the open file
+  # descriptor, fildes.
+  #
+  # Upon successful completion, write() shall return the number of
+  # bytes actually written to the file associated with fildes. This
+  # number shall never be greater than nbyte. Otherwise, -1 shall be
+  # returned and errno set to indicate the error.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem,stdout]
+      from:
+        - arg: [0]
+        - arg: [2]
+  - output:
+      tags: [filesystem,stdout,user_output]
+      from:
+        - arg_points_to: [1]
+  - dataflow:
+      tags: [filesystem,stdout]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [2]
+          - arg_points_to: [1]
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^writev$'
+  # ssize_t writev(int fd, const struct iovec *iov, int iovcnt)
+  #
+  # The writev() system call writes iovcnt buffers of data described by iov to
+  # the file associated with the file descriptor fd ("gather output").
+  #
+  # The pointer iov points to an array of iovec structures, defined
+  # in <sys/uio.h> as:
+  #
+  #     struct iovec {
+  #         void  *iov_base;    /* Starting address */
+  #         size_t iov_len;     /* Number of bytes to transfer */
+  #     };
+  #
+  # The writev() system call works just like write(2) except that
+  # multiple buffers are written out.
+  signatures:
+  - pts_none: []
+  - output:
+      tags: [filesystem,stdout]
+      from:
+        - arg: [0]
+        - arg: [2]
+  - output:
+      tags: [filesystem,stdout,user_output]
+      from:
+        - arg_reachable: [1]
+  - dataflow:
+      tags: [filesystem,stdout]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [2]
+          - arg_reachable: [1]
+          - arg: [1]
+      to:
+        - return: []
+
+- name: '^scanf$'
+  # int scanf(const char *restrict format, ...)
+  signatures:
+  - input:
+      tags: [filesystem,stdin,user_input]
+      to:
+        - arg: [1]
+        - arg_points_to: [1]
+        - arg: [2]
+        - arg_points_to: [2]
+        - arg: [3]
+        - arg_points_to: [3]
+        - arg: [4]
+        - arg_points_to: [4]
+        - arg: [5]
+        - arg_points_to: [5]
+        - arg: [6]
+        - arg_points_to: [6]
+        - arg: [7]
+        - arg_points_to: [7]
+        - arg: [8]
+        - arg_points_to: [8]
+        - arg: [9]
+        - arg_points_to: [9]
+        - arg: [10]
+        - arg_points_to: [10]
+        - return: []
+  - dataflow:
+      tags: [filesystem,stdin]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+      to:
+      - arg: [1]
+      - arg: [2]
+      - arg: [3]
+      - arg: [4]
+      - arg: [5]
+      - arg: [6]
+      - arg: [7]
+      - arg: [8]
+      - arg: [9]
+      - arg: [10]
+      - return: []
+
+- name: '^ungetc$'
+  # int ungetc(int c, FILE *stream)
+  #
+  # ungetc() pushes c back to stream, cast to unsigned char, where it is
+  # available for subsequent read operations. Pushed-back characters will be
+  # returned in reverse order; only one pushback is guaranteed.
+  signatures:
+    - pts_none: []
+    - dataflow:
+        from:
+          direct:
+          - arg: [0]
+        to:
+        - arg_points_to: [1]
+
+- name: '^__isoc99_scanf$'
+  # int scanf(const char *restrict format, ...)
+  # NOTE: This is just scanf(3), but with a special symbol due to
+  # format specifier changes in C99.
+  signatures:
+  - input:
+      tags: [filesystem,stdin,user_input]
+      to:
+        - arg: [1]
+        - arg_points_to: [1]
+        - arg: [2]
+        - arg_points_to: [2]
+        - arg: [3]
+        - arg_points_to: [3]
+        - arg: [4]
+        - arg_points_to: [4]
+        - arg: [5]
+        - arg_points_to: [5]
+        - arg: [6]
+        - arg_points_to: [6]
+        - arg: [7]
+        - arg_points_to: [7]
+        - arg: [8]
+        - arg_points_to: [8]
+        - arg: [9]
+        - arg_points_to: [9]
+        - arg: [10]
+        - arg_points_to: [10]
+        - return: []
+  - dataflow:
+      tags: [filesystem,stdin]
+      from:
+        indirect:
+          - arg: [0]
+          - arg_points_to: [0]
+      to:
+      - arg: [1]
+      - arg: [2]
+      - arg: [3]
+      - arg: [4]
+      - arg: [5]
+      - arg: [6]
+      - arg: [7]
+      - arg: [8]
+      - arg: [9]
+      - arg: [10]
+      - return: []
+
+# ------------------------------------------------------------------------------
+# POSIX
+# ------------------------------------------------------------------------------
+
+- name: '^basename$'
+  # The functions dirname() and basename() break a null-terminated pathname
+  # string into directory and filename components. In the usual case, dirname()
+  # returns the string up to, but not including, the final '/', and basename()
+  # returns the component following the final '/'. Trailing '/' characters are
+  # not counted as part of the pathname.
+  #
+  # Both dirname() and basename() may modify the contents of  path,  so  it
+  # may be desirable to pass a copy when calling one of these functions.
+  #
+  # These  functions  may  return  pointers  to statically allocated memory
+  # which may be overwritten by subsequent calls.  Alternatively, they  may
+  # return  a  pointer to some part of path, so that the string referred to
+  # by path should not be modified or freed until the pointer  returned  by
+  # the function is no longer required.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - pts_return_alloc_once: []
+  - dataflow:
+      from:
+        direct:
+        - arg_points_to: [0]
+      to:
+      - return: []
+
+- name: '^crypt$'
+  # char *crypt(const char *key, const char *salt);
+  #
+  # crypt() is the password encryption function. It is based on the Data
+  # Encryption Standard algorithm with variations intended (among other things)
+  # to discourage use of hardware implementations of a key search.
+  #
+  # key is a user's typed password.
+  #
+  # salt is a two-character string chosen from the set [a-zA-Z0-9./]. This
+  # string is used to perturb the algorithm in one of 4096 different ways.
+  #
+  # On success, a pointer to the encrypted password is returned. On error, NULL
+  # is returned.
+  #
+  # The return value points to static data whose content is overwritten by each
+  # call.
+  #
+  signatures:
+  - pts_return_alloc_once: []
+  - dataflow:
+      from:
+        direct:
+        - arg_points_to: [0]
+        - arg_points_to: [1]
+      to:
+        - return_points_to: []
+
+- name: '^dirname$'
+  # The functions dirname() and basename() break a null-terminated pathname
+  # string into directory and filename components. In the usual case, dirname()
+  # returns the string up to, but not including, the final '/', and basename()
+  # returns the component following the final '/'. Trailing '/' characters are
+  # not counted as part of the pathname.
+  #
+  # Both dirname() and basename() may modify the contents of  path,  so  it
+  # may be desirable to pass a copy when calling one of these functions.
+  #
+  # These  functions  may  return  pointers  to statically allocated memory
+  # which may be overwritten by subsequent calls.  Alternatively, they  may
+  # return  a  pointer to some part of path, so that the string referred to
+  # by path should not be modified or freed until the pointer  returned  by
+  # the function is no longer required.
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - pts_return_alloc_once: []
+  - dataflow:
+      from:
+        direct:
+        - arg_points_to: [0]
+      to:
+      - return: []
+
+- name: '^inet_ntop$'
+  # const char *inet_ntop(int af, const void *src, char *dst, socklen_t size)
+  #
+  # This function converts the network address structure src in the af
+  # address family into a character string. The resulting string is
+  # copied to the buffer pointed to by dst, which must be a non-NULL
+  # pointer. The caller specifies the number of bytes available in
+  # this buffer in the argument size.
+  #
+  # On success, inet_ntop() returns a non-NULL pointer to dst. NULL is
+  # returned if there was an error, with errno set to indicate the
+  # error.
+  signatures:
+  - pts_return_aliases_arg: [2]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [3]
+        direct:
+          - arg_points_to_aggregate: [1]
+      to:
+        - arg_points_to: [2]
+  - dataflow:
+      tags: [network]
+      from:
+        indirect:
+          - arg: [0]
+          - arg: [1]
+          - arg: [3]
+          - arg_points_to_aggregate: [1]
+      to:
+        - return: []
+
+- name: '^inet_ntoa$'
+  # char *inet_ntoa(struct in_addr in);
+  #
+  # The inet_ntoa() function converts the Internet host address in, given in
+  # network byte order, to a string in IPv4 dotted-decimal notation. The string
+  # is returned in a statically allocated buffer, which subsequent calls will
+  # overwrite.
+  signatures:
+  - pts_return_alloc_once: []
+  - dataflow:
+      tags: [network]
+      from:
+        direct:
+          - arg: [0]
+      to:
+        - return_points_to: []
+
+- name: '^gcvt'
+  # char *gcvt(double number, int ndigit, char *buf)
+  #
+  # The gcvt() function converts number to a minimal length null-terminated
+  # ASCII string and stores the result in buf. It produces ndigit significant
+  # digits in either printf(3) F format or E format.
+  #
+  # The gcvt() function returns buf.
+  signatures:
+  - pts_return_aliases_arg: [2]
+  - dataflow:
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg: [1]
+      to:
+        - return_points_to: []
+
+# ------------------------------------------------------------------------------
+# Linux
+# ------------------------------------------------------------------------------
+
+- name: '^epoll_ctl$'
+  # int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)
+  #
+  # This system call is used to add, modify, or remove entries in the interest
+  # list of the epoll(7) instance referred to by the file descriptor epfd. It
+  # requests that the operation op be performed for the target file descriptor,
+  # fd.
+  #
+  signatures:
+  - pts_none: []
+
+- name: '^epoll_wait$'
+  # int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout)
+  #
+  # The epoll_wait() system call waits for events on the epoll(7) instance
+  # referred to by the file descriptor epfd. The buffer pointed to by events is
+  # used to return information from the ready list about file descriptors in the
+  # interest list that have some events available. Up to maxevents are returned
+  # by epoll_wait(). The maxevents argument must be greater than zero.
+  #
+  # On success, epoll_wait() returns the number of file descriptors ready for
+  # the requested I/O, or zero if no file descriptor became ready during the
+  # requested timeout milliseconds. On failure, epoll_wait() returns -1 and
+  # errno is set to indicate the error.
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - arg_points_to_aggregate: [1]
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+# ------------------------------------------------------------------------------
+# pthreads
+# ------------------------------------------------------------------------------
+
+- name: '^pthread_mutex_lock$'
+  # int pthread_mutex_lock(pthread_mutex_t *mutex);
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^pthread_mutex_trylock$'
+  # int pthread_mutex_trylock(pthread_mutex_t *mutex);
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+- name: '^pthread_mutex_unlock$'
+  # int pthread_mutex_unlock(pthread_mutex_t *mutex);
+  signatures:
+  - pts_none: []
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+
+# ------------------------------------------------------------------------------
+# OpenSSL
+# ------------------------------------------------------------------------------
+
+# Just some allocators to get the points-to analysis going...
+
+- name: '^SSL_new$'
+  # SSL *SSL_new(SSL_CTX *ctx);
+  signatures:
+  - pts_return_alloc: []
+
+- name: '^SSL_dup$'
+  # SSL *SSL_dup(SSL *s);
+  signatures:
+  - pts_return_alloc: []
+
+- name: '^SSL_CTX_new_ex$'
+  # SSL_CTX *SSL_CTX_new_ex (OSSL_LIB_CTX *libctx, const char *propq,
+  #                          const SSL_METHOD *method);
+  signatures:
+  - pts_return_alloc: []
+
+- name: '^SSL_CTX_new$'
+  # SSL_CTX *SSL_CTX_new(const SSL_METHOD *method);
+  signatures:
+  - pts_return_alloc: []
+
+- name: '^TLS_method$'
+  # const SSL_METHOD *TLS_method(void);
+  signatures:
+  - pts_return_alloc: []
+
+- name: '^TLS_client_method$'
+  # const SSL_METHOD *TLS_client_method(void);
+  signatures:
+  - pts_return_alloc: []
+
+- name: '^TLS_client_method$'
+  # const SSL_METHOD *TLS_client_method(void);
+  signatures:
+  - pts_return_alloc: []
+
+- name: '^EC_KEY_new_by_curve_name_ex$'
+  # EC_KEY *EC_KEY_new_by_curve_name_ex(OSSL_LIB_CTX *ctx,
+  #                                     const char *propq,
+  #                                     int nid);
+  signatures:
+  - pts_return_alloc_once: []
+
+- name: '^EC_KEY_new_by_curve_name$'
+  # EC_KEY *EC_KEY_new_by_curve_name(int nid);
+  signatures:
+  - pts_return_alloc: []
+
+- name: '^EVP_sha244$'
+  # EVP_MD *EVP_sha224(void);
+  signatures:
+  - pts_return_alloc_once: []
+
+- name: '^EVP_sha256$'
+  # EVP_MD *EVP_sha256(void);
+  signatures:
+  - pts_return_alloc_once: []
+
+- name: '^EVP_sha512_224$'
+  # EVP_MD *EVP_sha512_224(void);
+  signatures:
+  - pts_return_alloc_once: []
+
+- name: '^EVP_sha512_256$'
+  # EVP_MD *EVP_sha512_256(void);
+  signatures:
+  - pts_return_alloc_once: []
+
+- name: '^EVP_sha384$'
+  # EVP_MD *EVP_sha384(void);
+  signatures:
+  - pts_return_alloc_once: []
+
+- name: '^EVP_sha512$'
+  # EVP_MD *EVP_sha512(void);
+  signatures:
+  - pts_return_alloc_once: []
+
+# ------------------------------------------------------------------------------
+# C++ ABI
+# ------------------------------------------------------------------------------
+
+- name: '^__dynamic_cast$'
+  # LLVM:
+  #
+  # declare dso_local i8* @__dynamic_cast(i8*, i8*, i8*, i64)
+  #
+  # Arguments: Pointer to be cast, typeinfo, typeinfo, hint
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      tags: [cxx]
+      from:
+        direct:
+          - arg: [0]
+        indirect:
+          - arg: [1]
+          - arg: [2]
+          - arg: [3]
+      to:
+        - return: []
+
+- name: '^_Znwm$'
+  # void *operator new(size_t size)
+  #
+  # The operator new() function allocates size bytes and returns a pointer
+  # to the allocated memory. The memory is not initialized. If size is
+  # 0, then operator new() returns either nullptr, or a unique pointer value
+  # that can later be successfully passed to delete().
+  signatures:
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+      deallocator: '_ZdlPv'
+
+- name: '^_Znam$'
+  # void *operator new[](size_t size)
+  #
+  # The operator new[]() function allocates size bytes and returns a pointer
+  # to the allocated memory. The memory is not initialized. If size is
+  # 0, then operator new[]() returns either nullptr, or a unique pointer value
+  # that can later be successfully passed to delete[]().
+  signatures:
+  - dataflow:
+      from:
+        indirect:
+          - arg: [0]
+      to:
+        - return: []
+      deallocator: '_ZdlPv'
+
+# ------------------------------------------------------------------------------
+# C++ Standard Library
+# ------------------------------------------------------------------------------
+
+# --------------------------------------
+# std::allocator_traits
+# --------------------------------------
+
+# Description: allocates uninitialized storage using the allocator
+#
+# C++:
+#
+# std::allocator_traits<std::allocator<type> >::allocate(std::allocator<type>&, unsigned long)
+#
+# LLVM:
+#
+# define linkonce_odr dso_local i8*
+#   @<mangled>(%"struct.std::less"* dereferenceable(1), i64)
+- name: 'std::allocator_traits<std::allocator<.+> >::allocate(std::allocator<.+>&, unsigned long)'
+  signatures:
+  - pts_return_alloc: []
+
+# Description: returns the maximum object size supported by the allocator
+#
+# C++:
+#
+# std::allocator_traits<std::allocator<type> >::max_size(std::allocator<type> const&)
+#
+# LLVM:
+#
+# define linkonce_odr dso_local i64
+#   @<mangled>(%"struct.std::less"* dereferenceable(1))
+- name: 'std::allocator_traits<std::allocator<.+> >::max_size(std::allocator<.+> const&)'
+  signatures:
+  - pts_none: []
+
+# Description: Destroys the default allocator.
+#
+# C++:
+#
+# std::allocator<type>::~allocator()
+#
+# LLVM:
+#
+# define linkonce_odr dso_local void
+#   @<mangled>(%"class.std::allocator.5"* %0) unnamed_addr #8 comdat align 2
+- name: 'std::allocator<.+>::~allocator()'
+  signatures:
+  - pts_none: []
+
+# --------------------------------------
+# std::basic_string
+# --------------------------------------
+
+# Description: destroys the string, deallocating internal storage if used
+#
+# LLVM:
+#
+# define linkonce_odr dso_local void
+#   @<mangled>(%"class.std::__cxx11::basic_string"*)
+- name: 'std::[^ ]*basic_string<.+>::~basic_string()'
+  signatures:
+  - pts_none: []
+
+# C++:
+#
+# template<typename _CharT, typename _Traits, typename _Alloc>
+#   typename basic_string<_CharT, _Traits, _Alloc>::pointer
+#     basic_string<_CharT, _Traits, _Alloc>::
+#           _M_create(size_type& __capacity, size_type __old_capacity)
+#
+# LLVM:
+#
+# declare i8*
+#   @<mangled>(%"class.std::__cxx11::basic_string"*, i64* dereferenceable(8), i64) local_unnamed_addr
+- name: 'std::[^ ]*basic_string<.+>::_M_create(unsigned long&, unsigned long)'
+  signatures:
+  - pts_return_alloc: []
+
+# C++:
+#
+# basic_string& _M_append(const _CharT* __s, size_type __n);
+#
+# LLVM:
+#
+# declare dereferenceable(32) %"class.std::__cxx11::basic_string"*
+#   @<mangled>(%"class.std::__cxx11::basic_string"*, i8*, i64) local_unnamed_addr
+- name: 'std::[^ ]*basic_string<.+>::_M_append(char const\*, unsigned long)'
+  signatures:
+  - pts_return_aliases_arg: [0]
+  - dataflow:
+      tags: [cxx]
+      from:
+        direct:
+          - arg: [0]
+          - arg_points_to_aggregate: [0]
+          - arg_points_to: [1]
+      to:
+        - return_points_to_aggregate: []
+
+# Description: returns the number of characters
+#
+# C++:
+#
+# std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::length() const
+#
+# LLVM:
+#
+# define linkonce_odr dso_local i64
+#   @<mangled>(%"class.std::__cxx11::basic_string"*)
+- name: 'std::[^ ]*basic_string<.+>::_M_length(unsigned long)'
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [cxx]
+      from:
+        indirect:
+          - arg_points_to_aggregate: [0]
+      to:
+        - return: []
+
+# C++:
+#
+# std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned long)
+- name: 'std::[^ ]*basic_string<.+>::_M_set_length()'
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [cxx]
+      from:
+        indirect:
+          - arg: [1]
+      to:
+        - arg_points_to_aggregate: [0]
+
+# C++:
+#
+# std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::max_size() const
+#
+# LLVM:
+#
+# define linkonce_odr dso_local i64
+#   @<mangled>(%"class.std::__cxx11::basic_string"*)
+- name: 'std::[^ ]*basic_string<.+>::max_size()'
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [cxx]
+      from:
+        indirect:
+          - arg_points_to_aggregate: [0]
+      to:
+        - return: []
+
+# Description: returns the number of characters
+#
+# C++:
+#
+# std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size() const
+#
+# LLVM:
+#
+# define linkonce_odr dso_local i64
+#   @<mangled>(%"class.std::__cxx11::basic_string"*)
+- name: 'std::.*basic_string<.+>::size()'
+  signatures:
+  - pts_none: []
+  - dataflow:
+      tags: [cxx]
+      from:
+        indirect:
+          - arg_points_to_aggregate: [0]
+      to:
+        - return: []
+
+# Copy constructor for std::string
+#
+# C++:
+#
+# std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+#
+# LLVM:
+#
+# define linkonce_odr dso_local void
+#   @<mangled>(%"class.std::__cxx11::basic_string"*,
+#              %"class.std::__cxx11::basic_string"* dereferenceable(32))
+- name: 'std::[^ ]*basic_string<.+>::basic_string(std::[^ ]*basic_string<.+> const&)'
+  signatures:
+  - dataflow:
+      tags: [cxx]
+      from:
+        direct:
+          - arg_points_to_aggregate: [1]
+      to:
+        - arg_points_to_aggregate: [0]
+
+# operator + for std::string
+#
+# C++:
+#
+# std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+#
+# LLVM:
+#
+# define linkonce_odr dso_local void
+#   @<mangled>(%"class.std::__cxx11::basic_string"* noalias sret,
+#              %"class.std::__cxx11::basic_string"* dereferenceable(32),
+#              %"class.std::__cxx11::basic_string"* dereferenceable(32))
+- name: 'std::[^ ]*basic_string<.+> std::operator\+<.+>(std::[^ ]*basic_string<.+>&&, std::[^ ]*basic_string<.+> const&)'
+  signatures:
+  - dataflow:
+      tags: [cxx]
+      from:
+        direct:
+          - arg_points_to_aggregate: [1]
+          - arg_points_to_aggregate: [2]
+      to:
+        - arg_points_to_aggregate: [0]

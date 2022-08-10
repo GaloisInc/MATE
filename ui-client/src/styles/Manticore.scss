@@ -1,0 +1,64 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+.Manticore {
+  .PolicySelector {
+    .last-control {
+      display: inline;
+      width: 86%;
+    }
+
+    .help-icon {
+      color: $gray-700;
+    }
+  }
+
+  .constraint-disabled {
+    color: $gray-500;
+  }
+
+  .results {
+    .card-header {
+      cursor: pointer;
+    }
+
+    .card-body {
+      .error-message {
+        display: flex;
+        cursor: pointer;
+
+        .collapse-ellipsis {
+          flex: 1;
+          min-width: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .expanded {
+          white-space: pre-line;
+        }
+      }
+    }
+
+    .Choices {
+      margin: 0 0 0 0.01em;
+      padding: 0;
+
+      .choices {
+        padding-left: 1em;
+
+        .choice {
+          code {
+            margin-left: 0.5em;
+            display: block;
+            white-space: pre-wrap;
+            background-color: $gray-100;
+            border: 1px solid $gray-200;
+            padding: 0.5em;
+          }
+        }
+      }
+    }
+  }
+}

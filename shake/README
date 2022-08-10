@@ -1,0 +1,15 @@
+Shake (Meta) Build System for MATE
+==================================
+
+This directory holds a meta build-system for MATE. It calls out to per-project
+build systems to assemble the MATE system as a whole.
+
+Basic usage is as follows:
+
+$ ./shake.sh [target]
+
+The list of available targets may be seen at the bottom of the help text.
+
+$ ./shake.sh --help
+
+See also ../hacking.rst.

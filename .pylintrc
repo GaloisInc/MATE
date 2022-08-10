@@ -1,0 +1,56 @@
+[MASTER]
+
+ignore=.git
+jobs=0
+suggestion-mode=yes
+
+[MESSAGES CONTROL]
+
+disable=all
+enable=assign-to-new-keyword,
+       bad-format-character,
+       bad-format-string-key,
+       bad-open-mode,
+       bad-string-format-type,
+       consider-using-get,
+       consider-using-join,
+       empty-docstring,
+       function-redefined,
+       not-in-loop,
+       redefined-builtin,
+       return-in-init,
+       too-few-format-args,
+       too-many-format-args,
+       trailing-whitespace,
+       truncated-format-string,
+       unnecessary-comprehension,
+       unused-argument,
+       unreachable,
+       unused-format-string-argument,
+       unused-format-string-key,
+       unused-import,
+       unused-variable,
+       using-constant-test
+
+[REPORTS]
+
+output-format=text
+reports=no
+score=no
+
+[BASIC]
+
+argument-naming-style=snake_case
+attr-naming-style=snake_case
+class-naming-style=PascalCase
+const-naming-style=UPPER_CASE
+function-naming-style=snake_case
+include-naming-hint=yes
+inlinevar-naming-style=snake_case
+method-naming-style=snake_case
+module-naming-style=snake_case
+variable-naming-style=snake_case
+
+[VARIABLES]
+
+redefining-builtins-modules=six.moves,past.builtins,future.builtins,builtins,io

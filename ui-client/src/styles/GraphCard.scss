@@ -1,0 +1,110 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+.GraphCard {
+  min-width: 30em;
+  margin: 0.5em;
+
+  box-shadow: 0px 5px 12px rgba(0, 67, 101, 0.08);
+  box-shadow: 0px 2px 6px rgba(130, 169, 188, 0.4);
+
+  flex-grow: 1;
+  flex-basis: min-content;
+
+  .card {
+    display: flex;
+    height: 100%;
+
+    .card-header {
+      vertical-align: middle;
+      line-height: 20px;
+
+      .close {
+        color: $gray-600;
+        margin-right: 0.2em;
+        cursor: pointer;
+      }
+    }
+
+    .card-body {
+      .alert {
+        display: flex;
+        flex-direction: row;
+        padding: 0.5em;
+
+        svg {
+          margin: auto 0.5em auto 0;
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .Annotation {
+        .edit-icon {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  h5 {
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 100;
+    font-size: 1.25em;
+  }
+
+  ul {
+    list-style-type: none;
+    margin-bottom: 0;
+  }
+
+  .key {
+    margin-left: 2em;
+    font-weight: 300;
+    display: inline-block;
+  }
+
+  .analysis {
+    h5 {
+      margin: 0;
+      line-height: 1.6em;
+    }
+
+    button {
+      &:hover {
+        background-color: $gray-200;
+      }
+    }
+  }
+
+  .GraphCardSliceData {
+    .avoid,
+    .focus {
+      margin-right: 0.5em;
+      cursor: pointer;
+      color: $gray-400;
+
+      &:hover:not(.inactive) {
+        color: $gray-600;
+      }
+
+      &.selected {
+        color: $gray-800;
+      }
+
+      &.inactive {
+        cursor: inherit;
+      }
+    }
+    .delete {
+      margin-bottom: 0.1em;
+      cursor: pointer;
+
+      &.inactive {
+        cursor: inherit;
+      }
+    }
+  }
+}

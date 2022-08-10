@@ -1,0 +1,5 @@
+{
+	[src/**.{js,ts,jsx,tsx,css,json}]
+	indent_style = space
+	indent_size = 2
+}

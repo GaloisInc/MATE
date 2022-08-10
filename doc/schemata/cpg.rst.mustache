@@ -1,0 +1,106 @@
+##########
+CPG Schema
+##########
+
+Given an LLVM bitcode file representing a C or C++ program, MATE builds a Code Property Graph (CPG).
+The CPG is a *labeled property graph*, meaning a graph where every node or edge has a collection of *attributes*, i.e. key/value pairs.
+For example, many of the nodes in the CPG represent parts of the syntax of the input program, like ``Function`` nodes.
+``Function`` nodes have attributes like "name", which can be accessed through the query interface.
+
+This document describes the kinds of nodes and edges in the CPG, along with the
+various attributes attached to them. It is generated from the MATE JSON schemata.
+
+******************
+General Guidelines
+******************
+
+The CPG contains three different representations of the input program
+corresponding to the following stages of compilation:
+
+- LLVM IR
+- LLVM middle-end ("MI" nodes and edges)
+- Binary ("MC" and "ASM" nodes and edges)
+
+The LLVM IR is considered the "default" representation, since it is most similar to the source language (C/C++). Therefore, generic names like ``Function``, ``Block``, ``Instruction``, and ``Argument`` refer to LLVM IR constructs. Nodes representing LLVM middle-end constructs have kinds prefixed by ``Machine``, and binary-level node kinds are prefixed by ``ASM``.
+
+*****
+Nodes
+*****
+
+{{#nodes}}
+``{{{title}}}``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``{{{title}}}`` nodes:
+
+.. image:: /schema.{{{title}}}.png
+   :alt: Entity-relationship diagram for {{{title}}} nodes
+   :target: ./schema.{{{title}}}.png
+
+
+{{#node-description}}
+{{{node-description}}}
+{{/node-description}}
+
+*Attributes:*
+
+{{#properties}}
+- ``{{{key}}}``{{#description}}: {{{description}}}{{/description}}{{#$ref}}: :ref:`{{{$ref}}}`{{/$ref}}{{#type}}
+
+  - type: ``{{{type}}}``{{/type}}
+
+{{/properties}}
+
+{{/nodes}}
+
+*****
+Edges
+*****
+
+{{#edges}}
+``{{{title}}}``
+===============================================================================================================================================
+
+{{#edge-description}}
+
+{{{edge-description}}}
+
+{{/edge-description}}
+
+*Attributes:*
+
+{{#properties}}
+- ``{{{key}}}``{{#description}}: {{{description}}}{{/description}}{{#$ref}}: :ref:`{{{$ref}}}`{{/$ref}}{{#type}}
+
+  - type: ``{{{type}}}``{{/type}}
+
+{{/properties}}
+
+{{/edges}}
+
+***********
+Definitions
+***********
+
+{{#definitions}}
+
+.. _#/definitions/{{{key}}}:
+
+#/definitions/{{{key}}}
+===============================================================================================================================================
+
+{{#description}}
+{{{description}}}
+
+{{#type}} - type: ``{{{type}}}``
+{{/type}} - attributes:
+   {{#properties}}
+
+   - ``{{{key}}}``{{#description}}: {{{description}}}{{/description}}{{#$ref}}: :ref:`{{{$ref}}}`{{/$ref}}{{#type}}
+
+     - type: ``{{{type}}}``{{/type}}
+
+   {{/properties}}
+
+{{/description}}
+{{/definitions}}

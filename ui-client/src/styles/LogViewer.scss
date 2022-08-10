@@ -1,0 +1,28 @@
+.LogViewer {
+  pre {
+    // background-color: black;
+    white-space: pre-wrap;
+    padding: 1em;
+    background-color: #303030;
+
+    code {
+      color: #f1f1f1;
+      counter-reset: line;
+
+      span {
+        display: block;
+
+        &:before {
+          counter-increment: line;
+          content: counter(line);
+          display: inline-block;
+          border-right: 1px solid #ddd;
+          padding: 0 0.5em;
+          margin-right: 0.5em;
+          color: #888;
+          min-width: 3em;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.Filters {
+  box-shadow: var(--sidebar-shadow);
+
+  .ToggleSwitch {
+    display: flex;
+    width: auto;
+    margin: 0.5em 0 0.5em -0.2em;
+
+    .caption {
+      display: inline-block;
+      margin-left: 1em;
+      line-height: 1.1em;
+      font-size: 1em;
+    }
+  }
+}
