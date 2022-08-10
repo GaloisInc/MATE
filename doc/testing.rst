@@ -126,15 +126,6 @@ In your first window:
 
     docker-compose up -V db storage mate-runtime-state
 
-In your second window, use ``docker-compose`` to run the integration tests:
-
-.. code-block:: bash
-
-    docker-compose \
-      -f docker-compose.yml \
-      -f docker-compose.test.yml \
-      run -v "$(pwd):/mate" challenge-test
-
 Separately, you can choose to enable intensive invariant tests in the normal
 test suite by setting ``MATE_INTEGRATION_TESTS=1``:
 

@@ -42,19 +42,14 @@ MATE are described below.
 Compiling a program
 ~~~~~~~~~~~~~~~~~~~
 
-MATE currently supports three types of compilation targets:
+MATE currently supports two types of compilation targets:
 
 #. Standalone C or C++ files (``foo.c`` or ``foo.cpp``);
 #. Program tarballs that contain a ``make``-based build (``foo.tar.gz``);
-#. "Brokerized" CHESS challenges, served by the CHESS system's challenge broker
-
-Usage of MATE outside of the integrated CHESS system primarily involves the
-first two types of targets. Brokerized compilation targets are only relevant
-in the presence of an active CHESS system challenge broker.
 
 You can construct a suitable tarball for a Make-based build with the ``tar`` command::
 
-  tar czf challenge.tar.gz challenge/
+  tar czf program.tar.gz program/
 
 To construct a CPG from source code, MATE first needs the source code in question. We provide
 it as an *artifact*::
@@ -65,8 +60,8 @@ it as an *artifact*::
 
   # a tarball containing a Make-based build
   artifact_uuid=$(http POST localhost:8666/api/v1/artifacts kind="compile-target:tarball" attributes:="{}" | jq -r '.artifact_id')
-  challenge_tarball=challenge.tar.gz
-  http -f POST localhost:8666/api/v1/artifacts/${artifact_uuid}/object file@${challenge_tarball}
+  program_tarball=program.tar.gz
+  http -f POST localhost:8666/api/v1/artifacts/${artifact_uuid}/object file@${program_tarball}
 
 Next, we need to tell MATE to *compile* our new artifact. We do this by creating a
 *compilation* associated with the artifact::

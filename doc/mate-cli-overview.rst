@@ -135,7 +135,7 @@ connection details like so:
 
 .. code-block:: bash
 
-    mate-cli --conn http://YOUR_CHESS_SYSTEM:8666 <subcommand>
+    mate-cli --conn http://localhost:8666 <subcommand>
 
 To see the full set of subcommands and arguments, run ``mate-cli --help`` or refer to the reference
 manual at :doc:`cli`.
@@ -167,10 +167,6 @@ previous step:
 .. code-block:: bash
 
     mate-cli compile create --wait --artifact-id 276d1771d6ee4532b89359eea2668482
-
-.. NOTE::
-   If we wanted to compile a challenge program instead of our own artifact, we could just as easily
-   use the ``--challenge-name`` or ``--challenge-id`` arguments.
 
 .. NOTE::
 
@@ -222,9 +218,10 @@ Creating compilations and builds for a given source with ``mate-cli`` is a fairl
 ``mate-cli`` supports a subcommand called ``oneshot`` which is shorthand for this part of the
 workflow.
 
-The ``oneshot`` subcommand takes a single parameter describing either an artifact or a broker
-challenge, compiles it and creates build tasks for each target. The parameter can be a few different
-things and ``oneshot`` will try to "guess" what it is. Some examples are provided below:
+The ``oneshot`` subcommand takes a single parameter describing an artifact,
+compiles it and creates build tasks for each target. The parameter can be a few
+different things and ``oneshot`` will try to "guess" what it is. Some examples
+are provided below:
 
 From a source file:
 
@@ -249,12 +246,6 @@ From an artifact ID:
 .. code-block:: bash
 
     mate-cli oneshot 2358423ccc7d4d0dba8477f9baf19420
-
-From a brokered challenge name (must be published on the CHESS challenge broker):
-
-.. code-block:: bash
-
-    mate-cli oneshot challenge-1
 
 The ``oneshot`` subcommand also supports the ``-p``/``--run-all-pois`` flag,
 which tells MATE to run all registered POI analyses once the CPG build completes:

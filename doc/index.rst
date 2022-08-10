@@ -2,7 +2,6 @@ MATE: Merged Analysis To  prevent Exploits
 ==========================================
 
 ..
-   TODO(lb, #1531): Audit for CHESS-specific references
    TODO(lb, #1709): Reorganize documentation
 
 MATE is a suite of tools for interactive program analysis with a focus on

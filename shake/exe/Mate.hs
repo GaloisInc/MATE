@@ -673,14 +673,6 @@ main =
       , arguments
       ]
 
-  "challenge-tests" ~> do
-    numProcs <- shakeThreads <$> getShakeOptions
-    callPytest False $ concat $
-      [ [ "tests/integration/challenge", "--benchmark-disable" ]
-      , if numProcs > 1 then [ "-n", show numProcs ] else []
-      , arguments
-      ]
-
   "poi-tests" ~> do
     numProcs <- shakeThreads <$> getShakeOptions
     callPytest False $ concat $

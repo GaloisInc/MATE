@@ -51,46 +51,31 @@ analyses run on each CPG:
 System architecture
 -------------------
 
-The MATE system is decomposed into nine services which run as part of the overall
-CHESS system:
+The MATE system is decomposed into eight services:
 
 server
-   The ``server`` component presents a REST API that can be used to
-   initiate individual steps of the analysis workflow depicted
-   above. This API is used to coordinate analysis tasks in response to
-   new challenges being submitted to the CHESS and also allows users
-   to manually run analyses steps with custom options or changes in
-   response to errors. The server API also implements backend queries
-   for MATE UI components including FlowFinder.
+   The ``server`` component presents a REST API that can be used to initiate
+   individual steps of the analysis workflow depicted above. This API allows
+   users to manually run analysis steps with custom options or changes in
+   response to errors. The server API also implements backend queries for MATE
+   UI components including Flowfinder.
 
 executor
    The ``executor`` component asynchronously processes long-running
-   requests initiated by the ``server`` component, such as challenge
-   compilation, CPG generation, and POI analyses. For compilation and
-   CPG generation steps that depend on the challenge environment, the
-   executor manages creating and executing docker containers served by
-   the CHESS docker registry.
-
+   requests initiated by the ``server`` component, such as program
+   compilation, CPG generation, and POI analyses.
 db
    The ``db`` component runs a standard PostgreSQL installation and
-   stores all generated Code Property Graphs. Any CHESS component
+   stores all generated Code Property Graphs. Other components
    (including other components of MATE) can access CPGs via the MATE
-   domain-specific query language connecting to the database via
-   the CHESS network. In addition to storing CPGs, the ``db`` component
-   stores all persistent MATE system state.
+   domain-specific query language connected to the database. In addition
+   to storing CPGs, the ``db`` component stores all persistent MATE
+   system state.
 
 storage
    The ``storage`` component supplements the ``db`` component with a
    MinIO object store and is used to store large analysis artifacts
-   such as challenge source code, compiled binaries, and logs.
-
-bridge
-   The ``bridge`` component connects MATE to the CHESS message bus and
-   is responsible for forwarding messages to other MATE
-   components. The bridge component also creates analysis pipeline
-   tasks for new challenges submitted to the CHESS challenge
-   broker. These tasks run on the executor and execute the compilation,
-   CPG generation, and POI analysis tasks in sequence for the challenge.
+   such as program source code, compiled binaries, and logs.
 
 broker
    The ``broker`` component is a MATE-internal message bus used to
@@ -109,10 +94,10 @@ notebook
    accessing the full capabilities of the MATE system.
 
 mantiserve
-   The ``mantiserve`` component exposes a REST API for running
-   symbolic execution queries against challenge programs. The API
-   allows symbolic execution tasks to be parameterized by specific
-   detector plugins that monitor for potential vulnerabilities.
+   The ``mantiserve`` component exposes a REST API for running symbolic
+   execution queries against programs. The API allows symbolic execution tasks
+   to be parameterized by specific detector plugins that monitor for potential
+   vulnerabilities.
 
 Component index
 ---------------
@@ -162,13 +147,12 @@ Compilation tasks
 
 Provenance: ToB
 
-The ``frontend/mate/mate/build/compile.py`` module manages the process
-of compiling challenges submitted to the CHESS system while monitoring
-and controlling the build process to create artifacts that can be
-analyzed by other MATE components. This module is responsible for
-creating docker environments in which to compile challenges on demand,
-inferring build system configurations and necessary options, and
-creating and storing artifacts for further analysis.
+The ``frontend/mate/mate/build/compile.py`` module manages the process of
+compiling programs submitted to MATE while monitoring and controlling the build
+process to create artifacts that can be analyzed by other MATE components. This
+module is responsible for creating docker environments in which to compile
+programs on demand, inferring build system configurations and necessary
+options, and creating and storing artifacts for further analysis.
 
 
 CPG generation components
@@ -381,13 +365,12 @@ Build tasks
 
 Provenance: ToB
 
-The ``frontend/mate/mate/build/build.py`` module manages the process
-of creating code property graphs for challenges submitted to the CHESS
-system. This module is responsible for creating docker environments in
-which to recompile challenges and perform machine code mapping, along
-with managing the overall CPG generation process. This module also
-manages incorporating source code information in the CPG and applying
-analysis signatures.
+The ``frontend/mate/mate/build/build.py`` module manages the process of creating
+code property graphs for programs submitted to MATE. This module is responsible
+for creating docker environments in which to recompile programs and perform
+machine code mapping, along with managing the overall CPG generation process.
+This module also manages incorporating source code information in the CPG and
+applying analysis signatures.
 
 Analysis components
 ===================
