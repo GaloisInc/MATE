@@ -13,7 +13,7 @@ Hello and welcome! 👋
 
 If you are new to MATE, please check out:
 
-#. The :doc:`user-workflow`
+#. The :doc:`quickstart`
 #. The :doc:`overview`
 
 Then continuing reading this page to understand what :ref:`hacking:Documentation` is available, get a tour of the codebase, and learn about our build workflow and engineering practices.

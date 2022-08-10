@@ -2,9 +2,10 @@
 Under-constrained Manticore
 ###########################
 
-MATE offers the possibility to run Manticore in *under-constrained* mode.
-*Under-constrained* execution means that, instead of executing the whole program from
-start to exit, Manticore will only execute a given function within the program.
+MATE offers the possibility to run the Manticore symbolic execution engine in
+*under-constrained* mode. *Under-constrained* symbolic execution means that,
+instead of executing the whole program from start to exit, Manticore will only
+execute a given function within the program.
 
 The main advantage of under-constrained execution is that it allows to target only a specific
 part of a program with symbolic analysis, regardless of the total size of the program. Hence

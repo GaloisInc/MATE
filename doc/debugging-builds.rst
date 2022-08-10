@@ -7,12 +7,6 @@ and building the associated Code Property Graph (CPG).
 
 .. NOTE::
 
-   The information below applies to compilations and CPG builds that are
-   performed through the REST API. The legacy ``mate`` CLI and its legacy build
-   pipeline are not covered here.
-
-.. NOTE::
-
    The information below is written in the context of the MATE's use within the
    integrated CHESS system. Most of the details apply to independent use of
    MATE as well.

@@ -4,12 +4,11 @@ MATE System Overview
 
 .. image:: assets/mate-architecture.jpg
 
-Merged Analysis To Prevent Exploits (MATE) is a set of tools for finding
-vulnerabilities in C and C++ programs. MATE unifies application-specific and
-low-level vulnerability analysis using code property graphs (CPGs), enabling
-the discovery of highly application-specific vulnerabilities that depend on
-both implementation details and the high-level semantics of target C/C++
-programs.
+MATE is a suite of tools for interactive program analysis with a focus on
+hunting for bugs in C and C++ code. MATE unifies application-specific and
+low-level vulnerability analysis using code property graphs (CPGs), enabling the
+discovery of highly application-specific vulnerabilities that depend on both
+implementation details and the high-level semantics of target C/C++ programs.
 
 *****************
 The MATE Workflow
@@ -68,6 +67,8 @@ information. For more information on the CPG, see :doc:`schema <schemata/cpg>`.
 
 Pointer Analysis
 ================
+..
+   TODO(lb, #1708): Link to upstream pointer analysis documentation
 
 MATE uses a precise, context-sensitive pointer analysis for C and C++ that
 allows for accurate, narrow tracking of data- and control-flow through the

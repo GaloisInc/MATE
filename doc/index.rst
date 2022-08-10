@@ -1,11 +1,19 @@
 MATE: Merged Analysis To  prevent Exploits
 ==========================================
 
-Welcome to the documentation for MATE!
+..
+   TODO(lb, #1531): Audit for CHESS-specific references
+   TODO(lb, #1709): Reorganize documentation
 
-* MATE users should start here: :doc:`user-workflow`
-* See this handy reference for :doc:`debugging-builds`
-* Access our `OpenAPI REST API documentation here <api.html>`_
+MATE is a suite of tools for interactive program analysis with a focus on
+hunting for bugs in C and C++ code. MATE unifies application-specific and
+low-level vulnerability analysis using code property graphs (CPGs), enabling the
+discovery of highly application-specific vulnerabilities that depend on both
+implementation details and the high-level semantics of target C/C++ programs.
+
+For a high-level overview of MATE, see :doc:`overview`. To start using MATE to
+explore a program, see :doc:`quickstart`. Contributors should read
+:doc:`hacking`.
 
 ..
    HACK(ww): https://stackoverflow.com/a/31820846
@@ -14,46 +22,31 @@ Welcome to the documentation for MATE!
 
 .. toctree::
    :hidden:
-   :caption: For MATE Users
+   :caption: User Documentation
 
-   user-workflow
+   overview
+   quickstart
    vulnerability-types
    using-flowfinder
-
-.. toctree::
-   :hidden:
-   :caption: For MATE Power Users
-
    using-rest-api
    using-notebooks
    usagefinder
+   pois
    mantiserve
    under-constrained-manticore
-
-.. toctree::
-   :hidden:
-   :caption: Troubleshooting Guides
-
    debugging-builds
 
 .. toctree::
    :hidden:
-   :caption: MATE Implementation Details
+   :caption: Developer Documentation
 
-   overview
    MATE REST API <api.html#http://>
    schemata/cpg
    signatures
    analysis
-
-.. toctree::
-   :hidden:
-   :caption: For MATE Developers
-
    hacking
    testing
    architecture
-   chess-system
    getting-started
    mate-cli-overview
    cli
@@ -72,6 +65,12 @@ Indices and Tables
 * :ref:`search`
 
 
+Project Status
+==============
+
+MATE is not actively developed by Galois, Inc. Please reach out to the email
+address "mate at galois dot com" if you'd like to discuss further work on MATE!
+
 Acknowledgments
 ===============
 
@@ -81,4 +80,3 @@ Contract No. FA8750-19-C-0004. Any opinions, findings and conclusions or
 recommendations expressed in this material are those of the author(s) and do
 not necessarily reflect the views of the United States Air Force or DARPA.
 Approved for Public Release, Distribution Unlimited.
-

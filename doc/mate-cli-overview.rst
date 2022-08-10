@@ -2,7 +2,7 @@
 mate-cli Command Line Tool Overview
 ###################################
 
-MATE users interact with the system using the :doc:`user-workflow`.
+See also the :doc:`quickstart`.
 
 The Python APIs that ``mate-cli`` uses under the hood can be found under the
 `MATE REST Client API documentation <api/MATERestClient/mate_rest_client.html#http://>`_.
@@ -139,6 +139,8 @@ connection details like so:
 
 To see the full set of subcommands and arguments, run ``mate-cli --help`` or refer to the reference
 manual at :doc:`cli`.
+
+.. _mate_cli_basic:
 
 **********************************
 A basic workflow with ``mate-cli``

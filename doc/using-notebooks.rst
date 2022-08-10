@@ -2,7 +2,10 @@
 MATE Python Notebooks
 #####################
 
-MATE provides a `Jupyter Notebook <https://jupyter.org/>`_ server for creating notebooks that can be used to write custom queries of the MATE code property graph.
+..
+   TODO(lb, #383): mention `help`
+
+MATE provides a `Jupyter Notebook <https://jupyter.org/>`_ server for creating notebooks that can be used to write custom queries in Python of the MATE code property graph.
 
 The MATE notebook server is exposed via web interface: `<http://YOUR_CHESS_SYSTEM:8889/>`_
 
