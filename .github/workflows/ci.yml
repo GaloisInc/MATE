@@ -18,7 +18,7 @@ jobs:
 
       - name: bdist
         run: |
-          docker run --rm -v $(pwd):/mate -it mate-dev:latest ./shake.sh -j bdist
+          docker run --rm -v $(pwd):/mate mate-dev:latest ./shake.sh -j bdist
 
       - name: mate-bdist
         run: |
