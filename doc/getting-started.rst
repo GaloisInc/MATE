@@ -2,17 +2,6 @@
 Starting Stand-alone MATE
 #########################
 
-.. attention::
-  MATE users should follow the :doc:`user-workflow` for running MATE within
-  the integrated CHESS system, rather than the instructions below.
-
-This page provides an introduction to running the MATE system outside of the
-CHESS system, and the various ways one may interact with it.
-
-.. TIP::
-  If you are a developer looking to work on MATE itself,
-  please read :doc:`hacking` instead.
-
 ************
 Running MATE
 ************
