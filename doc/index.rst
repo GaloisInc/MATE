@@ -1,8 +1,5 @@
-MATE: Merged Analysis To  prevent Exploits
-==========================================
-
-..
-   TODO(lb, #1709): Reorganize documentation
+MATE: Merged Analysis To prevent Exploits
+=========================================
 
 MATE is a suite of tools for interactive program analysis with a focus on
 hunting for bugs in C and C++ code. MATE unifies application-specific and
@@ -21,40 +18,43 @@ explore a program, see :doc:`quickstart`. Contributors should read
 
 .. toctree::
    :hidden:
-   :caption: User Documentation
+   :caption: Start Here
 
    overview
    quickstart
-   vulnerability-types
-   using-flowfinder
-   using-rest-api
-   using-notebooks
-   usagefinder
-   pois
-   mantiserve
-   under-constrained-manticore
-   debugging-builds
 
 .. toctree::
    :hidden:
-   :caption: Developer Documentation
+   :caption: Reference
 
-   MATE REST API <api.html#http://>
+   architecture
+   cli
+   cpg
+   debugging-builds
+   dwarfcore
+   environment
+   getting-started
+   hacking
+   legal
+   mantiserve
+   mate-cli-overview
+   pois
    schemata/cpg
    signatures
-   analysis
-   hacking
    testing
-   architecture
-   getting-started
-   mate-cli-overview
-   cli
-   dwarfcore
-   standalonepa
    trace
-   environment
+   under-constrained-manticore
+   usagefinder
+   using-flowfinder
+   using-notebooks
+   using-rest-api
+
+.. toctree::
+   :hidden:
+   :caption: API Documentation
+
    api/index
-   legal
+   MATE REST API <api.html#http://>
 
 Indices and Tables
 ==================
@@ -62,13 +62,6 @@ Indices and Tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-
-Project Status
-==============
-
-MATE is not actively developed by Galois, Inc. Please reach out to the email
-address "mate at galois dot com" if you'd like to discuss further work on MATE!
 
 Acknowledgments
 ===============

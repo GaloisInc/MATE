@@ -749,13 +749,36 @@ new APIs:
 Adding a POI Query
 ******************
 
+To write an analysis you need to define two classes:
+
+1. a ``POI`` class which is a record to describe the point of interest
+
+2. an ``Analysis`` class which contains a ``run`` method with the logic of your analysis.
+
+``Analysis`` subclasses yield instances of ``POI`` subclasses as soon as they are computed.
+
+Here are all of the contractual requirements for POIs and Analyses:
+
+- POIs must be JSON serializable
+- The POI base class provides default ``to_json`` and ``from_json``
+  functions which call ``json.loads`` and ``json.dumps``. If your POI
+  subclass has simple fields (such as strings) this will be sufficient.
+  If you POI has more complex fields (such as objects) you must define your
+  own ``to_json`` and ``from_json`` objects that describe how to serialize
+  and deserialize instances of your subclass.
+- Analyses must provide a ``run`` method with exactly the signature up above
+- Analyses should yield instances of the POI subclass they are returning as soon as possible
+- Analysis scripts must contain exactly one instance of an Analysis subclass.
+- Analyses may log using calls to ``logger.{log_level}`` but **MUST NOT** print
+- The analysis module itself **MUST** provide an ``analysis_background`` field,
+  in Markdown, that will be rendered as context for each POI produced.
+
 Here's a checklist of things to think about when adding a POI query:
 
 - Add a test program and accompanying test harness. Optimally, this program will
   have true positives, false positives (where static information is insufficient
   or the query could stand to be improved), true negatives, and false negatives.
-- Add the new query to the tests in
-  ``/home/langston/code/mate/side/tests/integration/poi/test_pois.py``.
+- Add the new query to the tests in ``tests/integration/poi/test_pois.py``.
 - Test running the POI query on some mid-size programs to ensure it's
   sufficiently performant.
 - Consider whether there are opportunities to push work from Python into the
@@ -1204,3 +1227,9 @@ was originally closed-source and developed on a private Gitlab instance hosted
 at Galois, Inc., and may contain references to Galois infrastructure or
 processes. We've tried our best to remove superfluous code, comments, and
 documentation in the open-sourcing process.
+
+Several components were de-prioritized during development, such as:
+
+- The trace-collection and analysis machinery
+- The patcher
+- Directed symbolic execution with Manticore

@@ -1,9 +1,14 @@
 MATE Tooling Architecture
 #########################
 
+..
+   TODO(lb): Deduplicate/compare with overview.rst
+
 This page provides a high-level overview of MATE's architecture,
 as well as an index for tools and instrumentation components within
 MATE.
+
+.. _analysis_workflow:
 
 Analysis Workflow
 -----------------
@@ -197,7 +202,7 @@ more performant "Steensgaard"-style analysis mode.
 The points-to analysis implementation is located in the
 ``llvm/PointerAnalysis/datalog`` directory.
 
-.. _Headache_desc:
+.. _Machine_desc:
 
 Machine-code mapping tools
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -221,6 +226,8 @@ with other program features.
 Known problems: None
 
 Expected problems: None
+
+.. _Headache_desc:
 
 Headache
 ++++++++
