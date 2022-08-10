@@ -5,8 +5,9 @@ Using the REST API
 MATE capabilities are controlled using a REST API. `Click here for the MATE
 OpenAPI REST API documentation <api.html>`_.
 
-Use this API via the REST client of your choice, or interactively through the
-interactive Swagger UI web interface at `<http://localhost:8666/api/v1/>`_
+Use this API via the :doc:`MATE CLI <mate-cli-overview>`, the REST client of
+your choice, or interactively through the interactive Swagger UI web interface
+at `<http://localhost:8666/api/v1/>`_.
 
 Some useful operations available via the REST API include:
 

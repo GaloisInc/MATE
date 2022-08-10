@@ -1,15 +1,22 @@
 ###########################
 Under-constrained Manticore
 ###########################
+..
+   These first two paragraphs are duplicated in overview.rst, and the first
+   sentence is in quickstart.rst. Updates to one should be reflected in the
+   others.
 
-MATE offers the possibility to run the Manticore symbolic execution engine in
-*under-constrained* mode. *Under-constrained* symbolic execution means that,
-instead of executing the whole program from start to exit, Manticore will only
-execute a given function within the program.
+MATE provides a web UI for exploring programs with the `Manticore
+<https://github.com/trailofbits/manticore>`_ symbolic execution engine in an
+*under-constrained* mode. Unlike traditional symbolic execution which begins at
+the program entry point and executes until the program exits, under-constrained
+symbolic execution starts at an arbitrary function. This specificity means that
+under-constrained symbolic execution can analyze parts of programs that would be
+too large or complex for traditional symbolic execution.
 
-The main advantage of under-constrained execution is that it allows to target only a specific
-part of a program with symbolic analysis, regardless of the total size of the program. Hence
-it can help to scale up Manticore tasks to big programs.
+Symbolic execution enables bit-precise local reasoning about memory and
+arithmetic, which complements MATE's higher-level inter-procedural data- and
+control-flow analyses.
 
 Under-constrained execution is implemented as a Manticore Plugin, which means it can be
 enabled/disabled easily, and should be able to coexist with other detectors such as the

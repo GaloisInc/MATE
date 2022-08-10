@@ -2,6 +2,10 @@
 UsageFinder
 ###########
 
+..
+   The first sentence is duplicated in overview.rst and quickstart.rst. Updates
+   to one should be reflected in the others.
+
 UsageFinder is a tool for finding vulnerabilities that result from incorrect usage of internal or external APIs.
 It is designed to assist with understanding the relationship between different features and functionalities in a program.
 

@@ -2,6 +2,9 @@
 Starting Stand-alone MATE
 #########################
 
+..
+   TODO(lb): deduplicate with quickstart, use MATE CLI?
+
 ************
 Running MATE
 ************

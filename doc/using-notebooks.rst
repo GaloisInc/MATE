@@ -5,10 +5,22 @@ MATE Python Notebooks
 ..
    TODO(lb, #383): mention `help`
 
-MATE provides a `Jupyter Notebook <https://jupyter.org/>`_ server for creating notebooks that can be used to write custom queries in Python of the MATE code property graph.
+..
+   The first paragraph is duplicated in overview.rst, and the first sentence is
+   in quickstart.rst. Updates to one should be reflected in the others.
 
-The MATE notebook server is exposed via web interface: `<http://localhost:8889/>`_
+MATE has `a Python API <overview_query>`_ for querying the CPG and exposes
+browser-based, interactive Jupyter notebooks with this query interface
+pre-loaded. These notebooks can be used to write complex, recursive,
+whole-program queries that answer detailed questions like "What sequences of
+function calls can lead from point A to point B in this program?" or "Can user
+input flow into a memory location with a specific struct type, and from there to
+some particular function without passing through one of these three sanitization
+routines?" These notebooks can be used for one-off explorations, or as a
+platform for users to build reusable apps on the MATE platform (such as
+:doc:`usagefinder`).
 
+The MATE notebook server is exposed via web interface at `<http://localhost:8889/>`_.
 
 *****************
 Create a notebook

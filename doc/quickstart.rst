@@ -91,17 +91,26 @@ for troubleshooting tips.
 Analyze with MATE
 *****************
 
-MATE provides several tools for exploring and analyzing the program's code
-property graph (CPG). See :doc:`overview` and the respective documentation pages
-for a more thorough description of each of these tools.
+MATE provides several tools for exploring and analyzing the program's :doc:`code
+property graph (CPG) <cpg>`. See :doc:`overview` and the respective
+documentation pages for a more thorough description of each of these tools.
+
+..
+   The idea is that each section here has about a one- or two-sentence
+   description, a link to the full documentation for each component, and a
+   description of how to start up the component from the builds page. For
+   comparison, overview.rst has one- or two-paragraph descriptions, plus an
+   optional screenshot, plus a link to the component docs.
+
+   The descriptions are generally taken from the first paragraph of the
+   respective documentation page, so updates to one should be reflected in the
+   other.
 
 POIs
 ====
 
-MATE identifies potential vulnerabilities and reports Points of Interest (POIs).
-The various kinds of vulnerabilities that MATE can detect are described in
-:doc:`vulnerability-types`. Click "view POIs" to see a list of POIs for this
-program.
+MATE automatically identifies potential vulnerabilities and reports Points of
+Interest (POIs). Click "view POIs" to see a list of POIs for this program.
 
 See :doc:`pois` for more details.
 
@@ -125,15 +134,13 @@ the program.
 
 See :doc:`using-notebooks` for more details.
 
-Manticore
-=========
+Under-Constrained Manticore
+===========================
 
-MATE offers the possibility to run the Manticore symbolic execution engine in
-*under-constrained* mode. *Under-constrained* symbolic execution means that,
-instead of executing the whole program from start to exit, Manticore will only
-execute a given function within the program. This help to scale up Manticore
-tasks to big programs. Press the "analyze in Manticore" button to open the
-Manticore UI.
+MATE provides a web UI for exploring programs with the `Manticore
+<https://github.com/trailofbits/manticore>`_ symbolic execution engine in an
+*under-constrained* mode. Press the "analyze in Manticore" button to open the
+Under-Constrained Manticore UI.
 
 See :doc:`under-constrained-manticore` for more details.
 
