@@ -24,9 +24,6 @@ RUN apt-get update && \
 FROM ghcr.io/trailofbits/llvm-wedlock:c2993fa3ff6ecf27eadabb5c725e8a572c28dd76 as tob-llvm-wedlock
 FROM base as dev
 
-# TODO(lb): Remove the last three lines of dependencies and download pre-built
-# packages when Souffle finds another host for pre-built packages:
-# https://github.com/souffle-lang/souffle/issues/1855
 RUN apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:hvr/ghc && \
     apt-get update && \
@@ -34,26 +31,15 @@ RUN apt-get install -y software-properties-common && \
       antlr4 curl locales \
       cabal-install-2.4 wget git-lfs \
       clang-format-10 clang-tidy-10 cmake ghc unzip \
-      zlib1g-dev ninja-build gdb shellcheck python3.8-dev \
-      autoconf automake bison build-essential clang doxygen flex g++ git \
-      libffi-dev libncurses5-dev libtool libsqlite3-dev make mcpp python \
-      sqlite zlib1g-dev libc++-dev libc++abi-dev lld && \
+      zlib1g-dev ninja-build gdb shellcheck python3.8-dev && \
     update-alternatives --install /usr/bin/cabal cabal /opt/cabal/bin/cabal 100 && \
     update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100 && \
     rm -rf /var/lib/apt/lists/*
 
-RUN cd /tmp && \
-    git clone --single-branch --branch=master https://github.com/souffle-lang/souffle && \
-    cd souffle && \
-    git checkout fce85d9ec8898a53365a0abb39485f27b14987b0 && \
-    cmake -S . -B build -G Ninja \
-        -DCMAKE_C_FLAGS=-g \
-        -DCMAKE_CXX_FLAGS=-g \
-        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-        -DSOUFFLE_USE_ZLIB=ON && \
-    cmake --build build --target install && \
-    cd && \
-    rm -rf /tmp/souffle
+RUN wget https://souffle-lang.github.io/ppa/souffle-key.public -O /usr/share/keyrings/souffle-archive-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/souffle-archive-keyring.gpg] https://souffle-lang.github.io/ppa/ubuntu/ stable main" | tee /etc/apt/sources.list.d/souffle.list && \
+    apt-get update && \
+    apt-get install -y souffle
 
 RUN wget -qnc -O /tmp/mustache.zip https://github.com/quantumew/mustache-cli/releases/download/v1.0.0/mustache-cli-linux-amd64.zip && \
     unzip -j -d /usr/bin /tmp/mustache.zip mustache && \
