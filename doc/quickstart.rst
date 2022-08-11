@@ -33,13 +33,29 @@ Get the source code:
     git clone --recurse-submodules https://github.com/GaloisInc/MATE
     cd MATE
 
-Build Docker images with the MATE tools (this may take a long time):
+Build Docker images with the MATE tools (this may take a long time, see
+:ref:`Docker Images and Compositions <docker>` for more information):
+
+..
+   TODO(lb): Login, pull, and tag from GHCR?
 
 .. code-block:: bash
 
+    docker build --target dev --tag mate-dev .
+    docker run --rm -v $(pwd):/mate -it mate-dev ./shake.sh -j bdist
     docker build --target dist --tag mate-dist .
     docker build --target notebook --tag mate-notebook .
     docker build --target ui --tag mate-ui .
+
+.. important::
+
+    The ``bdist`` build includes a large C++ build that requires at least
+    8GB of RAM. You may encounter OOM-induced build failures if your development
+    machine (or Docker environment) doesn't have sufficient memory.
+
+    Alternatively, if increasing the amount of RAM is not feasible, you
+    may have some luck with reducing the build's parallelism (e.g. with ``-j2``
+    instead of ``-j``) or removing ``-j`` entirely.
 
 Spin up the MATE services (database, REST API, UI, etc., see :doc:`architecture`
 for details):
