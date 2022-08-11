@@ -29,15 +29,14 @@ explore a program, see :doc:`quickstart`. Contributors should read
 
    architecture
    cli
+   cli-overview
    cpg
    debugging-builds
    dwarfcore
    environment
-   getting-started
    hacking
    legal
    mantiserve
-   cli-overview
    pois
    schemata/cpg
    signatures

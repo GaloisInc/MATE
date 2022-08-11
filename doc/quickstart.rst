@@ -41,7 +41,8 @@ Build Docker images with the MATE tools (this may take a long time):
     docker build --target notebook --tag mate-notebook .
     docker build --target ui --tag mate-ui .
 
-Spin up the MATE services (database, REST API, UI, etc.):
+Spin up the MATE services (database, REST API, UI, etc., see :doc:`architecture`
+for details):
 
 .. code-block:: bash
 
