@@ -1,10 +1,10 @@
 [submodule "submodules/llvm-wedlock"]
 	path = submodules/llvm-wedlock
-	url = ssh://git@github.com/trailofbits/llvm-wedlock
+	url = https://github.com/trailofbits/llvm-wedlock
 [submodule "submodules/manticore"]
 	path = submodules/manticore
 	url = https://github.com/trailofbits/manticore
 	ignore = dirty
 [submodule "llvm/PointerAnalysis"]
 	path = llvm/PointerAnalysis
-	url = ssh://git@github.com/GaloisInc/cclyzerpp
+	url = https://github.com/GaloisInc/cclyzerpp
