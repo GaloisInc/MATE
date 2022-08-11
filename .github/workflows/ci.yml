@@ -14,16 +14,39 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Login to Packages Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: mate-dev
         run: |
-          docker build --target dev -t mate-dev .
+          docker build \
+            --target dev \
+            --tag "ghcr.io/GaloisInc/mate-dev:${GITHUB_SHA}" \
+            .
+
+          docker push \
+            "ghcr.io/GaloisInc/mate-dev:${GITHUB_SHA}"
 
       - name: bdist
         run: |
-          docker run --rm -v $(pwd):/mate mate-dev:latest ./shake.sh -j bdist
+          docker run \
+            --rm -v $(pwd):/mate \
+            "ghcr.io/GaloisInc/mate-dev:${GITHUB_SHA}" \
+            ./shake.sh -j bdist
 
       - name: mate-dist
         run: |
           # HACK
           sudo chmod a+r -R .out/
-          docker build --target dist -t mate-dist .
+
+          docker build \
+            --target dist \
+            --tag "ghcr.io/GaloisInc/mate-dist:${GITHUB_SHA}" \
+            .
+
+          docker push \
+            "ghcr.io/GaloisInc/mate-dist:${GITHUB_SHA}"
