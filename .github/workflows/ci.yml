@@ -25,17 +25,17 @@ jobs:
         run: |
           docker build \
             --target dev \
-            --tag "ghcr.io/GaloisInc/mate-dev:${GITHUB_SHA}" \
+            --tag "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
             .
 
           docker push \
-            "ghcr.io/GaloisInc/mate-dev:${GITHUB_SHA}"
+            "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}"
 
       - name: bdist
         run: |
           docker run \
             --rm -v $(pwd):/mate \
-            "ghcr.io/GaloisInc/mate-dev:${GITHUB_SHA}" \
+            "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
             ./shake.sh -j bdist
 
       - name: mate-dist
@@ -45,8 +45,8 @@ jobs:
 
           docker build \
             --target dist \
-            --tag "ghcr.io/GaloisInc/mate-dist:${GITHUB_SHA}" \
+            --tag "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}" \
             .
 
           docker push \
-            "ghcr.io/GaloisInc/mate-dist:${GITHUB_SHA}"
+            "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}"
