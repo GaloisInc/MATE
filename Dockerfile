@@ -51,10 +51,6 @@ RUN wget -qnc -O /usr/bin/hadolint https://github.com/hadolint/hadolint/releases
 RUN cabal v2-update
 RUN cabal v2-install -j --overwrite-policy=always Cabal cabal-install
 
-RUN wget -q -O vagrant.deb https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb && \
-    apt-get install -y ./vagrant.deb && \
-    rm ./vagrant.deb
-
 ENV PATH=/root/.cabal/bin:$PATH \
     DOCKERIZED_MATE=1
 
