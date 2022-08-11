@@ -5,6 +5,7 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,6 +25,7 @@ jobs:
       - name: Build and push the mate-dev image
         run: |
           docker build \
+            --build-arg BUILDKIT_INLINE_CACHE=1 \
             --target dev \
             --tag "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
             .
@@ -31,8 +33,9 @@ jobs:
           docker push \
             "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}"
 
-          # If we're on main, then we additionally tag at mate-dev:latest.
-          if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
+          # If we're on main or we were manually dispatched,
+          # then we additionally tag at mate-dev:latest.
+          if [[ "${GITHUB_REF_NAME}" == "main" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
             docker tag \
               "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
               "ghcr.io/galoisinc/mate-dev:latest"
@@ -60,6 +63,7 @@ jobs:
           sudo chmod a+r -R .out/
 
           docker build \
+            --build-arg BUILDKIT_INLINE_CACHE=1 \
             --target dist \
             --tag "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}" \
             .
@@ -67,8 +71,9 @@ jobs:
           docker push \
             "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}"
 
-          # If we're on main, then we additionally tag at mate-dist:latest.
-          if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
+          # If we're on main or we were manually dispatched,
+          # then we additionally tag at mate-dist:latest.
+          if [[ "${GITHUB_REF_NAME}" == "main" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
             docker tag \
               "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}" \
               "ghcr.io/galoisinc/mate-dist:latest"
