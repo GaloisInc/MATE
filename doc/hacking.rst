@@ -953,6 +953,32 @@ filtering. Ideally, we would like to pre-emptively prune any path that
 will not be accepted by the CFL, but SQL won't support this since it
 can't maintain state very easily.
 
+*****************
+Running the Shell
+*****************
+
+MATE provides the capability to open an IPython shell which automatically
+connects to a running database instance. This shell can be run as follows::
+
+  docker-compose -f docker-compose.yml -f docker-compose.clients.yml run shell
+
+Once inside the shell, the database object ``db`` is available and
+preconfigured, can be used to make queries using the MATE query language. For
+example::
+
+  >>> session = db.new_session()
+  >>> session.query(db.Build).count()
+  1
+  >>> build = session.query(db.Build).one()
+  >>> print(build.uuid)
+  "e4e8e8e5e9c848fd959463d568e30194"
+  >>> graph = session.graph_from_build(build)
+  >>> session.query(graph.Node).count()
+  909
+  >>> session.query(graph.Edge).count()
+  2045
+
+
 ***********************
 Internal state machines
 ***********************

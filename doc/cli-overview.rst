@@ -1,14 +1,13 @@
-###################################
-mate-cli Command Line Tool Overview
-###################################
+############
+CLI Overview
+############
 
-See also the :doc:`quickstart`.
-
+``mate-cli`` is a CLI for interacting with the :doc:`REST API <using-rest-api>`.
 The Python APIs that ``mate-cli`` uses under the hood can be found under the
-`MATE REST Client API documentation <api/MATERestClient/mate_rest_client.html#http://>`_.
+`MATE REST Client API documentation
+<api/MATERestClient/mate_rest_client.html#http://>`_.
 
-.. NOTE::
-    For the detailed reference manual for ``mate-cli`` see :doc:`cli`.
+For the detailed reference manual for ``mate-cli`` see :doc:`cli`.
 
 ***********************
 Installing ``mate-cli``
@@ -50,7 +49,8 @@ Start from the MATE repository root:
     (env) $ mate-cli --help
 
 
-Once ``mate-cli`` is installed, you'll be able to interact with any MATE server.
+Once ``mate-cli`` is installed, you'll be able to interact with any MATE server
+(see :doc:`quickstart` for how to start a server).
 
 By default, ``mate-cli`` will connect to ``localhost:8666``. You can change this
 by specifying ``--conn your-server:port`` instead:
@@ -151,12 +151,21 @@ A basic workflow with ``mate-cli``
     For many use cases, :ref:`mate-cli oneshot <mate_cli_oneshot>` will be
     faster and simpler than the steps listed below.
 
-If we're analyzing our own program with MATE, most workflows will begin by uploading an artifact. We
+Most workflows will begin by uploading an artifact. We
 can do this with the ``mate-cli artifact create`` command like so:
 
 .. code-block:: bash
 
     mate-cli artifact create compile-target:single ./frontend/test/programs/overflowable-allocations.c
+
+MATE currently supports two types of compilation targets:
+
+#. Standalone C or C++ files (``foo.c`` or ``foo.cpp``);
+#. Program tarballs that contain a ``make``-based build (``foo.tar.gz``);
+
+You can construct a suitable tarball for a Make-based build with the ``tar`` command::
+
+  tar czf program.tar.gz program/
 
 The response from the MATE server will tell us the ID of the artifact that we just created. In this
 case, it is ``276d1771d6ee4532b89359eea2668482``.
@@ -177,8 +186,12 @@ previous step:
     to determine to compilation's status before proceeding.
 
 
-When our compile job reaches the ``compiled`` state, we can then use the ``build`` subcommand and
-generate the CPG so that MATE analyses can be run on the program:
+The top-level unit of analysis in MATE is a *CPG build*, or *build* for short. A
+build is typically associated with a particular binary produced by a compilation
+process. A compilation process can produce multiple binaries, and so a single
+compilation can produce multiple CPG builds. When our compile job reaches the
+``compiled`` state, we can then use the ``build`` subcommand and generate the
+CPG:
 
 .. code-block:: bash
 
@@ -239,7 +252,7 @@ From a directory:
 
 .. code-block:: bash
 
-    mate-cli oneshot ./program
+    mate-cli oneshot ./program/
 
 From an artifact ID:
 
