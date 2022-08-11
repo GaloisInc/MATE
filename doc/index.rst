@@ -37,7 +37,7 @@ explore a program, see :doc:`quickstart`. Contributors should read
    hacking
    legal
    mantiserve
-   mate-cli-overview
+   cli-overview
    pois
    schemata/cpg
    signatures

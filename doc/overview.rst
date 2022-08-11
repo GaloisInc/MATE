@@ -173,7 +173,7 @@ REST API and CLI
 ================
 
 Much of MATE's functionality is exposed via :doc:`a REST API <using-rest-api>`,
-and there is :doc:`a CLI <mate-cli-overview>` for interacting with this API.
+and there is :doc:`a CLI <cli-overview>` for interacting with this API.
 
 .. _overview_pointer:
 
