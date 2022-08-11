@@ -13,7 +13,7 @@ application-, domain-, or API-specific detectors. Potential vulnerabilities
 found by these queries can be viewed in `Flowfinder <overview_flowfinder>`_ for
 collaboration and triage.
 
-The :doc:`MATE CLI <mate-cli-overview>` and `REST API <api.html>`_ can also be
+The :doc:`MATE CLI <cli-overview>` and `REST API <api.html>`_ can also be
 used to manage POIs and their results; see the ``analyses`` and ``pois``
 subcommands of the MATE CLI and the ``/analyses/`` and ``/pois`` endpoints of
 the REST API in particular.
