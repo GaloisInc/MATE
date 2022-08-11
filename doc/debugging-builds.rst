@@ -152,6 +152,9 @@ compiler) fails, you can try the following workarounds:
 
    For example, a compilation that only needs the ``make server`` command:
 
+   ..
+      TODO(lb): Replace http with mate-cli
+
    .. code-block:: bash
 
       http POST localhost:8666/api/v1/compilations \
@@ -164,6 +167,9 @@ compiler) fails, you can try the following workarounds:
    If you see individual compiler commands failing because of incorrect or
    overly conservative flags, you can add additional flags to every compilation
    step:
+
+   ..
+      TODO(lb): Replace http with mate-cli
 
    .. code-block:: bash
 
@@ -188,7 +194,7 @@ API:
 
 .. code-block:: bash
 
-   http localhost:8666/api/v1/builds/YOUR-BUILD-ID
+   mate-cli compile get YOUR-BUILD-ID
 
 This will return a JSON blob (abbreviated below) with metadata about the build,
 including a ``state`` field that indicates the build's status:
@@ -261,11 +267,11 @@ root cause of the build failure, follow these steps:
       system that we infer as dependencies. This process isn't perfect, and
       can cause linker errors for missing or duplicated symbols.
 
-   #. Errors and assertions during pointer analysis. MATE's pointer analysis
-      component contains assertions for unexpected conditions, which will cause
-      a build failure if hit. The pointer analysis component may also abort
-      with a segmentation fault on certain pathological bitcode inputs,
-      or with a floating point exception.
+   #. Errors and assertions during pointer analysis. MATE's :ref:`pointer
+      analysis <points_to_desc>` component contains assertions for unexpected
+      conditions, which will cause a build failure if hit. The pointer analysis
+      component may also abort with a segmentation fault on certain pathological
+      bitcode inputs, or with a floating point exception.
 
    #. Resource exhaustion. MATE's pointer analysis is limited to 32GB of RAM by
       default (or the value of ``MATE_DEFAULT_MEMORY_LIMIT_GB``, if that
@@ -303,6 +309,9 @@ root cause of the build failure, follow these steps:
 
    In both cases, you can use the REST API to retrieve the log's contents:
 
+   ..
+      TODO(lb): Replace http with mate-cli?
+
    .. code-block:: bash
 
       # change this as necessary
@@ -327,12 +336,12 @@ the REST API after applying workarounds and fixes.
    POI analyses are not run automatically for builds initiated by the `REST API
    <api.html>`_. To run POI analyses for a manually-created build, wait until
    the built has completed (its state is reported as ``built``), and then submit
-   a request to the ``api/v1/analyses/run/{build_id}`` endpoint supplying the
-   build ID using either the REST API web page or at the command line:
+   a request with ``mate-cli`` or to the ``api/v1/analyses/run/{build_id}``
+   endpoint supplying the build ID:
 
    .. code-block:: bash
 
-      http POST http://localhost:8666/api/v1/analyses/run/${build_id}
+      mate-cli analysis run YOUR-BUILD-ID
 
 
 Pointer Analysis Issues
@@ -344,6 +353,8 @@ following workarounds:
 #. Try rebuilding with more RAM by setting the ``memory_limit_mb`` build option
    (though this might just fail again and/or take a long time, depending on the
    program).
+#. Try rebuilding with the unification analysis (see the ``pointer_analysis``
+   build option).
 #. Try building with less context-sensitivity (see the ``context_sensitivity``
    build option). The default is ``2-callsite``, so you might try ``2-caller``,
    ``1-callsite`` or even ``insensitive``. The resulting analysis will be less
