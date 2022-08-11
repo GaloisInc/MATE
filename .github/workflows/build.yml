@@ -21,7 +21,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build the mate-dev image
+      - name: Build and push the mate-dev image
         run: |
           docker build \
             --target dev \
@@ -30,6 +30,15 @@ jobs:
 
           docker push \
             "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}"
+
+          # If we're on main, then we additionally tag at mate-dev:latest.
+          if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
+            docker tag \
+              "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
+              "ghcr.io/galoisinc/mate-dev:latest"
+
+            docker push "ghcr.io/galoisinc/mate-dev:latest"
+          fi
 
       - name: Build the MATE bdist
         run: |
@@ -45,7 +54,7 @@ jobs:
           paths: |
             ./.out
 
-      - name: mate-dist
+      - name: Bush and push the mate-dist image
         run: |
           # HACK
           sudo chmod a+r -R .out/
@@ -57,3 +66,12 @@ jobs:
 
           docker push \
             "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}"
+
+          # If we're on main, then we additionally tag at mate-dist:latest.
+          if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
+            docker tag \
+              "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}" \
+              "ghcr.io/galoisinc/mate-dist:latest"
+
+            docker push "ghcr.io/galoisinc/mate-dist:latest"
+          fi
