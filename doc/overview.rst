@@ -167,7 +167,7 @@ Specific Language (DSL) for querying the CPG, embedded in Python. It has
 abstractions relevant to program analysis, for example, control- and data-flow
 path queries.
 
-See :ref:`query-desc` for more information.
+See :ref:`CPG Query API <query-desc>` for more information.
 
 REST API and CLI
 ================

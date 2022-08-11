@@ -3,7 +3,7 @@ Debugging Program Build Failures
 ################################
 
 This page describes how to debug issues related to compiling programs and
-building the associated Code Property Graph (CPG).
+building the associated :doc:`Code Property Graph (CPG) <cpg>`.
 
 When turning a program into a CPG, MATE goes through two primary phases: it
 first *compiles* the program into LLVM bitcode, and then it *builds* one or
@@ -26,7 +26,7 @@ checking the status of the compilation that we kicked off:
 
 .. code-block:: bash
 
-   $ http localhost:8666/api/v1/compilations/YOUR-COMPILATION-ID
+   $ mate-cli compile get YOUR-COMPILATION-ID
 
 This will return a JSON blob with metadata about the compilation, including
 a ``state`` field that indicates the compilation's status:
@@ -83,20 +83,20 @@ is immediately required for a compilation in this state.
 
 ``"state": "compiled"`` indicates a successful compilation, producing one
 or more bitcode outputs that are suitable for the CPG build pipeline.
-Follow the steps under :ref:`Debugging a MATE CPG build <debugging-mate-build>`
+Follow the steps under :ref:`Debugging a CPG build <debugging-build>`
 for debugging failed builds once you've turned a compilation into CPG builds.
 
 ``"state": "failed"`` affirmatively indicates a failed compilation phase. Follow
 the steps under
-:ref:`Debugging a MATE compilation <debugging-mate-compilation>`.
+:ref:`Debugging a compilation <debugging-compilation>`.
 
-.. _debugging-mate-compilation:
+.. _debugging-compilation:
 
-****************************
-Debugging a MATE compilation
-****************************
+***********************
+Debugging a compilation
+***********************
 
-To begin debugging a MATE compilation, follow these steps:
+To begin debugging a compilation, follow these steps:
 
 #. First, check the Docker logs for the ``executor`` service, which handles
    compilation tasks. This will probably either be
@@ -125,15 +125,14 @@ To begin debugging a MATE compilation, follow these steps:
 
    .. code-block:: bash
 
-      http 'localhost:8666/api/v1/artifacts?kind=compile-output:compile-log&detail=true'
+       mate-cli artifact get --kind compile-output:compile-log
 
    Once you have the artifact ID for the container log of interest, you can
    request the raw log contents:
 
    .. code-block:: bash
 
-      http localhost:8666/api/v1/artifacts/ARTIFACT-ID/object | less
-
+      mate-cli artifact dump ARTIFACT-ID | less
 
 .. _compilations-what-to-do:
 
@@ -178,14 +177,14 @@ compiler) fails, you can try the following workarounds:
 
 #. Attempt a combination of the above.
 
-.. _debugging-mate-build:
+.. _debugging-build:
 
-**********************
-Debugging a MATE build
-**********************
+*****************
+Debugging a build
+*****************
 
-To debug a MATE build, we can start by retrieving the build's status from
-MATE's REST API:
+To debug a build, we can start by retrieving the build's status from the REST
+API:
 
 .. code-block:: bash
 
