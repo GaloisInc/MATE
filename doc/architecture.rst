@@ -1,12 +1,9 @@
-MATE Tooling Architecture
-#########################
+############
+Architecture
+############
 
-..
-   TODO(lb): Deduplicate/compare with overview.rst
-
-This page provides a high-level overview of MATE's architecture,
-as well as an index for tools and instrumentation components within
-MATE.
+This page provides an index of tools and components within MATE. For a
+higher-level overview of MATE, see :doc:`overview`.
 
 .. _analysis_workflow:
 
@@ -14,9 +11,9 @@ Analysis Workflow
 -----------------
 
 The MATE workflow can be visualized as a transition from some source-code
-representation of a program, to a compilation that can produce one
-or more executables, to one CPG build per executable, and finally to individual
-analyses run on each CPG:
+representation of a program, to a compilation that can produce one or more
+executables, to one :doc:`CPG <cpg>` build per executable, and finally to
+individual analyses run on each CPG:
 
 ..
   NOTE(ww): Keep this up-to-date with the image below!
@@ -59,16 +56,17 @@ System architecture
 The MATE system is decomposed into eight services:
 
 server
-   The ``server`` component presents a REST API that can be used to initiate
-   individual steps of the analysis workflow depicted above. This API allows
-   users to manually run analysis steps with custom options or changes in
-   response to errors. The server API also implements backend queries for MATE
-   UI components including Flowfinder.
+   The ``server`` component presents :doc:`a REST API <using-rest-api>` that can
+   be used to initiate individual steps of the analysis workflow depicted above.
+   This API allows users to manually run analysis steps with custom options or
+   changes in response to errors. The server API also implements backend queries
+   for MATE UI components including Flowfinder.
 
 executor
    The ``executor`` component asynchronously processes long-running
    requests initiated by the ``server`` component, such as program
-   compilation, CPG generation, and POI analyses.
+   compilation, CPG generation, and :doc:`POI analyses <pois>`.
+
 db
    The ``db`` component runs a standard PostgreSQL installation and
    stores all generated Code Property Graphs. Other components
@@ -87,25 +85,30 @@ broker
    coordinate MATE components.
 
 mate-ui
-   The ``mate-ui`` component serves a web-based user-interface to the
-   MATE system. It provides interfaces to monitor the compilation and
-   CPG generation processes, in addition to an interactive CPG
-   visualization tool called Flowfinder.
+   The ``mate-ui`` component serves a web-based user-interface to the MATE
+   system. It provides access to :doc:`Flowfinder <using-flowfinder>`,
+   :doc:`under-constrained-manticore`, and an interface to monitor the
+   compilation and CPG generation processes.
 
 notebook
-   The ``notebook`` component provides a Jupyter notebook environment
-   for interacting with the MATE system via the Python domain-specific
-   query language. It is intended as an expert-level interface for
-   accessing the full capabilities of the MATE system.
+   The ``notebook`` component provides a :doc:`Jupyter notebook environment
+   <using-notebooks>` for interacting with the MATE system via :ref:`the Python
+   domain-specific query language <overview_query>`.
 
 mantiserve
-   The ``mantiserve`` component exposes a REST API for running symbolic
-   execution queries against programs. The API allows symbolic execution tasks
-   to be parameterized by specific detector plugins that monitor for potential
-   vulnerabilities.
+   The ``mantiserve`` component exposes :doc:`a REST API <mantiserve>` for
+   running symbolic execution queries against programs. The API allows symbolic
+   execution tasks to be parameterized by specific detector plugins that monitor
+   for potential vulnerabilities.
 
 Component index
 ---------------
+
+..
+   For components which have a more extensive primary reference page (e.g.,
+   POIs), the sections below should provide less detailed information and a link
+   to the primary reference material.
+
 
 Compilation components
 ======================
@@ -118,7 +121,7 @@ LLVM bitcode module that is suitable for CPG generation.
 blight
 ~~~~~~
 
-Provenance: ToB (`GitHub <https://github.com/trailofbits/blight>`__)
+Provenance: Trail of Bits (`GitHub <https://github.com/trailofbits/blight>`__)
 
 ``blight`` is a build tool wrapper for C/C++ compilers (``cc`` and ``c++``) as well as the
 standalone preprocessor (``cpp``), assembler (``as``), linker (``ld``), and other standard
@@ -145,12 +148,12 @@ GLLVM is a suite of tools for wrapping ``clang`` and ``clang++`` to emit bitcode
 intermediate output, as well combining those intermediate bitcode outputs into a unified
 LLVM IR module.
 
-.. _compile_v2_desc:
+.. _compile_desc:
 
 Compilation tasks
 ~~~~~~~~~~~~~~~~~
 
-Provenance: ToB
+Provenance: Trail of Bits
 
 The ``frontend/mate/mate/build/compile.py`` module manages the process of
 compiling programs submitted to MATE while monitoring and controlling the build
@@ -172,35 +175,45 @@ LLVM middle-end passes
 
 Provenance: Galois
 
-There are three middle-end passes which read in bitcode and spew out analysis results. They are loaded dynamically using ``opt``. Consult the LLVM documentation to learn about loading passes into ``opt``.
+There are three middle-end passes which read in LLVM bitcode and spew out analysis results. They are loaded dynamically using ``opt``. Consult the LLVM documentation to learn about loading passes into ``opt``.
 
--  Our custom pointer analysis lives in ``llvm/PointerAnalysis/PointerAnalysis.cpp``.
+- The :ref:`pointer analysis <points_to_dec>` lives in ``llvm/PointerAnalysis/``.
 
--  The FactGenerator supports the pointer analysis. It outputs datalog relations about elements of the input program (such as, variable ``x`` points to value ``y``), which are fed into ``cclyzer`` to infer more interesting facts related to pointer aliasing. These more interesting facts are then mapped back to LLVM concepts so they can be added to the CPG.
+- Many nodes and edges of the CPG are created in
+  ``llvm/MATE/ASTGraphWriter.cpp``, :ref:`including <cpg_provenance>`: the LLVM
+  AST, intra-procedural CFGs, intra-procedural (non-memory) DFGs, and the CDG.
+  ``ASTGraphWriter`` also formats the output of the pointer analysis for
+  inclusion in the CPG.
 
--  Many nodes and edges of the CPG are created in ``llvm/MATE/ASTGraphWriter.cpp``.
+- Basic blocks are instrumented to generate :doc:`traces <trace>` for dynamic
+  analysis in ``llvm/MATE/TraceLogger.cpp``.
 
--  Basic blocks are instrumented to generate a trace for the dynamic analysis in ``llvm/MATE/TraceLogger.cpp``.
+Known Problems: ASTGraphWriter does not properly handle exceptional control
+flow; such exceptional flows will not be reflected in higher-level tools like
+Flowfinder or notebook queries.
+
+Expected Problems: ASTGraphWriter may be unaware of the semantics of more
+obscure LLVM instructions and intrinsics.
 
 .. _points_to_dec:
 
 Points-to analysis
 ~~~~~~~~~~~~~~~~~~
 
+..
+   TODO(lb, #1708): Link to upstream pointer analysis documentation
+
 Provenance: Galois
 
-MATE's code property graph representation is built on top of the
-results of a whole-program points-to analysis. This analysis,
-implemented using the `Soufflé  <https://souffle-lang.github.io/>`__
-datalog engine, is a fork of the open-source LLVM points-to analysis
-`cclyzer <https://github.com/plast-lab/cclyzer>`__. Improvements to
-the cclyzer analysis implemented as part of MATE include support for
-numerous bug fixes, support for context-sensitive analyses enabling
-greater precision for many programs, and experimental support for a
-more performant "Steensgaard"-style analysis mode.
+MATE's code property graph representation is built on top of the results of a
+precise, context-sensitive, whole-program points-to analysis that allows for
+accurate, narrow tracking of data- and control-flow through the program under
+analysis.
 
-The points-to analysis implementation is located in the
-``llvm/PointerAnalysis/datalog`` directory.
+The points-to analysis implementation is located in the ``llvm/PointerAnalysis``
+directory.
+
+Known problems: Refer to the upstream documentation.
 
 .. _Machine_desc:
 
@@ -215,7 +228,7 @@ binary-level information against the core LLVM CPG elements.
 Nomina
 ++++++
 
-Provenance: ToB
+Provenance: Trail of Bits
 
 Nomina is an LLVM pass responsible for canonicalizing the names
 of basic blocks in LLVM bitcode. Nomina's canonicalization enables
@@ -232,7 +245,7 @@ Expected problems: None
 Headache
 ++++++++
 
-Provenance: ToB
+Provenance: Trail of Bits
 
 Headache is an LLVM pass with a collection of responsibilities:
 
@@ -254,7 +267,7 @@ unhandled edge cases in Headache's scope handling.
 Wedlock
 +++++++
 
-Provenance: ToB
+Provenance: Trail of Bits
 
 Wedlock is a *backend* LLVM pass responsible for pairing the IR representation of a bitcode
 module with LLVM's "middle-end" representation.
@@ -272,7 +285,7 @@ until lowering begins.
 migraine
 ++++++++
 
-Provenance: ToB
+Provenance: Trail of Bits
 
 migraine is a Python module and utility responsible for emitting a patch of assembler directives
 based on :ref:`Wedlock_desc`'s output. migraine's assembler directive patch is later used during
@@ -288,7 +301,7 @@ Expected problems: None.
 aspirin
 +++++++
 
-Provenance: ToB
+Provenance: Trail of Bits
 
 aspirin is a Python module and utility with a collection of responsibilities:
 
@@ -307,7 +320,7 @@ Expected problems: None.
 margin-walker
 +++++++++++++
 
-Provenance: ToB
+Provenance: Trail of Bits
 
 margin-walker is a Python module and utility responsible for emitting MATE-compatible CPG records
 based on the combined input of :ref:`Wedlock_desc` and :ref:`aspirin_desc`, as well as
@@ -323,9 +336,9 @@ quadratically with program size.
 quotidian
 +++++++++
 
-Provenance: ToB
+Provenance: Trail of Bits
 
-quotidian is a Python module and utility that represents the primary ingress and egress for all ToB
+quotidian is a Python module and utility that represents the primary ingress and egress for all Trail of Bits
 provided instrumentation. It takes *either* a bitcode input *or* a G/WLLVM-compiled binary input.
 
 quotidian does not require :ref:`Nomina_desc` to be run in the input bitcode beforehand. However,
@@ -338,11 +351,11 @@ Expected problems: None.
 Machine code mapping dependencies
 +++++++++++++++++++++++++++++++++
 
-The following depicts the dependency relations between various ToB tools and the JSONL ultimately
+The following depicts the dependency relations between various Trail of Bits tools and the JSONL ultimately
 generated for insertion into the CPG.
 
 .. image:: assets/tob-tool-graph.png
-    :alt: Dependency relations between ToB tools and the CPG
+    :alt: Dependency relations between Trail of Bits tools and the CPG
 
 The above image should be kept up-to-date with the following
 MermaidJS specification::
@@ -370,32 +383,45 @@ MermaidJS specification::
 Build tasks
 ~~~~~~~~~~~
 
-Provenance: ToB
+Provenance: Trail of Bits
 
 The ``frontend/mate/mate/build/build.py`` module manages the process of creating
-code property graphs for programs submitted to MATE. This module is responsible
-for creating docker environments in which to recompile programs and perform
-machine code mapping, along with managing the overall CPG generation process.
-This module also manages incorporating source code information in the CPG and
-applying analysis signatures.
+CPGs for programs submitted to MATE. This module is responsible for creating
+Docker environments in which to recompile programs and perform machine code
+mapping, along with managing the overall CPG generation process. This module
+also manages incorporating source code information in the CPG and applying
+analysis signatures.
 
 Analysis components
 ===================
 
-CPG Query Language
-~~~~~~~~~~~~~~~~~~
+.. _query_desc:
+
+CPG Query API
+~~~~~~~~~~~~~
 
 Provenance: Galois
 
-MATE includes a domain-specific query language for accessing
-information in the CPG. This interface abstracts the core
-property-graph representation stored in the PostgreSQL database and
-provides a programmatic, object-based interface in the Python
-programming language. This query language, built using the
-`SQLAlchemy ORM <https://docs.sqlalchemy.org/en/13/>`__, is used to
-implement MATE's automated analyses and user interface, and is also
-available to expert users via the Jupyter Notebook service. The
-language is implemented in the ``frontend/mate-query/mate_query/cpg`` directory.
+..
+   The following sentence is duplicated in overview.rst; updates to one should
+   be reflected in the other.
+
+MATE provides a `SQLAlchemy <https://docs.sqlalchemy.org/en/13/>`_-based Domain
+Specific Language (DSL) for querying the CPG, embedded in Python. It has
+abstractions relevant to program analysis, for example, control- and data-flow
+path queries. This interface abstracts the core property-graph representation
+stored in the PostgreSQL database and provides a programmatic, object-based
+interface. This query API is used to implement MATE's automated analyses and
+user interface, and is also available to users via the Jupyter Notebook service.
+
+The query API is implemented in the ``frontend/mate-query/mate_query/cpg``
+directory.
+
+See the :doc:`API documentation <api/MATE/modules>` for the API reference. This
+documentation can also be accessed from Python code with the ``help`` function.
+It may also be helpful to look at :doc:`cpg`, :doc:`schemata/cpg`, and `the LLVM
+Language Reference <https://llvm.org/docs/LangRef.html#llvm-ptrmask-intrinsic>`_
+to better understand the content of the CPG.
 
 Context-free language reachability queries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -435,55 +461,14 @@ graph. POI analyses are managed via a REST API implemented in
 POI analyses
 ~~~~~~~~~~~~
 
-Provenance: Galois/ToB
+Provenance: Galois/Trail of Bits
 
-The current release of MATE includes the following built-in POI analyses. The
-primary CPG layer(s) used in the analysis are listed at the end of each
-description.
+MATE ships with a number of automated analyses that detect potential
+vulnerabilities, called Points of Interest (POIs). These analyses are
+implemented as Python modules in the ``frontend/mate/mate/poi/analysis``
+directory.
 
-* **CommandInjection**: Finds calls to output functions (e.g. ``write``) with
-  potential SQL keywords in string arguments, detecting SQL injection (SQLi)
-  vulnerabilities. (AST)
-
-* **PathTraversal**: Find calls to filesystem operations where the path may be
-  influenced by user input, detecting path traversal vulnerabilities. (DFG)
-
-* **PointerDisclosure**: Finds pointer-typed values that may be output to the
-  user, detecting vulnerabilities that may allow an attacker to circumvent
-  memory protections like ASLR and stack canaries. (DFG)
-
-* **UserStringComparisonLength**: Finds string and memory comparison calls where
-  the comparison length may be controlled by user input, detecting various
-  memory corruption vulnerabilities. (DFG)
-
-* **VariableLengthStackObject**: Detects uses of C99-style variable-length
-  arrays (VLAs) or the alloca library routine where the user can control the
-  size of the stack allocation, detecting vulnerability to certain stack-based
-  attacks. (DFG)
-
-* **OverflowableAllocations**: Finds calls to dynamic allocations (e.g.
-  ``malloc``) where the size calculation may be influenced by user input,
-  detecting unsafe or unintended heap accesses. (DFG)
-
-* **TruncatedInteger**: Finds calls to dynamic allocations where the size may be
-  influenced by user input and the input is truncated and used elsewhere as a
-  signed integer, detecting vulnerabilities in which an attacker may gain
-  control of the heap. (DFG)
-
-* **IteratorInvalidation**: Finds uses of C++ iterators subsequent to
-  iterator-invalidating collection modifications, detecting vulnerabilities
-  resulting from invalid iterator accesses. (CFG)
-
-* **UninitializedStackMemory**: Finds potential intra- and inter-procedural uses
-  of uninitialized stack memory, detecting potential information leaks or
-  computation on invalid data. (CFG, PTG)
-
-* **UseAfterFree**: Finds potential uses of heap-allocated memory after calls to
-  ``free``, detecting UAF vulnerabilities. (CFG, PTG)
-
-These analyses are implemented as Python modules in the
-``frontend/mate/mate/poi/analysis`` directory.
-
+See :doc:`pois` for more information.
 
 User interface components
 =========================
@@ -508,7 +493,7 @@ framework.
 Mantiserve
 ~~~~~~~~~~
 
-Provenance: ToB
+Provenance: Trail of Bits
 
 MATE's symbolic execution capabilities are exposed via the Mantiserve component,
 located in the ``mantiserve`` directory. Mantiserve provides a REST API for

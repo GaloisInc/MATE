@@ -30,6 +30,8 @@ accessed through the `Python query API <overview_query>`_.
 See :doc:`schemata/cpg` for detailed information about the various kinds of
 nodes, edges, and attributes in the CPG.
 
+The CPG is stored in a PostgreSQL database.
+
 General Guidelines
 ******************
 
@@ -50,6 +52,8 @@ to the source language (C/C++). Therefore, generic names like ``Function``,
 ``Block``, ``Instruction``, and ``Argument`` refer to LLVM IR constructs. Nodes
 representing LLVM middle-end constructs have kinds prefixed by ``Machine``, and
 binary-level node kinds are prefixed by ``ASM``.
+
+.. _cpg_provenance:
 
 Provenance
 **********

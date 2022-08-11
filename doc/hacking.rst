@@ -545,39 +545,51 @@ the relevant indices and tables.
 Deployment
 ==========
 
-Documentation from the ``master`` branch of the MATE repository is automatically
-rendered and deployed to the `web <https://mate.galois.com/>`_ by CI. Your
-edits will need to be merged into master before they show up.
+Documentation from the ``main`` branch of the repository is automatically
+rendered and deployed to the `web <https://mate.galois.com/>`_ by CI. Your edits
+will need to be merged into master before they show up.
 
 The JSON schemata
 =================
 
-The JSON schemata in ``./frontend/mate-common/mate_common/schemata`` describe valid contents of the
-JSON blobs stored in the database. The ``edges.json``  and ``nodes.json`` files
-specify each kind of node and edge in the CPG along with their required and
-optional fields. This information can also be found in
+The JSON schemata in ``./frontend/mate-common/mate_common/schemata`` describe
+valid contents of the JSON blobs stored in the database. The ``edges.json`` and
+``nodes.json`` files specify each kind of node and edge in the CPG along with
+their required and optional fields. This information can also be found in
 ``frontend/mate-common/mate_common/models/cpg_types/mate.py`` which codifies
 these structures so they can be used in the query interface.
 
-The Wiki
-========
-
-Some information can be found on `the project wiki
-<https://gitlab-ext.galois.com/mate/MATE/-/wikis/home>`_, including design
-documentation for a few features:
-
-- `Directed Symbolic Execution with Mantiserve and the CPG <https://gitlab-ext.galois.com/mate/MATE/-/wikis/Design:-Directed-Symbolic-Execution>`_
-
+Style
+=====
 
 Capitalization conventions
-==========================
+--------------------------
 
 - MATE is the name of our project, ``mate`` is the name of the legacy CLI tool
   and the primary Python package
 
-- Python, SQLAlchemy, etc. are proper names and need capitalization
+- Docker, Python, SQLAlchemy, etc. are proper names and need capitalization
 
 - JSON, SQL, POI, etc. are abbreviations and need capitalization
+
+Linking
+-------
+
+Wikipedia has `sensible guidelines on linking
+<https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Linking#Principles>`_,
+and the MATE documentation follows similar conventions. In particular:
+
+- Mention of unfamiliar or novel concepts like the CPG should include internal
+  links to the main documentation page on the concept (in this case,
+  :doc:`cpg`).
+- Links should generally appear at most once per page
+
+Abbreviations
+-------------
+
+For an appropriate balance of clarity and concision, most abbreviations like POI
+for point of interest and CPG for code property graph should be introduced
+explicitly once per page, and referred to by the abbreviation thereafter.
 
 *****************************
 Adding a new model to the CPG
