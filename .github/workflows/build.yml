@@ -1,4 +1,4 @@
-name: CI
+name: Build
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: mate-dev
+      - name: Build the mate-dev image
         run: |
           docker build \
             --target dev \
@@ -31,12 +31,19 @@ jobs:
           docker push \
             "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}"
 
-      - name: bdist
+      - name: Build the MATE bdist
         run: |
           docker run \
             --rm -v $(pwd):/mate \
             "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
             ./shake.sh -j bdist
+
+      - name: Upload the MATE bdist
+        uses: actions/upload-artifact@v3
+        with:
+          name: mate-bdist
+          paths: |
+            ./.out
 
       - name: mate-dist
         run: |
