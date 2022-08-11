@@ -101,6 +101,57 @@ mantiserve
    execution tasks to be parameterized by specific detector plugins that monitor
    for potential vulnerabilities.
 
+
+Docker Images and Compositions
+------------------------------
+
+The above services are deployed in Docker containers using ``docker-compose``.
+
+Docker Images
+=============
+
+First-Party
+~~~~~~~~~~~
+
+The following images are built from the top-level ``Dockerfile`` in CI, and can
+be built manually by supplying the ``--target`` flag to ``docker build``. The
+default target is ``dev``. By convention, the images are usually tagged with the
+target names prefixed by ``mate-``, e.g., ``mate-dist``.
+
+- ``dev``: An image with all of the tools necessary to develop MATE, including
+  build systems, complilers, linters, etc.
+- ``dist``: An image with MATE installed
+- ``notebook``: Jupyter Notebook server
+- ``ui``: Web UI components (Flowfinder, builds page, etc.)
+
+Third-Party
+~~~~~~~~~~~
+
+These images are used in MATE compositions, but contain third-party software.
+
+- ``postgres``: Used for the ``db`` component (described above)
+- ``rabbitmq``: : Used for the ``broker`` component (described above)
+- ``minio``: Used for the ``storage`` component (described above)
+
+Docker Compositions
+===================
+
+MATE has several ``docker-compose.*.yml`` files. These are generally run in
+conjunction with ``docker-compose.yml``, e.g.::
+
+  docker-compose -f docker-compose.yml -f docker-compose.ui.yml up
+
+On especially powerful hosts, ``docker-compose.yml`` can be replaced with
+``docker-compose.large.yml``. Each of the other compositions runs particular
+services:
+
+- ``.clients.yml``: Run an IPython (Jupyter) shell from the command-line,
+  without using the MATE Notebooks service.
+- ``.notebook.yml``: Runs the ``notebook`` service, see :doc:`using-notebooks`.
+- ``.test.yml``: Used by MATE developers to test MATE, see :doc:`hacking`.
+- ``.ui.dev.yml``: Used by MATE developers to develop MATE, see :doc:`hacking`.
+- ``.ui.yml``: Runs the ``mate-ui`` service.
+
 Component index
 ---------------
 
@@ -158,7 +209,7 @@ Provenance: Trail of Bits
 The ``frontend/mate/mate/build/compile.py`` module manages the process of
 compiling programs submitted to MATE while monitoring and controlling the build
 process to create artifacts that can be analyzed by other MATE components. This
-module is responsible for creating docker environments in which to compile
+module is responsible for creating Docker environments in which to compile
 programs on demand, inferring build system configurations and necessary
 options, and creating and storing artifacts for further analysis.
 
