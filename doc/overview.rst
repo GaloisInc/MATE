@@ -213,6 +213,8 @@ MATE has several important limitations:
 - MATE is still research-grade software. We have worked hard to make it robust,
   but not all of MATE's tools and features will work well on all programs.
 
+.. _status:
+
 **************
 Project Status
 **************
