@@ -24,4 +24,6 @@ jobs:
 
       - name: mate-dist
         run: |
+          # HACK
+          sudo chmod a+r -R .out/
           docker build --target dist -t mate-dist .
