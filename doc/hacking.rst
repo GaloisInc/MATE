@@ -147,8 +147,8 @@ this section.
 .. code-block:: bash
 
     docker login artifactory.galois.com:5004
-    docker pull artifactory.galois.com:5004/mate-dev:master
-    docker tag artifactory.galois.com:5004/mate-dev:master mate-dev
+    docker pull artifactory.galois.com:5004/mate-dev:main
+    docker tag artifactory.galois.com:5004/mate-dev:main mate-dev
     git clone --recurse-submodules git@gitlab-ext.galois.com:mate/MATE.git
     cd MATE
     docker run --rm -v $(pwd):/mate -it mate-dev ./shake.sh -j bdist
@@ -170,14 +170,14 @@ The development image is ``mate-dev``, and the release image is
 
 .. code-block:: bash
 
-   docker pull artifactory.galois.com:5004/mate-dev:master
+   docker pull artifactory.galois.com:5004/mate-dev:main
 
 Re-tag the ``mate-dev`` image without the ``artifactory.falois.com:5004/``
 prefix, for convenience.
 
 .. code-block:: bash
 
-    docker tag artifactory.galois.com:5004/mate-dev:master mate-dev
+    docker tag artifactory.galois.com:5004/mate-dev:main mate-dev
 
 Clone the MATE repository, including its submodules.
 
@@ -303,8 +303,8 @@ Using Gitlab
 MRs
 ---
 
-*Invariably*: Code is added to the master branch exclusively through merge
-requests (MRs). In practice this means developing on a branch off of master
+*Invariably*: Code is added to the main branch exclusively through merge
+requests (MRs). In practice this means developing on a branch off of main
 and opening a MR based on that branch.
 
 *Aspirationally*: MRs link to relevant :ref:`issues <hacking:Issues>`,
@@ -331,7 +331,7 @@ Squashing
 
 *Aspirationally*: To preserve a clean Git history (see also :ref:`git`), we
 often squash the many commits added to a MR during the review/test cycle into
-one commit on the master branch. However, it is not a requirement to squash
+one commit on the main branch. However, it is not a requirement to squash
 commits, and in fact it can be detrimental to a meaningful Git history to
 squash together unrelated changes (e.g. one commit that is purely
 organizational with one that changes functionality or fixes a bug). MR authors
@@ -339,12 +339,12 @@ should use their best judgement, and
 :ref:`label the MR appropriately <mr-labels>`.
 
 *Consistently*: As a rule, each commit on a non-squashed MR should pass CI, i.e.
-each commit on the master branch should always build and pass tests.
+each commit on the main branch should always build and pass tests.
 
 Rebasing
 ^^^^^^^^
 
-*Invariably*: Every MR has to be rebased against the current master branch
+*Invariably*: Every MR has to be rebased against the current main branch
 (Gitlab conveniently provides a button for doing this). This ensures that the
 MR is run with the latest tests, and that another recently merged MR didn't
 subtly conflict with it. Unfortunately, it also means that all the tests need
@@ -503,7 +503,7 @@ Documentation for MATE is written in `ReStructured Text`_, and processed by the
 `Sphinx`_ documentation system. Documentation source files are located within
 the ``doc/`` subdirectory of the MATE repository.
 
-.. _ReStructured Text: https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#external-links
+.. _ReStructured Text: https://www.sphinx-doc.org/en/main/usage/restructuredtext/basics.html#external-links
 .. _Sphinx: https://www.sphinx-doc.org/
 
 Building
@@ -547,7 +547,7 @@ Deployment
 
 Documentation from the ``main`` branch of the repository is automatically
 rendered and deployed to the `web <https://mate.galois.com/>`_ by CI. Your edits
-will need to be merged into master before they show up.
+will need to be merged into main before they show up.
 
 The JSON schemata
 =================
@@ -1004,10 +1004,10 @@ tests.)
 Implementation
 ==============
 
-Development of MATE happens in merge requests against the ``master`` branch,
+Development of MATE happens in merge requests against the ``main`` branch,
 which has a suite of tests that run on every commit. MATE has enough
 long-running tests that it's not feasible to run all of them against every
-commit before merging to ``master``. Therefore, ``master`` is periodically
+commit before merging to ``main``. Therefore, ``main`` is periodically
 merged into the ``stable`` branch, and the following script decides when to run
 a longer, more complete suite of tests:
 
