@@ -177,7 +177,7 @@ Provenance: Galois
 
 There are three middle-end passes which read in LLVM bitcode and spew out analysis results. They are loaded dynamically using ``opt``. Consult the LLVM documentation to learn about loading passes into ``opt``.
 
-- The :ref:`pointer analysis <points_to_dec>` lives in ``llvm/PointerAnalysis/``.
+- The :ref:`pointer analysis <points_to_desc>` lives in ``llvm/PointerAnalysis/``.
 
 - Many nodes and edges of the CPG are created in
   ``llvm/MATE/ASTGraphWriter.cpp``, :ref:`including <cpg_provenance>`: the LLVM
@@ -195,13 +195,10 @@ Flowfinder or notebook queries.
 Expected Problems: ASTGraphWriter may be unaware of the semantics of more
 obscure LLVM instructions and intrinsics.
 
-.. _points_to_dec:
+.. _points_to_desc:
 
 Points-to analysis
 ~~~~~~~~~~~~~~~~~~
-
-..
-   TODO(lb, #1708): Link to upstream pointer analysis documentation
 
 Provenance: Galois
 
@@ -212,6 +209,9 @@ analysis.
 
 The points-to analysis implementation is located in the ``llvm/PointerAnalysis``
 directory.
+
+See `the upstream documentation <https://galoisinc.github.io/cclyzerpp/>`_ for
+more information.
 
 Known problems: Refer to the upstream documentation.
 

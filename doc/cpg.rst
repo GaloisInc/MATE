@@ -61,16 +61,16 @@ Provenance
 The various "layers" of the CPG are constructed by different tools.
 
 - abstract syntax tree (AST): :ref:`ASTGraphWriter <LLVM_passes_desc>`
-- call graph (CG): :ref:`pointer analysis <overview_pointer>`
+- call graph (CG): :ref:`pointer analysis <points_to_desc>`
   (see also :ref:`LLVM_passes_desc`)
 - control-flow graph (CFG): :ref:`ASTGraphWriter <LLVM_passes_desc>` for
   intra-procedural control-flow
 - inter-procedural control-flow graph (ICFG):
-  :ref:`pointer analysis <overview_pointer>`
+  :ref:`pointer analysis <points_to_desc>`
 - inter-procedural dataflow-graph (DFG):
-  :ref:`pointer analysis <overview_pointer>` for flows through memory and
+  :ref:`pointer analysis <points_to_desc>` for flows through memory and
   calls) and :ref:`ASTGraphWriter <LLVM_passes_desc>` for intra-procedural flows
 - control-dependence graph (CDG): :ref:`ASTGraphWriter <LLVM_passes_desc>`
-- points-to graph (PTG): :ref:`pointer analysis <overview_pointer>`
+- points-to graph (PTG): :ref:`pointer analysis <points_to_desc>`
 - source-code to machine-code mapping: :ref:`machine-code mapping <Machine_desc>`
 - memory layout and DWARF type graph: :ref:`machine-code mapping <Machine_desc>`
