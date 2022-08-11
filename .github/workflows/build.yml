@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: mate-bdist
-          paths: |
+          path: |
             ./.out
 
       - name: Bush and push the mate-dist image
