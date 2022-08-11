@@ -504,9 +504,9 @@ Manticore's runtime environment, allowing Manticore runs to be isolated within
 containers that are identical to the "normal" execution environment for a
 target.
 
-Mantiserve tasks are configured to run one or more "detectors," representing the
-dynamic counterpart to MATE's static "POI" analyses. Each detector has access to
-the MATE CPG for the targeted program, including a queryable graph
-representation of the program's binary layout and debug information (via DWARF).
-These detectors are written using Manticore's public plugin API, and are located
-in the ``dwarfcore`` directory.
+Mantiserve tasks are configured to run one or more :doc:`"detectors,"
+<dwarfcore>` representing the dynamic counterpart to MATE's static "POI"
+analyses. Each detector has access to the MATE CPG for the targeted program,
+including a queryable graph representation of the program's binary layout and
+debug information (via DWARF). These detectors are written using Manticore's
+public plugin API, and are located in the ``dwarfcore`` directory.

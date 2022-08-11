@@ -4,6 +4,10 @@ Overview
 
 .. image:: assets/mate-architecture.jpg
 
+.. NOTE::
+  This page provides a high-level overview of MATE. To get started using MATE
+  right away, see :doc:`quickstart`.
+
 MATE is a suite of tools for interactive program analysis with a focus on
 hunting for bugs in C and C++ code. MATE unifies application-specific and
 low-level vulnerability analysis using code property graphs (CPGs), enabling the
@@ -35,6 +39,7 @@ At a very high level, here's how MATE is used:
 - MATE compiles and analyzes the program, creating one CPG per binary
 - The user attempts to find vulnerabilities in the program by using :ref:`the
   MATE tools <overview_tools>`
+
 
 .. _overview_tools:
 
