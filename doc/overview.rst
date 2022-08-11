@@ -150,6 +150,9 @@ See :doc:`usagefinder` for more details.
 Other MATE Components
 *********************
 
+..
+   These are likely less important to users, and so have shorter descriptions.
+
 In addition to the above user-facing tools, the following are a few components
 of MATE that can be used to build other tools. For a comprehensive list of
 MATE's components, see :doc:`architecture`.
@@ -159,11 +162,12 @@ MATE's components, see :doc:`architecture`.
 The Query Interface
 ===================
 
-MATE provides a SQLAlchemy-based Domain Specific Language (DSL) for querying the
-CPG, embedded in Python. It has abstractions relevant to program analysis, for
-example, control- and data-flow path queries.
+MATE provides a `SQLAlchemy <https://docs.sqlalchemy.org/en/13/>`_-based Domain
+Specific Language (DSL) for querying the CPG, embedded in Python. It has
+abstractions relevant to program analysis, for example, control- and data-flow
+path queries.
 
-See the :doc:`API documentation <api/MATE/modules>` for more information.
+See :ref:`query-desc` for more information.
 
 REST API and CLI
 ================
@@ -175,12 +179,12 @@ and there is :doc:`a CLI <mate-cli-overview>` for interacting with this API.
 
 Pointer Analysis
 ================
-..
-   TODO(lb, #1708): Link to upstream pointer analysis documentation
 
 MATE uses a precise, context-sensitive pointer analysis for C and C++ that
 allows for accurate, narrow tracking of data- and control-flow through the
-program under analysis. For more on the pointer analysis in MATE, see TODO(lb).
+program under analysis.
+
+See :ref:`Points-to analysis <points_to_dec>` for more information.
 
 ***********
 Limitations

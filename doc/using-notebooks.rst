@@ -3,14 +3,11 @@ MATE Python Notebooks
 #####################
 
 ..
-   TODO(lb, #383): mention `help`
-
-..
    The first paragraph is duplicated in overview.rst, and the first sentence is
    in quickstart.rst. Updates to one should be reflected in the others.
 
-MATE has `a Python API <overview_query>`_ for querying the CPG and exposes
-browser-based, interactive Jupyter notebooks with this query interface
+MATE has :ref:`a Python API <query_desc>`_ for querying :doc:`the CPG <cpg>` and
+exposes browser-based, interactive Jupyter notebooks with this query interface
 pre-loaded. These notebooks can be used to write complex, recursive,
 whole-program queries that answer detailed questions like "What sequences of
 function calls can lead from point A to point B in this program?" or "Can user
@@ -78,7 +75,9 @@ Query the code property graph
 
 The MATE notebook uses
 `SQLAlchemy <https://www.sqlalchemy.org/>`_ to expose the CPG as Python objects.
-See :doc:`schemata/cpg` for detailed documentation of the content available.
+See :ref:`query_desc` for more information and :doc:`API documentation
+<api/MATE/modules>` for a complete reference. The reference documentation is
+also available inside Python via the ``help`` function.
 
 Below are some examples queries.
 Each assume ``session``, ``b``, and ``g`` have been initialized as described above.

@@ -1,6 +1,6 @@
-###########
-MATE Traces
-###########
+######
+Traces
+######
 
 .. NOTE::
     The CLIs documented below are part of the **legacy** ``mate`` CLI, which is
