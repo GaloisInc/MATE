@@ -39,7 +39,7 @@ RUN apt-get install -y software-properties-common && \
 RUN wget https://souffle-lang.github.io/ppa/souffle-key.public -O /usr/share/keyrings/souffle-archive-keyring.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/souffle-archive-keyring.gpg] https://souffle-lang.github.io/ppa/ubuntu/ stable main" | tee /etc/apt/sources.list.d/souffle.list && \
     apt-get update && \
-    apt-get install -y souffle
+    apt-get install -y souffle=2.3
 
 RUN wget -qnc -O /tmp/mustache.zip https://github.com/quantumew/mustache-cli/releases/download/v1.0.0/mustache-cli-linux-amd64.zip && \
     unzip -j -d /usr/bin /tmp/mustache.zip mustache && \

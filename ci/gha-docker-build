@@ -31,14 +31,10 @@ fi
 
 full_image_name="ghcr.io/galoisinc/${name}"
 
-# To speed the Docker build up, we trawl the Git history for the last 2
-# commits (excluding the current one) and use them as caching sources.
-# In theory any images associated with these commits will have similar layers,
-# which Docker can reuse instead of recreating.
-cache_from_args=""
-for commit in $(git log -n 3 --format="%H" | tail +2); do
-  cache_from_args="${cache_from_args} --cache-from ${full_image_name}:${commit}"
-done
+# To speed the Docker build up, we use two image cache sources:
+# * The current HEAD~1 (generally, the previous commit)
+# * The most recent `:main`-tagged image
+prev_ref=$(git rev-parse "${ref}~1")
 
 >&2 echo "Building ${full_image_name}:${ref} from ${target} target"
 
@@ -46,7 +42,8 @@ done
 # for reasons that I don't know.
 docker build \
   --build-arg BUILDKIT_INLINE_CACHE=1 \
-  ${cache_from_args} \
+  --cache-from "${full_image_name}:${prev_ref}" \
+  --cache-from "${full_image_name}:main" \
   --target "${target}" \
   --tag "${full_image_name}:${ref}" \
   .
