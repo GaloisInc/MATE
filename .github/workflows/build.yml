@@ -57,18 +57,18 @@ jobs:
 
       - name: Compress the MATE bdist
         run: |
-          zip -qr bdist.zip ./.out/bdist
+          tar czf bdist.tar.gz ./.out/bdist
 
       - name: Upload the MATE bdist
         uses: actions/upload-artifact@v3
         with:
           name: mate-bdist
           path: |
-            bdist.zip
+            bdist.tar.gz
 
-      - name: Bush and push the mate-dist image
+      - name: Build and push the mate-dist image
         run: |
-          docker pull ghcr.io/galoisinc/mate-dist:main" || true
+          docker pull "ghcr.io/galoisinc/mate-dist:main" || true
           docker pull "ghcr.io/galoisinc/mate-dist:3f669142c740617fe269deafb0b2ea61198d29db"
 
           # HACK
