@@ -21,14 +21,20 @@ fi
 
 full_image_name="ghcr.io/galoisinc/${name}"
 
-# To speed the Docker build up, we trawl the Git history for the last 5
-# commits and use them as caching sources. In theory any images associated
-# with these commits will have similar layers, which Docker can reuse instead
-# of recreating.
+# To speed the Docker build up, we trawl the Git history for the last 3
+# commits (excluding the current one) and use them as caching sources.
+# In theory any images associated with these commits will have similar layers,
+# which Docker can reuse instead of recreating.
 cache_from_args=""
-for commit in "$(git log -n 5 --format="%H")"; do
-  cache_from_args="${cache_from_args} --cache-from type=registry,ref=${full_image_name}:${commit}"
+for commit in "$(git log -n 4 --format="%H" | tail +2)"; do
+  # As hard as I've tried, I've been unable to get Docker to dynamically pull
+  # from the registry for caching. Caching only seems to work if I explicitly
+  # pull the images down first.
+  docker pull "${full_image_name}:${commit}" &
+
+  cache_from_args="${cache_from_args} --cache-from ${full_image_name}:${commit}"
 done
+wait -n
 
 >&2 echo "Building ${full_image_name}:${GITHUB_SHA} from ${target} target"
 
