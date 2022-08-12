@@ -21,12 +21,9 @@ RUN apt-get update && \
     update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100 && \
     rm -rf /var/lib/apt/lists/*
 
-FROM artifactory.galois.com:5004/tob-llvm-wedlock:155b9cdb as tob-llvm-wedlock
+FROM ghcr.io/trailofbits/llvm-wedlock:c2993fa3ff6ecf27eadabb5c725e8a572c28dd76 as tob-llvm-wedlock
 FROM base as dev
 
-# TODO(lb): Remove the last three lines of dependencies and download pre-built
-# packages when Souffle finds another host for pre-built packages:
-# https://github.com/souffle-lang/souffle/issues/1855
 RUN apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:hvr/ghc && \
     apt-get update && \
@@ -34,26 +31,15 @@ RUN apt-get install -y software-properties-common && \
       antlr4 curl locales \
       cabal-install-2.4 wget git-lfs \
       clang-format-10 clang-tidy-10 cmake ghc unzip \
-      zlib1g-dev ninja-build gdb shellcheck python3.8-dev \
-      autoconf automake bison build-essential clang doxygen flex g++ git \
-      libffi-dev libncurses5-dev libtool libsqlite3-dev make mcpp python \
-      sqlite zlib1g-dev libc++-dev libc++abi-dev lld && \
+      zlib1g-dev ninja-build gdb shellcheck python3.8-dev && \
     update-alternatives --install /usr/bin/cabal cabal /opt/cabal/bin/cabal 100 && \
     update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100 && \
     rm -rf /var/lib/apt/lists/*
 
-RUN cd /tmp && \
-    git clone --single-branch --branch=master https://github.com/souffle-lang/souffle && \
-    cd souffle && \
-    git checkout fce85d9ec8898a53365a0abb39485f27b14987b0 && \
-    cmake -S . -B build -G Ninja \
-        -DCMAKE_C_FLAGS=-g \
-        -DCMAKE_CXX_FLAGS=-g \
-        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-        -DSOUFFLE_USE_ZLIB=ON && \
-    cmake --build build --target install && \
-    cd && \
-    rm -rf /tmp/souffle
+RUN wget https://souffle-lang.github.io/ppa/souffle-key.public -O /usr/share/keyrings/souffle-archive-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/souffle-archive-keyring.gpg] https://souffle-lang.github.io/ppa/ubuntu/ stable main" | tee /etc/apt/sources.list.d/souffle.list && \
+    apt-get update && \
+    apt-get install -y souffle=2.3
 
 RUN wget -qnc -O /tmp/mustache.zip https://github.com/quantumew/mustache-cli/releases/download/v1.0.0/mustache-cli-linux-amd64.zip && \
     unzip -j -d /usr/bin /tmp/mustache.zip mustache && \
@@ -65,10 +51,6 @@ RUN wget -qnc -O /usr/bin/hadolint https://github.com/hadolint/hadolint/releases
 RUN cabal v2-update
 RUN cabal v2-install -j --overwrite-policy=always Cabal cabal-install
 
-RUN wget -q -O vagrant.deb https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb && \
-    apt-get install -y ./vagrant.deb && \
-    rm ./vagrant.deb
-
 ENV PATH=/root/.cabal/bin:$PATH \
     DOCKERIZED_MATE=1
 
@@ -76,14 +58,14 @@ WORKDIR /mate
 COPY shake/mate.cabal /mate/mate/mate.cabal
 RUN cd mate; rm -rf dist; rm -rf dist-newstyle; cabal v2-build --only-dependencies exe:mate
 
-COPY ./dev-requirements.txt /mate
-RUN python3.8 -m pip install -r dev-requirements.txt
-
 RUN locale-gen --purge en_US.UTF-8 && \
     update-locale && \
     dpkg-reconfigure -f noninteractive locales
 
 COPY --from=tob-llvm-wedlock /opt/llvm-wedlock /opt/llvm-wedlock
+
+COPY ./dev-requirements.txt /mate
+RUN python3.8 -m pip install -r dev-requirements.txt
 
 # If you want the paths to work for dev, then you need to run the dev container
 # with the mate repo mounted at '/mate', i.e. '-v <mate-repo-root>:/mate'

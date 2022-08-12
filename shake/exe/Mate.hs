@@ -520,7 +520,8 @@ main =
                         "sphinx-build"
                         [".", "-j", show numProcs]
     sphinxBuild ["-b", "html", sourceRoot </> bDistRoot </> "local/doc/html"]
-    sphinxBuild ["-b", "latex", sourceRoot </> bDistRoot </> "local/doc/latex"]
+    -- NOTE: Re-enable this if you need the LaTeX build.
+    -- sphinxBuild ["-b", "latex", sourceRoot </> bDistRoot </> "local/doc/latex"]
 
   (localDocRoot </> "html/api.html") %> \_ -> do
     need . concat =<< sequence [ mateCommonPackage

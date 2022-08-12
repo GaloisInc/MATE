@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+# gha-docker-build: build a MATE Docker image with some caching help
+
+# This script only works in CI.
+if [[ -z "${GITHUB_ACTIONS}" ]]; then
+  >&2 echo "Fatal: Only works in GitHub Actions."
+  exit 1
+fi
+
+# This should already be set in the CI, but just in case.
+export DOCKER_BUILDKIT=1
+
+# Extremely annoying: the `pull_request` even creates a merge commit,
+# which means that `GITHUB_SHA` is completely useless to key off of.
+# We have to do some additional sleuthing for these events to get the right
+# commit.
+if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+  ref="${ACTUAL_GITHUB_SHA_ON_PULL_REQUEST}"
+else
+  ref="${GITHUB_SHA}"
+fi
+
+target="${1}"
+name="${2}"
+
+if [[ -z "${target}" || -z "${name}" ]]; then
+  >&2 echo "Usage: gha-docker-build <dockerfile-target> <image-name>"
+  exit 1
+fi
+
+full_image_name="ghcr.io/galoisinc/${name}"
+
+# To speed the Docker build up, we use two image cache sources:
+# * The current HEAD~1 (generally, the previous commit)
+# * The most recent `:main`-tagged image
+prev_ref=$(git rev-parse "${ref}~1")
+
+>&2 echo "Building ${full_image_name}:${ref} from ${target} target"
+
+# Do the actual build. We need to explicitly enable BuildKit's inline cache,
+# for reasons that I don't know.
+docker build \
+  --build-arg BUILDKIT_INLINE_CACHE=1 \
+  --cache-from "${full_image_name}:${prev_ref}" \
+  --cache-from "${full_image_name}:main" \
+  --target "${target}" \
+  --tag "${full_image_name}:${ref}" \
+  .
+
+docker push "${full_image_name}:${ref}"
+
+# Additionally, if we're on main or we're doing a manually triggered build,
+# tag the image as ":main".
+if [[ "${GITHUB_REF_NAME}" == "main" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+  docker tag \
+    "${full_image_name}:${ref}" \
+    "${full_image_name}:main"
+
+  docker push "${full_image_name}:main"
+fi
+
+>&2 echo "[+] OK"
