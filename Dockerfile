@@ -58,14 +58,14 @@ WORKDIR /mate
 COPY shake/mate.cabal /mate/mate/mate.cabal
 RUN cd mate; rm -rf dist; rm -rf dist-newstyle; cabal v2-build --only-dependencies exe:mate
 
-COPY ./dev-requirements.txt /mate
-RUN python3.8 -m pip install -r dev-requirements.txt
-
 RUN locale-gen --purge en_US.UTF-8 && \
     update-locale && \
     dpkg-reconfigure -f noninteractive locales
 
 COPY --from=tob-llvm-wedlock /opt/llvm-wedlock /opt/llvm-wedlock
+
+COPY ./dev-requirements.txt /mate
+RUN python3.8 -m pip install -r dev-requirements.txt
 
 # If you want the paths to work for dev, then you need to run the dev container
 # with the mate repo mounted at '/mate', i.e. '-v <mate-repo-root>:/mate'
