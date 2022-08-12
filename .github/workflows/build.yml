@@ -33,7 +33,7 @@ jobs:
 
       - name: Build the MATE bdist
         run: |
-          # Extremely annoying: the `pull_request` even creates a merge commit,
+          # Extremely annoying: the `pull_request` event creates a merge commit,
           # which means that `GITHUB_SHA` is completely useless to key off of.
           # We have to do some additional sleuthing for these events to get the right
           # commit.
