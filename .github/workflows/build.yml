@@ -26,28 +26,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push the mate-dev image
-        run: |
-          docker build \
-            --build-arg BUILDKIT_INLINE_CACHE=1 \
-            --cache-from "ghcr.io/galoisinc/mate-dev:main" \
-            --cache-from "ghcr.io/galoisinc/mate-dev:51aef155263c49058aaf34b2b8f34569a1d6e240" \
-            --cache-from "ghcr.io/galoisinc/mate-dev:a1b921dd53692cd3f7a81fce137160bf75d19b44" \
-            --target dev \
-            --tag "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
-            .
-
-          docker push \
-            "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}"
-
-          # If we're on main or we were manually dispatched,
-          # then we additionally tag at mate-dev:main.
-          if [[ "${GITHUB_REF_NAME}" == "main" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
-            docker tag \
-              "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
-              "ghcr.io/galoisinc/mate-dev:main"
-
-            docker push "ghcr.io/galoisinc/mate-dev:main"
-          fi
+        run: ./ci/gha-docker-build "dev" "mate-dev"
 
       - name: Build the MATE bdist
         run: |
@@ -61,24 +40,4 @@ jobs:
           # HACK
           sudo chmod a+r -R .out/
 
-          docker build \
-            --build-arg BUILDKIT_INLINE_CACHE=1 \
-            --cache-from "ghcr.io/galoisinc/mate-dist:main" \
-            --cache-from "ghcr.io/galoisinc/mate-dist:51aef155263c49058aaf34b2b8f34569a1d6e240" \
-            --cache-from "ghcr.io/galoisinc/mate-dist:a1b921dd53692cd3f7a81fce137160bf75d19b44" \
-            --target dist \
-            --tag "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}" \
-            .
-
-          docker push \
-            "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}"
-
-          # If we're on main or we were manually dispatched,
-          # then we additionally tag at mate-dist:main.
-          if [[ "${GITHUB_REF_NAME}" == "main" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
-            docker tag \
-              "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}" \
-              "ghcr.io/galoisinc/mate-dist:main"
-
-            docker push "ghcr.io/galoisinc/mate-dist:main"
-          fi
+          ./ci/gha-docker-build "dist" "mate-dist"
