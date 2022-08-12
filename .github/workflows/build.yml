@@ -27,6 +27,7 @@ jobs:
           docker build \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --cache-from "ghcr.io/galoisinc/mate-dev:main" \
+            --cache-from "ghcr.io/galoisinc/mate-dev:3f669142c740617fe269deafb0b2ea61198d29db" \
             --target dev \
             --tag "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
             .
@@ -70,6 +71,7 @@ jobs:
           docker build \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --cache-from "ghcr.io/galoisinc/mate-dist:main" \
+            --cache-from "ghcr.io/galoisinc/mate-dist:3f669142c740617fe269deafb0b2ea61198d29db" \
             --target dist \
             --tag "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}" \
             .
