@@ -11,6 +11,16 @@ fi
 # This should already be set in the CI, but just in case.
 export DOCKER_BUILDKIT=1
 
+# Extremely annoying: the `pull_request` even creates a merge commit,
+# which means that `GITHUB_SHA` is completely useless to key off of.
+# We have to do some additional sleuthing for these events to get the right
+# commit.
+if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+  ref="${ACTUAL_GITHUB_SHA_ON_PULL_REQUEST}"
+else
+  ref="${GITHUB_SHA}"
+fi
+
 target="${1}"
 name="${2}"
 
@@ -21,22 +31,20 @@ fi
 
 full_image_name="ghcr.io/galoisinc/${name}"
 
-# To speed the Docker build up, we trawl the Git history for the last 3
+# To speed the Docker build up, we trawl the Git history for the last 2
 # commits (excluding the current one) and use them as caching sources.
 # In theory any images associated with these commits will have similar layers,
 # which Docker can reuse instead of recreating.
 cache_from_args=""
-for commit in "$(git log -n 4 --format="%H" | tail +2)"; do
-  # As hard as I've tried, I've been unable to get Docker to dynamically pull
-  # from the registry for caching. Caching only seems to work if I explicitly
-  # pull the images down first.
-  docker pull "${full_image_name}:${commit}" &
-
+for commit in $(git log -n 3 --format="%H" | tail +2); do
   cache_from_args="${cache_from_args} --cache-from ${full_image_name}:${commit}"
 done
-wait -n
 
->&2 echo "Building ${full_image_name}:${GITHUB_SHA} from ${target} target"
+# Finally, because of my own CI errors: seed with a known-good image.
+# This can be removed once the CI is stabilized.
+cache_from_args="${cache_from_args} --cache-from ${full_image_name}:f1910a297fdcef4a410303b2d8ab1f1c60aa72f2"
+
+>&2 echo "Building ${full_image_name}:${ref} from ${target} target"
 
 # Do the actual build. We need to explicitly enable BuildKit's inline cache,
 # for reasons that I don't know.
@@ -44,16 +52,16 @@ docker build \
   --build-arg BUILDKIT_INLINE_CACHE=1 \
   ${cache_from_args} \
   --target "${target}" \
-  --tag "${full_image_name}:${GITHUB_SHA}" \
+  --tag "${full_image_name}:${ref}" \
   .
 
-docker push "${full_image_name}:${GITHUB_SHA}"
+docker push "${full_image_name}:${ref}"
 
 # Additionally, if we're on main or we're doing a manually triggered build,
 # tag the image as ":main".
 if [[ "${GITHUB_REF_NAME}" == "main" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
   docker tag \
-    "${full_image_name}:${GITHUB_SHA}" \
+    "${full_image_name}:${ref}" \
     "${full_image_name}:main"
 
   docker push "${full_image_name}:main"

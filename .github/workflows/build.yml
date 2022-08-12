@@ -9,6 +9,8 @@ on:
 
 env:
   DOCKER_BUILDKIT: "1"
+  # This will be empty on events that aren't pull requests.
+  ACTUAL_GITHUB_SHA_ON_PULL_REQUEST: "${{ github.event.pull_request.head.sha }}"
 
 jobs:
   build:
@@ -17,6 +19,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
+          fetch-depth: 5
 
       - name: Login to Packages Container registry
         uses: docker/login-action@v2
@@ -30,9 +33,19 @@ jobs:
 
       - name: Build the MATE bdist
         run: |
+          # Extremely annoying: the `pull_request` even creates a merge commit,
+          # which means that `GITHUB_SHA` is completely useless to key off of.
+          # We have to do some additional sleuthing for these events to get the right
+          # commit.
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            ref="${ACTUAL_GITHUB_SHA_ON_PULL_REQUEST}"
+          else
+            ref="${GITHUB_SHA}"
+          fi
+
           docker run \
             --rm -v $(pwd):/mate \
-            "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
+            "ghcr.io/galoisinc/mate-dev:${ref}" \
             ./shake.sh -j bdist
 
       - name: Build and push the mate-dist image
