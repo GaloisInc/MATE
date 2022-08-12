@@ -55,17 +55,6 @@ jobs:
             "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
             ./shake.sh -j bdist
 
-      - name: Compress the MATE bdist
-        run: |
-          tar czf bdist.tar.gz ./.out/bdist
-
-      - name: Upload the MATE bdist
-        uses: actions/upload-artifact@v3
-        with:
-          name: mate-bdist
-          path: |
-            bdist.tar.gz
-
       - name: Build and push the mate-dist image
         run: |
           docker pull "ghcr.io/galoisinc/mate-dist:main" || true
