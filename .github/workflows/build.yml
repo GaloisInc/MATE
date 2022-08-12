@@ -57,7 +57,7 @@ jobs:
 
       - name: Compress the MATE bdist
         run: |
-          zip -r bdist.zip ./.out/bdist
+          zip -qr bdist.zip ./.out/bdist
 
       - name: Upload the MATE bdist
         uses: actions/upload-artifact@v3
