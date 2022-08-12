@@ -31,6 +31,7 @@ jobs:
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --cache-from "ghcr.io/galoisinc/mate-dev:main" \
             --cache-from "ghcr.io/galoisinc/mate-dev:51aef155263c49058aaf34b2b8f34569a1d6e240" \
+            --cache-from "ghcr.io/galoisinc/mate-dev:a1b921dd53692cd3f7a81fce137160bf75d19b44" \
             --target dev \
             --tag "ghcr.io/galoisinc/mate-dev:${GITHUB_SHA}" \
             .
@@ -64,6 +65,7 @@ jobs:
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --cache-from "ghcr.io/galoisinc/mate-dist:main" \
             --cache-from "ghcr.io/galoisinc/mate-dist:51aef155263c49058aaf34b2b8f34569a1d6e240" \
+            --cache-from "ghcr.io/galoisinc/mate-dist:a1b921dd53692cd3f7a81fce137160bf75d19b44" \
             --target dist \
             --tag "ghcr.io/galoisinc/mate-dist:${GITHUB_SHA}" \
             .
