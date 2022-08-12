@@ -24,6 +24,9 @@ jobs:
 
       - name: Build and push the mate-dev image
         run: |
+          docker pull "ghcr.io/galoisinc/mate-dev:main" || true
+          docker pull "ghcr.io/galoisinc/mate-dev:3f669142c740617fe269deafb0b2ea61198d29db"
+
           docker build \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --cache-from "ghcr.io/galoisinc/mate-dev:main" \
@@ -65,6 +68,9 @@ jobs:
 
       - name: Bush and push the mate-dist image
         run: |
+          docker pull ghcr.io/galoisinc/mate-dist:main" || true
+          docker pull "ghcr.io/galoisinc/mate-dist:3f669142c740617fe269deafb0b2ea61198d29db"
+
           # HACK
           sudo chmod a+r -R .out/
 
