@@ -2,6 +2,8 @@
 
 # gha-docker-build: build a MATE Docker image with some caching help
 
+set -e
+
 # This script only works in CI.
 if [[ -z "${GITHUB_ACTIONS}" ]]; then
   >&2 echo "Fatal: Only works in GitHub Actions."
