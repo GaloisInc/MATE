@@ -40,10 +40,6 @@ for commit in $(git log -n 3 --format="%H" | tail +2); do
   cache_from_args="${cache_from_args} --cache-from ${full_image_name}:${commit}"
 done
 
-# Finally, because of my own CI errors: seed with a known-good image.
-# This can be removed once the CI is stabilized.
-cache_from_args="${cache_from_args} --cache-from ${full_image_name}:f1910a297fdcef4a410303b2d8ab1f1c60aa72f2"
-
 >&2 echo "Building ${full_image_name}:${ref} from ${target} target"
 
 # Do the actual build. We need to explicitly enable BuildKit's inline cache,
