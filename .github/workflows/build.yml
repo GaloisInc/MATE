@@ -48,6 +48,16 @@ jobs:
             "ghcr.io/galoisinc/mate-dev:${ref}" \
             ./shake.sh -j bdist
 
+      - name: Compress the MATE bdist
+        run: |
+          tar czf mate-bdist.tar.gz ./.out/bdist
+
+      - name: Upload the MATE bdist
+        uses: actions/upload-artifact@v3
+        with:
+          name: mate-bdist
+          path: mate-bdist.tar.gz
+
       - name: Build and push the mate-dist image
         run: |
           # HACK: These files are owned by the container root, so we can't
