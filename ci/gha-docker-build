@@ -52,6 +52,14 @@ docker build \
 
 docker push "${full_image_name}:${ref}"
 
+# Also tag it with the current workflow run ID, to make reuse in subsequent
+# CI steps easier (no need to track the commit ref).
+docker tag \
+  "${full_image_name}:${ref}" \
+  "${full_image_name}:${GITHUB_RUN_ID}"
+
+docker push "${full_image_name}:${GITHUB_RUN_ID}"
+
 # Additionally, if we're on main or we're doing a manually triggered build,
 # tag the image as ":main".
 if [[ "${GITHUB_REF_NAME}" == "main" || "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
