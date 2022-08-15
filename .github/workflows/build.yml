@@ -73,11 +73,20 @@ jobs:
         run: |
           docker pull "ghcr.io/galoisinc/mate-dev:${GITHUB_RUN_ID}"
 
+      # - name: Fetch the MATE bdist
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: mate-bdist
+
+      # - name: Extract the MATE bdist
+      #   run: |
+      #     tar xzf mate-dist.tar.gz
+
       - name: Run legacy tests
         run: |
           # TODO: Figure out the right way to plumb the integration test setting.
           docker run \
             -e MATE_INTEGRATION_TESTS=0 \
-            --rm -v $(pwd):/mate -it \
+            --rm -v $(pwd):/mate \
             "ghcr.io/galoisinc/mate-dev:${GITHUB_RUN_ID}" \
               ./shake.sh --skip=build pytests -- -- -n logical -x
