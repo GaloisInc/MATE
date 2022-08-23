@@ -34,13 +34,10 @@ explore a program, see :doc:`quickstart`. Contributors should read
    debugging-builds
    dwarfcore
    environment
-   hacking
-   legal
    mantiserve
    pois
    schemata/cpg
    signatures
-   testing
    trace
    under-constrained-manticore
    usagefinder
@@ -54,6 +51,14 @@ explore a program, see :doc:`quickstart`. Contributors should read
 
    api/index
    MATE REST API <api.html#http://>
+
+.. toctree::
+   :hidden:
+   :caption: Developer Documentation
+
+   hacking
+   legal
+   testing
 
 Indices and Tables
 ==================
