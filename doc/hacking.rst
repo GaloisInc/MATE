@@ -732,6 +732,8 @@ In general, there are three steps to publishing one of the ``frontend/`` package
       Make sure that ``dist/`` has nothing other than the new distribution files
       in it; preexisting distribution files will be rejected by PyPI.
 
+.. _history:
+
 *******
 History
 *******
@@ -1045,4 +1047,3 @@ resources for code reviewers.
   <https://medium.com/palantir/code-review-best-practices-19e02780015f>`_
 - `Karl E. Wiegers' essay, "Humanizing Peer Reviews"
   <http://www.processimpact.com/articles/humanizing_reviews.pdf>`_
-

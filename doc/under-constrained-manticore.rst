@@ -18,9 +18,9 @@ Symbolic execution enables bit-precise local reasoning about memory and
 arithmetic, which complements MATE's higher-level inter-procedural data- and
 control-flow analyses.
 
-Under-constrained execution is implemented as a Manticore Plugin, which means it can be
-enabled/disabled easily, and should be able to coexist with other detectors such as the
-UAF or variable-bounds detectors.
+Under-constrained execution is implemented as a Manticore Plugin, which means it
+can be enabled/disabled easily, and should be able to coexist with other
+:ref:`detectors <detectors>` such as the UAF or variable-bounds detectors.
 
 In broad terms, under-constrained Manticore works as follows:
 
@@ -36,11 +36,11 @@ In broad terms, under-constrained Manticore works as follows:
    function arguments as if it was normally called from within the program. To do so,
    it uses the CPG to infer the expected arguments and their types, and creates
    a symbolic expression for every argument. So the target function is called with fully
-   symbolic inputs
+   symbolic inputs.
 
 
 *  **Symbolic pointers**:
-   when a function takes a pointer as argument, e.g ``foo(int* ptr)``, and that pointer is
+   when a function takes a pointer as argument, e.g ``foo(int *ptr)``, and that pointer is
    dereferenced in the function's body, Manticore has to rely on a special memory model.
    In a normal Manticore run, ``ptr`` would have been initialized previously by the program,
    but in under-constrained mode it is purely symbolic, and doesn't point to any real
@@ -55,7 +55,7 @@ In broad terms, under-constrained Manticore works as follows:
 
   .. code-block:: c
 
-      foo(int*ptr, int idx){
+      foo(int *ptr, int idx){
           return ptr[idx];
       }
 
@@ -77,22 +77,22 @@ The exploration options that are passed with the API call are similar to the reg
 options with some additional settings:
 
 * **target_function**: the name of the target function to execute. In case of a C++ binary
-  the name must be mangled
+  the name must be mangled.
 
 * **input_constraints**: additional symbolic state constraints. Those can be used to
   constrain Manticore further to eliminate possible errors that are false positive or
   to optimize the execution time by trimming some exploration paths. See the
-  :ref:`constraints_DSL` section for more details
+  :ref:`constraints_DSL` section for more details.
 
 * **primitive_ptr_policy**: the policy for choosing the length of unbounded symbolic arrays
   that contain primitive types. The default policy lets Manticore choose reasonable lengths
   for arrays, but the user can specify explicit lengths to use by switching to the
-  ``custom`` policy
+  ``custom`` policy.
 
 * **complex_ptr_policy**: the policy for choosing the length of unbounded symbolic arrays
   that contain complex types such as structures or objects. The default policy lets
   Manticore choose reasonable lengths for arrays, but the user can specify explicit lengths
-  to use by switching to the ``custom`` policy
+  to use by switching to the ``custom`` policy.
 
 .. _constraints_DSL:
 
@@ -108,19 +108,19 @@ to eliminate the false positives and keep only the interesting results.
 Two examples of using constraints are:
 
 * **relationship between function arguments**:
-  let's consider the following ``strcpy``-like function:
+  consider the following ``strcpy``-like function:
 
   .. code-block:: c
 
-    void foo(char* dst, char* src){
+    void my_strcpy(char *dst, char *src){
         while((*(dst++) = *(src++))){};
     }
 
-  if ``src`` is longer than ``dst``, Manticore will return a potential out-of-bounds memory
+  If ``src`` is longer than ``dst``, Manticore will return a potential out-of-bounds memory
   write error. However, in some cases, we might be **sure** (or want to assume) that
   ``src`` is smaller than ``dst``. Using a symbolic constraint will allow use to enforce
   the size relationship between ``src`` and ``dst`` in Manticore and remove the out-of-bounds
-  error
+  error.
 
 
 * **data structure invariants**:
@@ -129,20 +129,21 @@ Two examples of using constraints are:
   .. code-block:: c
 
     struct string {
-        char * str;
+        char *str;
         int len; // Length of 'str'
     };
 
-  under-constrained Manticore doesn't know that ``len`` if referring to the size of ``str``. while
-  in some cases avoiding to correlate ``len`` and ``str`` could help find bugs withing the ``string``
-  implementation, we will often want to inform Manticore that those two variables are linked
-  (one if the size of the other) so that the ``string`` struct behaves correctly and doesn't
-  cause many false positive errors that will hide other interesting findings. This becomes even more true when using classes of the C++
-  runtime like ``std::vector``, ``std::string``, etc, of whom Manticore MUST assume that their
-  implementations and internals are bug-free
+  under-constrained Manticore doesn't know that ``len`` if referring to the size
+  of ``str``. While in some cases avoiding to correlate ``len`` and ``str``
+  could help find bugs withing the ``string`` implementation, we will often want
+  to inform Manticore of the relationship between those two variables (one is
+  the size of the other) so that the ``string`` struct behaves correctly and
+  doesn't cause many false positive errors that will hide other interesting
+  findings. This becomes even more true when using classes of the C++ standard
+  library like ``std::vector``, ``std::string``, etc, of whom Manticore **must**
+  assume that their implementations and internals are bug-free.
 
-
-Symbolic constraints can be written using the Domain-Specific-Language (DSL) described below:
+Symbolic constraints can be written using the Domain-Specific-Language (DSL) described below.
 
 ==================================
 Constraints on function parameters
@@ -159,7 +160,7 @@ in the source code. For example if we target the ``foo`` function:
         int b;
     };
 
-    void foo(A& x) {
+    void foo(struct A x) {
         ...
     }
 
@@ -225,10 +226,10 @@ Example constraints to make the following structure coherent:
 
     struct buffer {
         int *buf;
-        int len; // Current nb of elements stored in 'buf'
+        int len; // Current number of elements stored in 'buf'
     };
 
-    void foo(buffer *b);
+    void foo(struct buffer *b);
 
 .. code-block::
 
@@ -242,7 +243,7 @@ Example constraints to make the following structure coherent:
 ==============================
 
 By default, under-constrained Manticore will create new symbolic objects for every
-symbolic pointer it deals with. For example, if running the ``foo(int* a, int* b)``
+symbolic pointer it deals with. For example, if running the ``foo(int *a, int *b)``
 function, Manticore will create two symbolic arrays, one for ``a`` and one for ``b``.
 Those are distinct and will never overlap.
 
@@ -273,7 +274,7 @@ can be written using the following syntax:
 
     <class_name>: <constraint>
 
-The ``<class_name>:`` specifier MUST match type names as they are stored in the CPG.
+The ``<class_name>:`` specifier must match type names as they are stored in the CPG.
 
 Since class constraints are generic, there is no declared variable name to use when
 writing the constraint. Instead, one can use the ``$OBJ.`` syntax to refer to the
@@ -283,10 +284,10 @@ instance of the class. If we build up on our previous example, that would give:
 
     struct buffer {
         int *buf;
-        int len; // Current nb of elements stored in 'buf'
+        int len; // Current number of elements stored in 'buf'
     };
 
-    void foo(buffer *b);
+    void foo(struct buffer *b);
 
 .. code-block::
 
@@ -294,7 +295,7 @@ instance of the class. If we build up on our previous example, that would give:
     buffer: $SIZE($OBJ) <= $CAPACITY($OBJ) # current size of the instance less or equal to it's capacity
     buffer: $OBJ.len == $SIZE($OBJ)
 
-When under-constrained Manticore instantiates the function argument ``buffer& b``, the generic
+When under-constrained Manticore instantiates the function argument ``b``, the generic
 constraints for ``buffer`` are applied to ``b`` (``$OBJ`` gets replaced by ``b``).
 
 It is also possible to write generic constraints for templated types by replace template
@@ -330,7 +331,8 @@ with maximal capacity of 100 elements:
 *************
 State forking
 *************
-Under-constrained Manticore will fork at the exact same locations as regular Manticore.
+
+Under-constrained Manticore will fork at the same locations as regular Manticore.
 However, for practical reasons, under-constrained Manticore also needs to perform
 additional forking on :ref:`meta_variables`. It will thus fork on:
 
