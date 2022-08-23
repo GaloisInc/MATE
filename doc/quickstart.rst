@@ -165,7 +165,7 @@ UsageFinder
 ===========
 
 UsageFinder is a tool for finding vulnerabilities that result from incorrect
-usage of internal or external APIs. Usagefinder can be found at
+usage of internal or external APIs. UsageFinder can be found at
 `<http://localhost:8889/notebooks/examples/usage-finder.ipynb>`_, or by clicking
 "For Experts", then "Notebooks" in the top bar of the builds page, then
 navigating to the "examples/" folder, then the "usage-finder.ipynb" file.

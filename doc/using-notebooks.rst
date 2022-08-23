@@ -41,7 +41,7 @@ Optional: click the notebook name (initially "Untitled") to give it a more descr
 Load the desired code property graph
 ************************************
 
-Within a python notebook, you need to identify the Code Property Graph you wish to query.
+Within a Python notebook, you need to identify the Code Property Graph you wish to query.
 You'll need the Build Id for the target you're interested in.
 You can copy it from the MATE dashboard: `<http://localhost:8050/>`_
 
