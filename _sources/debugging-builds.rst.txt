@@ -1,21 +1,9 @@
-##################################
-Debugging Challenge Build Failures
-##################################
+################################
+Debugging Program Build Failures
+################################
 
-This page describes how to debug issues related to compiling challenge programs
-and building the associated Code Property Graph (CPG).
-
-.. NOTE::
-
-   The information below applies to compilations and CPG builds that are
-   performed through the REST API. The legacy ``mate`` CLI and its legacy build
-   pipeline are not covered here.
-
-.. NOTE::
-
-   The information below is written in the context of the MATE's use within the
-   integrated CHESS system. Most of the details apply to independent use of
-   MATE as well.
+This page describes how to debug issues related to compiling programs and
+building the associated :doc:`Code Property Graph (CPG) <cpg>`.
 
 When turning a program into a CPG, MATE goes through two primary phases: it
 first *compiles* the program into LLVM bitcode, and then it *builds* one or
@@ -28,7 +16,6 @@ sources of failures.
    The debugging information below does **not** include environmental failure
    conditions, such as out-of-memory (OOM) errors or disk space exhaustion.
 
-
 *******************************
 Identifying the kind of failure
 *******************************
@@ -39,7 +26,7 @@ checking the status of the compilation that we kicked off:
 
 .. code-block:: bash
 
-   $ http YOUR_CHESS_SYSTEM:8666/api/v1/compilations/YOUR-COMPILATION-ID
+   $ mate-cli compile get YOUR-COMPILATION-ID
 
 This will return a JSON blob with metadata about the compilation, including
 a ``state`` field that indicates the compilation's status:
@@ -96,20 +83,20 @@ is immediately required for a compilation in this state.
 
 ``"state": "compiled"`` indicates a successful compilation, producing one
 or more bitcode outputs that are suitable for the CPG build pipeline.
-Follow the steps under :ref:`Debugging a MATE CPG build <debugging-mate-build>`
+Follow the steps under :ref:`Debugging a CPG build <debugging-build>`
 for debugging failed builds once you've turned a compilation into CPG builds.
 
 ``"state": "failed"`` affirmatively indicates a failed compilation phase. Follow
 the steps under
-:ref:`Debugging a MATE compilation <debugging-mate-compilation>`.
+:ref:`Debugging a compilation <debugging-compilation>`.
 
-.. _debugging-mate-compilation:
+.. _debugging-compilation:
 
-****************************
-Debugging a MATE compilation
-****************************
+***********************
+Debugging a compilation
+***********************
 
-To begin debugging a MATE compilation, follow these steps:
+To begin debugging a compilation, follow these steps:
 
 #. First, check the Docker logs for the ``executor`` service, which handles
    compilation tasks. This will probably either be
@@ -118,28 +105,9 @@ To begin debugging a MATE compilation, follow these steps:
 
    The most common sources of compilation errors at this level are as follows:
 
-   #. (CHESS system only) Challenge broker and Docker registry configuration
-      errors. When compiling a brokerized challenge, MATE expects to be able to
-      run containers from images that may originate behind Apogee's VPN or are
-      stored on a credential-protected ECS instance.
-
-   #. (CHESS system only) Build system inference errors. When compiling a
-      brokerized challenge, MATE attempts to collect the individual steps
-      needed to build the challenge from the ``Dockerfile.build`` supplied
-      with each challenge. To do this, MATE currently looks for a range of
-      Dockerfile steps marked with ``# CHESS BUILD START`` and
-      ``# CHESS BUILD END`` and attempts to translate them into appropriate
-      commands for running the build in a temporary directory within
-      an already-spawned copy of the challenge's image. This process isn't
-      perfect, and can fail (for example) if the build steps include a
-      ``WORKDIR`` directive that MATE can't relocate into a directory
-      within its copy of the challenge source code. These may manifest as
-      the entire challenge container terminating due to the ``chdir`` syscall
-      failing.
-
    #. Compiler and linker flag errors. MATE runs compilations either in its own
-      environment or in a challenge container, depending on how the compilation
-      was requested. In both cases, MATE uses its own build of the LLVM compiler
+      environment or in a container, depending on how the compilation was
+      requested. In both cases, MATE uses its own build of the LLVM compiler
       toolchain for the individual build steps.
 
       This introduces several avenues of failure. For non-containerized
@@ -147,10 +115,9 @@ To begin debugging a MATE compilation, follow these steps:
       dependencies. Alternatively, the MATE LLVM toolchain may not have the
       correct language or flag features for the target.
 
-#. (CHESS system only) If the Docker logs don't show any errors or the
-   formatting of the errors is too difficult to follow, you may be able to
-   obtain additional context from the compilation-only log stored with
-   each containerized compilation attempt.
+#. If the Docker logs don't show any errors or the formatting of the errors is
+   too difficult to follow, you may be able to obtain additional context from
+   the compilation-only log stored with each containerized compilation attempt.
 
    To get this log, you can request all containerized compilation logs
    from the REST API and select just the one corresponding to your compilation
@@ -158,15 +125,14 @@ To begin debugging a MATE compilation, follow these steps:
 
    .. code-block:: bash
 
-      http 'YOUR_CHESS_SYSTEM:8666/api/v1/artifacts?kind=compile-output:compile-log&detail=true'
+       mate-cli artifact get --kind compile-output:compile-log
 
    Once you have the artifact ID for the container log of interest, you can
    request the raw log contents:
 
    .. code-block:: bash
 
-      http YOUR_CHESS_SYSTEM:8666/api/v1/artifacts/ARTIFACT-ID/object | less
-
+      mate-cli artifact dump ARTIFACT-ID | less
 
 .. _compilations-what-to-do:
 
@@ -186,9 +152,12 @@ compiler) fails, you can try the following workarounds:
 
    For example, a compilation that only needs the ``make server`` command:
 
+   ..
+      TODO(lb): Replace http with mate-cli
+
    .. code-block:: bash
 
-      http POST YOUR_CHESS_SYSTEM:8666/api/v1/compilations \
+      http POST localhost:8666/api/v1/compilations \
          kind="your-target-kind" \
          handle="your-target-handle" \
          options:='{"containerized_infer_build": false, "make_targets": ["server"]}'
@@ -199,9 +168,12 @@ compiler) fails, you can try the following workarounds:
    overly conservative flags, you can add additional flags to every compilation
    step:
 
+   ..
+      TODO(lb): Replace http with mate-cli
+
    .. code-block:: bash
 
-      http POST YOUR_CHESS_SYSTEM:8666/api/v1/compilations \
+      http POST localhost:8666/api/v1/compilations \
          kind="your-target-kind" \
          handle="your-target-handle" \
          options:='{"extra_compiler_flags": ["-some", "-extras"]}'
@@ -211,18 +183,18 @@ compiler) fails, you can try the following workarounds:
 
 #. Attempt a combination of the above.
 
-.. _debugging-mate-build:
+.. _debugging-build:
 
-**********************
-Debugging a MATE build
-**********************
+*****************
+Debugging a build
+*****************
 
-To debug a MATE build, we can start by retrieving the build's status from
-MATE's REST API:
+To debug a build, we can start by retrieving the build's status from the REST
+API:
 
 .. code-block:: bash
 
-   http YOUR_CHESS_SYSTEM:8666/api/v1/builds/YOUR-BUILD-ID
+   mate-cli compile get YOUR-BUILD-ID
 
 This will return a JSON blob (abbreviated below) with metadata about the build,
 including a ``state`` field that indicates the build's status:
@@ -295,11 +267,11 @@ root cause of the build failure, follow these steps:
       system that we infer as dependencies. This process isn't perfect, and
       can cause linker errors for missing or duplicated symbols.
 
-   #. Errors and assertions during pointer analysis. MATE's pointer analysis
-      component contains assertions for unexpected conditions, which will cause
-      a build failure if hit. The pointer analysis component may also abort
-      with a segmentation fault on certain pathological bitcode inputs,
-      or with a floating point exception.
+   #. Errors and assertions during pointer analysis. MATE's :ref:`pointer
+      analysis <points_to_desc>` component contains assertions for unexpected
+      conditions, which will cause a build failure if hit. The pointer analysis
+      component may also abort with a segmentation fault on certain pathological
+      bitcode inputs, or with a floating point exception.
 
    #. Resource exhaustion. MATE's pointer analysis is limited to 32GB of RAM by
       default (or the value of ``MATE_DEFAULT_MEMORY_LIMIT_GB``, if that
@@ -337,17 +309,20 @@ root cause of the build failure, follow these steps:
 
    In both cases, you can use the REST API to retrieve the log's contents:
 
+   ..
+      TODO(lb): Replace http with mate-cli?
+
    .. code-block:: bash
 
       # change this as necessary
       build_id=YOUR-BUILD-ID
       target_log=build-output:quotidian-wedlock-log
 
-      artifact_id=$(http "YOUR_CHESS_SYSTEM:8666/api/v1/artifacts?kind=${target_log}&detail=true" | \
+      artifact_id=$(http "localhost:8666/api/v1/artifacts?kind=${target_log}&detail=true" | \
                      jq -r --arg build_id "${build_id}" \
                      '.[] | select(.build_ids | select(.[] == $build_id)) | .artifact_id')
 
-      http YOUR_CHESS_SYSTEM:8666/api/v1/artifacts/${artifact_id}/object | less
+      http localhost:8666/api/v1/artifacts/${artifact_id}/object | less
 
 .. _builds-what-to-do:
 
@@ -358,15 +333,15 @@ If you encounter any of the above failure modes, builds can be re-created using
 the REST API after applying workarounds and fixes.
 
 .. important::
-   POI analyses are not run automatically for builds initiated by the `REST API <api.html>`_
-   rather than the challenge broker. To run POI analyses for a manually-created
-   build, wait until the built has completed (its state is reported as ``built``),
-   and then submit a request to the ``api/v1/analyses/run/{build_id}`` endpoint
-   supplying the build ID using either the REST API web page or at the command line:
+   POI analyses are not run automatically for builds initiated by the `REST API
+   <api.html>`_. To run POI analyses for a manually-created build, wait until
+   the built has completed (its state is reported as ``built``), and then submit
+   a request with ``mate-cli`` or to the ``api/v1/analyses/run/{build_id}``
+   endpoint supplying the build ID:
 
    .. code-block:: bash
 
-      http POST http://YOUR_CHESS_SYSTEM:8666/api/v1/analyses/run/${build_id}
+      mate-cli analysis run YOUR-BUILD-ID
 
 
 Pointer Analysis Issues
@@ -377,15 +352,17 @@ following workarounds:
 
 #. Try rebuilding with more RAM by setting the ``memory_limit_mb`` build option
    (though this might just fail again and/or take a long time, depending on the
-   challenge).
+   program).
+#. Try rebuilding with the unification analysis (see the ``pointer_analysis``
+   build option).
 #. Try building with less context-sensitivity (see the ``context_sensitivity``
    build option). The default is ``2-callsite``, so you might try ``2-caller``,
    ``1-callsite`` or even ``insensitive``. The resulting analysis will be less
    precise, but hopefully more scalable.
 #. Try building without bitcode merging, i.e., set ``merge_library_bitcode`` to
    ``false``. The resulting CPG may not be "complete" in the sense that it might
-   not contain a representation of the whole challenge program with all its
-   accompanying libraries. Some challenges may fail to build with
+   not contain a representation of the whole program with all its
+   accompanying libraries. Some programs may fail to build with
    ``merge_library_bitcode`` set to ``false``, particularly if they use complex
    linking instructions (e.g., libtool-based build systems).
 

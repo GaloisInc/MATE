@@ -2,11 +2,12 @@
 Dwarfcore
 #########
 
-Dwarfcore is a framework for building plugins that query and expose MATE CPG
-information (including but not limited to DWARF debug information) to the
-Manticore symbolic execution engine used by Mantiserve. Dwarfcore internal
-plugins are used to build ``Detector``\ s, which are the capabilities made
-available to MATE users via the :doc:`mantiserve` REST API.
+Dwarfcore is a framework for building plugins that query and expose :doc:`code
+property graph (CPG) <cpg>` information (including but not limited to DWARF
+debug information) to the Manticore symbolic execution engine used by
+Mantiserve. Dwarfcore internal plugins are used to build ``Detector``\ s, which
+are the capabilities made available to MATE users via the :doc:`mantiserve` REST
+API.
 
 Detectors:
 ~~~~~~~~~~
@@ -23,7 +24,7 @@ The following built-in Dwarfcore Detectors are available to users of Mantiserve:
 
 * **Use After Free Detector** -
   (:class:`~dwarfcore.detectors.uaf.DetectUseAfterFree`) - Detects memory
-  accesses to freed memory from calls to malloc and free
+  accesses to freed memory from calls to ``malloc`` and ``free``
 
 Internal Plugins (Not available via REST API):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

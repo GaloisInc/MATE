@@ -2,16 +2,28 @@
 MATE Python Notebooks
 #####################
 
-MATE provides a `Jupyter Notebook <https://jupyter.org/>`_ server for creating notebooks that can be used to write custom queries of the MATE code property graph.
+..
+   The first paragraph is duplicated in overview.rst, and the first sentence is
+   in quickstart.rst. Updates to one should be reflected in the others.
 
-The MATE notebook server is exposed via web interface: `<http://YOUR_CHESS_SYSTEM:8889/>`_
+MATE has :ref:`a Python API <query_desc>`_ for querying :doc:`the CPG <cpg>` and
+exposes browser-based, interactive Jupyter notebooks with this query interface
+pre-loaded. These notebooks can be used to write complex, recursive,
+whole-program queries that answer detailed questions like "What sequences of
+function calls can lead from point A to point B in this program?" or "Can user
+input flow into a memory location with a specific struct type, and from there to
+some particular function without passing through one of these three sanitization
+routines?" These notebooks can be used for one-off explorations, or as a
+platform for users to build reusable apps on the MATE platform (such as
+:doc:`usagefinder`).
 
+The MATE notebook server is exposed via web interface at `<http://localhost:8889/>`_.
 
 *****************
 Create a notebook
 *****************
 
-Navigate to the MATE notebook server at `<http://YOUR_CHESS_SYSTEM:8889/>`_ and use the "New" dropdown to create a new Python3 notebook.
+Navigate to the MATE notebook server at `<http://localhost:8889/>`_ and use the "New" dropdown to create a new Python3 notebook.
 
 .. figure:: assets/create-notebook.png
    :scale: 35
@@ -29,9 +41,9 @@ Optional: click the notebook name (initially "Untitled") to give it a more descr
 Load the desired code property graph
 ************************************
 
-Within a python notebook, you need to identify the Code Property Graph you wish to query.
+Within a Python notebook, you need to identify the Code Property Graph you wish to query.
 You'll need the Build Id for the target you're interested in.
-You can copy it from the MATE dashboard: `<http://YOUR_CHESS_SYSTEM:8050/>`_
+You can copy it from the MATE dashboard: `<http://localhost:8050/>`_
 
 .. figure:: assets/get-build-id.png
    :scale: 35
@@ -63,7 +75,9 @@ Query the code property graph
 
 The MATE notebook uses
 `SQLAlchemy <https://www.sqlalchemy.org/>`_ to expose the CPG as Python objects.
-See :doc:`schemata/cpg` for detailed documentation of the content available.
+See :ref:`query_desc` for more information and :doc:`API documentation
+<api/MATE/modules>` for a complete reference. The reference documentation is
+also available inside Python via the ``help`` function.
 
 Below are some examples queries.
 Each assume ``session``, ``b``, and ``g`` have been initialized as described above.

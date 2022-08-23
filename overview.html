@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>MATE System Overview &mdash; MATE 0.1.0.0 documentation</title>
+  <title>Overview &mdash; MATE 0.1.0.0 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="CPG Schema" href="schemata/cpg.html" />
-    <link rel="prev" title="Debugging Challenge Build Failures" href="debugging-builds.html" /> 
+    <link rel="next" title="Quick Start" href="quickstart.html" />
+    <link rel="prev" title="MATE: Merged Analysis To prevent Exploits" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,60 +88,60 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
-<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Start Here</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">MATE System Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#the-mate-workflow">The MATE Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#mate-features">MATE Features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#the-mate-code-property-graph">The MATE Code Property Graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pointer-analysis">Pointer Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-query-interface">The Query Interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#poi-queries">POI Queries</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mate-tools">MATE Tools</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#flowfinder">Flowfinder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#symbolic-execution-with-manticore">Symbolic Execution with Manticore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#poi-queries">POI Queries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notebooks">Notebooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#under-constrained-manticore">Under-Constrained Manticore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usagefinder">UsageFinder</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#other-mate-components">Other MATE Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-query-interface">The Query Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rest-api-and-cli">REST API and CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pointer-analysis">Pointer Analysis</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#project-status">Project Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli-overview.html">CLI Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpg.html">The Code Property Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Program Build Failures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pois.html">Points of Interest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
-<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
 <li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
 </ul>
 
             
@@ -190,7 +190,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>MATE System Overview</li>
+      <li>Overview</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -209,119 +209,161 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="mate-system-overview">
-<h1>MATE System Overview<a class="headerlink" href="#mate-system-overview" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
 <img alt="_images/mate-architecture.jpg" src="_images/mate-architecture.jpg" />
-<p>Merged Analysis To Prevent Exploits (MATE) is a set of tools for finding
-vulnerabilities in C and C++ programs. MATE unifies application-specific and
-low-level vulnerability analysis using code property graphs (CPGs), enabling
-the discovery of highly application-specific vulnerabilities that depend on
-both implementation details and the high-level semantics of target C/C++
-programs.</p>
-<div class="section" id="the-mate-workflow">
-<h2>The MATE Workflow<a class="headerlink" href="#the-mate-workflow" title="Permalink to this headline">¶</a></h2>
-<p>Given a C/C++ program MATE performs both whole program static and dynamic
-analyses which can be combined in search of vulnerabilities.</p>
-<p>The static analyses works by first compiling the target program to a single
-<code class="docutils literal notranslate"><span class="pre">.ll</span></code> or <code class="docutils literal notranslate"><span class="pre">.bc</span></code> LLVM Intermediate Representation (IR) file using
-<a class="reference external" href="https://github.com/SRI-CSL/gllvm">GLLVM</a>. MATE
-then constructs a CPG from the IR by compiling it with a custom build of LLVM.
-The database can be queried using a Python query interface (see below) which
-provides relevant domain-specific query abilities, such as searching for
-control-flow paths with certain properties.</p>
-<p>When a program is built with MATE, MATE performs a collection of built-in
-analyses for common vulnerabilities types, and reports findings as Points of
-Interest. See the <a class="reference internal" href="analysis.html"><span class="doc">POI Analyses</span></a> documentation for details.</p>
-<p>To enable users to effectively explore potential vulnerabilities
-discovered by MATE’s automated analyses and apply their insights to
-find concrete evidence of exploitability, MATE includes a custom
-graphical user interface component Flowfinder. Flowfinder allows users to
-explore the CPG by interacting with a point-and-click graph
-visualization of the program, rather than manually reviewing source
-code or writing complex analysis queries.</p>
-<p>To answer more complex questions about the program, users can also access an
-interactive notebook service that gives programmatic access to the full CPG
-representation via a domain-specific query language. These notebooks can be used
-for one-off explorations, or as a platform for users to build reusable apps on
-the MATE platform. MATE includes the <a class="reference internal" href="usagefinder.html"><span class="doc">UsageFinder</span></a> app for
-finding vulnerabilities that result from incorrect usage of internal or external
-APIs.</p>
-<p>MATE includes the <a class="reference external" href="https://github.com/trailofbits/manticore">Manticore</a>
-symbolic execution engine, which can be used to complement MATE’s static
-analysis capabilities with dynamic analysis for further exploration and
-validation of the behavior of the target program.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page provides a high-level overview of MATE. To get started using MATE
+right away, see <a class="reference internal" href="quickstart.html"><span class="doc">Quick Start</span></a>.</p>
 </div>
-<div class="section" id="mate-features">
-<h2>MATE Features<a class="headerlink" href="#mate-features" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="the-mate-code-property-graph">
-<h3>The MATE Code Property Graph<a class="headerlink" href="#the-mate-code-property-graph" title="Permalink to this headline">¶</a></h3>
-<p>MATE combines representations of a program’s syntax, control-flow, data-flow,
-and the results of static analyses into a CPG that can be queried to identify
-potential flaws. One of the central features of the MATE CPG is a comprehensive
-and accurate mapping between program representations that occur at different
-phases of compilation, from the source level (LLVM bitcode), through the LLVM
-middle-end, all the way to the binary and its embedded DWARF debugging
-information. For more information on the CPG, see <a class="reference internal" href="schemata/cpg.html"><span class="doc">schema</span></a>.</p>
-</div>
-<div class="section" id="pointer-analysis">
-<h3>Pointer Analysis<a class="headerlink" href="#pointer-analysis" title="Permalink to this headline">¶</a></h3>
-<p>MATE uses a precise, context-sensitive pointer analysis for C and C++ that
-allows for accurate, narrow tracking of data- and control-flow through the
-program under analysis. For more on the pointer analysis in MATE, see <a class="reference internal" href="standalonepa.html"><span class="doc">the
-documentation</span></a>.</p>
-</div>
-<div class="section" id="the-query-interface">
-<h3>The Query Interface<a class="headerlink" href="#the-query-interface" title="Permalink to this headline">¶</a></h3>
-<p>MATE provides a SQLAlchemy-based Domain Specific Language (DSL) for querying the
-CPG, embedded in Python. It has abstractions relevant to program analysis, for
-example, control- and data-flow path queries. See the
-<a class="reference internal" href="api/MATE/modules.html"><span class="doc">API documentation</span></a> for more information.</p>
+<p>MATE is a suite of tools for interactive program analysis with a focus on
+hunting for bugs in C and C++ code. MATE unifies application-specific and
+low-level vulnerability analysis using code property graphs (CPGs), enabling the
+discovery of highly application-specific vulnerabilities that depend on both
+implementation details and the high-level semantics of target C/C++ programs.</p>
+<p>MATE primarily finds vulnerabilities by static program analysis over the
+target’s <a class="reference internal" href="cpg.html"><span class="doc">CPG</span></a>, which combines representations of a program’s syntax,
+control-flow, and dependencies into a unified graph structure that can be
+queried to identify potential flaws. The MATE CPG consists of the target’s:</p>
+<ul class="simple">
+<li><p>abstract syntax tree (AST)</p></li>
+<li><p>call graph (CG)</p></li>
+<li><p>control-flow graph (CFG)</p></li>
+<li><p>inter-procedural control-flow graph (ICFG)</p></li>
+<li><p>inter-procedural dataflow-graph (DFG)</p></li>
+<li><p>control-dependence graph (CDG)</p></li>
+<li><p>points-to graph (PTG)</p></li>
+<li><p>source-code to machine-code mapping</p></li>
+<li><p>memory layout and DWARF type graph</p></li>
+</ul>
+<p>At a very high level, here’s how MATE is used:</p>
+<ul class="simple">
+<li><p>The user inputs the source code of a C or C++ program</p></li>
+<li><p>MATE compiles and analyzes the program, creating one CPG per binary</p></li>
+<li><p>The user attempts to find vulnerabilities in the program by using <a class="reference internal" href="#overview-tools"><span class="std std-ref">the
+MATE tools</span></a></p></li>
+</ul>
+<div class="section" id="mate-tools">
+<span id="overview-tools"></span><h2>MATE Tools<a class="headerlink" href="#mate-tools" title="Permalink to this headline">¶</a></h2>
+<p>MATE provides several tools for exploring and analyzing the program’s code
+property graph (CPG).</p>
+<div class="section" id="flowfinder">
+<span id="overview-flowfinder"></span><h3>Flowfinder<a class="headerlink" href="#flowfinder" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/flowfinder-overview.jpg" src="_images/flowfinder-overview.jpg" />
+<p>Flowfinder is an interactive, graphical, browser-based user interface for
+exploring a program’s CPG. Given a potential vulnerability discovered via
+<a class="reference internal" href="#overview-pois"><span class="std std-ref">MATE’s automated analyses</span></a>, Flowfinder displays relevant
+fragments of the CPG that explain relationships between program inputs, outputs,
+and computations. Similar to other program analysis tools such as IDA Pro,
+Binary Ninja, and angr management, Flowfinder is designed to help answer
+questions such as “How does this data get from here to there and how is it
+changed along the way” or “If I can control this buffer, what effect can I have
+on the execution of the program?” By leveraging the detailed information in the
+MATE CPG, Flowfinder is intended to enable interprocedural analysis of program
+dataflows at a relatively high level of abstraction. Rather than navigating by
+scrolling or jumping between detailed level views of the program’s disassembly
+or source code, Flowfinder is designed to support expanding and contracting
+representations of code and data as needed and creating and manipulating
+visualizations of high-level flows between different components.</p>
+<p>See <a class="reference internal" href="using-flowfinder.html"><span class="doc">Using Flowfinder</span></a> for more information.</p>
 </div>
 <div class="section" id="poi-queries">
-<h3>POI Queries<a class="headerlink" href="#poi-queries" title="Permalink to this headline">¶</a></h3>
-<p>POI (Point-Of-Interest) queries are CPG queries written by MATE users and
-developers that identify potentially problematic spots in a code base. These
-can then be triaged with human assistance or examined using directed symbolic
-execution. See <a class="reference internal" href="vulnerability-types.html"><span class="doc">Vulnerability Types</span></a> for
-more information.</p>
+<span id="overview-pois"></span><h3>POI Queries<a class="headerlink" href="#poi-queries" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/flowfinder-base.png" src="_images/flowfinder-base.png" />
+<p>MATE ships with a number of automated analyses that detect potential
+vulnerabilities, called Points of Interest (POIs). These detectors are written
+using the MATE <a class="reference internal" href="#overview-query"><span class="std std-ref">Python query API</span></a>; it’s easy to write
+additional application-, domain-, or API-specific detectors. Potential
+vulnerabilities found by these queries can be viewed in <a class="reference internal" href="#overview-flowfinder"><span class="std std-ref">Flowfinder</span></a> for collaboration and triage.</p>
+<p>See <a class="reference internal" href="pois.html"><span class="doc">Points of Interest</span></a> for more information.</p>
 </div>
-<div class="section" id="flowfinder">
-<h3>Flowfinder<a class="headerlink" href="#flowfinder" title="Permalink to this headline">¶</a></h3>
-<p>Flowfinder is an interactive, graphical user interface for exploring a
-program’s code property graph. Given a potential vulnerability
-discovered via MATE’s automated analyses, Flowfinder displays relevant
-fragments of the CPG that explain relationships between program inputs,
-outputs, and computations. Users can deepen their understanding of the
-potential vulnerability by viewing additional fragments of the CPG
-that answer specific questions about program elements, such as data
-flows or control dependencies that influence specific statements. By
-exploring a potential vulnerability using Flowfinder, users can apply
-their high-level insights about the program’s semantics and security
-requirements to eliminate analysis false positives or develop concrete
-inputs that demonstrate the insecurity of the program. See <a class="reference internal" href="using-flowfinder.html"><span class="doc">Using Flowfinder</span></a> for more information.</p>
+<div class="section" id="notebooks">
+<span id="overview-notebooks"></span><h3>Notebooks<a class="headerlink" href="#notebooks" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/notebook-overview.jpg" src="_images/notebook-overview.jpg" />
+<p>MATE has <a class="reference internal" href="#overview-query"><span class="std std-ref">a Python API</span></a> for querying the CPG and exposes
+browser-based, interactive Jupyter notebooks with this query interface
+pre-loaded. These notebooks can be used to write complex, recursive,
+whole-program queries that answer detailed questions like “What sequences of
+function calls can lead from point A to point B in this program?” or “Can user
+input flow into a memory location with a specific struct type, and from there to
+some particular function without passing through one of these three sanitization
+routines?” These notebooks can be used for one-off explorations, or as a
+platform for users to build reusable apps on the MATE platform (such as
+<a class="reference internal" href="usagefinder.html"><span class="doc">UsageFinder</span></a>).</p>
+<p>See <a class="reference internal" href="using-notebooks.html"><span class="doc">MATE Python Notebooks</span></a> for more information.</p>
 </div>
-<div class="section" id="symbolic-execution-with-manticore">
-<h3>Symbolic Execution with Manticore<a class="headerlink" href="#symbolic-execution-with-manticore" title="Permalink to this headline">¶</a></h3>
-<p>One of the goals of the CHESS program is to not only find bugs, but generate
-proofs of vulnerability (PoVs) that demonstrate the problems in the target
-programs. MATE’s approach to assisted PoV generation uses binary-level symbolic
-execution with Manticore (developed by Trail of Bits). While MATE must have
-access to the program source and does extensive analysis at that level,
-binary-level symbolic execution helps ensure that MATE only generates true
-exploits.</p>
-<p>Symbolic execution is incredibly powerful, in that it can solve complicated
-constraints and generate inputs to a program that cause very specific behavior.
-This precision comes at the cost of performance; it’s prohibitively expensive
-to explore all paths in a large program using a tool like Manticore. The MATE
-solution is to identify possible bugs using a range of methods
-(manual inspection, POI queries, fuzzing), and then to use <em>directed</em> symbolic
-execution to generate PoVs. Directed symbolic execution is when the engine
-(Manticore) is provided with additional constraints telling it where to look,
-rather then exploring the program state space freely.</p>
-<p>See the <a class="reference internal" href="under-constrained-manticore.html"><span class="doc">Under-constrained Manticore</span></a> and
-<a class="reference internal" href="mantiserve.html"><span class="doc">Mantiserve</span></a> documentation for more information on accessing
-symbolic execution functionality within MATE.</p>
+<div class="section" id="under-constrained-manticore">
+<h3>Under-Constrained Manticore<a class="headerlink" href="#under-constrained-manticore" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/uc-manticore.jpg" src="_images/uc-manticore.jpg" />
+<p>MATE provides a web UI for exploring programs with the <a class="reference external" href="https://github.com/trailofbits/manticore">Manticore</a> symbolic execution engine in an
+<em>under-constrained</em> mode. Unlike traditional symbolic execution which begins at
+the program entry point and executes until the program exits, under-constrained
+symbolic execution starts at an arbitrary function. This specificity means that
+under-constrained symbolic execution can analyze parts of programs that would be
+too large or complex for traditional symbolic execution.</p>
+<p>Symbolic execution enables bit-precise local reasoning about memory and
+arithmetic, which complements MATE’s higher-level inter-procedural data- and
+control-flow analyses.</p>
+<p>See <a class="reference internal" href="under-constrained-manticore.html"><span class="doc">Under-constrained Manticore</span></a> for more information.</p>
 </div>
+<div class="section" id="usagefinder">
+<h3>UsageFinder<a class="headerlink" href="#usagefinder" title="Permalink to this headline">¶</a></h3>
+<p>UsageFinder is a tool for finding vulnerabilities that result from incorrect
+usage of internal or external APIs.</p>
+<p>See <a class="reference internal" href="usagefinder.html"><span class="doc">UsageFinder</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="other-mate-components">
+<span id="overview-internals"></span><h2>Other MATE Components<a class="headerlink" href="#other-mate-components" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the above user-facing tools, the following are a few components
+of MATE that can be used to build other tools. For a comprehensive list of
+MATE’s components, see <a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a>.</p>
+<div class="section" id="the-query-interface">
+<span id="overview-query"></span><h3>The Query Interface<a class="headerlink" href="#the-query-interface" title="Permalink to this headline">¶</a></h3>
+<p>MATE provides a <a class="reference external" href="https://docs.sqlalchemy.org/en/13/">SQLAlchemy</a>-based Domain
+Specific Language (DSL) for querying the CPG, embedded in Python. It has
+abstractions relevant to program analysis, for example, control- and data-flow
+path queries.</p>
+<p>See <a class="reference internal" href="architecture.html#query-desc"><span class="std std-ref">CPG Query API</span></a> for more information.</p>
+</div>
+<div class="section" id="rest-api-and-cli">
+<h3>REST API and CLI<a class="headerlink" href="#rest-api-and-cli" title="Permalink to this headline">¶</a></h3>
+<p>Much of MATE’s functionality is exposed via <a class="reference internal" href="using-rest-api.html"><span class="doc">a REST API</span></a>,
+and there is <a class="reference internal" href="cli-overview.html"><span class="doc">a CLI</span></a> for interacting with this API.</p>
+</div>
+<div class="section" id="pointer-analysis">
+<span id="overview-pointer"></span><h3>Pointer Analysis<a class="headerlink" href="#pointer-analysis" title="Permalink to this headline">¶</a></h3>
+<p>MATE uses a precise, context-sensitive pointer analysis for C and C++ that
+allows for accurate, narrow tracking of data- and control-flow through the
+program under analysis.</p>
+<p>See <a class="reference internal" href="architecture.html#points-to-desc"><span class="std std-ref">Points-to analysis</span></a> for more information.</p>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>MATE has several important limitations:</p>
+<ul class="simple">
+<li><p>MATE analyzes only statically-linked code, so it can’t find bugs or follow
+control- and data-flows in dynamically-linked libraries without users writing
+detailed <a class="reference internal" href="signatures.html"><span class="doc">MATE Signatures</span></a> for external code.</p></li>
+<li><p>MATE analyzes LLVM bitcode. In practice, obtaining LLVM bitcode requires
+access to the source code, that the project can be compiled using
+clang/clang++, and may require some mucking around with the build system.
+Additionally, it’s much easier to use and understand MATE given familiarity
+with the LLVM language, but such familiarity is fairly uncommon.</p></li>
+<li><p>MATE’s static analysis is fairly heavy-weight. The <a class="reference internal" href="#overview-pointer"><span class="std std-ref">pointer analysis</span></a> in particular requires a significant amount of time and
+RAM, on the order of hours and up to dozens of GB for large programs.
+Furthermore, these requirements don’t relate predictably to program size or
+other features.</p></li>
+<li><p>MATE is still research-grade software. We have worked hard to make it robust,
+but not all of MATE’s tools and features will work well on all programs.</p></li>
+</ul>
+</div>
+<div class="section" id="project-status">
+<span id="status"></span><h2>Project Status<a class="headerlink" href="#project-status" title="Permalink to this headline">¶</a></h2>
+<p>MATE is not actively developed by Galois, Inc. Please reach out to the email
+address “mate at galois dot com” if you’d like to discuss further work on MATE!</p>
 </div>
 </div>
 
@@ -331,8 +373,8 @@ symbolic execution functionality within MATE.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="schemata/cpg.html" class="btn btn-neutral float-right" title="CPG Schema" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="debugging-builds.html" class="btn btn-neutral float-left" title="Debugging Challenge Build Failures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quickstart.html" class="btn btn-neutral float-right" title="Quick Start" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="MATE: Merged Analysis To prevent Exploits" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

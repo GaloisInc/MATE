@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Quick Start &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Architecture" href="architecture.html" />
+    <link rel="prev" title="Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Start Here</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-and-run-mate">Build and Run MATE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upload-a-program">Upload a Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analyze-with-mate">Analyze with MATE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pois">POIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flowfinder">Flowfinder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notebooks">Notebooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#under-constrained-manticore">Under-Constrained Manticore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usagefinder">UsageFinder</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli-overview.html">CLI Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpg.html">The Code Property Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Program Build Failures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pois.html">Points of Interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Quick Start</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/quickstart.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<p>This guide is intended to get you started analyzing a program with MATE as soon
+as possible. For more detail on the various steps taken here, refer to the rest
+of the documentation.</p>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>You’ll need:</p>
+<ul>
+<li><p>Docker tools to run the MATE services:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://www.docker.com/">Docker</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docker-compose</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Python tools to use the CLI:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/">Python</a></p></li>
+<li><p><a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="build-and-run-mate">
+<h2>Build and Run MATE<a class="headerlink" href="#build-and-run-mate" title="Permalink to this headline">¶</a></h2>
+<p>Get the source code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone --recurse-submodules https://github.com/GaloisInc/MATE
+<span class="nb">cd</span> MATE
+</pre></div>
+</div>
+<p>Build Docker images with the MATE tools (this may take a long time, see
+<a class="reference internal" href="architecture.html#docker"><span class="std std-ref">Docker Images and Compositions</span></a> for more information):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build --target dev --tag mate-dev .
+docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/mate -it mate-dev ./shake.sh -j bdist
+docker build --target dist --tag mate-dist .
+docker build --target notebook --tag mate-notebook .
+docker build --target ui --tag mate-ui .
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">bdist</span></code> build includes a large C++ build that requires at least
+8GB of RAM. You may encounter OOM-induced build failures if your development
+machine (or Docker environment) doesn’t have sufficient memory.</p>
+<p>Alternatively, if increasing the amount of RAM is not feasible, you
+may have some luck with reducing the build’s parallelism (e.g. with <code class="docutils literal notranslate"><span class="pre">-j2</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">-j</span></code>) or removing <code class="docutils literal notranslate"><span class="pre">-j</span></code> entirely.</p>
+</div>
+<p>Spin up the MATE services (database, REST API, UI, etc., see <a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a>
+for details):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
+</pre></div>
+</div>
+<p>Install the CLI. (Run this from the MATE source root. You can install this into a
+<a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">virtual environment</a> if
+desired):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r cli-requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="upload-a-program">
+<h2>Upload a Program<a class="headerlink" href="#upload-a-program" title="Permalink to this headline">¶</a></h2>
+<p>You’re now ready to provide a C or C++ program to MATE. The program must:</p>
+<ul class="simple">
+<li><p>either be a single standalone C or C++ file, or a Make-based build</p></li>
+<li><p>compile with Clang(++)</p></li>
+<li><p>have no external/library dependencies (this restriction <a class="reference internal" href="cli-overview.html#mate-cli-basic"><span class="std std-ref">can be avoided</span></a>, but we won’t cover that here)</p></li>
+</ul>
+<p>A good choice might be <code class="docutils literal notranslate"><span class="pre">frontend/test/programs/notes.c</span></code> from the MATE source
+tree.</p>
+<p>Use the CLI to upload the program (see <a class="reference internal" href="cli-overview.html#mate-cli-oneshot"><span class="std std-ref">mate-cli oneshot</span></a> for more options):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli oneshot -p program.c
+</pre></div>
+</div>
+<p>Navigate to the builds page at <a class="reference external" href="http://localhost:3000/builds">http://localhost:3000/builds</a> in your web
+browser to view the progress in compiling and analyzing your program.</p>
+<a class="reference internal image-reference" href="_images/dashboard-builds.png"><img alt="_images/dashboard-builds.png" src="_images/dashboard-builds.png" style="width: 641.1999999999999px; height: 118.99999999999999px;" /></a>
+<p>Wait and refresh the page until the status of the build has changed from
+“building” or “inserting” to “built”. For small programs, this can be a matter
+of seconds, for larger programs it can take hours. See <a class="reference internal" href="debugging-builds.html"><span class="doc">Debugging Program Build Failures</span></a>
+for troubleshooting tips.</p>
+</div>
+<div class="section" id="analyze-with-mate">
+<h2>Analyze with MATE<a class="headerlink" href="#analyze-with-mate" title="Permalink to this headline">¶</a></h2>
+<p>MATE provides several tools for exploring and analyzing the program’s <a class="reference internal" href="cpg.html"><span class="doc">code
+property graph (CPG)</span></a>. See <a class="reference internal" href="overview.html"><span class="doc">Overview</span></a> and the respective
+documentation pages for a more thorough description of each of these tools.</p>
+<div class="section" id="pois">
+<h3>POIs<a class="headerlink" href="#pois" title="Permalink to this headline">¶</a></h3>
+<p>MATE automatically identifies potential vulnerabilities and reports Points of
+Interest (POIs). Click “view POIs” to see a list of POIs for this program.</p>
+<p>See <a class="reference internal" href="pois.html"><span class="doc">Points of Interest</span></a> for more details.</p>
+</div>
+<div class="section" id="flowfinder">
+<h3>Flowfinder<a class="headerlink" href="#flowfinder" title="Permalink to this headline">¶</a></h3>
+<p>Flowfinder is an interactive, graphical user interface for exploring a CPG. You
+can start Flowfinder from a POI as described above, but you can also start
+Flowfinder without viewing a particular POI by clicking “analyze in Flowfinder”
+from the builds page.</p>
+<p>See <a class="reference internal" href="using-flowfinder.html"><span class="doc">Using Flowfinder</span></a> for more details.</p>
+</div>
+<div class="section" id="notebooks">
+<h3>Notebooks<a class="headerlink" href="#notebooks" title="Permalink to this headline">¶</a></h3>
+<p>MATE provides a <a class="reference external" href="https://jupyter.org/">Jupyter Notebook</a> server for creating
+notebooks that can be used to write custom queries in Python over the CPG. Press
+the “Open Jupyter Notebook” button to open a Jupyter/IPython notebook to explore
+the program.</p>
+<p>See <a class="reference internal" href="using-notebooks.html"><span class="doc">MATE Python Notebooks</span></a> for more details.</p>
+</div>
+<div class="section" id="under-constrained-manticore">
+<h3>Under-Constrained Manticore<a class="headerlink" href="#under-constrained-manticore" title="Permalink to this headline">¶</a></h3>
+<p>MATE provides a web UI for exploring programs with the <a class="reference external" href="https://github.com/trailofbits/manticore">Manticore</a> symbolic execution engine in an
+<em>under-constrained</em> mode. Press the “analyze in Manticore” button to open the
+Under-Constrained Manticore UI.</p>
+<p>See <a class="reference internal" href="under-constrained-manticore.html"><span class="doc">Under-constrained Manticore</span></a> for more details.</p>
+</div>
+<div class="section" id="usagefinder">
+<h3>UsageFinder<a class="headerlink" href="#usagefinder" title="Permalink to this headline">¶</a></h3>
+<p>UsageFinder is a tool for finding vulnerabilities that result from incorrect
+usage of internal or external APIs. UsageFinder can be found at
+<a class="reference external" href="http://localhost:8889/notebooks/examples/usage-finder.ipynb">http://localhost:8889/notebooks/examples/usage-finder.ipynb</a>, or by clicking
+“For Experts”, then “Notebooks” in the top bar of the builds page, then
+navigating to the “examples/” folder, then the “usage-finder.ipynb” file.</p>
+<p>See <a class="reference internal" href="usagefinder.html"><span class="doc">UsageFinder</span></a> for more details.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="architecture.html" class="btn btn-neutral float-right" title="Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

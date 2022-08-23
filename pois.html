@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Points of Interest &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CPG Schema" href="schemata/cpg.html" />
+    <link rel="prev" title="Mantiserve" href="mantiserve.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Start Here</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli-overview.html">CLI Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpg.html">The Code Property Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Program Build Failures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Points of Interest</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#viewing-pois">Viewing POIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vulnerability-types">Vulnerability Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#command-injection">Command Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterator-invalidation">Iterator Invalidation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overflowable-heap-allocations">Overflowable Heap Allocations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#path-traversal">Path Traversal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pointer-disclosure">Pointer Disclosure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#truncated-malloc-size">Truncated <code class="docutils literal notranslate"><span class="pre">malloc</span></code> Size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uninitialized-stack-memory-use">Uninitialized Stack Memory Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-after-free-uaf">Use After Free (UAF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-controlled-string-comparisons">User-Controlled String Comparisons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variable-length-stack-allocations">Variable-Length Stack Allocations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Points of Interest</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/pois.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="points-of-interest">
+<h1>Points of Interest<a class="headerlink" href="#points-of-interest" title="Permalink to this headline">¶</a></h1>
+<p>MATE ships with a number of automated analyses that detect potential
+vulnerabilities, called Points of Interest (POIs). These detectors are written
+using the MATE <a class="reference external" href="overview_query">Python API</a>; it’s easy to write additional
+application-, domain-, or API-specific detectors. Potential vulnerabilities
+found by these queries can be viewed in <a class="reference external" href="overview_flowfinder">Flowfinder</a> for
+collaboration and triage.</p>
+<p>The <a class="reference internal" href="cli-overview.html"><span class="doc">MATE CLI</span></a> and <a class="reference external" href="api.html">REST API</a> can also be
+used to manage POIs and their results; see the <code class="docutils literal notranslate"><span class="pre">analyses</span></code> and <code class="docutils literal notranslate"><span class="pre">pois</span></code>
+subcommands of the MATE CLI and the <code class="docutils literal notranslate"><span class="pre">/analyses/</span></code> and <code class="docutils literal notranslate"><span class="pre">/pois</span></code> endpoints of
+the REST API in particular.</p>
+<p>For tips on developing POIs, see <a class="reference internal" href="hacking.html"><span class="doc">Hacking on MATE</span></a>.</p>
+<div class="section" id="viewing-pois">
+<h2>Viewing POIs<a class="headerlink" href="#viewing-pois" title="Permalink to this headline">¶</a></h2>
+<p>To view the POIs that MATE found for a particular binary, navigate to the MATE
+builds page (usually at <a class="reference external" href="http://localhost:3000/builds">http://localhost:3000/builds</a>) and click “view POIs”
+to see a list of POIs.</p>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="_images/dashboard-pois.png"><img alt="_images/dashboard-pois.png" src="_images/dashboard-pois.png" style="width: 634.1999999999999px; height: 321.29999999999995px;" /></a>
+<p class="caption"><span class="caption-text">The POI page will list POI findings, with links to view each finding in Flowfinder</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The list of POIs starts empty. Results are added one-by-one as the MATE analyses running in the background report findings. Refresh the POIs page periodically to see the most up-to-date set of results.</p>
+</div>
+<p>For each POI result, there is:</p>
+<ul class="simple">
+<li><p>“Analysis Name”: the type of analysis, see below for details</p></li>
+<li><p>“Insight”: brief summary of the finding itself</p></li>
+<li><p>“Code Graph”: click the “analyze” link to visualize this finding in Flowfinder, see <a class="reference internal" href="using-flowfinder.html"><span class="doc">Using Flowfinder</span></a> for details</p></li>
+</ul>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="_images/flowfinder-usage.png"><img alt="_images/flowfinder-usage.png" src="_images/flowfinder-usage.png" style="width: 430.2px; height: 267.0px;" /></a>
+<p class="caption"><span class="caption-text">Visualizing a POI in Flowfinder</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="vulnerability-types">
+<h2>Vulnerability Types<a class="headerlink" href="#vulnerability-types" title="Permalink to this headline">¶</a></h2>
+<p>MATE automatically reports findings related to the following types of vulnerabilities.</p>
+<p>The current release of MATE includes the following built-in POI analyses. The
+primary CPG layer(s) used in the analysis are listed at the end of each
+description. Each title links to a more complete description of the analysis
+below.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#commandinjection"><span class="std std-ref">Command Injection</span></a>: Finds calls to output functions (e.g. <code class="docutils literal notranslate"><span class="pre">write</span></code>) with
+potential SQL keywords in string arguments, detecting SQL injection (SQLi)
+vulnerabilities. (AST)</p></li>
+<li><p><a class="reference internal" href="#iteratorinvalidation"><span class="std std-ref">Iterator Invalidation</span></a>: Finds uses of C++ iterators subsequent to
+iterator-invalidating collection modifications, detecting vulnerabilities
+resulting from invalid iterator accesses. (CFG)</p></li>
+<li><p><a class="reference internal" href="#overflowableallocations"><span class="std std-ref">Overflowable Heap Allocations</span></a>: Finds calls to dynamic allocations (e.g.
+<code class="docutils literal notranslate"><span class="pre">malloc</span></code>) where the size calculation may be influenced by user input,
+detecting unsafe or unintended heap accesses. (DFG)</p></li>
+<li><p><a class="reference internal" href="#pathtraversal"><span class="std std-ref">Path Traversal</span></a>: Find calls to filesystem operations where the path may be
+influenced by user input, detecting path traversal vulnerabilities. (DFG)</p></li>
+<li><p><a class="reference internal" href="#pointerdisclosure"><span class="std std-ref">Pointer Disclosure</span></a>: Finds pointer-typed values that may be output to the
+user, detecting vulnerabilities that may allow an attacker to circumvent
+memory protections like ASLR and stack canaries. (DFG)</p></li>
+<li><p><a class="reference internal" href="#truncatedinteger"><span class="std std-ref">Truncated malloc Size</span></a>: Finds calls to dynamic allocations where the size may be
+influenced by user input and the input is truncated and used elsewhere as a
+signed integer, detecting vulnerabilities in which an attacker may gain
+control of the heap. (DFG)</p></li>
+<li><p><a class="reference internal" href="#uninitializedstackmemory"><span class="std std-ref">Uninitialized Stack Memory Use</span></a>: Finds potential intra- and inter-procedural uses
+of uninitialized stack memory, detecting potential information leaks or
+computation on invalid data. (CFG, PTG)</p></li>
+<li><p><a class="reference internal" href="#useafterfree"><span class="std std-ref">Use After Free (UAF)</span></a>: Finds potential uses of heap-allocated memory after calls to
+<code class="docutils literal notranslate"><span class="pre">free</span></code>, detecting UAF vulnerabilities. (CFG, PTG)</p></li>
+<li><p><a class="reference internal" href="#userstringcomparisonlength"><span class="std std-ref">User-Controlled String Comparisons</span></a>: Finds string and memory comparison calls where
+the comparison length may be controlled by user input, detecting various
+memory corruption vulnerabilities. (DFG)</p></li>
+<li><p><a class="reference internal" href="#variablelengthstackobject"><span class="std std-ref">Variable-Length Stack Allocations</span></a>: Detects uses of C99-style variable-length
+arrays (VLAs) or the alloca library routine where the user can control the
+size of the stack allocation, detecting vulnerability to certain stack-based
+attacks. (DFG)</p></li>
+</ul>
+<div class="section" id="command-injection">
+<span id="commandinjection"></span><h3>Command Injection<a class="headerlink" href="#command-injection" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): AST</em></p>
+<p>Programs frequently interact with other programs by building up sequences
+of commands and then sending those commands to the target. Common examples
+include SQL queries, HTTP requests, and “system” commands.</p>
+<p>When command sequences are built up using string functions, command injection
+can occur: a malicious user can provide inputs that the target interprets
+as instructions, rather than as data.</p>
+<p>For example, the following pseudocode to query a user by ID:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM users WHERE id = &quot;</span> <span class="o">+</span> <span class="n">user_id</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>can be manipulated by an attacker to return all rows by providing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">user_id</span> <span class="o">=</span> <span class="s2">&quot;1234 OR 1=1&quot;</span>
+</pre></div>
+</div>
+<p>making the final query:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>which is always true, and therefore returns all users instead
+of the intended behavior of just one.</p>
+<p>MATE looks for constants that contain keywords associated with command construction,
+followed by uses of those constants in string or output formatting functions that
+are likely sources of command injection.</p>
+</div>
+<div class="section" id="iterator-invalidation">
+<span id="iteratorinvalidation"></span><h3>Iterator Invalidation<a class="headerlink" href="#iterator-invalidation" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): CFG</em></p>
+<p>The C++ standard library supports a number of containers (<code class="docutils literal notranslate"><span class="pre">vector</span></code>, <code class="docutils literal notranslate"><span class="pre">set</span></code>, <code class="docutils literal notranslate"><span class="pre">map</span></code>, etc). Each
+container type has a corresponding iterator type that is designed to allow users to iterate across
+and access its elements.</p>
+<p>There are some rules around iterator usage. Some container methods cause “iterator invalidation”,
+meaning that any iterators that were retrieved from the container before the call can only be safely
+destructed and are otherwise unsafe to use. For example, the following iterator usage invokes
+undefined behaviour:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">populate_vec</span><span class="p">();</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+<span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// invalidates `iter`</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">iter</span><span class="p">;</span><span class="w"> </span><span class="c1">// accesses invalid iterator, UB</span>
+</pre></div>
+</div>
+<p>MATE finds execution paths where invalid iterators are accessed. It does this by looking for
+container methods such as <code class="xref any docutils literal notranslate"><span class="pre">begin</span></code> that return iterators into a given container. It then looks for
+invalidating methods on the container found in the previous step. Finally, it checks whether the
+iterator from the first step is accessed with <code class="docutils literal notranslate"><span class="pre">operator*</span></code> or <code class="docutils literal notranslate"><span class="pre">operator-&gt;</span></code>. If this is the case,
+MATE will flag the code as a point of interest. The initial graph loaded for this point of interest
+shows:</p>
+<ul class="simple">
+<li><p>The call to the container method that constructed the iterator (e.g. <code class="docutils literal notranslate"><span class="pre">begin</span></code>)</p></li>
+<li><p>The call to the container method that invalidated the iterator (e.g. <code class="docutils literal notranslate"><span class="pre">push_back</span></code>)</p></li>
+<li><p>The usage of the invalid iterator</p></li>
+</ul>
+</div>
+<div class="section" id="overflowable-heap-allocations">
+<span id="overflowableallocations"></span><h3>Overflowable Heap Allocations<a class="headerlink" href="#overflowable-heap-allocations" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): DFG</em></p>
+<p>C programs can dynamically allocate memory using the <a class="reference internal" href="api/MATE/mate.poi.analysis.TruncatedInteger.html#mate.poi.analysis.TruncatedInteger.TruncatedIntegerPOI.malloc" title="mate.poi.analysis.TruncatedInteger.TruncatedIntegerPOI.malloc"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">malloc</span></code></a> function.</p>
+<p>A common vulnerability occurs when a user controlled value is supplied as the size argument to
+<a class="reference internal" href="api/MATE/mate.poi.analysis.TruncatedInteger.html#mate.poi.analysis.TruncatedInteger.TruncatedIntegerPOI.malloc" title="mate.poi.analysis.TruncatedInteger.TruncatedIntegerPOI.malloc"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">malloc</span></code></a> as part of an arithmetic expression. Consider the following example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="n">memcpy</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">size</span></code> can be controlled to <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>, the argument to <code class="docutils literal notranslate"><span class="pre">malloc</span></code> will evaluate to 0 and
+an attacker will be able to write <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code> bytes of data from <code class="docutils literal notranslate"><span class="pre">src</span></code> into the heap at
+whatever address <code class="docutils literal notranslate"><span class="pre">malloc</span></code> returns.</p>
+<p>MATE finds execution paths in the program that take user input (such as a call to <code class="docutils literal notranslate"><span class="pre">scanf()</span></code>), use
+it as part of an arithmetic operation that is susceptible to integer over/under flow and use the
+result to control the size of a dynamic memory allocation.</p>
+</div>
+<div class="section" id="path-traversal">
+<span id="pathtraversal"></span><h3>Path Traversal<a class="headerlink" href="#path-traversal" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): DFG</em></p>
+<p>Path traversal (also known as directory traversal) is an attack in which user-provided input results in the program using a filepath that “escapes” the intended part of the filesystem to read or write unauthorized files.
+Path traversal exploits often include input that causes unexpected relative path resolution, such as <code class="docutils literal notranslate"><span class="pre">../</span></code>, which navigates to the enclosing directory, <code class="docutils literal notranslate"><span class="pre">//</span></code>, which may restart path resolution at the root directory, or <code class="docutils literal notranslate"><span class="pre">~</span></code>, which may resolve to the current user’s home directory. An example attack might include a file path like <code class="docutils literal notranslate"><span class="pre">mallory/../../../../path/to/secret.txt</span></code>, which “escapes” from the current directory and accesses a secret file.</p>
+<p>Sometimes you can insert <code class="docutils literal notranslate"><span class="pre">../</span></code> directly into some input that is used to generate a filename - try it!
+But often programs include some logic to identify and replace patterns like <code class="docutils literal notranslate"><span class="pre">..</span></code>.
+In these cases, you can sometimes provide encoded input that makes it past these checks, but nevertheless ends up being treated like <code class="docutils literal notranslate"><span class="pre">../</span></code> when it is used later in the program.</p>
+<p>For example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">%2e%2e%2f</span></code>, <code class="docutils literal notranslate"><span class="pre">%2e%2e/</span></code>, and <code class="docutils literal notranslate"><span class="pre">%2e.%2f</span></code> may all be decoded to <code class="docutils literal notranslate"><span class="pre">../</span></code></p></li>
+<li><p>URL encoding <code class="docutils literal notranslate"><span class="pre">..%c0%af</span></code> may also be interpreted as <code class="docutils literal notranslate"><span class="pre">../</span></code></p></li>
+</ul>
+<p>Path traversal may be useful to:</p>
+<ul class="simple">
+<li><p>read secret files (e.g. authentication tokens)</p></li>
+<li><p>write over important files</p></li>
+</ul>
+<p>MATE reports PathTraversal points of interest, which each include:</p>
+<ul class="simple">
+<li><p>The source location where attacker-controlled input may enter the target program</p></li>
+<li><p>The source location where user-controlled data related the the input may be used a filesystem-related function</p></li>
+</ul>
+<p>Each POI result can be opened in Flowfinder, which can be used to explore:</p>
+<ul class="simple">
+<li><p>How is user input used in the construction of the filepath used by the program? Can it take a relative path? Absolute path?</p></li>
+<li><p>What functions perform checks and substitutions intended to prevent path traversal? What do they check (and what might they miss)?</p></li>
+<li><p>What functions encode/decode input (e.g. URL encoding)? What might they miss: double-encoded values, invalid encodings, etc.?</p></li>
+<li><p>Does the program check path data before or after the path has been canonicalized?</p></li>
+<li><p>What part of the user input is/isn’t checked? Whole path? Filename? Extension?</p></li>
+</ul>
+</div>
+<div class="section" id="pointer-disclosure">
+<span id="pointerdisclosure"></span><h3>Pointer Disclosure<a class="headerlink" href="#pointer-disclosure" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): DFG</em></p>
+<p>Security mechanisms like Address Space Layout Randomization (ASLR) aim to make it more difficult for attackers to predict where key code and data can be found in memory.
+Vulnerabilities that reveal information about the live layout of a program in memory can enable attacks that bypass these security mechanisms.</p>
+<p>Pointer disclosure vulnerabilities generally involve programming errors that result in program output that includes the memory address of a value rather than the value itself.
+For example, <code class="docutils literal notranslate"><span class="pre">printf</span></code> and related string functions take a <a class="reference external" href="https://en.wikipedia.org/wiki/Printf_format_string">format string</a> and a set of parameters.
+The format string tells the string function how to interpret the parameters in order to render them appropriately (e.g. as an integer, as a string, etc.).
+If the value to be rendered as an integer, for example, is instead a pointer to an integer, the address in that pointer is “leaked” to the attacker.</p>
+<p>MATE provides an analysis that looks for ways that values used as pointers may be passed into functions that produce output.
+MATE reports POIs containing:</p>
+<ul class="simple">
+<li><p>The source code location where a pointer is computed</p></li>
+<li><p>The source code location where that pointer may be output to the user</p></li>
+</ul>
+<p>Common source of false positives:</p>
+<ul class="simple">
+<li><p>The MATE analysis may not be able to distinguish between code that prints an entire struct (leaking the pointer) and printing the first field of a struct (which is safe) in accesses to code constructs like:</p></li>
+</ul>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">msg</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="truncated-malloc-size">
+<span id="truncatedinteger"></span><h3>Truncated <code class="docutils literal notranslate"><span class="pre">malloc</span></code> Size<a class="headerlink" href="#truncated-malloc-size" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): DFG</em></p>
+<p>A common vulnerability occurs when a user controllable value is supplied as the size argument to
+<code class="docutils literal notranslate"><span class="pre">malloc()</span></code> and used elsewhere as a signed integer.</p>
+<p>If the size argument is manipulated to exceed 2GB, the conversion to a signed integer will truncate
+the value and result in an extremely negative value (-2GB). If this signed integer is used to
+control reads/writes to the allocated memory, it can result in an attacker being able to write to
+unexpected portions of the heap.</p>
+<p>MATE finds execution paths in the program that take user input (such as a call to <code class="docutils literal notranslate"><span class="pre">scanf()</span></code>), use it
+to control the size of a dynamic memory allocation and then later convert the size to a signed
+integer of equal or smaller width.</p>
+</div>
+<div class="section" id="uninitialized-stack-memory-use">
+<span id="uninitializedstackmemory"></span><h3>Uninitialized Stack Memory Use<a class="headerlink" href="#uninitialized-stack-memory-use" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): CFG, PTG</em></p>
+<p>In C and C++ programs, stack variables are not initialized by default.
+If a program reads a newly-allocated stack variable before it has been written to, the program will generally contain “junk” data from whatever was last stored at the memory location.
+Sometimes junk data is already useful to an adversary (e.g. to easily pass a “check if not <code class="docutils literal notranslate"><span class="pre">0</span></code>” test), while other times an adversary may be able to control what data is at that location (e.g. content leftover from previous function invocations).</p>
+<p>Normally, correct programs have the sequence:</p>
+<ol class="arabic simple">
+<li><p><strong>allocation</strong>: reserve space on the stack for the variable near the start of the function</p></li>
+<li><p><strong>initialization</strong>: write some data to the variable</p></li>
+<li><p><strong>use</strong>: read data from that variable</p></li>
+</ol>
+<p>MATE detects execution paths such that a <strong>use</strong> of a variable may be reached without passing through an <strong>initialization</strong> of that variable.
+MATE reports points of interest that each include:</p>
+<ul class="simple">
+<li><p>The relevant variable name</p></li>
+<li><p>Where the variable is declared in the source code</p></li>
+<li><p>Where (in the source code) might that variable be used without having first been initialized</p></li>
+</ul>
+<p>Look for:</p>
+<ul class="simple">
+<li><p>How might it be valuable for an adversary to control that variable? How is that variable used (e.g. in conditionals, array indexing, etc.) that might be useful to control?</p></li>
+</ul>
+<p>Common source of false positives:</p>
+<ul class="simple">
+<li><p>Look for relevant calls to external (e.g. library) functions that initialize the variable. MATE can only analyze code included in the program, so relies on <a class="reference internal" href="signatures.html"><span class="doc">MATE Signatures</span></a> to determine whether external library code is capable of initializing variables or not. If we don’t have a complete signature, MATE will miss the initialization and report a false positive.</p></li>
+<li><p>MATE may report findings based on paths that may not actually be realizable: explore in Flowfinder and/or browsing the source to determine how that point in the code may be reached.</p></li>
+</ul>
+</div>
+<div class="section" id="use-after-free-uaf">
+<span id="useafterfree"></span><h3>Use After Free (UAF)<a class="headerlink" href="#use-after-free-uaf" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): CFG, PTG</em></p>
+<p>Programs can allocate memory dynamically on the heap, using functions like <code class="docutils literal notranslate"><span class="pre">malloc</span></code> in C.
+Normally, correct programs:</p>
+<ol class="arabic simple">
+<li><p>allocate memory with <code class="docutils literal notranslate"><span class="pre">malloc()</span></code> or similar</p></li>
+<li><p><strong>use</strong> that memory</p></li>
+<li><p><strong>free</strong> that memory with <code class="docutils literal notranslate"><span class="pre">free()</span></code> or similar</p></li>
+</ol>
+<p>A Use After Free vulnerability is a condition in which memory is referenced (used) after it has been freed.
+This may be useful in a variety of ways, generally related to enabling the attacker to control the data at the <strong>use</strong> site by having previously filled that memory location with advantageous contents.</p>
+<p>MATE finds execution paths through the program that pass through a <strong>free</strong>, reaching a <strong>use</strong> site for a variable without having first passing through a (re)allocation function.
+The POI results include:</p>
+<ul class="simple">
+<li><p>The source location where a variable’s memory is <strong>freed</strong></p></li>
+<li><p>The source location where that variable’s memory is <strong>used</strong> without having first been (re)allocated</p></li>
+</ul>
+<p>Recommendation: use Flowfinder to</p>
+<ol class="arabic simple">
+<li><p>Determine whether the use after free is feasible.</p></li>
+<li><p>Determine how a control of the content of that variable could be useful.</p></li>
+<li><p>Identify how to control the content of that variable. Will the content at the use site point to the previously used content? Can you cause/control a large number of allocations elsewhere so the free memory will likely contain useful values?</p></li>
+</ol>
+<p>Common source of false positives:</p>
+<ul class="simple">
+<li><p>Similar to the uninitialized stack memory POI, if an external function performs the proper (re)allocation between the free and the use site, MATE may not be able to determine this (as MATE only analyzes the code in the program binary).</p></li>
+<li><p>Reasoning about dynamic behavior is challenging, and at times cannot be fully precise. In some cases, MATE may report findings that are not actually feasible in practice.</p></li>
+<li><p>In particular, a common code pattern results in use-sites that are only reachable if a pointer passes a null-pointer check. If a pointer is set to null after it has been freed, these use sites are not reachable in practice.</p></li>
+</ul>
+</div>
+<div class="section" id="user-controlled-string-comparisons">
+<span id="userstringcomparisonlength"></span><h3>User-Controlled String Comparisons<a class="headerlink" href="#user-controlled-string-comparisons" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): DFG</em></p>
+<p>Some string and memory comparison functions such as <code class="docutils literal notranslate"><span class="pre">strncmp</span></code> and <code class="docutils literal notranslate"><span class="pre">memcmp</span></code> take
+an argument that limits the length of the strings that get compared. For
+example, <code class="docutils literal notranslate"><span class="pre">strcmp(&quot;password&quot;,</span> <span class="pre">&quot;pass&quot;)</span> <span class="pre">==</span> <span class="pre">0</span></code> is false, but
+<code class="docutils literal notranslate"><span class="pre">strncmp(&quot;password&quot;,</span> <span class="pre">&quot;pass&quot;,</span> <span class="pre">4)</span> <span class="pre">==</span> <span class="pre">0</span></code> is true.</p>
+<p>If a length-limited comparison function is used in an
+authentication check (e.g., to check a user-provided password) and an attacker
+can control both the length argument and one of the string arguments, they may
+be able to bypass the authentication check.</p>
+</div>
+<div class="section" id="variable-length-stack-allocations">
+<span id="variablelengthstackobject"></span><h3>Variable-Length Stack Allocations<a class="headerlink" href="#variable-length-stack-allocations" title="Permalink to this headline">¶</a></h3>
+<p><em>CPG Layer(s): DFG</em></p>
+<p>In most programs, variable-sized objects are dynamically allocated on the heap, and stack objects are fixed in size. There are two exceptions to this:</p>
+<p>1. In C99, programmers may use Variable-Length Arrays (VLAs) to create dynamic stack objects
+1. In some runtimes, the <a class="reference external" href="https://man7.org/linux/man-pages/man3/alloca.3.html"><code class="docutils literal notranslate"><span class="pre">alloca()</span></code></a> library routine can dynamically allocate stack memory</p>
+<p>Dynamic stack objects are inherently dangerous because of the stack’s limited space: if a user can add arbitrarily sized objects to the stack, then they can potentially clash the stack with other memory regions in the program (like the heap) or even potentially write backwards from the current stack pointer.</p>
+<p>MATE finds execution paths in the program that take user input (such as a call to <code class="docutils literal notranslate"><span class="pre">scanf()</span></code>) and use that input to control the size of a stack object.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="schemata/cpg.html" class="btn btn-neutral float-right" title="CPG Schema" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mantiserve.html" class="btn btn-neutral float-left" title="Mantiserve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

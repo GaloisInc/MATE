@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Writing and running MATE’s tests" href="testing.html" />
-    <link rel="prev" title="MATE POI Analyses" href="analysis.html" /> 
+    <link rel="next" title="Legal" href="legal.html" />
+    <link rel="prev" title="mantiserve.mantireach module" href="api/Mantiserve/mantiserve.mantireach.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,46 +88,91 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Start Here</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli-overview.html">CLI Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpg.html">The Code Property Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Program Build Failures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
-<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
-<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pois.html">Points of Interest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
 <li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Hacking on MATE</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#a-tour-of-the-codebase">A tour of the codebase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#building-and-running">Building and Running</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#building-with-docker">Building with Docker</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#quickstart">Quickstart</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#explanation">Explanation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#useful-options-for-working-with-docker">Useful options for working with Docker</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#run-the-build">Run the build</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-and-running">Building and Running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hacking-on-the-mate-ui">Hacking on the MATE UI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building">Building</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing">Writing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deployment">Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-json-schemata">The JSON schemata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#style">Style</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#capitalization-conventions">Capitalization conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linking">Linking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#abbreviations">Abbreviations</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#hacking-on-the-mate-ui">Hacking on the MATE UI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-new-model-to-the-cpg">Adding a new model to the CPG</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#considerations">Considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes">Changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enumerations">Enumerations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#schemata">Schemata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-the-model">Adding the model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-poi-query">Adding a POI Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#querying-the-sql-db-directly">Querying the SQL DB Directly</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#listing-nodes-edges">Listing Nodes/Edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filtering-on-node-edge-attributes">Filtering on Node/Edge Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#joins">Joins</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-shell">Running the Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-state-machines">Internal state machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pointer-analysis">Pointer Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-souffle">Running Souffle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#profiling">Profiling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-the-pointer-analysis-results">Debugging the pointer analysis results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plots">Plots</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#publishing-the-mate-packages-to-pypi">Publishing the MATE packages to PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ci-and-git-branches">CI and Git Branches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-releases">Building Releases</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#development-practices">Development practices</a><ul>
@@ -149,77 +194,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#further-reading">Further reading</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#documentation">Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#building">Building</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#writing">Writing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#deployment">Deployment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-json-schemata">The JSON schemata</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-wiki">The Wiki</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#capitalization-conventions">Capitalization conventions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#adding-a-new-model-to-the-cpg">Adding a new model to the CPG</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#considerations">Considerations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#changes">Changes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#enumerations">Enumerations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#schemata">Schemata</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#adding-the-model">Adding the model</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#adding-a-poi-query">Adding a POI Query</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#querying-the-sql-db-directly">Querying the SQL DB Directly</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#listing-nodes-edges">Listing Nodes/Edges</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#filtering-on-node-edge-attributes">Filtering on Node/Edge Attributes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#statically-sized-joins">Statically-Sized Joins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#path-queries">Path Queries</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#extensions">Extensions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#shortcomings">Shortcomings</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#internal-state-machines">Internal state machines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ci-and-git-branches">CI and Git Branches</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#background">Background</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#implementation">Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#building-releases">Building Releases</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#developing-against-the-chess-system">Developing Against the CHESS System</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#make-mate-specific-changes">Make MATE-Specific Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bump-stack-definitions-and-message-schemas">Bump stack definitions and message schemas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bump-submodule-revisions-in-mate">Bump submodule revisions in MATE</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#pointer-analysis">Pointer Analysis</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#running-souffle">Running Souffle</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#profiling">Profiling</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#debugging-the-pointer-analysis-results">Debugging the pointer analysis results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#plots">Plots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#tests">Tests</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#publishing-the-mate-packages-to-pypi">Publishing the MATE packages to PyPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#project-infrastructure">Project Infrastructure</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
-<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
-<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
 </ul>
 
             
@@ -298,36 +276,26 @@
 <p>Hello and welcome! 👋</p>
 <p>If you are new to MATE, please check out:</p>
 <ol class="arabic simple">
-<li><p>The <a class="reference internal" href="user-workflow.html"><span class="doc">MATE User Workflow</span></a></p></li>
-<li><p>The <a class="reference internal" href="overview.html"><span class="doc">MATE System Overview</span></a></p></li>
+<li><p>The <a class="reference internal" href="overview.html"><span class="doc">Overview</span></a></p></li>
+<li><p>The <a class="reference internal" href="quickstart.html"><span class="doc">Quick Start</span></a></p></li>
 </ol>
-<p>Then continuing reading this page to understand what <a class="reference internal" href="#documentation"><span class="std std-ref">Documentation</span></a> is available, get a tour of the codebase, and learn about our build workflow and engineering practices.</p>
-<p>To get up to speed on what is represented in the Code Property Graph (CPG) take
-a look at the <a class="reference internal" href="schemata/cpg.html"><span class="doc">CPG schema</span></a>, which describes the
-types of Nodes and Edges in the CPG, as well as what properties they contain.</p>
-<p>To get write queries and play with the query interface, the best place to start
-is with <a class="reference internal" href="using-notebooks.html"><span class="doc">MATE Python Notebooks</span></a>. You can search and browse the autogenerated
-<a class="reference internal" href="api/MATE/modules.html"><span class="doc">API documentation</span></a>.</p>
+<p>Then continuing reading this page to get a tour of the codebase, learn about our
+build workflow and engineering practices, and find other tips for developers.</p>
 </div>
 <div class="section" id="a-tour-of-the-codebase">
 <h2>A tour of the codebase<a class="headerlink" href="#a-tour-of-the-codebase" title="Permalink to this headline">¶</a></h2>
 <p>Below is some context on what some of the files and directories contain, along
-with what you might want to know about them.</p>
+with what you might want to know about them. See the <a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a>
+documentation for additional information about MATE’s components.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>: These files encode the dependencies
-necessary to build and to run <code class="docutils literal notranslate"><span class="pre">mate</span></code>. MATE is released in the <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code>
-docker image, which contains only the minimal number of dependencies to run
-<code class="docutils literal notranslate"><span class="pre">mate</span></code>, while <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> contains all the dependencies needed to for
-developing <code class="docutils literal notranslate"><span class="pre">mate</span></code>. Our CI pipeline builds both of these images each time it
-runs (such as when you push a commit to an open merge request), and pushes the
-images tagged with the branch name to artifactory. You can download each of
-these images with the command <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span>
-<span class="pre">artifactory.galois.com:5004/mate-dev:&lt;branch-name&gt;</span></code>. Any time the content of
-these files changes you will need to pull the corresponding image from
-Artifactory or rebuild locally. You can rebuild locally by running <code class="docutils literal notranslate"><span class="pre">docker</span>
-<span class="pre">build</span> <span class="pre">--target</span> <span class="pre">dist</span> <span class="pre">--tag</span> <span class="pre">&lt;branch&gt;:&lt;version&gt;</span> <span class="pre">.</span></code> in the root directory
-(the tag is arbitrary, the format suggested here is based on your current
-<code class="docutils literal notranslate"><span class="pre">git</span></code> branch and some version number).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> and <code class="docutils literal notranslate"><span class="pre">dev-requirements.txt</span></code>: These files encode the
+dependencies necessary to build and to run <code class="docutils literal notranslate"><span class="pre">mate</span></code>. MATE is released in the
+<code class="docutils literal notranslate"><span class="pre">mate-dist</span></code> Docker image, which contains only the minimal number of
+dependencies to run <code class="docutils literal notranslate"><span class="pre">mate</span></code>, while <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> contains all the dependencies
+needed to for developing <code class="docutils literal notranslate"><span class="pre">mate</span></code> (see also <a class="reference internal" href="architecture.html#docker"><span class="std std-ref">Docker Images and
+Compositions</span></a>). Any time the content of these files changes you will
+need to pull the corresponding image from the Github Container Registry or
+rebuild locally (see <a class="reference internal" href="quickstart.html"><span class="doc">Quick Start</span></a>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">shake/exe/Mate.hs</span></code>: We use the <a class="reference external" href="https://shakebuild.com/">Shake</a> build
 system to build MATE; this is the file where the build system is defined. You
 can build MATE from inside the <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> container by running <code class="docutils literal notranslate"><span class="pre">./shake.sh</span>
@@ -335,15 +303,12 @@ can build MATE from inside the <code class="docutils literal notranslate"><span 
 update files in the <code class="docutils literal notranslate"><span class="pre">.out</span></code> output directory. If you want to change, add or
 see the details of any flags to the build system <code class="docutils literal notranslate"><span class="pre">Mate.hs</span></code> is the file to
 check out.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code>: This file defines the commands executed by each of the CI
-pipeline stages.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">frontend</span></code>: Files related to the MATE REST API, task substrate, integrations
-with other CHESS TAs, and the legacy <code class="docutils literal notranslate"><span class="pre">mate</span></code> command line interface
-(CLI). For more CLI documentation check out <a class="reference internal" href="mate-cli-overview.html"><span class="doc">the MATE CLI overview</span></a> as well as
-<a class="reference internal" href="cli.html"><span class="doc">the full (autogenerated) docs</span></a> of all the command line flags. The
-<code class="docutils literal notranslate"><span class="pre">mate</span></code> executable lives at <code class="docutils literal notranslate"><span class="pre">frontend/mate/bin/mate</span></code>. When you build <code class="docutils literal notranslate"><span class="pre">mate</span></code>
-by running <code class="docutils literal notranslate"><span class="pre">./shake.sh</span> <span class="pre">bdist</span></code> in the <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> image, the frontend/mate
-directory gets copied to
+<li><p><code class="docutils literal notranslate"><span class="pre">.github/</span></code>: This directory contains the CI pipelines.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frontend</span></code>: Files related to the MATE REST API, task substrate, and the
+legacy <code class="docutils literal notranslate"><span class="pre">mate</span></code> command line interface (CLI). For more CLI documentation check
+out <a class="reference internal" href="cli-overview.html"><span class="doc">the MATE CLI overview</span></a>. The <code class="docutils literal notranslate"><span class="pre">mate</span></code> executable lives
+at <code class="docutils literal notranslate"><span class="pre">frontend/mate/bin/mate</span></code>. When you build <code class="docutils literal notranslate"><span class="pre">mate</span></code> by running <code class="docutils literal notranslate"><span class="pre">./shake.sh</span>
+<span class="pre">bdist</span></code> in the <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> image, the frontend/mate directory gets copied to
 <code class="docutils literal notranslate"><span class="pre">.out/bdist/local/lib/python3.8/site-packages/mate</span></code>.</p>
 <blockquote>
 <div><ul class="simple">
@@ -378,8 +343,7 @@ the program under analysis and writes out the nodes and edges of our CPG into
 a JSONL file. These JSONL files are then post-processed to create the
 database which the query interface queries against. The pointer analysis is
 also implemented as a middle-end pass and passes data into the
-<code class="docutils literal notranslate"><span class="pre">ASTGraphWriter</span></code>. See the
-<a class="reference internal" href="architecture.html"><span class="doc">MATE Tooling Architecture</span></a> documentation for more details.</p></li>
+<code class="docutils literal notranslate"><span class="pre">ASTGraphWriter</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">submodules</span></code>: MATE contains a number of other projects as submodules, which
 reside in the <code class="docutils literal notranslate"><span class="pre">submodules</span></code> directory. Whenever the code changes to rely on
 an updated version of a submodule, you’ll need to get a later version by
@@ -393,69 +357,12 @@ the <a class="reference internal" href="#documentation"><span class="std std-ref
 </div>
 <div class="section" id="building-and-running">
 <h2>Building and Running<a class="headerlink" href="#building-and-running" title="Permalink to this headline">¶</a></h2>
-<p>Below is an outline of two different environments for building &amp; executing MATE,
-and an overview of different parts of the analysis and implementation.</p>
-<div class="section" id="building-with-docker">
-<h3>Building with Docker<a class="headerlink" href="#building-with-docker" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="quickstart">
-<h4>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h4>
-<div class="section" id="permissions">
-<h5>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h5>
-<p>In order to build MATE, you need to make sure you have permissions for the
-following:</p>
-<ul class="simple">
-<li><p>Artifactory</p></li>
-<li><p>The MATE repos</p></li>
-</ul>
-<p>Here is a quickstart of the commands if copying and pasting to do a new build or
-starting up on a new machine. Each command is explained in more detail after
-this section.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker login artifactory.galois.com:5004
-docker pull artifactory.galois.com:5004/mate-dev:master
-docker tag artifactory.galois.com:5004/mate-dev:master mate-dev
-git clone --recurse-submodules git@gitlab-ext.galois.com:mate/MATE.git
-<span class="nb">cd</span> MATE
-docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/mate -it mate-dev ./shake.sh -j bdist
+<p>If you followed <a class="reference internal" href="quickstart.html"><span class="doc">Quick Start</span></a>., you should have an initial build of MATE
+available. To re-build MATE with any changes you’ve made, just re-run the
+<code class="docutils literal notranslate"><span class="pre">bdist</span></code> and <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code> steps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/mate -it mate-dev ./shake.sh -j bdist
 docker build --target dist -t mate-dist .
 </pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="explanation">
-<h4>Explanation<a class="headerlink" href="#explanation" title="Permalink to this headline">¶</a></h4>
-<p>First, authenticate with Artifactory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker login artifactory.galois.com:5004
-</pre></div>
-</div>
-<p>Pull the latest Docker image from the Artifactory repository.
-The development image is <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code>, and the release image is
-<code class="docutils literal notranslate"><span class="pre">mate-dist</span></code>. For this example, we’ll be using <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker pull artifactory.galois.com:5004/mate-dev:master
-</pre></div>
-</div>
-<p>Re-tag the <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> image without the <code class="docutils literal notranslate"><span class="pre">artifactory.falois.com:5004/</span></code>
-prefix, for convenience.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker tag artifactory.galois.com:5004/mate-dev:master mate-dev
-</pre></div>
-</div>
-<p>Clone the MATE repository, including its submodules.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone --recurse-submodules git@gitlab-ext.galois.com:mate/MATE.git
-</pre></div>
-</div>
-<p>Enter the MATE source tree. We use the source tree as a build context, so
-we need to be in it for subsequent steps.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> MATE
-</pre></div>
-</div>
-<p>Run the <code class="docutils literal notranslate"><span class="pre">bdist</span></code> target, which actually builds MATE’s core runtime components.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">bdist</span></code> build includes a large C++ build that requires at least
-8GB of RAM. You may encounter OOM-induced build failures if your development
-machine (or Docker environment) doesn’t have sufficient memory.</p>
-<p>Alternatively, if increasing the amount of RAM is not feasible, you
-may have some luck with reducing the build’s parallelism (e.g. with <code class="docutils literal notranslate"><span class="pre">-j2</span></code>
-instead of <code class="docutils literal notranslate"><span class="pre">-j</span></code>) or removing <code class="docutils literal notranslate"><span class="pre">-j</span></code> entirely.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -463,40 +370,9 @@ instead of <code class="docutils literal notranslate"><span class="pre">-j</span
 to <code class="docutils literal notranslate"><span class="pre">./shake.sh</span></code>. This <em>may</em> result in an even more memory intensive
 build phase.</p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/mate -it mate-dev ./shake.sh -j bdist
-</pre></div>
-</div>
-<p>Build the <code class="docutils literal notranslate"><span class="pre">mate-bdist</span></code> image, which embeds the MATE runtime that we
-built in the previous step.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build --target dist -t mate-dist .
-</pre></div>
-</div>
-</div>
-<div class="section" id="useful-options-for-working-with-docker">
-<h4>Useful options for working with Docker<a class="headerlink" href="#useful-options-for-working-with-docker" title="Permalink to this headline">¶</a></h4>
-<ul class="simple">
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">--rm</span></code> to remove the container after you stop it</p></li>
-<li><p>To run a single command inside Docker and exit, remove the <code class="docutils literal notranslate"><span class="pre">-it</span></code> flag and
-add the command to run, i.e. <code class="docutils literal notranslate"><span class="pre">./shake.sh</span></code> to the end of the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code>
-incantation.</p></li>
-</ul>
-</div>
-<div class="section" id="run-the-build">
-<h4>Run the build<a class="headerlink" href="#run-the-build" title="Permalink to this headline">¶</a></h4>
-<p>If you followed the quickstart above, you should have an initial build of MATE
-available.</p>
-<p>To re-build MATE with any changes you’ve made, just re-run the <code class="docutils literal notranslate"><span class="pre">bdist</span></code> and
-<code class="docutils literal notranslate"><span class="pre">mate-dist</span></code> steps:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/mate -it mate-dev ./shake.sh -j bdist
-docker build --target dist -t mate-dist .
-</pre></div>
-</div>
-<p>For guidance on how to analyze a program with MATE, check out the
-<a class="reference external" href="doc/tutorial.rst">tutorial</a>.</p>
-</div>
 </div>
 <div class="section" id="hacking-on-the-mate-ui">
-<h3>Hacking on the MATE UI<a class="headerlink" href="#hacking-on-the-mate-ui" title="Permalink to this headline">¶</a></h3>
+<h2>Hacking on the MATE UI<a class="headerlink" href="#hacking-on-the-mate-ui" title="Permalink to this headline">¶</a></h2>
 <p>MATE’s current UI is a web application, based on React and written in TypeScript.</p>
 <p>It is decoupled from the rest of the MATE codebase, using only the REST API
 exposed by the MATE server.</p>
@@ -512,189 +388,9 @@ run just the <code class="docutils literal notranslate"><span class="pre">ui</sp
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="development-practices">
-<h2>Development practices<a class="headerlink" href="#development-practices" title="Permalink to this headline">¶</a></h2>
-<p>This section collects the practices that the whole MATE team has agreed to
-uphold. These practices continue to develop as we work together. The two major
-goals of these practices are:</p>
-<ol class="arabic simple">
-<li><p>To ease the maintenance of MATE in the long term</p></li>
-<li><p>To reduce the potential for friction and inefficiency as a result of
-mismatched expectations</p></li>
-</ol>
-<p>To attend to (2), we need to agree on how consistently we uphold each of these
-practices. In the following sections, the word <em>consistently</em> will prefix
-practices that we do almost always, and
-<em>aspirationally</em> will be used for ones that aren’t necessarily expected, but are
-nice to do. Some of these are <em>invariably</em> enforced, meaning that compliance
-is guaranteed by some automated mechanism (usually a Gitlab setting).</p>
-<div class="section" id="documenting-development-practices">
-<h3>Documenting development practices<a class="headerlink" href="#documenting-development-practices" title="Permalink to this headline">¶</a></h3>
-<p><em>Consistently</em>: documenting our development practices in writing ensures we’re
-all on the same page. Changes to the practices should be reflected in this
-document, and should be approved by the whole team.</p>
-</div>
-<div class="section" id="using-gitlab">
-<h3>Using Gitlab<a class="headerlink" href="#using-gitlab" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="mrs">
-<h4>MRs<a class="headerlink" href="#mrs" title="Permalink to this headline">¶</a></h4>
-<p><em>Invariably</em>: Code is added to the master branch exclusively through merge
-requests (MRs). In practice this means developing on a branch off of master
-and opening a MR based on that branch.</p>
-<p><em>Aspirationally</em>: MRs link to relevant <a class="reference internal" href="#issues"><span class="std std-ref">issues</span></a>,
-especially ones that should be considered “done” once the MR is merged. This
-helps us track exactly when and how issues got fixed.</p>
-<div class="section" id="assigning-reviewers">
-<span id="mr-review"></span><h5>Assigning reviewers<a class="headerlink" href="#assigning-reviewers" title="Permalink to this headline">¶</a></h5>
-<p><em>Consistently</em>: Every MR is assigned to one or more collaborators
-for <a class="reference internal" href="#code-review"><span class="std std-ref">review</span></a>. The assignee tends to be, but doesn’t have to
-be, someone familiar with that part of the codebase. When assigning the
-reviewers, the MR author should ping them in the <code class="docutils literal notranslate"><span class="pre">~review-requests</span></code> channel
-on Mattermost, and should do so every time the MR is ready for another round
-of reviews. One approval is required before merging. The assignee should
-review within a business day, or reassign the MR to someone else. Unless the
-author needs specific feedback from the assignee(s), it’s OK to merge if a
-collaborator other than the assignee(s) reviews the MR.</p>
-</div>
-<div class="section" id="squashing">
-<h5>Squashing<a class="headerlink" href="#squashing" title="Permalink to this headline">¶</a></h5>
-<p><em>Aspirationally</em>: To preserve a clean Git history (see also <a class="reference internal" href="#git"><span class="std std-ref">Using Git</span></a>), we
-often squash the many commits added to a MR during the review/test cycle into
-one commit on the master branch. However, it is not a requirement to squash
-commits, and in fact it can be detrimental to a meaningful Git history to
-squash together unrelated changes (e.g. one commit that is purely
-organizational with one that changes functionality or fixes a bug). MR authors
-should use their best judgement, and
-<a class="reference internal" href="#mr-labels"><span class="std std-ref">label the MR appropriately</span></a>.</p>
-<p><em>Consistently</em>: As a rule, each commit on a non-squashed MR should pass CI, i.e.
-each commit on the master branch should always build and pass tests.</p>
-</div>
-<div class="section" id="rebasing">
-<h5>Rebasing<a class="headerlink" href="#rebasing" title="Permalink to this headline">¶</a></h5>
-<p><em>Invariably</em>: Every MR has to be rebased against the current master branch
-(Gitlab conveniently provides a button for doing this). This ensures that the
-MR is run with the latest tests, and that another recently merged MR didn’t
-subtly conflict with it. Unfortunately, it also means that all the tests need
-to run again, and they can take a while.</p>
-<p><em>Aspirationally</em>: After rebasing a branch, the rebaser should cancel any ongoing
-CI runs for that same MR. This helps reduce load on the CI runners, speeding
-up other builds.</p>
-</div>
-<div class="section" id="merging">
-<h5>Merging<a class="headerlink" href="#merging" title="Permalink to this headline">¶</a></h5>
-<p><em>Consistently</em>: The author of the MR hits the merge button after it has been
-approved. This prevents merging in code that may be approved but that the
-author may wish to make more changes to before merging. Reviewers can hit the
-merge button for trivial changes but should generally defer to the author.</p>
-<p><a class="reference internal" href="#mr-labels"><span class="std std-ref">The section on MR labels</span></a> describes how the author can
-indicate that the MR is ready to be merged.</p>
-</div>
-<div class="section" id="mr-labels">
-<span id="id1"></span><h5>MR Labels<a class="headerlink" href="#mr-labels" title="Permalink to this headline">¶</a></h5>
-<p><em>Aspirationally</em>: When an MR has been approved by a reviewer and is ready to
-merge, the author should add the <code class="docutils literal notranslate"><span class="pre">MR-ready/squash</span></code> or <code class="docutils literal notranslate"><span class="pre">MR-ready/no-squash</span></code>
-labels, indicating that the MR is ready to be merged, and that other
-collaborators should rebase it and merge it if another MR is merged first.</p>
-<p>See also <a class="reference internal" href="#issue-labels"><span class="std std-ref">the section on issue labels</span></a>.</p>
-</div>
-<div class="section" id="wip-mrs">
-<h5>WIP MRs<a class="headerlink" href="#wip-mrs" title="Permalink to this headline">¶</a></h5>
-<p><em>Aspirationally</em>: If your MR is not ready for a full review and merge, but you’d
-like someone to have a head start on looking at your progress, prefix the
-title of the MR with “WIP:”, and remove this prefix and notify the asignee
-(s) when it is ready for review.</p>
-</div>
-<div class="section" id="issues">
-<h5>Issues<a class="headerlink" href="#issues" title="Permalink to this headline">¶</a></h5>
-<p><em>Aspirationally</em>: We use issues to track bugs, plan features, and as a forum for
-discussions. Creating issues and assigning them to yourself helps others know
-what you’re up to, and prevents duplication of effort.</p>
-</div>
-<div class="section" id="issue-labels">
-<span id="id2"></span><h5>Issue Labels<a class="headerlink" href="#issue-labels" title="Permalink to this headline">¶</a></h5>
-<dl class="simple">
-<dt><em>Aspirationally</em>: There are a few labels that indicate the priority of issues.</dt><dd><p>These are helpful for searching and sorting issues, especially
-in <a class="reference internal" href="#milestones"><span class="std std-ref">milestones</span></a>. Collaborators should create and use
-additional Gitlab labels however they find helpful.</p>
-</dd>
-</dl>
-</div>
-<div class="section" id="milestones">
-<span id="id3"></span><h5>Milestones<a class="headerlink" href="#milestones" title="Permalink to this headline">¶</a></h5>
-<p><em>Aspirationally</em>: We assign issues and MRs to milestones to track our progress,
-ensure necessary functionality and fixes get merged before releases, and to
-align our development with the Statement of Work.</p>
-</div>
-</div>
-</div>
-<div class="section" id="code-review">
-<span id="id4"></span><h3>Code review<a class="headerlink" href="#code-review" title="Permalink to this headline">¶</a></h3>
-<p>We have no specific practices surrounding code review (other than <a class="reference internal" href="#mr-review"><span class="std std-ref">a review
-is required for each MR</span></a>). See also <a class="reference internal" href="#further-reading"><span class="std std-ref">Further reading</span></a>.</p>
-</div>
-<div class="section" id="testing">
-<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h3>
-<p><em>Aspirationally</em>: We generally expect that code added to MATE has at least one
-associated unit test, i.e., a test that specifically exercises the new
-functionality, independently from as much other code as possible. These tests
-run in CI on every merge request.</p>
-</div>
-<div class="section" id="using-git">
-<span id="git"></span><h3>Using Git<a class="headerlink" href="#using-git" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="commit-messages">
-<h4>Commit messages<a class="headerlink" href="#commit-messages" title="Permalink to this headline">¶</a></h4>
-<p><em>Aspirationally</em>: We strive for meaningful commit messages. It’s especially
-important to review the commit message that Gitlab will add to your MR when
-squashing (sometimes it makes a weird choice).</p>
-</div>
-</div>
-<div class="section" id="linting-and-formatting">
-<h3>Linting and formatting<a class="headerlink" href="#linting-and-formatting" title="Permalink to this headline">¶</a></h3>
-<p><em>Invariably</em>: All code introduced in MATE passes a suite of linters and
-formatters. These tools are integrated with the Shake build system, so
-developers can run the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./shake.sh lint
-./shake.sh format
-</pre></div>
-</div>
-<p>to lint and auto-format their code, respectively.</p>
-<p>Automatically formatting the code has a few advantages.</p>
-<ul class="simple">
-<li><p>It ensures consistency in style across our codebase, hopefully making the code
-more readable.</p></li>
-<li><p>It saves developer time, because you need to spend less time fixing up your
-hastily-written scripts to look nice.</p></li>
-<li><p>It reduces friction during code reviews, because disagreement about how code
-should be formatted is front-loaded in the selection and configuration of a
-formatting tool.</p></li>
-</ul>
-<p>Linting shares many of the same advantages with respect to readability, but also
-helps us avoid common bugs, such as type errors.</p>
-<div class="section" id="mypy">
-<h4>Mypy<a class="headerlink" href="#mypy" title="Permalink to this headline">¶</a></h4>
-<p><em>Aspirationally</em>: When possible, adding Mypy-compatible type annotations makes
-the code easier to refactor, communicates the author’s intentions, and catches
-some type errors at lint-time (rather than at run-time). Sometimes it’s not
-possible or worth the effort to add type annotations to code, due to the
-limitations of Mypy’s type system (for example, in <code class="docutils literal notranslate"><span class="pre">mate_query.cpg.models</span></code>).</p>
-</div>
-</div>
-<div class="section" id="further-reading">
-<span id="id5"></span><h3>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h3>
-<p>Galwegians interested in learning more about internally-recommended software
-engineering practices should take a look at the <a class="reference external" href="http://wiki.galois.com/trac/galois/wiki/Engineering/Practices/Software">the relevant wiki page</a>.</p>
-<p>In particular, engineers at Galois have identified the following pages as good
-resources for code reviewers.</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://medium.com/palantir/code-review-best-practices-19e02780015f">Palantir’s blog post, “Code Review Best Practices”</a></p></li>
-<li><p><a class="reference external" href="http://www.processimpact.com/articles/humanizing_reviews.pdf">Karl E. Wiegers’ essay, “Humanizing Peer Reviews”</a></p></li>
-</ul>
-</div>
-</div>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
-<p>Documentation for MATE is written in <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#external-links">ReStructured Text</a>, and processed by the
+<p>Documentation for MATE is written in <a class="reference external" href="https://www.sphinx-doc.org/en/main/usage/restructuredtext/basics.html#external-links">ReStructured Text</a>, and processed by the
 <a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a> documentation system. Documentation source files are located within
 the <code class="docutils literal notranslate"><span class="pre">doc/</span></code> subdirectory of the MATE repository.</p>
 <div class="section" id="building">
@@ -727,35 +423,47 @@ the relevant indices and tables.</p>
 </div>
 <div class="section" id="deployment">
 <h3>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h3>
-<p>Documentation from the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch of the MATE repository is automatically
-rendered and deployed to the <a class="reference external" href="https://mate.galois.com/">web</a> by CI. Your
-edits will need to be merged into master before they show up.</p>
+<p>Documentation from the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of the repository is automatically
+rendered and deployed to the <a class="reference external" href="https://mate.galois.com/">web</a> by CI. Your edits
+will need to be merged into main before they show up.</p>
 </div>
 <div class="section" id="the-json-schemata">
 <h3>The JSON schemata<a class="headerlink" href="#the-json-schemata" title="Permalink to this headline">¶</a></h3>
-<p>The JSON schemata in <code class="docutils literal notranslate"><span class="pre">./frontend/mate-common/mate_common/schemata</span></code> describe valid contents of the
-JSON blobs stored in the database. The <code class="docutils literal notranslate"><span class="pre">edges.json</span></code>  and <code class="docutils literal notranslate"><span class="pre">nodes.json</span></code> files
-specify each kind of node and edge in the CPG along with their required and
-optional fields. This information can also be found in
+<p>The JSON schemata in <code class="docutils literal notranslate"><span class="pre">./frontend/mate-common/mate_common/schemata</span></code> describe
+valid contents of the JSON blobs stored in the database. The <code class="docutils literal notranslate"><span class="pre">edges.json</span></code> and
+<code class="docutils literal notranslate"><span class="pre">nodes.json</span></code> files specify each kind of node and edge in the CPG along with
+their required and optional fields. This information can also be found in
 <code class="docutils literal notranslate"><span class="pre">frontend/mate-common/mate_common/models/cpg_types/mate.py</span></code> which codifies
 these structures so they can be used in the query interface.</p>
 </div>
-<div class="section" id="the-wiki">
-<h3>The Wiki<a class="headerlink" href="#the-wiki" title="Permalink to this headline">¶</a></h3>
-<p>Some information can be found on <a class="reference external" href="https://gitlab-ext.galois.com/mate/MATE/-/wikis/home">the project wiki</a>, including design
-documentation for a few features:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://gitlab-ext.galois.com/mate/MATE/-/wikis/Design:-Directed-Symbolic-Execution">Directed Symbolic Execution with Mantiserve and the CPG</a></p></li>
-</ul>
-</div>
+<div class="section" id="style">
+<h3>Style<a class="headerlink" href="#style" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="capitalization-conventions">
-<h3>Capitalization conventions<a class="headerlink" href="#capitalization-conventions" title="Permalink to this headline">¶</a></h3>
+<h4>Capitalization conventions<a class="headerlink" href="#capitalization-conventions" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>MATE is the name of our project, <code class="docutils literal notranslate"><span class="pre">mate</span></code> is the name of the legacy CLI tool
 and the primary Python package</p></li>
-<li><p>Python, SQLAlchemy, etc. are proper names and need capitalization</p></li>
+<li><p>Docker, Python, SQLAlchemy, etc. are proper names and need capitalization</p></li>
 <li><p>JSON, SQL, POI, etc. are abbreviations and need capitalization</p></li>
 </ul>
+</div>
+<div class="section" id="linking">
+<h4>Linking<a class="headerlink" href="#linking" title="Permalink to this headline">¶</a></h4>
+<p>Wikipedia has <a class="reference external" href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Linking#Principles">sensible guidelines on linking</a>,
+and the MATE documentation follows similar conventions. In particular:</p>
+<ul class="simple">
+<li><p>Mention of unfamiliar or novel concepts like the CPG should include internal
+links to the main documentation page on the concept (in this case,
+<a class="reference internal" href="cpg.html"><span class="doc">The Code Property Graph</span></a>).</p></li>
+<li><p>Links should generally appear at most once per page</p></li>
+</ul>
+</div>
+<div class="section" id="abbreviations">
+<h4>Abbreviations<a class="headerlink" href="#abbreviations" title="Permalink to this headline">¶</a></h4>
+<p>For an appropriate balance of clarity and concision, most abbreviations like POI
+for point of interest and CPG for code property graph should be introduced
+explicitly once per page, and referred to by the abbreviation thereafter.</p>
+</div>
 </div>
 </div>
 <div class="section" id="adding-a-new-model-to-the-cpg">
@@ -898,13 +606,34 @@ new APIs:</p>
 </div>
 <div class="section" id="adding-a-poi-query">
 <h2>Adding a POI Query<a class="headerlink" href="#adding-a-poi-query" title="Permalink to this headline">¶</a></h2>
+<p>To write an analysis you need to define two classes:</p>
+<ol class="arabic simple">
+<li><p>a <code class="docutils literal notranslate"><span class="pre">POI</span></code> class which is a record to describe the point of interest</p></li>
+<li><p>an <code class="docutils literal notranslate"><span class="pre">Analysis</span></code> class which contains a <code class="docutils literal notranslate"><span class="pre">run</span></code> method with the logic of your analysis.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">Analysis</span></code> subclasses yield instances of <code class="docutils literal notranslate"><span class="pre">POI</span></code> subclasses as soon as they are computed.</p>
+<p>Here are all of the contractual requirements for POIs and Analyses:</p>
+<ul class="simple">
+<li><p>POIs must be JSON serializable</p></li>
+<li><p>The POI base class provides default <code class="docutils literal notranslate"><span class="pre">to_json</span></code> and <code class="docutils literal notranslate"><span class="pre">from_json</span></code>
+functions which call <code class="docutils literal notranslate"><span class="pre">json.loads</span></code> and <code class="docutils literal notranslate"><span class="pre">json.dumps</span></code>. If your POI
+subclass has simple fields (such as strings) this will be sufficient.
+If you POI has more complex fields (such as objects) you must define your
+own <code class="docutils literal notranslate"><span class="pre">to_json</span></code> and <code class="docutils literal notranslate"><span class="pre">from_json</span></code> objects that describe how to serialize
+and deserialize instances of your subclass.</p></li>
+<li><p>Analyses must provide a <code class="docutils literal notranslate"><span class="pre">run</span></code> method with exactly the signature up above</p></li>
+<li><p>Analyses should yield instances of the POI subclass they are returning as soon as possible</p></li>
+<li><p>Analysis scripts must contain exactly one instance of an Analysis subclass.</p></li>
+<li><p>Analyses may log using calls to <code class="docutils literal notranslate"><span class="pre">logger.{log_level}</span></code> but <strong>MUST NOT</strong> print</p></li>
+<li><p>The analysis module itself <strong>MUST</strong> provide an <code class="docutils literal notranslate"><span class="pre">analysis_background</span></code> field,
+in Markdown, that will be rendered as context for each POI produced.</p></li>
+</ul>
 <p>Here’s a checklist of things to think about when adding a POI query:</p>
 <ul class="simple">
 <li><p>Add a test program and accompanying test harness. Optimally, this program will
 have true positives, false positives (where static information is insufficient
 or the query could stand to be improved), true negatives, and false negatives.</p></li>
-<li><p>Add the new query to the tests in
-<code class="docutils literal notranslate"><span class="pre">/home/langston/code/mate/side/tests/integration/poi/test_pois.py</span></code>.</p></li>
+<li><p>Add the new query to the tests in <code class="docutils literal notranslate"><span class="pre">tests/integration/poi/test_pois.py</span></code>.</p></li>
 <li><p>Test running the POI query on some mid-size programs to ensure it’s
 sufficiently performant.</p></li>
 <li><p>Consider whether there are opportunities to push work from Python into the
@@ -955,8 +684,8 @@ and use <code class="docutils literal notranslate"><span class="pre">json_extrac
 <p>Documentation on how to manipulate JSON can be found in the <a class="reference external" href="https://www.sqlite.org/json1.html">SQLite
 Documentation</a>.</p>
 </div>
-<div class="section" id="statically-sized-joins">
-<h3>Statically-Sized Joins<a class="headerlink" href="#statically-sized-joins" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="joins">
+<h3>Joins<a class="headerlink" href="#joins" title="Permalink to this headline">¶</a></h3>
 <p>To join a known number of tables, use them together in a <code class="docutils literal notranslate"><span class="pre">WHERE</span></code>
 clause.</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"></span>
@@ -972,82 +701,29 @@ clause.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="path-queries">
-<h3>Path Queries<a class="headerlink" href="#path-queries" title="Permalink to this headline">¶</a></h3>
-<p>Path queries involve joining the edge table multiple times, with itself.
-This can be expensive; thankfully, we can use recursive common-table
-expressions (CTEs) to express this (relatively) concisely.</p>
-<p>The following query constructs a table of all paths between any pair of
-vertices.</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Definition of recursive CTE</span>
-<span class="k">with</span><span class="w"> </span><span class="k">recursive</span><span class="w"> </span><span class="n">paths</span><span class="p">(</span><span class="k">source</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="c1">-- Base Case</span>
-<span class="w">  </span><span class="k">select</span><span class="w"> </span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="n">json_array</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">nodes</span><span class="w"></span>
-
-<span class="w">  </span><span class="k">union</span><span class="w"></span>
-
-<span class="w">  </span><span class="c1">-- Recursive Case</span>
-<span class="w">  </span><span class="k">select</span><span class="w"></span>
-<span class="w">    </span><span class="n">paths</span><span class="p">.</span><span class="k">source</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">edges</span><span class="p">.</span><span class="n">target</span><span class="p">,</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">-- Cycle-breaking</span>
-<span class="w">    </span><span class="n">json_insert</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="n">paths</span><span class="p">.</span><span class="n">path</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="s1">&#39;$[&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">json_array_length</span><span class="p">(</span><span class="n">paths</span><span class="p">.</span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;]&#39;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">edges</span><span class="p">.</span><span class="n">target</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="k">from</span><span class="w"> </span><span class="n">paths</span><span class="p">,</span><span class="w"> </span><span class="n">edges</span><span class="w"></span>
-<span class="w">  </span><span class="k">where</span><span class="w"> </span><span class="n">paths</span><span class="p">.</span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edges</span><span class="p">.</span><span class="k">source</span><span class="w"></span>
-<span class="w">    </span><span class="k">and</span><span class="w"> </span><span class="n">edges</span><span class="p">.</span><span class="n">target</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">json_each</span><span class="p">(</span><span class="n">paths</span><span class="p">.</span><span class="n">path</span><span class="p">))</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
-<span class="c1">-- Usage of recursive CTE</span>
-<span class="k">select</span><span class="w"></span>
-<span class="w">  </span><span class="k">source</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">target</span><span class="p">,</span><span class="w"></span>
-
-<span class="w">  </span><span class="c1">-- Prettify JSON path, not strictly necessary.</span>
-<span class="w">  </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="n">group_concat</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">json_each</span><span class="p">(</span><span class="n">paths</span><span class="p">.</span><span class="n">path</span><span class="p">))</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">path</span><span class="w"></span>
-<span class="k">from</span><span class="w"> </span><span class="n">paths</span><span class="p">;</span><span class="w"></span>
+</div>
+<div class="section" id="running-the-shell">
+<h2>Running the Shell<a class="headerlink" href="#running-the-shell" title="Permalink to this headline">¶</a></h2>
+<p>MATE provides the capability to open an IPython shell which automatically
+connects to a running database instance. This shell can be run as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="o">-</span><span class="n">f</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">yml</span> <span class="o">-</span><span class="n">f</span> <span class="n">docker</span><span class="o">-</span><span class="n">compose</span><span class="o">.</span><span class="n">clients</span><span class="o">.</span><span class="n">yml</span> <span class="n">run</span> <span class="n">shell</span>
 </pre></div>
 </div>
-<div class="section" id="extensions">
-<h4>Extensions<a class="headerlink" href="#extensions" title="Permalink to this headline">¶</a></h4>
-<p>There are multiple ways in which this query can be refined:</p>
-<ul>
-<li><p>If you will be doing multiple queries over the computed paths, you
-should probably store them in a table.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>create table paths as with recursive …;
+<p>Once inside the shell, the database object <code class="docutils literal notranslate"><span class="pre">db</span></code> is available and
+preconfigured, can be used to make queries using the MATE query language. For
+example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">session</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">new_session</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Build</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">build</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Build</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">build</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+<span class="go">&quot;e4e8e8e5e9c848fd959463d568e30194&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">graph_from_build</span><span class="p">(</span><span class="n">build</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">909</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">Edge</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">2045</span>
 </pre></div>
-</div>
-<p>This approach will often be better than recomputing the query with
-additional constraints, as below, if there are enough of them.</p>
-</li>
-<li><p>If you do not require paths between <strong>all</strong> pairs of vertices, you
-can add a <code class="docutils literal notranslate"><span class="pre">where</span></code> clause to the base case of the query to restrict
-the set of entry points.</p></li>
-<li><p>If you want to compute all paths <strong>not</strong> passing through a given
-vertex, you have several options:</p>
-<ol class="arabic simple">
-<li><p>Compute all paths, and filter them on the path afterwards. This
-will be faster if you have precomputed the paths already.</p></li>
-<li><p>Add a <code class="docutils literal notranslate"><span class="pre">where</span></code> clause to the recursive case of the query to stop
-it from exploring the given vertex.</p></li>
-</ol>
-</li>
-</ul>
-</div>
-<div class="section" id="shortcomings">
-<h4>Shortcomings<a class="headerlink" href="#shortcomings" title="Permalink to this headline">¶</a></h4>
-<p>Pretty much any kind of query you like can be expressed as a combination
-of an all-paths query, followed by a filtering. However, some kinds of
-queries won’t really scale with this approach.</p>
-<p>For example, CFL-reachability can only really be answered by computing
-<strong>all</strong> paths, and piping them out to a separate program to do the CF
-filtering. Ideally, we would like to pre-emptively prune any path that
-will not be accepted by the CFL, but SQL won’t support this since it
-can’t maintain state very easily.</p>
-</div>
 </div>
 </div>
 <div class="section" id="internal-state-machines">
@@ -1061,139 +737,6 @@ in red.</p>
 <a class="reference external image-reference" href="./schemata/statemachine.BuildState.png"><img alt="State transition diagram for BuildState nodes" src="schemata/statemachine.BuildState.png" /></a>
 <a class="reference external image-reference" href="./schemata/statemachine.CompilationState.png"><img alt="State transition diagram for CompilationState nodes" src="schemata/statemachine.CompilationState.png" /></a>
 <a class="reference external image-reference" href="./schemata/statemachine.MantiserveTaskState.png"><img alt="State transition diagram for MantiserveTaskState nodes" src="schemata/statemachine.MantiserveTaskState.png" /></a>
-</div>
-<div class="section" id="ci-and-git-branches">
-<h2>CI and Git Branches<a class="headerlink" href="#ci-and-git-branches" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="background">
-<h3>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h3>
-<p>MATE has a large test suite, ranging from unit tests of small pure functions to
-whole-system integraion tests running in Docker Compose. However, more tests
-running on every commit are not <em>always</em> better. We have to balance the
-trade-off between the additional assurance granted by running more tests
-against the time they take to run. The central concerns to take care of when
-considering this balance are:</p>
-<ul class="simple">
-<li><p>Level of assurance for deliverables to the client</p></li>
-<li><p>Depth of features in deliverables to the client</p></li>
-<li><p>Developer productivity and happiness</p></li>
-</ul>
-<p>(None of these concerns correspond directly to more/slower tests or fewer/faster
-tests.)</p>
-</div>
-<div class="section" id="implementation">
-<h3>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
-<p>Development of MATE happens in merge requests against the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch,
-which has a suite of tests that run on every commit. MATE has enough
-long-running tests that it’s not feasible to run all of them against every
-commit before merging to <code class="docutils literal notranslate"><span class="pre">master</span></code>. Therefore, <code class="docutils literal notranslate"><span class="pre">master</span></code> is periodically
-merged into the <code class="docutils literal notranslate"><span class="pre">stable</span></code> branch, and the following script decides when to run
-a longer, more complete suite of tests:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
-
-<span class="c1"># Test script to see if we&#39;re in a CI pipeline that should run integration</span>
-<span class="c1"># tests, optimize heavily, etc.</span>
-<span class="c1">#</span>
-<span class="c1"># Specifically, will exit 0 (true) if:</span>
-<span class="c1">#</span>
-<span class="c1"># 1. this is a MR into stable,</span>
-<span class="c1"># 2. this is a commit on stable, or</span>
-<span class="c1"># 3. this is a pipeline inside a schedule (indicating a once-a-day pipeline on</span>
-<span class="c1">#    master).</span>
-<span class="c1">#</span>
-<span class="c1"># This script should be kept in sync with the &quot;rules:&quot; clause of the</span>
-<span class="c1"># &quot;.on-stable:&quot; configuration in .gitlab-ci.yml.</span>
-
-<span class="nb">set</span> -x
-
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CI_MERGE_REQUEST_TARGET_BRANCH_NAME</span><span class="k">:-</span><span class="nv">fake</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;stable&quot;</span> <span class="o">]</span> <span class="se">\</span>
-  <span class="o">||</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CI_COMMIT_BRANCH</span><span class="k">:-</span><span class="nv">fake</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;stable&quot;</span> <span class="o">]</span> <span class="se">\</span>
-  <span class="o">||</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="si">${</span><span class="nv">SCHEDULE</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-  <span class="nb">exit</span> <span class="m">0</span>
-<span class="k">fi</span>
-<span class="nb">exit</span> <span class="m">1</span>
-</pre></div>
-</div>
-<p>Specifically, when the above script exits with 0,</p>
-<ul class="simple">
-<li><p>The environment variable <code class="docutils literal notranslate"><span class="pre">MATE_INTEGRATION_TESTS</span></code> is set to <code class="docutils literal notranslate"><span class="pre">1</span></code> before
-running <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, which causes more tests to be run and with slightly
-different settings,</p></li>
-<li><p>All C++ components of MATE are built with the Clang Static Analyzer</p></li>
-<li><p>All C++ components of MATE are built LLVM’s Address Sanitizer and Undefined
-Behavior Sanitizer, and the test suite is run on top of each of these
-builds.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">--release-build</span></code> flag is passed to Shake (see <a class="reference internal" href="#building-releases"><span class="std std-ref">Building Releases</span></a>)</p></li>
-</ul>
-</div>
-<div class="section" id="building-releases">
-<h3>Building Releases<a class="headerlink" href="#building-releases" title="Permalink to this headline">¶</a></h3>
-<p>Releases are cut from the <code class="docutils literal notranslate"><span class="pre">stable</span></code> branch. The primary release artifact is the
-<code class="docutils literal notranslate"><span class="pre">mate-dist</span></code> Docker image that is build by CI and uploaded to the
-Galois-maintained Artifactory instance. Release builds are built with Shake’s
-<code class="docutils literal notranslate"><span class="pre">--release-build</span></code> flag which</p>
-<ul class="simple">
-<li><p>Disables assertions so that fewer errors are fatal</p></li>
-<li><p>Turns on more aggressive optimization flags which cause build times to
-skyrocket but significantly improve performance</p></li>
-</ul>
-<p>The effect of this flag is predominantly implemented in <code class="docutils literal notranslate"><span class="pre">llvm/CMakeLists.txt</span></code>
-and <code class="docutils literal notranslate"><span class="pre">llvm/PointerAnalysis/CMakeLists.txt</span></code>.</p>
-</div>
-</div>
-<div class="section" id="developing-against-the-chess-system">
-<h2>Developing Against the CHESS System<a class="headerlink" href="#developing-against-the-chess-system" title="Permalink to this headline">¶</a></h2>
-<p>As described in <a class="reference internal" href="chess-system.html#working-with-the-chess-system"><span class="std std-ref">its sesion</span></a>,
-MATE is one component of the larger CHESS System, which includes interoperating
-software stacks from all of the performers on the DARPA CHESS Program. This
-section describes how to test and interate an in-development version of MATE
-against the current deployed version of the CHESS System.</p>
-<p>Make sure to go through the <code class="docutils literal notranslate"><span class="pre">README</span></code> in <code class="docutils literal notranslate"><span class="pre">submodules/chess-system</span></code> to get
-more specfic and up-to-date information.</p>
-<div class="section" id="make-mate-specific-changes">
-<h3>Make MATE-Specific Changes<a class="headerlink" href="#make-mate-specific-changes" title="Permalink to this headline">¶</a></h3>
-<p>The first round of development occurs in the main MATE repository, consisting of
-regular MATE development. In order to be able to have the MATE stack use local
-images, modify the <code class="docutils literal notranslate"><span class="pre">submodules/chess-system/docker-compose.mate.yml</span></code> stack
-definition to reference the appropriate images, and follow the regular
-instructions on running the CHESS System.</p>
-<p>Some useful workflows:</p>
-<ol class="arabic simple">
-<li><p>Any individual stack (such as MATE) can be brought down and up again
-independently of the other stacks. If the images referenced by the stack
-definition have been rebuilt, the redeployment will use those new images.
-(e.g. <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">stack</span> <span class="pre">rm</span> <span class="pre">mate;</span> <span class="pre">docker</span> <span class="pre">build</span> <span class="pre">...;</span> <span class="pre">docker</span> <span class="pre">stack</span> <span class="pre">deploy</span> <span class="pre">...</span>
-<span class="pre">mate</span></code></p></li>
-<li><p>The logs for any particular service may be viewed through <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">service</span>
-<span class="pre">logs</span> <span class="pre">&lt;service-name&gt;</span></code>. 3. Any container run while attached to <code class="docutils literal notranslate"><span class="pre">chess_net</span></code>
-will be able to see every other service in the swarm as <code class="docutils literal notranslate"><span class="pre">&lt;stack_service&gt;</span></code>,
-and will be able to access any open ports on those containers. 4. Services
-in the same stack can refer to each other with just the service name;
-services in other stacks must be qualified with <code class="docutils literal notranslate"><span class="pre">&lt;stack_name&gt;_</span></code>.</p></li>
-</ol>
-<p>As part of this initial MATE-specific MR, do not commit any changes to the
-<code class="docutils literal notranslate"><span class="pre">chess-system</span></code> repository.</p>
-<p>Once a satisfactory merge request has been reviewed and merged into the master
-branch, new images must be pushed out. You will need credentials for Apogee’s
-AWS ECR repositories. The tag for these images should be a commit hash on
-master representing the state of the code-base desired.</p>
-</div>
-<div class="section" id="bump-stack-definitions-and-message-schemas">
-<h3>Bump stack definitions and message schemas<a class="headerlink" href="#bump-stack-definitions-and-message-schemas" title="Permalink to this headline">¶</a></h3>
-<p>The second step is to persist the changes to the <code class="docutils literal notranslate"><span class="pre">chess-system</span></code> repository.
-Typically this will only involve updating the image hashes in the MATE stack
-definition, but can also involve adding/removing services, etc.</p>
-<p>In addition, any new message schemas should be committed to the
-<code class="docutils literal notranslate"><span class="pre">chess-messages</span></code> repository.</p>
-<p>At the end of this workflow, new commits of both repositories should be pushed
-upstream, which will require credentials to Apogee’s GitLab. There is no MR
-process in place, since most performers will be only modifying their own stack
-definitions.</p>
-</div>
-<div class="section" id="bump-submodule-revisions-in-mate">
-<h3>Bump submodule revisions in MATE<a class="headerlink" href="#bump-submodule-revisions-in-mate" title="Permalink to this headline">¶</a></h3>
-<p>Finally, persist the updated submodule revisions in MATE by creating a MATE MR.
-This should usually not be more complicated than just the submodule updates.</p>
-</div>
 </div>
 <div class="section" id="pointer-analysis">
 <h2>Pointer Analysis<a class="headerlink" href="#pointer-analysis" title="Permalink to this headline">¶</a></h2>
@@ -1223,19 +766,17 @@ souffleprof -j your-prog-profile.json
 </div>
 <div class="section" id="debugging-the-pointer-analysis-results">
 <h3>Debugging the pointer analysis results<a class="headerlink" href="#debugging-the-pointer-analysis-results" title="Permalink to this headline">¶</a></h3>
-<p>MATE uses a patched version of
-<a class="reference external" href="https://github.com/plast-lab/cclyzer-souffle">cclyzer</a> that stores its CSV
-results in a compressed format. As a result, the CSV intermediates produced by
-running a CPG build with <code class="docutils literal notranslate"><span class="pre">debug_pointer_analysis=true</span></code> are not initially human
-readable.</p>
+<p><a class="reference internal" href="architecture.html#points-to-desc"><span class="std std-ref">cclyzer++</span></a> stores its CSV results in a compressed format.
+As a result, the CSV intermediates produced by running a CPG build with
+<code class="docutils literal notranslate"><span class="pre">debug_pointer_analysis=true</span></code> are not initially human readable.</p>
 <p>To decompress the CSV intermediates for manual debugging, you can use
 <code class="docutils literal notranslate"><span class="pre">gunzip</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># -c emits to stdout</span>
 gunzip -c /path/to/intermediates/whatever.csv.gz
 </pre></div>
 </div>
-<p>The results produced by the pointer analysis itself (from <code class="docutils literal notranslate"><span class="pre">cclyzer</span></code>’s fact
-generation) are similarly compressed, and can be decompressed with the same
+<p>The results produced by the pointer analysis itself (from cclyzer++’s
+FactGenerator) are similarly compressed, and can be decompressed with the same
 <code class="docutils literal notranslate"><span class="pre">gunzip</span></code> invocation.</p>
 </div>
 <div class="section" id="plots">
@@ -1267,39 +808,6 @@ inside the <code class="docutils literal notranslate"><span class="pre">mate-dev
           <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">report</span><span class="o">/</span><span class="n">directory</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="tests">
-<h3>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h3>
-<p>There are three test suites related to the pointer analysis:</p>
-<ul>
-<li><p>Tests for the user-defined functors that make up our implementation of context
-sensitivity</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Run with <code class="docutils literal notranslate"><span class="pre">./shake.sh</span> <span class="pre">ctest</span></code></p></li>
-<li><p>Source is in <code class="docutils literal notranslate"><span class="pre">llvm/PointerAnalysis/datalog</span></code></p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p>Golden tests, benchmarks, and tests of properties/invariants of the pointer
-analysis output</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Run with <code class="docutils literal notranslate"><span class="pre">./shake.sh</span> <span class="pre">pytests</span></code> and <code class="docutils literal notranslate"><span class="pre">./shake.sh</span> <span class="pre">bench</span></code></p></li>
-<li><p>Source is in <code class="docutils literal notranslate"><span class="pre">llvm/PointerAnalysis/test</span></code></p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p>The tests and benchmarks of the CPG/query interface that indirectly test the
-pointer analysis</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Run with <code class="docutils literal notranslate"><span class="pre">./shake.sh</span> <span class="pre">pytests</span></code> and <code class="docutils literal notranslate"><span class="pre">./shake.sh</span> <span class="pre">bench</span></code></p></li>
-<li><p>Source is in <code class="docutils literal notranslate"><span class="pre">frontend/test</span></code></p></li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
 </div>
 </div>
 <div class="section" id="publishing-the-mate-packages-to-pypi">
@@ -1373,11 +881,290 @@ in it; preexisting distribution files will be rejected by PyPI.</p>
 </li>
 </ol>
 </div>
-<div class="section" id="project-infrastructure">
-<h2>Project Infrastructure<a class="headerlink" href="#project-infrastructure" title="Permalink to this headline">¶</a></h2>
-<p>Galois maintains a Gitlab CI runner for MATE. The configuration of this runner
-and other deployment-specific configuration and documentation can be found
-here: <a class="reference external" href="https://gitlab-ext.galois.com/mate/deepblue">https://gitlab-ext.galois.com/mate/deepblue</a>.</p>
+<div class="section" id="id1">
+<span id="id2"></span><h2>History<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>MATE was originally developed as part of the DARPA CHESS program. MATE may
+contain some amount of code for, documentation of, or references to integration
+with other systems (“TAs”, “challenges”, “challenge broker”). Furthermore, MATE
+was originally closed-source and developed on a private Gitlab instance hosted
+at Galois, Inc., and may contain references to Galois infrastructure or
+processes. We’ve tried our best to remove superfluous code, comments, and
+documentation in the open-sourcing process.</p>
+<p>Several components were de-prioritized during development, such as:</p>
+<ul class="simple">
+<li><p>The trace-collection and analysis machinery</p></li>
+<li><p>The patcher</p></li>
+<li><p>Directed symbolic execution with Manticore</p></li>
+</ul>
+<p>Furthermore, some features of the CI system and development flow have not been
+ported over to Github.</p>
+</div>
+<div class="section" id="ci-and-git-branches">
+<h2>CI and Git Branches<a class="headerlink" href="#ci-and-git-branches" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since <a class="reference internal" href="overview.html#status"><span class="std std-ref">MATE is not actively developed by Galois, Inc.</span></a>, this
+section is somewhat <span class="xref std std-ref">historical</span> in nature.</p>
+</div>
+<div class="section" id="background">
+<h3>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h3>
+<p>MATE has a large test suite, ranging from unit tests of small pure functions to
+whole-system integraion tests running in Docker Compose. However, more tests
+running on every commit are not <em>always</em> better. We have to balance the
+trade-off between the additional assurance granted by running more tests
+against the time they take to run. The central concerns to take care of when
+considering this balance are:</p>
+<ul class="simple">
+<li><p>Level of assurance for deliverables to the client</p></li>
+<li><p>Depth of features in deliverables to the client</p></li>
+<li><p>Developer productivity and happiness</p></li>
+</ul>
+<p>(None of these concerns correspond directly to more/slower tests or fewer/faster
+tests.)</p>
+</div>
+<div class="section" id="implementation">
+<h3>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
+<p>Development of MATE happens in merge requests against the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch,
+which has a suite of tests that run on every commit. MATE has enough
+long-running tests that it’s not feasible to run all of them against every
+commit before merging to <code class="docutils literal notranslate"><span class="pre">main</span></code>. Therefore, <code class="docutils literal notranslate"><span class="pre">main</span></code> is periodically
+merged into the <code class="docutils literal notranslate"><span class="pre">stable</span></code> branch, and the following script decides when to run
+a longer, more complete suite of tests:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># Test script to see if we&#39;re in a CI pipeline that should run integration</span>
+<span class="c1"># tests, optimize heavily, etc.</span>
+<span class="c1">#</span>
+<span class="c1"># Specifically, will exit 0 (true) if:</span>
+<span class="c1">#</span>
+<span class="c1"># 1. this is a MR into stable,</span>
+<span class="c1"># 2. this is a commit on stable, or</span>
+<span class="c1"># 3. this is a pipeline inside a schedule (indicating a once-a-day pipeline on</span>
+<span class="c1">#    master).</span>
+<span class="c1">#</span>
+<span class="c1"># This script should be kept in sync with the &quot;rules:&quot; clause of the</span>
+<span class="c1"># &quot;.on-stable:&quot; configuration in .gitlab-ci.yml.</span>
+
+<span class="nb">set</span> -x
+
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CI_MERGE_REQUEST_TARGET_BRANCH_NAME</span><span class="k">:-</span><span class="nv">fake</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;stable&quot;</span> <span class="o">]</span> <span class="se">\</span>
+  <span class="o">||</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">CI_COMMIT_BRANCH</span><span class="k">:-</span><span class="nv">fake</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;stable&quot;</span> <span class="o">]</span> <span class="se">\</span>
+  <span class="o">||</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="si">${</span><span class="nv">SCHEDULE</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">exit</span> <span class="m">0</span>
+<span class="k">fi</span>
+<span class="nb">exit</span> <span class="m">1</span>
+</pre></div>
+</div>
+<p>Specifically, when the above script exits with 0,</p>
+<ul class="simple">
+<li><p>The environment variable <code class="docutils literal notranslate"><span class="pre">MATE_INTEGRATION_TESTS</span></code> is set to <code class="docutils literal notranslate"><span class="pre">1</span></code> before
+running <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, which causes more tests to be run and with slightly
+different settings,</p></li>
+<li><p>All C++ components of MATE are built with the Clang Static Analyzer</p></li>
+<li><p>All C++ components of MATE are built LLVM’s Address Sanitizer and Undefined
+Behavior Sanitizer, and the test suite is run on top of each of these
+builds.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--release-build</span></code> flag is passed to Shake (see <a class="reference internal" href="#building-releases"><span class="std std-ref">Building Releases</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="building-releases">
+<h3>Building Releases<a class="headerlink" href="#building-releases" title="Permalink to this headline">¶</a></h3>
+<p>Releases are cut from the <code class="docutils literal notranslate"><span class="pre">stable</span></code> branch. The primary release artifact is the
+<code class="docutils literal notranslate"><span class="pre">mate-dist</span></code> Docker image that is build by CI and uploaded to the
+Galois-maintained Artifactory instance. Release builds are built with Shake’s
+<code class="docutils literal notranslate"><span class="pre">--release-build</span></code> flag which</p>
+<ul class="simple">
+<li><p>Disables assertions so that fewer errors are fatal</p></li>
+<li><p>Turns on more aggressive optimization flags which cause build times to
+skyrocket but significantly improve performance</p></li>
+</ul>
+<p>The effect of this flag is predominantly implemented in <code class="docutils literal notranslate"><span class="pre">llvm/CMakeLists.txt</span></code>
+and <code class="docutils literal notranslate"><span class="pre">llvm/PointerAnalysis/CMakeLists.txt</span></code>.</p>
+</div>
+</div>
+<div class="section" id="development-practices">
+<h2>Development practices<a class="headerlink" href="#development-practices" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since <a class="reference internal" href="overview.html#status"><span class="std std-ref">MATE is not actively developed by Galois, Inc.</span></a>, this
+section is largely <span class="xref std std-ref">historical</span> in nature.</p>
+</div>
+<p>This section collects the practices that the whole MATE team has agreed to
+uphold. These practices continue to develop as we work together. The two major
+goals of these practices are:</p>
+<ol class="arabic simple">
+<li><p>To ease the maintenance of MATE in the long term</p></li>
+<li><p>To reduce the potential for friction and inefficiency as a result of
+mismatched expectations</p></li>
+</ol>
+<p>To attend to (2), we need to agree on how consistently we uphold each of these
+practices. In the following sections, the word <em>consistently</em> will prefix
+practices that we do almost always, and
+<em>aspirationally</em> will be used for ones that aren’t necessarily expected, but are
+nice to do. Some of these are <em>invariably</em> enforced, meaning that compliance
+is guaranteed by some automated mechanism (usually a Gitlab setting).</p>
+<div class="section" id="documenting-development-practices">
+<h3>Documenting development practices<a class="headerlink" href="#documenting-development-practices" title="Permalink to this headline">¶</a></h3>
+<p><em>Consistently</em>: documenting our development practices in writing ensures we’re
+all on the same page. Changes to the practices should be reflected in this
+document, and should be approved by the whole team.</p>
+</div>
+<div class="section" id="using-gitlab">
+<h3>Using Gitlab<a class="headerlink" href="#using-gitlab" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mrs">
+<h4>MRs<a class="headerlink" href="#mrs" title="Permalink to this headline">¶</a></h4>
+<p><em>Invariably</em>: Code is added to the main branch exclusively through merge
+requests (MRs). In practice this means developing on a branch off of main
+and opening a MR based on that branch.</p>
+<p><em>Aspirationally</em>: MRs link to relevant <a class="reference internal" href="#id4"><span class="std std-ref">issues</span></a>,
+especially ones that should be considered “done” once the MR is merged. This
+helps us track exactly when and how issues got fixed.</p>
+<div class="section" id="assigning-reviewers">
+<span id="mr-review"></span><h5>Assigning reviewers<a class="headerlink" href="#assigning-reviewers" title="Permalink to this headline">¶</a></h5>
+<p><em>Consistently</em>: Every MR is assigned to one or more collaborators
+for <a class="reference internal" href="#code-review"><span class="std std-ref">review</span></a>. The assignee tends to be, but doesn’t have to
+be, someone familiar with that part of the codebase. When assigning the
+reviewers, the MR author should ping them in the <code class="docutils literal notranslate"><span class="pre">~review-requests</span></code> channel
+on Mattermost, and should do so every time the MR is ready for another round
+of reviews. One approval is required before merging. The assignee should
+review within a business day, or reassign the MR to someone else. Unless the
+author needs specific feedback from the assignee(s), it’s OK to merge if a
+collaborator other than the assignee(s) reviews the MR.</p>
+</div>
+<div class="section" id="squashing">
+<h5>Squashing<a class="headerlink" href="#squashing" title="Permalink to this headline">¶</a></h5>
+<p><em>Aspirationally</em>: To preserve a clean Git history (see also <a class="reference internal" href="#git"><span class="std std-ref">Using Git</span></a>), we
+often squash the many commits added to a MR during the review/test cycle into
+one commit on the main branch. However, it is not a requirement to squash
+commits, and in fact it can be detrimental to a meaningful Git history to
+squash together unrelated changes (e.g. one commit that is purely
+organizational with one that changes functionality or fixes a bug). MR authors
+should use their best judgement, and
+<a class="reference internal" href="#mr-labels"><span class="std std-ref">label the MR appropriately</span></a>.</p>
+<p><em>Consistently</em>: As a rule, each commit on a non-squashed MR should pass CI, i.e.
+each commit on the main branch should always build and pass tests.</p>
+</div>
+<div class="section" id="rebasing">
+<h5>Rebasing<a class="headerlink" href="#rebasing" title="Permalink to this headline">¶</a></h5>
+<p><em>Invariably</em>: Every MR has to be rebased against the current main branch
+(Gitlab conveniently provides a button for doing this). This ensures that the
+MR is run with the latest tests, and that another recently merged MR didn’t
+subtly conflict with it. Unfortunately, it also means that all the tests need
+to run again, and they can take a while.</p>
+<p><em>Aspirationally</em>: After rebasing a branch, the rebaser should cancel any ongoing
+CI runs for that same MR. This helps reduce load on the CI runners, speeding
+up other builds.</p>
+</div>
+<div class="section" id="merging">
+<h5>Merging<a class="headerlink" href="#merging" title="Permalink to this headline">¶</a></h5>
+<p><em>Consistently</em>: The author of the MR hits the merge button after it has been
+approved. This prevents merging in code that may be approved but that the
+author may wish to make more changes to before merging. Reviewers can hit the
+merge button for trivial changes but should generally defer to the author.</p>
+<p><a class="reference internal" href="#mr-labels"><span class="std std-ref">The section on MR labels</span></a> describes how the author can
+indicate that the MR is ready to be merged.</p>
+</div>
+<div class="section" id="mr-labels">
+<span id="id3"></span><h5>MR Labels<a class="headerlink" href="#mr-labels" title="Permalink to this headline">¶</a></h5>
+<p><em>Aspirationally</em>: When an MR has been approved by a reviewer and is ready to
+merge, the author should add the <code class="docutils literal notranslate"><span class="pre">MR-ready/squash</span></code> or <code class="docutils literal notranslate"><span class="pre">MR-ready/no-squash</span></code>
+labels, indicating that the MR is ready to be merged, and that other
+collaborators should rebase it and merge it if another MR is merged first.</p>
+<p>See also <a class="reference internal" href="#issue-labels"><span class="std std-ref">the section on issue labels</span></a>.</p>
+</div>
+<div class="section" id="wip-mrs">
+<h5>WIP MRs<a class="headerlink" href="#wip-mrs" title="Permalink to this headline">¶</a></h5>
+<p><em>Aspirationally</em>: If your MR is not ready for a full review and merge, but you’d
+like someone to have a head start on looking at your progress, prefix the
+title of the MR with “WIP:”, and remove this prefix and notify the asignee
+(s) when it is ready for review.</p>
+</div>
+<div class="section" id="id4">
+<h5>Issues<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h5>
+<p><em>Aspirationally</em>: We use issues to track bugs, plan features, and as a forum for
+discussions. Creating issues and assigning them to yourself helps others know
+what you’re up to, and prevents duplication of effort.</p>
+</div>
+<div class="section" id="issue-labels">
+<span id="id5"></span><h5>Issue Labels<a class="headerlink" href="#issue-labels" title="Permalink to this headline">¶</a></h5>
+<dl class="simple">
+<dt><em>Aspirationally</em>: There are a few labels that indicate the priority of issues.</dt><dd><p>These are helpful for searching and sorting issues, especially
+in <a class="reference internal" href="#milestones"><span class="std std-ref">milestones</span></a>. Collaborators should create and use
+additional Gitlab labels however they find helpful.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="milestones">
+<span id="id6"></span><h5>Milestones<a class="headerlink" href="#milestones" title="Permalink to this headline">¶</a></h5>
+<p><em>Aspirationally</em>: We assign issues and MRs to milestones to track our progress,
+ensure necessary functionality and fixes get merged before releases, and to
+align our development with the Statement of Work.</p>
+</div>
+</div>
+</div>
+<div class="section" id="code-review">
+<span id="id7"></span><h3>Code review<a class="headerlink" href="#code-review" title="Permalink to this headline">¶</a></h3>
+<p>We have no specific practices surrounding code review (other than <a class="reference internal" href="#mr-review"><span class="std std-ref">a review
+is required for each MR</span></a>). See also <a class="reference internal" href="#further-reading"><span class="std std-ref">Further reading</span></a>.</p>
+</div>
+<div class="section" id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h3>
+<p><em>Aspirationally</em>: We generally expect that code added to MATE has at least one
+associated unit test, i.e., a test that specifically exercises the new
+functionality, independently from as much other code as possible. These tests
+run in CI on every merge request.</p>
+</div>
+<div class="section" id="using-git">
+<span id="git"></span><h3>Using Git<a class="headerlink" href="#using-git" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="commit-messages">
+<h4>Commit messages<a class="headerlink" href="#commit-messages" title="Permalink to this headline">¶</a></h4>
+<p><em>Aspirationally</em>: We strive for meaningful commit messages. It’s especially
+important to review the commit message that Gitlab will add to your MR when
+squashing (sometimes it makes a weird choice).</p>
+</div>
+</div>
+<div class="section" id="linting-and-formatting">
+<h3>Linting and formatting<a class="headerlink" href="#linting-and-formatting" title="Permalink to this headline">¶</a></h3>
+<p><em>Invariably</em>: All code introduced in MATE passes a suite of linters and
+formatters. These tools are integrated with the Shake build system, so
+developers can run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./shake.sh lint
+./shake.sh format
+</pre></div>
+</div>
+<p>to lint and auto-format their code, respectively.</p>
+<p>Automatically formatting the code has a few advantages.</p>
+<ul class="simple">
+<li><p>It ensures consistency in style across our codebase, hopefully making the code
+more readable.</p></li>
+<li><p>It saves developer time, because you need to spend less time fixing up your
+hastily-written scripts to look nice.</p></li>
+<li><p>It reduces friction during code reviews, because disagreement about how code
+should be formatted is front-loaded in the selection and configuration of a
+formatting tool.</p></li>
+</ul>
+<p>Linting shares many of the same advantages with respect to readability, but also
+helps us avoid common bugs, such as type errors.</p>
+<div class="section" id="mypy">
+<h4>Mypy<a class="headerlink" href="#mypy" title="Permalink to this headline">¶</a></h4>
+<p><em>Aspirationally</em>: When possible, adding Mypy-compatible type annotations makes
+the code easier to refactor, communicates the author’s intentions, and catches
+some type errors at lint-time (rather than at run-time). Sometimes it’s not
+possible or worth the effort to add type annotations to code, due to the
+limitations of Mypy’s type system (for example, in <code class="docutils literal notranslate"><span class="pre">mate_query.cpg.models</span></code>).</p>
+</div>
+</div>
+<div class="section" id="further-reading">
+<span id="id8"></span><h3>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h3>
+<p>Galwegians interested in learning more about internally-recommended software
+engineering practices should take a look at the <a class="reference external" href="http://wiki.galois.com/trac/galois/wiki/Engineering/Practices/Software">the relevant wiki page</a>.</p>
+<p>In particular, engineers at Galois have identified the following pages as good
+resources for code reviewers.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://medium.com/palantir/code-review-best-practices-19e02780015f">Palantir’s blog post, “Code Review Best Practices”</a></p></li>
+<li><p><a class="reference external" href="http://www.processimpact.com/articles/humanizing_reviews.pdf">Karl E. Wiegers’ essay, “Humanizing Peer Reviews”</a></p></li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -1387,8 +1174,8 @@ here: <a class="reference external" href="https://gitlab-ext.galois.com/mate/dee
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="testing.html" class="btn btn-neutral float-right" title="Writing and running MATE’s tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="analysis.html" class="btn btn-neutral float-left" title="MATE POI Analyses" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="legal.html" class="btn btn-neutral float-right" title="Legal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="api/Mantiserve/mantiserve.mantireach.html" class="btn btn-neutral float-left" title="mantiserve.mantireach module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
