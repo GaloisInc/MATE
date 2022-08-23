@@ -20,7 +20,6 @@ which are controlled by ``pytest``:
 * Dwarfcore-specific tests live under ``tests/dwarfcore``
 * Mantiserve-specific tests live under ``tests/mantiserve``
 * Integration tests live under ``tests/integration``
-* Pointer analysis tests live under ``llvm/PointerAnalysis/test``
 * "Legacy" tests (mostly for datastructures) live under ``frontend/test``
 
 *****************
@@ -137,13 +136,13 @@ test suite by setting ``MATE_INTEGRATION_TESTS=1``:
       run -v "$(pwd):/mate" -e MATE_INTEGRATION_TESTS=1 test
 
 
-"Legacy" and pointer analysis tests
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"Legacy" tests
+~~~~~~~~~~~~~~
 
-The "legacy" and pointer analysis tests do not require access to CPGs, and
-therefore can be run outside of a ``docker-compose`` environment.
+The "legacy" tests do not require access to CPGs, and therefore can be run
+outside of a ``docker-compose`` environment.
 
-To run the "legacy" and pointer analysis tests:
+To run the "legacy" tests:
 
 .. code-block:: bash
 
