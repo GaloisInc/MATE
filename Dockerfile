@@ -1,3 +1,5 @@
+# The various targets of this Dockerfile are described in doc/architecture.rst.
+
 # NOTE: The value of BASE must be kept in-sync with the value of
 # MATE_COMPATIBLE_BASE_IMAGE in frontend/mate/mate/build/common.py.
 ARG BASE=ubuntu:20.04

@@ -39,7 +39,7 @@ Interface overview
 ******************
 
 When you click the analyze button on the Points of Interest page it
-will take you to the flowfinder user interface.
+will take you to the Flowfinder user interface.
 
 .. important::
    Loading Points of Interest can some times take a minute or two,
@@ -262,7 +262,7 @@ G:
     The background panel provides information about the general
     vulnerability class that this  point of interest belongs to. The
     background panel also provides directions and specific suggestions
-    of what to look for and what to try with this flowfinder
+    of what to look for and what to try with this Flowfinder
     interface.
 
 .. _slice-tool:

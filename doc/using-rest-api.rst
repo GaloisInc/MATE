@@ -17,6 +17,7 @@ Some useful operations available via the REST API include:
 - Manually (re)starting a build with custom parameters (see API docs for
   details)
 - Manually running POI analyses for a build
+- Running Manticore tasks
 
 *********************************
 Running POIs after a manual build
