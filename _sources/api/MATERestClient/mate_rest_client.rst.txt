@@ -1,0 +1,22 @@
+mate\_rest\_client package
+==========================
+
+.. automodule:: mate_rest_client
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_rest_client.analyses
+   mate_rest_client.artifacts
+   mate_rest_client.builds
+   mate_rest_client.common
+   mate_rest_client.compilations
+   mate_rest_client.graphs
+   mate_rest_client.manticore
+   mate_rest_client.pois

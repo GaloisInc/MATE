@@ -1,0 +1,29 @@
+mate\_common package
+====================
+
+.. automodule:: mate_common
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_common.datastructures
+   mate_common.models
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_common.assertions
+   mate_common.config
+   mate_common.error
+   mate_common.schemata
+   mate_common.state_machine
+   mate_common.utils

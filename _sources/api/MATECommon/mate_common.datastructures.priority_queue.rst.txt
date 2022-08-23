@@ -1,0 +1,7 @@
+mate\_common.datastructures.priority\_queue module
+==================================================
+
+.. automodule:: mate_common.datastructures.priority_queue
+   :members:
+   :undoc-members:
+   :show-inheritance:

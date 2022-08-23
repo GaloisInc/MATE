@@ -1,0 +1,7 @@
+mate.error module
+=================
+
+.. automodule:: mate.error
+   :members:
+   :undoc-members:
+   :show-inheritance:

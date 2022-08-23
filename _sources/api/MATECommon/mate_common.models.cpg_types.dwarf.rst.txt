@@ -1,0 +1,7 @@
+mate\_common.models.cpg\_types.dwarf module
+===========================================
+
+.. automodule:: mate_common.models.cpg_types.dwarf
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate.build.tob_chess_utils.tools.margin module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate.build.tob_chess_utils.tools.migraine module" href="mate.build.tob_chess_utils.tools.migraine.html" />
+    <link rel="prev" title="mate.build.tob_chess_utils.tools.aspirin module" href="mate.build.tob_chess_utils.tools.aspirin.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATE API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate.html">mate package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATE API Reference</a> &raquo;</li>
+        
+          <li><a href="mate.html">mate package</a> &raquo;</li>
+        
+          <li><a href="mate.build.html">mate.build package</a> &raquo;</li>
+        
+          <li><a href="mate.build.tob_chess_utils.html">mate.build.tob_chess_utils package</a> &raquo;</li>
+        
+          <li><a href="mate.build.tob_chess_utils.tools.html">mate.build.tob_chess_utils.tools package</a> &raquo;</li>
+        
+      <li>mate.build.tob_chess_utils.tools.margin module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATE/mate.build.tob_chess_utils.tools.margin.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate.build.tob_chess_utils.tools.margin">
+<span id="mate-build-tob-chess-utils-tools-margin-module"></span><h1>mate.build.tob_chess_utils.tools.margin module<a class="headerlink" href="#module-mate.build.tob_chess_utils.tools.margin" title="Permalink to this headline">¶</a></h1>
+<dl class="py exception">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">MarginError</span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../MATECommon/mate_common.error.html#mate_common.error.MateError" title="mate_common.error.MateError"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.error.MateError</span></code></a></p>
+<p>A generic error, internal to <code class="docutils literal notranslate"><span class="pre">margin-walker</span></code>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">MarginWalkerContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>options</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions</em></a>) – </p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext.emit_edge">
+<span class="sig-name descname"><span class="pre">emit_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.EdgeKind" title="mate_common.models.cpg_types.mate.EdgeKind"><span class="pre">mate_common.models.cpg_types.mate.EdgeKind</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext.emit_edge" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em>) – </p></li>
+<li><p><strong>dest</strong> (<em>str</em>) – </p></li>
+<li><p><strong>edge_kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.EdgeKind" title="mate_common.models.cpg_types.mate.EdgeKind"><em>mate_common.models.cpg_types.mate.EdgeKind</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext.emit_node">
+<span class="sig-name descname"><span class="pre">emit_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext.emit_node" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>attrs</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext.next_id">
+<span class="sig-name descname"><span class="pre">next_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext.next_id" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext.options">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">options</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions</span></a></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext.options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">MarginWalkerOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sanity_checks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omit_plt_stub_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omit_translation_unit_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omit_type_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omit_global_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omit_wedlock_function_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omit_param_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omit_var_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omit_asm_inst_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omit_arg_edges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sanity_checks</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>omit_plt_stub_nodes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>omit_translation_unit_nodes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>omit_type_nodes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>omit_global_nodes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>omit_wedlock_function_nodes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>omit_param_nodes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>omit_var_nodes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>omit_asm_inst_nodes</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>omit_arg_edges</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_arg_edges">
+<span class="sig-name descname"><span class="pre">omit_arg_edges</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_arg_edges" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_asm_inst_nodes">
+<span class="sig-name descname"><span class="pre">omit_asm_inst_nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_asm_inst_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_global_nodes">
+<span class="sig-name descname"><span class="pre">omit_global_nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_global_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_param_nodes">
+<span class="sig-name descname"><span class="pre">omit_param_nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_param_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_plt_stub_nodes">
+<span class="sig-name descname"><span class="pre">omit_plt_stub_nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_plt_stub_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_translation_unit_nodes">
+<span class="sig-name descname"><span class="pre">omit_translation_unit_nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_translation_unit_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_type_nodes">
+<span class="sig-name descname"><span class="pre">omit_type_nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_type_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_var_nodes">
+<span class="sig-name descname"><span class="pre">omit_var_nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_var_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_wedlock_function_nodes">
+<span class="sig-name descname"><span class="pre">omit_wedlock_function_nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.omit_wedlock_function_nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.sanity_checks">
+<span class="sig-name descname"><span class="pre">sanity_checks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions.sanity_checks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.emit_asm_inst_nodes_and_edges">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">emit_asm_inst_nodes_and_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">abb_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instr_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.emit_asm_inst_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</em></a>) – </p></li>
+<li><p><strong>abb_uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>instr_dicts</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.emit_aspirin_param_nodes_and_edges">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">emit_aspirin_param_nodes_and_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">asp_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_node_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wed_func_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.emit_aspirin_param_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields nodes and edges related to DWARF parameters, as related by <code class="docutils literal notranslate"><span class="pre">aspirin</span></code>.</p>
+<dl class="simple">
+<dt>The following nodes are emitted::</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DWARFArgument</span></code> (one per DWARF parameter)</p></li>
+</ul>
+</dd>
+<dt>The following edges are emitted::</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HasDWARFType</span></code> (one per <code class="docutils literal notranslate"><span class="pre">DWARFArgument</span></code>, relating to <code class="docutils literal notranslate"><span class="pre">DWARFType</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ArgumentToDWARFArgument</span></code> (one per <code class="docutils literal notranslate"><span class="pre">DWARFArgument</span></code>, relating to <code class="docutils literal notranslate"><span class="pre">Argument</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MIFunctionToDWARFArgument</span></code> (one per <code class="docutils literal notranslate"><span class="pre">DWARFArgument</span></code>, relating to <code class="docutils literal notranslate"><span class="pre">MachineFunction</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</em></a>) – </p></li>
+<li><p><strong>asp_params</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>wed</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>type_node_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>wed_func_uuid</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.emit_aspirin_var_nodes_and_edges">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">emit_aspirin_var_nodes_and_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">asp_vars</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_node_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wed_func_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.emit_aspirin_var_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields a DWARFLocalVariable node (and corresponding HasDWARFType edge) for every parameter in
+<code class="docutils literal notranslate"><span class="pre">asp_params</span></code>, using context in <code class="docutils literal notranslate"><span class="pre">wed</span></code> to produce the appropriate ID format for pairing with
+MATE’s <code class="docutils literal notranslate"><span class="pre">LocalVariable</span></code> nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</em></a>) – </p></li>
+<li><p><strong>asp_vars</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>wed</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>type_node_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>wed_func_uuid</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.emit_global_variable_nodes_and_edges">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">emit_global_variable_nodes_and_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">asp_global_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_node_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.emit_global_variable_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields a ASMGlobalVariable node (and corresponding HasDWARFType edge) for every global
+variable record in <code class="docutils literal notranslate"><span class="pre">asp_global_dicts</span></code>, using the already constructed <code class="docutils literal notranslate"><span class="pre">type_node_map</span></code> for
+type edge drawing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</em></a>) – </p></li>
+<li><p><strong>asp_global_dicts</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>type_node_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.emit_plt_stub_nodes">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">emit_plt_stub_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">asp_plt_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.emit_plt_stub_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</em></a>) – </p></li>
+<li><p><strong>asp_plt_dicts</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.emit_translation_unit_nodes_and_edges">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">emit_translation_unit_nodes_and_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cu_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asp_module_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.emit_translation_unit_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields a TranslationUnit node for every compilation unit in <code class="docutils literal notranslate"><span class="pre">cu_dict</span></code>, as well as edges to
+the containing LLVM module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</em></a>) – </p></li>
+<li><p><strong>cu_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>asp_module_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.emit_type_nodes_and_edges">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">emit_type_nodes_and_edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ti_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_node_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.emit_type_nodes_and_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields a DWARFType node for every type in <code class="docutils literal notranslate"><span class="pre">ti_map</span></code>, building up a map of type IDs to
+DWARFType node UUIDs along the way.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</em></a>) – </p></li>
+<li><p><strong>ti_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>type_node_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.emit_wedlock_function_nodes">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">emit_wedlock_function_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">wed_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asp_func_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.emit_wedlock_function_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields a MachineFunction node (and associated Wedlock + Aspirin function records) for every
+record in <code class="docutils literal notranslate"><span class="pre">wed_dicts</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerContext" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerContext"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerContext</em></a>) – </p></li>
+<li><p><strong>wed_dicts</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>asp_func_dicts</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.main">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.main" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.margin">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">margin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wed_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asp_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ti_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cu_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions"><span class="pre">mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">MarginWalkerOptions(sanity_checks=False,</span> <span class="pre">omit_plt_stub_nodes=False,</span> <span class="pre">omit_translation_unit_nodes=False,</span> <span class="pre">omit_type_nodes=False,</span> <span class="pre">omit_global_nodes=False,</span> <span class="pre">omit_wedlock_function_nodes=False,</span> <span class="pre">omit_param_nodes=False,</span> <span class="pre">omit_var_nodes=False,</span> <span class="pre">omit_asm_inst_nodes=False,</span> <span class="pre">omit_arg_edges=True)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.margin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wed_dicts</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>asp_dicts</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>ti_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>cu_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>options</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions" title="mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions"><em>mate.build.tob_chess_utils.tools.margin.MarginWalkerOptions</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.margin.sanity_checks">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.margin.</span></span><span class="sig-name descname"><span class="pre">sanity_checks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_bb_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.margin.sanity_checks" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>asp_bb_dicts</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate.build.tob_chess_utils.tools.migraine.html" class="btn btn-neutral float-right" title="mate.build.tob_chess_utils.tools.migraine module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate.build.tob_chess_utils.tools.aspirin.html" class="btn btn-neutral float-left" title="mate.build.tob_chess_utils.tools.aspirin module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

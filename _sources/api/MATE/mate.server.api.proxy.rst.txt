@@ -1,0 +1,15 @@
+mate.server.api.proxy package
+=============================
+
+.. automodule:: mate.server.api.proxy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.server.api.proxy.routes

@@ -1,0 +1,7 @@
+dwarfcore.utils module
+======================
+
+.. automodule:: dwarfcore.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

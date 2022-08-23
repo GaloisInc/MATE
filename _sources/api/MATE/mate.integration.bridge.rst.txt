@@ -1,0 +1,7 @@
+mate.integration.bridge module
+==============================
+
+.. automodule:: mate.integration.bridge
+   :members:
+   :undoc-members:
+   :show-inheritance:

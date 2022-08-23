@@ -1,0 +1,7 @@
+dwarfcore.detectors.heap\_oob module
+====================================
+
+.. automodule:: dwarfcore.detectors.heap_oob
+   :members:
+   :undoc-members:
+   :show-inheritance:

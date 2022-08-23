@@ -1,0 +1,1332 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>dwarflang.enums module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="dwarflang.fold module" href="dwarflang.fold.html" />
+    <link rel="prev" title="dwarflang.decoder module" href="dwarflang.decoder.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Dwarflang API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="dwarflang.html">dwarflang package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dwarflang.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="dwarflang.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">Dwarflang API Reference</a> &raquo;</li>
+        
+          <li><a href="dwarflang.html">dwarflang package</a> &raquo;</li>
+        
+      <li>dwarflang.enums module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/Dwarflang/dwarflang.enums.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-dwarflang.enums">
+<span id="dwarflang-enums-module"></span><h1>dwarflang.enums module<a class="headerlink" href="#module-dwarflang.enums" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">DW_OP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarflang.enums.DW_OP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.ABS">
+<span class="sig-name descname"><span class="pre">ABS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_abs'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.ABS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.ADDR">
+<span class="sig-name descname"><span class="pre">ADDR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_addr'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.ADDR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.ADDRX">
+<span class="sig-name descname"><span class="pre">ADDRX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_addrx'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.ADDRX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.AND">
+<span class="sig-name descname"><span class="pre">AND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_and'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.AND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.AND_">
+<span class="sig-name descname"><span class="pre">AND_</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_and'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.AND_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BIT_PIECE">
+<span class="sig-name descname"><span class="pre">BIT_PIECE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_bit_piece'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BIT_PIECE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BRA">
+<span class="sig-name descname"><span class="pre">BRA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_bra'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BRA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG0">
+<span class="sig-name descname"><span class="pre">BREG0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg0'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG1">
+<span class="sig-name descname"><span class="pre">BREG1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg1'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG10">
+<span class="sig-name descname"><span class="pre">BREG10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg10'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG11">
+<span class="sig-name descname"><span class="pre">BREG11</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg11'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG12">
+<span class="sig-name descname"><span class="pre">BREG12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg12'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG13">
+<span class="sig-name descname"><span class="pre">BREG13</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg13'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG14">
+<span class="sig-name descname"><span class="pre">BREG14</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg14'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG14" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG15">
+<span class="sig-name descname"><span class="pre">BREG15</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg15'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG15" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG16">
+<span class="sig-name descname"><span class="pre">BREG16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg16'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG16" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG17">
+<span class="sig-name descname"><span class="pre">BREG17</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg17'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG17" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG18">
+<span class="sig-name descname"><span class="pre">BREG18</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg18'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG18" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG19">
+<span class="sig-name descname"><span class="pre">BREG19</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg19'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG19" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG2">
+<span class="sig-name descname"><span class="pre">BREG2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg2'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG20">
+<span class="sig-name descname"><span class="pre">BREG20</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg20'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG20" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG21">
+<span class="sig-name descname"><span class="pre">BREG21</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg21'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG21" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG22">
+<span class="sig-name descname"><span class="pre">BREG22</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg22'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG22" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG23">
+<span class="sig-name descname"><span class="pre">BREG23</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg23'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG23" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG24">
+<span class="sig-name descname"><span class="pre">BREG24</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg24'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG24" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG25">
+<span class="sig-name descname"><span class="pre">BREG25</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg25'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG25" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG26">
+<span class="sig-name descname"><span class="pre">BREG26</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg26'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG26" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG27">
+<span class="sig-name descname"><span class="pre">BREG27</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg27'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG27" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG28">
+<span class="sig-name descname"><span class="pre">BREG28</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg28'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG28" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG29">
+<span class="sig-name descname"><span class="pre">BREG29</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg29'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG29" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG3">
+<span class="sig-name descname"><span class="pre">BREG3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg3'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG30">
+<span class="sig-name descname"><span class="pre">BREG30</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg30'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG30" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG31">
+<span class="sig-name descname"><span class="pre">BREG31</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg31'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG31" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG4">
+<span class="sig-name descname"><span class="pre">BREG4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg4'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG5">
+<span class="sig-name descname"><span class="pre">BREG5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg5'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG6">
+<span class="sig-name descname"><span class="pre">BREG6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg6'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG7">
+<span class="sig-name descname"><span class="pre">BREG7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg7'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG8">
+<span class="sig-name descname"><span class="pre">BREG8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg8'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREG9">
+<span class="sig-name descname"><span class="pre">BREG9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg9'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREG9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.BREGX">
+<span class="sig-name descname"><span class="pre">BREGX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_bregx'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.BREGX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CALL2">
+<span class="sig-name descname"><span class="pre">CALL2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_call2'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CALL2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CALL4">
+<span class="sig-name descname"><span class="pre">CALL4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_call4'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CALL4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CALL_FRAME_CFA">
+<span class="sig-name descname"><span class="pre">CALL_FRAME_CFA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_call_frame_cfa'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CALL_FRAME_CFA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CALL_REF">
+<span class="sig-name descname"><span class="pre">CALL_REF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_call_ref'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CALL_REF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONST1S">
+<span class="sig-name descname"><span class="pre">CONST1S</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_const1s'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONST1S" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONST1U">
+<span class="sig-name descname"><span class="pre">CONST1U</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_const1u'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONST1U" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONST2S">
+<span class="sig-name descname"><span class="pre">CONST2S</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_const2s'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONST2S" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONST2U">
+<span class="sig-name descname"><span class="pre">CONST2U</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_const2u'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONST2U" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONST4S">
+<span class="sig-name descname"><span class="pre">CONST4S</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_const4s'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONST4S" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONST4U">
+<span class="sig-name descname"><span class="pre">CONST4U</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_const4u'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONST4U" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONST8S">
+<span class="sig-name descname"><span class="pre">CONST8S</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_const8s'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONST8S" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONST8U">
+<span class="sig-name descname"><span class="pre">CONST8U</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_const8u'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONST8U" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONSTS">
+<span class="sig-name descname"><span class="pre">CONSTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_consts'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONSTS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONSTU">
+<span class="sig-name descname"><span class="pre">CONSTU</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_constu'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONSTU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONSTX">
+<span class="sig-name descname"><span class="pre">CONSTX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_constx'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONSTX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONST_TYPE">
+<span class="sig-name descname"><span class="pre">CONST_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_const_type'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONST_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.CONVERT">
+<span class="sig-name descname"><span class="pre">CONVERT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_convert'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.CONVERT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.DEREF">
+<span class="sig-name descname"><span class="pre">DEREF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_deref'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.DEREF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.DEREF_SIZE">
+<span class="sig-name descname"><span class="pre">DEREF_SIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_deref_size'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.DEREF_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.DEREF_TYPE">
+<span class="sig-name descname"><span class="pre">DEREF_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_deref_type'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.DEREF_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.DIV">
+<span class="sig-name descname"><span class="pre">DIV</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_div'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.DIV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.DROP">
+<span class="sig-name descname"><span class="pre">DROP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_drop'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.DROP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.DUP">
+<span class="sig-name descname"><span class="pre">DUP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_dup'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.DUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.ENTRY_VALUE">
+<span class="sig-name descname"><span class="pre">ENTRY_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_entry_value'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.ENTRY_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.EQ">
+<span class="sig-name descname"><span class="pre">EQ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_eq'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.EQ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.FBREG">
+<span class="sig-name descname"><span class="pre">FBREG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_fbreg'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.FBREG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.FORM_TLS_ADDRESS">
+<span class="sig-name descname"><span class="pre">FORM_TLS_ADDRESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_form_tls_address'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.FORM_TLS_ADDRESS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GE">
+<span class="sig-name descname"><span class="pre">GE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_ge'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GNU_CONST_TYPE">
+<span class="sig-name descname"><span class="pre">GNU_CONST_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_GNU_const_type'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GNU_CONST_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GNU_CONVERT">
+<span class="sig-name descname"><span class="pre">GNU_CONVERT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_GNU_convert'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GNU_CONVERT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GNU_DEREF_TYPE">
+<span class="sig-name descname"><span class="pre">GNU_DEREF_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_GNU_deref_type'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GNU_DEREF_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GNU_ENTRY_VALUE">
+<span class="sig-name descname"><span class="pre">GNU_ENTRY_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_GNU_entry_value'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GNU_ENTRY_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GNU_IMPLICIT_POINTER">
+<span class="sig-name descname"><span class="pre">GNU_IMPLICIT_POINTER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_GNU_implicit_pointer'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GNU_IMPLICIT_POINTER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GNU_PARAMETER_REF">
+<span class="sig-name descname"><span class="pre">GNU_PARAMETER_REF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_GNU_parameter_ref'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GNU_PARAMETER_REF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GNU_PUSH_TLS_ADDRESS">
+<span class="sig-name descname"><span class="pre">GNU_PUSH_TLS_ADDRESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_GNU_push_tls_address'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GNU_PUSH_TLS_ADDRESS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GNU_REGVAL_TYPE">
+<span class="sig-name descname"><span class="pre">GNU_REGVAL_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_GNU_regval_type'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GNU_REGVAL_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.GT">
+<span class="sig-name descname"><span class="pre">GT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_gt'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.GT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.HI_USER">
+<span class="sig-name descname"><span class="pre">HI_USER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_hi_user'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.HI_USER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.IMPLICIT_POINTER">
+<span class="sig-name descname"><span class="pre">IMPLICIT_POINTER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_implicit_pointer'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.IMPLICIT_POINTER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.IMPLICIT_VALUE">
+<span class="sig-name descname"><span class="pre">IMPLICIT_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_implicit_value'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.IMPLICIT_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LE">
+<span class="sig-name descname"><span class="pre">LE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_le'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT0">
+<span class="sig-name descname"><span class="pre">LIT0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit0'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT1">
+<span class="sig-name descname"><span class="pre">LIT1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit1'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT10">
+<span class="sig-name descname"><span class="pre">LIT10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit10'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT11">
+<span class="sig-name descname"><span class="pre">LIT11</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit11'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT12">
+<span class="sig-name descname"><span class="pre">LIT12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit12'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT13">
+<span class="sig-name descname"><span class="pre">LIT13</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit13'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT14">
+<span class="sig-name descname"><span class="pre">LIT14</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit14'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT14" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT15">
+<span class="sig-name descname"><span class="pre">LIT15</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit15'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT15" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT16">
+<span class="sig-name descname"><span class="pre">LIT16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit16'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT16" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT17">
+<span class="sig-name descname"><span class="pre">LIT17</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit17'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT17" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT18">
+<span class="sig-name descname"><span class="pre">LIT18</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit18'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT18" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT19">
+<span class="sig-name descname"><span class="pre">LIT19</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit19'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT19" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT2">
+<span class="sig-name descname"><span class="pre">LIT2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit2'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT20">
+<span class="sig-name descname"><span class="pre">LIT20</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit20'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT20" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT21">
+<span class="sig-name descname"><span class="pre">LIT21</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit21'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT21" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT22">
+<span class="sig-name descname"><span class="pre">LIT22</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit22'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT22" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT23">
+<span class="sig-name descname"><span class="pre">LIT23</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit23'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT23" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT24">
+<span class="sig-name descname"><span class="pre">LIT24</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit24'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT24" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT25">
+<span class="sig-name descname"><span class="pre">LIT25</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit25'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT25" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT26">
+<span class="sig-name descname"><span class="pre">LIT26</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit26'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT26" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT27">
+<span class="sig-name descname"><span class="pre">LIT27</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit27'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT27" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT28">
+<span class="sig-name descname"><span class="pre">LIT28</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit28'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT28" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT29">
+<span class="sig-name descname"><span class="pre">LIT29</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit29'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT29" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT3">
+<span class="sig-name descname"><span class="pre">LIT3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit3'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT30">
+<span class="sig-name descname"><span class="pre">LIT30</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit30'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT30" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT31">
+<span class="sig-name descname"><span class="pre">LIT31</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit31'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT31" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT4">
+<span class="sig-name descname"><span class="pre">LIT4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit4'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT5">
+<span class="sig-name descname"><span class="pre">LIT5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit5'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT6">
+<span class="sig-name descname"><span class="pre">LIT6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit6'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT7">
+<span class="sig-name descname"><span class="pre">LIT7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit7'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT8">
+<span class="sig-name descname"><span class="pre">LIT8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit8'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LIT9">
+<span class="sig-name descname"><span class="pre">LIT9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lit9'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LIT9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LO_USER">
+<span class="sig-name descname"><span class="pre">LO_USER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lo_user'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LO_USER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.LT">
+<span class="sig-name descname"><span class="pre">LT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_lt'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.LT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.MINUS">
+<span class="sig-name descname"><span class="pre">MINUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_minus'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.MINUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.MOD">
+<span class="sig-name descname"><span class="pre">MOD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_mod'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.MOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.MUL">
+<span class="sig-name descname"><span class="pre">MUL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_mul'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.MUL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.NE">
+<span class="sig-name descname"><span class="pre">NE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_ne'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.NE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.NEG">
+<span class="sig-name descname"><span class="pre">NEG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_neg'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.NEG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.NOP">
+<span class="sig-name descname"><span class="pre">NOP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_nop'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.NOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.NOT">
+<span class="sig-name descname"><span class="pre">NOT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_not'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.NOT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.NOT_">
+<span class="sig-name descname"><span class="pre">NOT_</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_not'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.NOT_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.OR">
+<span class="sig-name descname"><span class="pre">OR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_or'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.OR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.OR_">
+<span class="sig-name descname"><span class="pre">OR_</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_or'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.OR_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.OVER">
+<span class="sig-name descname"><span class="pre">OVER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_over'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.OVER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.PICK">
+<span class="sig-name descname"><span class="pre">PICK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_pick'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.PICK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.PIECE">
+<span class="sig-name descname"><span class="pre">PIECE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_piece'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.PIECE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.PLUS">
+<span class="sig-name descname"><span class="pre">PLUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_plus'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.PLUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.PLUS_UCONST">
+<span class="sig-name descname"><span class="pre">PLUS_UCONST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_plus_uconst'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.PLUS_UCONST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.PUSH_OBJECT_ADDRESS">
+<span class="sig-name descname"><span class="pre">PUSH_OBJECT_ADDRESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_push_object_address'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.PUSH_OBJECT_ADDRESS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG0">
+<span class="sig-name descname"><span class="pre">REG0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg0'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG1">
+<span class="sig-name descname"><span class="pre">REG1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg1'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG10">
+<span class="sig-name descname"><span class="pre">REG10</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg10'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG11">
+<span class="sig-name descname"><span class="pre">REG11</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg11'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG12">
+<span class="sig-name descname"><span class="pre">REG12</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg12'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG13">
+<span class="sig-name descname"><span class="pre">REG13</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg13'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG14">
+<span class="sig-name descname"><span class="pre">REG14</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg14'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG14" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG15">
+<span class="sig-name descname"><span class="pre">REG15</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg15'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG15" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG16">
+<span class="sig-name descname"><span class="pre">REG16</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg16'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG16" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG17">
+<span class="sig-name descname"><span class="pre">REG17</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg17'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG17" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG18">
+<span class="sig-name descname"><span class="pre">REG18</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg18'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG18" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG19">
+<span class="sig-name descname"><span class="pre">REG19</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg19'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG19" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG2">
+<span class="sig-name descname"><span class="pre">REG2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg2'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG20">
+<span class="sig-name descname"><span class="pre">REG20</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg20'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG20" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG21">
+<span class="sig-name descname"><span class="pre">REG21</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg21'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG21" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG22">
+<span class="sig-name descname"><span class="pre">REG22</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg22'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG22" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG23">
+<span class="sig-name descname"><span class="pre">REG23</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg23'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG23" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG24">
+<span class="sig-name descname"><span class="pre">REG24</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg24'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG24" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG25">
+<span class="sig-name descname"><span class="pre">REG25</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg25'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG25" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG26">
+<span class="sig-name descname"><span class="pre">REG26</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg26'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG26" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG27">
+<span class="sig-name descname"><span class="pre">REG27</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg27'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG27" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG28">
+<span class="sig-name descname"><span class="pre">REG28</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg28'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG28" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG29">
+<span class="sig-name descname"><span class="pre">REG29</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg29'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG29" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG3">
+<span class="sig-name descname"><span class="pre">REG3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg3'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG30">
+<span class="sig-name descname"><span class="pre">REG30</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg30'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG30" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG31">
+<span class="sig-name descname"><span class="pre">REG31</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg31'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG31" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG4">
+<span class="sig-name descname"><span class="pre">REG4</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg4'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG5">
+<span class="sig-name descname"><span class="pre">REG5</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg5'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG6">
+<span class="sig-name descname"><span class="pre">REG6</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg6'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG7">
+<span class="sig-name descname"><span class="pre">REG7</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg7'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG8">
+<span class="sig-name descname"><span class="pre">REG8</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg8'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REG9">
+<span class="sig-name descname"><span class="pre">REG9</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg9'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REG9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REGVAL_TYPE">
+<span class="sig-name descname"><span class="pre">REGVAL_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_regval_type'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REGVAL_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REGX">
+<span class="sig-name descname"><span class="pre">REGX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_regx'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REGX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.REINTERPRET">
+<span class="sig-name descname"><span class="pre">REINTERPRET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reinterpret'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.REINTERPRET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.ROT">
+<span class="sig-name descname"><span class="pre">ROT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_rot'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.ROT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.SHL">
+<span class="sig-name descname"><span class="pre">SHL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_shl'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.SHL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.SHR">
+<span class="sig-name descname"><span class="pre">SHR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_shr'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.SHR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.SHRA">
+<span class="sig-name descname"><span class="pre">SHRA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_shra'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.SHRA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.SKIP">
+<span class="sig-name descname"><span class="pre">SKIP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_skip'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.SKIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.STACK_VALUE">
+<span class="sig-name descname"><span class="pre">STACK_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_stack_value'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.STACK_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.SWAP">
+<span class="sig-name descname"><span class="pre">SWAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_swap'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.SWAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.XDEREF">
+<span class="sig-name descname"><span class="pre">XDEREF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_xderef'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.XDEREF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.XDEREF_SIZE">
+<span class="sig-name descname"><span class="pre">XDEREF_SIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_xderef_size'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.XDEREF_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.XDEREF_TYPE">
+<span class="sig-name descname"><span class="pre">XDEREF_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_xderef_type'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.XDEREF_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DW_OP.XOR">
+<span class="sig-name descname"><span class="pre">XOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_xor'</span></em><a class="headerlink" href="#dwarflang.enums.DW_OP.XOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarflang.enums.DwarfRegister">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">DwarfRegister</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarflang.enums.DwarfRegister" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>The variety of DWARF registers.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DwarfRegister.DW_OP_BREG">
+<span class="sig-name descname"><span class="pre">DW_OP_BREG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_breg'</span></em><a class="headerlink" href="#dwarflang.enums.DwarfRegister.DW_OP_BREG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DwarfRegister.DW_OP_BREGX">
+<span class="sig-name descname"><span class="pre">DW_OP_BREGX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_bregx'</span></em><a class="headerlink" href="#dwarflang.enums.DwarfRegister.DW_OP_BREGX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DwarfRegister.DW_OP_FBREG">
+<span class="sig-name descname"><span class="pre">DW_OP_FBREG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_fbreg'</span></em><a class="headerlink" href="#dwarflang.enums.DwarfRegister.DW_OP_FBREG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DwarfRegister.DW_OP_REG">
+<span class="sig-name descname"><span class="pre">DW_OP_REG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_reg'</span></em><a class="headerlink" href="#dwarflang.enums.DwarfRegister.DW_OP_REG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarflang.enums.DwarfRegister.DW_OP_REGX">
+<span class="sig-name descname"><span class="pre">DW_OP_REGX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DW_OP_regx'</span></em><a class="headerlink" href="#dwarflang.enums.DwarfRegister.DW_OP_REGX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.breg">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">breg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarflang.enums.breg" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP">dwarflang.enums.DW_OP</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.breg_num">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">breg_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarflang.enums.breg_num" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>op</strong> (<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><em>dwarflang.enums.DW_OP</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.breg_to_reg">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">breg_to_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarflang.enums.breg_to_reg" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>op</strong> (<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><em>dwarflang.enums.DW_OP</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP">dwarflang.enums.DW_OP</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.lit">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">lit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarflang.enums.lit" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP">dwarflang.enums.DW_OP</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.lit_num">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">lit_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarflang.enums.lit_num" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>op</strong> (<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><em>dwarflang.enums.DW_OP</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.lookup_DW_OP">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">lookup_DW_OP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarflang.enums.lookup_DW_OP" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP">dwarflang.enums.DW_OP</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.reg">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarflang.enums.reg" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP">dwarflang.enums.DW_OP</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.reg_num">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">reg_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarflang.enums.reg_num" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>op</strong> (<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><em>dwarflang.enums.DW_OP</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.reg_to_breg">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">reg_to_breg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><span class="pre">dwarflang.enums.DW_OP</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarflang.enums.reg_to_breg" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>op</strong> (<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP"><em>dwarflang.enums.DW_OP</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="#dwarflang.enums.DW_OP" title="dwarflang.enums.DW_OP">dwarflang.enums.DW_OP</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarflang.enums.remove_prefix">
+<span class="sig-prename descclassname"><span class="pre">dwarflang.enums.</span></span><span class="sig-name descname"><span class="pre">remove_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dwarflang.enums.remove_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – </p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dwarflang.fold.html" class="btn btn-neutral float-right" title="dwarflang.fold module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dwarflang.decoder.html" class="btn btn-neutral float-left" title="dwarflang.decoder module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

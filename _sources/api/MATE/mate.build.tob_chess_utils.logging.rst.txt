@@ -1,0 +1,7 @@
+mate.build.tob\_chess\_utils.logging module
+===========================================
+
+.. automodule:: mate.build.tob_chess_utils.logging
+   :members:
+   :undoc-members:
+   :show-inheritance:

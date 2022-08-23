@@ -1,0 +1,7 @@
+mate\_common.error module
+=========================
+
+.. automodule:: mate_common.error
+   :members:
+   :undoc-members:
+   :show-inheritance:

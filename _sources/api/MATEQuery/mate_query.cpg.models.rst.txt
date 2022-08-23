@@ -1,0 +1,24 @@
+mate\_query.cpg.models package
+==============================
+
+.. automodule:: mate_query.cpg.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_query.cpg.models.core
+   mate_query.cpg.models.node
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_query.cpg.models.docs

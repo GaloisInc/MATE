@@ -1,0 +1,863 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Mantiserve &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Under-constrained Manticore" href="under-constrained-manticore.html" />
+    <link rel="prev" title="UsageFinder" href="usagefinder.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mantiserve</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-a-task">Running a task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#status-of-a-task">Status of a Task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#killing-a-task">Killing a Task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mantiserve-request-fields">Mantiserve Request Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detectors">Detectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-detector-with-a-poi-result">Using a Detector with a POI Result</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-queries">Example Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-in-progress-request">Example in Progress Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-query-results">Example Query Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mantiserve-final-states">Mantiserve Final States</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#strategies-for-activating-mantiserve">Strategies for Activating Mantiserve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developer-python-api-documentation">Developer Python API Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Mantiserve</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/mantiserve.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mantiserve">
+<h1>Mantiserve<a class="headerlink" href="#mantiserve" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Users interact with Mantiserve via the the MATE REST API.
+See the documentation <a class="reference external" href="api.html">here</a>.</p>
+</div>
+<p><em>Mantiserve</em> is a service included with MATE that serves a REST API to start,
+check, and kill <em>Manticore</em> tasks. Mantiserve uses the MATE-built target binary
+and associated CPG to perform its analyses.</p>
+<p><em>Manticore</em> is a symbolic execution tool for analysis of binaries. It executes a
+target program to explore its behavior as related to user-controlled input.
+Manticore provides a rich API to write plugins that can detect and report on
+program properties like all possible values of an input at a certain point
+during execution. When paired with MATE and the CPG, Manticore plugins can
+perform deep inspection of the program during execution to detect the potential for
+and impact of various forms of memory corruption, violation of memory safety,
+and other issues.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p id="mantiserve-usage">The primary usage of Mantiserve is through the REST API located at
+<a class="reference external" href="http://YOUR_CHESS_SYSTEM:8666/api/v1/">http://YOUR_CHESS_SYSTEM:8666/api/v1/</a>, which you can visit on your browser for a nicely
+formatted FastAPI help page where you can hit the endpoints and peruse the different message
+schemas.</p>
+<p>Each Mantiserve task kind requires a <code class="docutils literal notranslate"><span class="pre">build_id</span></code> (listed next to each target on the MATE Dashboard
+at <a class="reference external" href="http://YOUR_CHESS_SYSTEM:8050/build">http://YOUR_CHESS_SYSTEM:8050/build</a>). This build ID is used to determine Manticore’s target
+binary, as well as the Docker image to isolate Manticore’s execution within (unless
+overridden by <a class="reference internal" href="#specifying-a-docker-image"><span class="std std-ref">docker_image</span></a>).</p>
+<p>Within the message request body you may also
+optionally specify a memory limit, in MB, to impose when using Manticore within
+a Docker container (<a class="reference internal" href="#specifying-a-docker-memory-limit"><span class="std std-ref">docker_memory_limit_mb</span></a>).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>It is <strong>highly</strong> recommended to provide a Docker image that is representative
+of the deployed execution environment for the target program. Not only will
+this provide all of the necessary files, environment variables, and
+dependencies, but Docker provides system isolation for each run which is
+crucial for accurate and repeatable results.</p>
+</div>
+<p>Manticore executes a program just as the program itself would run. Because
+Manticore does not perfectly isolate program behavior and side-effects,
+Manticore execution could make permanent changes<a class="footnote-reference brackets" href="#id2" id="id1">1</a> to the filesystem or
+even the operating system itself. This could interfere with simultaneous runs
+of a Mantiserve task and affect reproducibility of results.  Without providing
+a docker image, all runs execute in the <code class="docutils literal notranslate"><span class="pre">mate_executor</span></code> container and could
+potentially disrupt other tasks and processes that run on that container.</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>By “permanent changes,” we mean to say that Manticore does not totally
+isolate execution side-effects of the target program. If the target issues a
+deletion of a file during normal execution, then that file is likely to
+really be deleted on the computer running Manticore. By running Manticore in
+a new Docker container every time, we rely on Docker’s isolation mechanisms
+as a good-enough solution for more deterministic analysis when Manticore is
+run multiple times.</p>
+</dd>
+</dl>
+<div class="section" id="running-a-task">
+<span id="id3"></span><h3>Running a task<a class="headerlink" href="#running-a-task" title="Permalink to this headline">¶</a></h3>
+<p>There are two kinds of tasks with corresponding endpoints:</p>
+<ul class="simple" id="reachability-doc">
+<li><p><strong>Reachability</strong> - <a class="reference external" href="api.html#operation/_execute_manticore_reachability_task_api_v1_manticore_reachability__build_id__post">reachability</a>
+- Guide Manticore along a path that you’d like to execute, and upon completion
+of the final <code class="docutils literal notranslate"><span class="pre">Waypoint</span></code>, Manticore will return a concrete input that leads to
+that location. If Manticore is unable to follow your path, it will continue to
+execute until it has exhausted all possible paths. This task can also be done
+with a <code class="docutils literal notranslate"><span class="pre">Detector</span></code> enabled.</p></li>
+</ul>
+<ul class="simple" id="exploration-doc">
+<li><p><strong>Exploration</strong> - <a class="reference external" href="api.html#operation/_execute_manticore_exploration_task_api_v1_manticore_explore__build_id__post">exploration</a>
+- Choose a <code class="docutils literal notranslate"><span class="pre">Detector</span></code> and allow Manticore to execute and explore the binary given
+only initial command-line arguments, <code class="docutils literal notranslate"><span class="pre">stdin</span></code> parameters, or information related
+to the respective <code class="docutils literal notranslate"><span class="pre">Detector</span></code>. Manticore will continue exploring until it has found
+something<a class="footnote-reference brackets" href="#id5" id="id4">2</a>.</p></li>
+</ul>
+<p>See the FastAPI webpage and <a class="reference internal" href="#detectors"><span class="std std-ref">Detectors</span></a> for more details about
+the kinds of messages and structures that are expected.</p>
+<dl class="footnote brackets">
+<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id4">2</a></span></dt>
+<dd><p>Unfortunately, Manticore is not perfect and could be missing
+implementations of system calls, assembly instruction semantics, or
+encountered an implementation bug. Furthermore, Manticore could exhaust any
+one of a host machine’s resources, like RAM or storage. If Manticore is
+unable to recover, the Mantiserve task will attempt to save any log output
+from the run as an <code class="docutils literal notranslate"><span class="pre">artifact</span></code> (which can be downloaded from the <a class="reference external" href="api.html#operation/get_artifacts_api_v1_artifacts_get">artifacts</a> MATE REST
+endpoint) and set the task status accordingly. If you find that Manticore
+returns an error, please save and send us the logs!</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="status-of-a-task">
+<span id="task-status"></span><h3>Status of a Task<a class="headerlink" href="#status-of-a-task" title="Permalink to this headline">¶</a></h3>
+<p>To check on the status, locate your unique task id (or query the status of the
+build id) and send a REST request to the <a class="reference external" href="api.htmll#operation/_get_manticore_task_api_v1_manticore_tasks__task_id__get">tasks/{task_id}</a>
+Mantiserve REST endpoint.</p>
+<p>Furthermore, the logs for a task will be saved when the task stops execution.
+The artifact ID for the log is included during querying of a task status.</p>
+</div>
+<div class="section" id="killing-a-task">
+<span id="kill-manti-task"></span><h3>Killing a Task<a class="headerlink" href="#killing-a-task" title="Permalink to this headline">¶</a></h3>
+<p>To kill a Manitserve task, you must have the unique task id and then send an
+<code class="docutils literal notranslate"><span class="pre">HTTP</span> <span class="pre">PATCH</span></code> request to the <a class="reference external" href="api.html#operation/_stop_manticore_task_api_v1_manticore_tasks__task_id__stop_patch">stop</a>
+Mantiserve REST endpoint.</p>
+<p>See <a class="reference internal" href="#strategies-for-activation"><span class="std std-ref">Strategies for Activating Mantiserve</span></a> for
+deciding when it might be appropriate to kill a task.</p>
+</div>
+<div class="section" id="mantiserve-request-fields">
+<h3>Mantiserve Request Fields<a class="headerlink" href="#mantiserve-request-fields" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;docker_image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;docker_image&gt;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;docker_memory_limit_mb&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;explore_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;arg0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;arg1&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ENV_VAR&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VAL&quot;</span><span class="p">}</span><span class="w"></span>
+<span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;docker_image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;docker_image&gt;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;docker_memory_limit_mb&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;reach_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;arg0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;arg1&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ENV_VAR&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VAL&quot;</span><span class="p">}</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;waypoints&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">             </span><span class="p">{</span><span class="w"></span>
+<span class="w">                 </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                     </span><span class="nt">&quot;va&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">                 </span><span class="p">},</span><span class="w"></span>
+<span class="w">                 </span><span class="nt">&quot;end&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                     </span><span class="nt">&quot;va&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">                 </span><span class="p">},</span><span class="w"></span>
+<span class="w">                 </span><span class="nt">&quot;asserts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                     </span><span class="p">{</span><span class="w"></span>
+<span class="w">                         </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                             </span><span class="nt">&quot;va&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">                         </span><span class="p">},</span><span class="w"></span>
+<span class="w">                         </span><span class="nt">&quot;constraint&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                             </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                 </span><span class="nt">&quot;expr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                 </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                                     </span><span class="p">{}</span><span class="w"></span>
+<span class="w">                                 </span><span class="p">]</span><span class="w"></span>
+<span class="w">                             </span><span class="p">}</span><span class="w"></span>
+<span class="w">                         </span><span class="p">]</span><span class="w"></span>
+<span class="w">                     </span><span class="p">}</span><span class="w"></span>
+<span class="w">                 </span><span class="p">],</span><span class="w"></span>
+<span class="w">                 </span><span class="nt">&quot;replacements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                     </span><span class="p">{</span><span class="w"></span>
+<span class="w">                         </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                         </span><span class="nt">&quot;va&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">                     </span><span class="p">},</span><span class="w"></span>
+<span class="w">                         </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                             </span><span class="nt">&quot;python_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"></span>
+<span class="w">                         </span><span class="p">}</span><span class="w"></span>
+<span class="w">                     </span><span class="p">}</span><span class="w"></span>
+<span class="w">                 </span><span class="p">]</span><span class="w"></span>
+<span class="w">             </span><span class="p">}</span><span class="w"></span>
+<span class="w">         </span><span class="p">],</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;constraint_vars&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">             </span><span class="p">{</span><span class="w"></span>
+<span class="w">                 </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="nt">&quot;expr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"></span>
+<span class="w">             </span><span class="p">}</span><span class="w"></span>
+<span class="w">         </span><span class="p">]</span><span class="w"></span>
+<span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<ul id="specifying-a-docker-image">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;docker_image&quot;</span></code>: This <strong>optional</strong> field specifies the docker image that will be pulled
+where Mantiserve will insert a Manticore instance. This image must be valid with a
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">&lt;docker_image&gt;</span></code>. It is HIGHLY recommended to use a Docker image to isolate
+Manticore’s side-effects.</p>
+<p>If an image is not specified in the request, Mantiserve will use the corresponding CPG build’s
+Docker image, if the CPG build was performed within a Docker container. If the corresponding
+build does not have an image, Mantiserve will execute the request within the
+<code class="docutils literal notranslate"><span class="pre">mate_executor</span></code> container itself. (See <a class="reference internal" href="#mantiserve-usage"><span class="std std-ref">Usage</span></a>)</p>
+</li>
+</ul>
+<ul class="simple" id="specifying-a-docker-memory-limit">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;docker_memory_limit_mb&quot;</span></code>: This field specifies the memory limit, in MB, to impose when using
+Manticore within a Docker container. It will be set by default to 64 GB if no value is specified.
+(See <a class="reference internal" href="#mantiserve-usage"><span class="std std-ref">Usage</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;explore_msg&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;reach_msg&quot;</span></code>: This field specifies the message with details for Explore
+and Reachability modes. (See <a class="reference internal" href="#running-a-task"><span class="std std-ref">Running a Task</span></a>)</p></li>
+</ul>
+<ul class="simple" id="request-path">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;command_line_flags&quot;</span></code>: Arguments passed to the program (<code class="docutils literal notranslate"><span class="pre">argv</span></code>) at time
+of execution.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;stdin_size&quot;</span></code>: When executing Manticore has a maximum number of purely
+symbolic (can be any value) bytes it can read from the stdin. This field
+specifies that number. If this is not specified the field defaults to 256. It
+is recommended to set this to a smaller number than 256 at the discretion of
+the user based on the program.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;concrete_start&quot;</span></code>: This field specifies a string of readable concrete
+bytes the symbolic executor reads before any purely symbolic bytes are read
+(see <code class="docutils literal notranslate"><span class="pre">&quot;stdin_size&quot;</span></code>). If this is not specified only symbolic bytes are
+read.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;env&quot;</span></code>: This field specifies a dictionary of environment variables that
+are available to the program of interest during execution.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;waypoints&quot;</span></code>: This field contains a list of <code class="docutils literal notranslate"><span class="pre">Waypoints</span></code>. Each <code class="docutils literal notranslate"><span class="pre">Waypoint</span></code>
+contains <code class="docutils literal notranslate"><span class="pre">Assertions</span></code> and <code class="docutils literal notranslate"><span class="pre">Replacements</span></code> for a block of code defined by
+<code class="docutils literal notranslate"><span class="pre">va_start</span></code> and <code class="docutils literal notranslate"><span class="pre">va_end</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;constraint_vars&quot;</span></code>: This field contains a list of initial declarations for
+symbolic variables.</p></li>
+</ul>
+</div>
+<div class="section" id="detectors">
+<span id="id6"></span><h3>Detectors<a class="headerlink" href="#detectors" title="Permalink to this headline">¶</a></h3>
+<p>To use a detector with either the <a class="reference internal" href="#exploration-doc"><span class="std std-ref">Exploration</span></a> or
+<a class="reference internal" href="#reachability-doc"><span class="std std-ref">Reachability</span></a> modes, add the <code class="docutils literal notranslate"><span class="pre">&quot;detector_options&quot;</span></code>
+field to the request</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;detector_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="nt">&quot;fast&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="nt">&quot;detector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UseAfterFree&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">   </span><span class="nt">&quot;poi_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>There are 3 types of <code class="docutils literal notranslate"><span class="pre">Detector</span></code>s  available to Mantiserve tasks:</p>
+<ul class="simple">
+<li><p><strong>Variable Bounds Access Detector</strong>:
+Specify <code class="docutils literal notranslate"><span class="pre">&quot;detector&quot;:</span> <span class="pre">&quot;VariableBoundsAccess&quot;</span></code> within <code class="docutils literal notranslate"><span class="pre">&quot;detector_options&quot;</span></code> to use this field.</p></li>
+</ul>
+<p>The Variable Bounds Access Detector searches for out of bounds memory access on
+the stack.</p>
+<p>If specified, the detector will only look at given function to variable pairs,
+otherwise the detector will search for every possible out of bounds stack use
+and detect the first out of bounds access on each given path. When a
+vulnerability is found on a given path, the detector will return the function
+name, variable name, and file/line/binary address location information.</p>
+<ul class="simple">
+<li><p><strong>Uninitialized Stack Variable Detector</strong>:
+Specify <code class="docutils literal notranslate"><span class="pre">&quot;detector&quot;:</span> <span class="pre">&quot;UninitializedVariable&quot;</span></code> within <code class="docutils literal notranslate"><span class="pre">&quot;detector_options&quot;</span></code> to use this field.</p></li>
+</ul>
+<p>The Uninitialized Stack Variable Detector searches for variables allocated on
+the stack and used prior to initialization.</p>
+<p>If specified, the detector will only look inside a given function at a given
+variable, otherwise the detector will search the program for every possible
+uninitialized stack variable use, and only detect the first uninitialized use
+on each path. Thus, it’s best to specify this information if a target is in
+mind. When a vulnerability is found on a given path a detector will return the
+function name, variable name, and file/line/binary address location information.</p>
+<ul class="simple">
+<li><p><strong>Use After Free Detector</strong>:
+Specify <code class="docutils literal notranslate"><span class="pre">&quot;detector&quot;:</span> <span class="pre">&quot;UseAfterFree&quot;</span></code> within <code class="docutils literal notranslate"><span class="pre">&quot;detector_options&quot;</span></code> to use this field.</p></li>
+</ul>
+<p>The Use After Free (UAF) Detector searches for and validates UAF
+vulnerabilities from calls to malloc and free.</p>
+<p>If specified the detector will only search for UAF at a given free to use site
+pairs, otherwise the detector will detect the first UAF reachable in each path.
+When a vulnerability is found on a given path the detector will create a
+Manticore testcase with information about the allocation’s use, free, and
+allocation file/line/binary address location information.</p>
+<p><strong>Detector Target (POI) Information</strong> - If no target information (variable to
+function or use to free site) is specified, the detector will search for the
+first found vulnerability it is intended to detect on each path.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&quot;poi_info&quot;</span></code> field in a <code class="docutils literal notranslate"><span class="pre">Mantiserve</span></code> request specifies this
+information. It accepts a list of dictionary objects specifying targets (See
+<a class="reference internal" href="#manti-examples"><span class="std std-ref">Examples</span></a> and <a class="reference internal" href="#detector-with-poi"><span class="std std-ref">Using a Detector with a POI Result</span></a>). If omitted from the json request or specified as
+<code class="docutils literal notranslate"><span class="pre">&quot;poi_info&quot;</span> <span class="pre">:</span> <span class="pre">[]</span></code> the detector will search with no target.</p>
+<p><strong>Detector Fast Mode</strong> - If specified the detector will stop and create a
+testcase and stop after the first vulnerability detection, otherwise Manticore
+will continue to search until the symbolic execution engine has finished
+(meaning all possible program paths have been explored).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&quot;fast&quot;</span></code> field in a <code class="docutils literal notranslate"><span class="pre">Mantiserve</span></code> request specifies this information. It
+a boolean value; <code class="docutils literal notranslate"><span class="pre">true</span></code> to end on first detection and <code class="docutils literal notranslate"><span class="pre">false</span></code> to have
+<code class="docutils literal notranslate"><span class="pre">Mantiserve</span></code> search until completion.</p>
+<p>It is recommended to leave <code class="docutils literal notranslate"><span class="pre">&quot;fast&quot;</span></code> as <code class="docutils literal notranslate"><span class="pre">true</span></code> so that you get immediate
+feedback when a detector detects something.</p>
+</div>
+<div class="section" id="using-a-detector-with-a-poi-result">
+<span id="detector-with-poi"></span><h3>Using a Detector with a POI Result<a class="headerlink" href="#using-a-detector-with-a-poi-result" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">&quot;poi_info&quot;</span></code> field specifies information to be shared with a detector for
+validation of POI results.  This can be used with an <a class="reference internal" href="#exploration-doc"><span class="std std-ref">Exploration</span></a> or
+<a class="reference internal" href="#reachability-doc"><span class="std std-ref">Reachability</span></a> Mantiserve request.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">VariableBoundsAccess</span></code> and <code class="docutils literal notranslate"><span class="pre">UninitializedVariable</span></code> <code class="docutils literal notranslate"><span class="pre">Detector</span></code>s this
+field will look like a list of function to variable pairs</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;poi_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;function_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;syscall_adjtimex&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;variable_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;txc&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;function_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;overflow_field&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;variable_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;auth&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">UseAfterFree</span></code> this field will look like a list of free to use sites</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;poi_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;use_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tmpp96vvx_w.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;use_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;free_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tmpp96vvx_w.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;free_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;use_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tmpp96vvx_w.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;use_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;free_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tmpp96vvx_w.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;free_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-queries">
+<span id="manti-examples"></span><h2>Example Queries<a class="headerlink" href="#example-queries" title="Permalink to this headline">¶</a></h2>
+<p><strong>Explore Request with no Detector</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">     </span><span class="nt">&quot;explore_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UninitializedVariable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Uninitialized Stack Variable Detector in Exploration Mode without POI
+Information</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;explore_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UninitializedVariable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;detector_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;fast&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;detector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UninitializedVariable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Uninitialized Stack Variable Detector in Exploration Mode with POI
+Information</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">     </span><span class="nt">&quot;explore_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UninitializedVariable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;detector_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">             </span><span class="nt">&quot;fast&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="nt">&quot;detector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UninitializedVariable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="nt">&quot;poi_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                 </span><span class="p">{</span><span class="w"></span>
+<span class="w">                     </span><span class="nt">&quot;function_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;syscall_adjtimex&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="nt">&quot;variable_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;txc&quot;</span><span class="w"></span>
+<span class="w">                 </span><span class="p">}</span><span class="w"></span>
+<span class="w">             </span><span class="p">]</span><span class="w"></span>
+<span class="w">         </span><span class="p">}</span><span class="w"></span>
+<span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Use After Free Detector in Exploration Mode with POI Information</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">     </span><span class="nt">&quot;explore_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UAF&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A00000000ABCDEFGH.ppm\nB00000000ABCDEFGH.ppm\n&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">         </span><span class="nt">&quot;detector_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">             </span><span class="nt">&quot;fast&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="nt">&quot;detector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UseAfterFree&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="nt">&quot;poi_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                 </span><span class="p">{</span><span class="w"></span>
+<span class="w">                     </span><span class="nt">&quot;use_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tmpp96vvx_w.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="nt">&quot;use_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">166</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="nt">&quot;free_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tmpp96vvx_w.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="nt">&quot;free_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="w"></span>
+<span class="w">                 </span><span class="p">}</span><span class="w"></span>
+<span class="w">             </span><span class="p">]</span><span class="w"></span>
+<span class="w">         </span><span class="p">}</span><span class="w"></span>
+<span class="w">     </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-in-progress-request">
+<h2>Example in Progress Request<a class="headerlink" href="#example-in-progress-request" title="Permalink to this headline">¶</a></h2>
+<p>When requesting the <a class="reference internal" href="#task-status"><span class="std std-ref">status of a running task</span></a> a response similar
+to the following will return:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;task_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;f3636f90a2de4293b0b6c7bfe35f89c9&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;build_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;d01e95ffe06b44e78f391b2cd20e603a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;running&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Explore&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;request_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UAF&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A00000000ABCDEFGH.ppm\nB00000000ABCDEFGH.ppm\n&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;detector_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;fast&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;detector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UseAfterFree&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;poi_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;artifact_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;response_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;docker_image&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The key things to note here are that the <code class="docutils literal notranslate"><span class="pre">&quot;state&quot;</span></code> field is <code class="docutils literal notranslate"><span class="pre">&quot;running&quot;</span></code>
+and the <code class="docutils literal notranslate"><span class="pre">&quot;response_msg&quot;</span></code> field is <code class="docutils literal notranslate"><span class="pre">null</span></code> since Manticore is still in progress.</p>
+</div>
+<div class="section" id="example-query-results">
+<h2>Example Query Results<a class="headerlink" href="#example-query-results" title="Permalink to this headline">¶</a></h2>
+<p>When requesting the <a class="reference internal" href="#task-status"><span class="std std-ref">status of a completed task</span></a> the
+<code class="docutils literal notranslate"><span class="pre">&quot;state&quot;</span></code> field in the response will be set to <code class="docutils literal notranslate"><span class="pre">&quot;completed&quot;</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">&quot;response_msg&quot;</span></code> field will have the following fields:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;response_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UAF&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">&quot;path&quot;</span></code> is the to the binary being executed (inferred from the CPG build)
+and <code class="docutils literal notranslate"><span class="pre">&quot;cases&quot;</span></code> is a list of the results. If the <code class="docutils literal notranslate"><span class="pre">&quot;cases&quot;</span></code> list is empty (like above) then
+no results were found, otherwise it will contain a list of results with
+<code class="docutils literal notranslate"><span class="pre">&quot;description&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;symbolic_inputs&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;detector_triggered&quot;</span></code> fields. See
+<a class="reference internal" href="api/MATECommon/mate_common.models.integration.html#mate_common.models.integration.ExploreRet" title="mate_common.models.integration.ExploreRet"><code class="xref any py py-class docutils literal notranslate"><span class="pre">ExploreRet</span></code></a> or <a class="reference internal" href="api/MATECommon/mate_common.models.integration.html#mate_common.models.integration.ReachabilityRet" title="mate_common.models.integration.ReachabilityRet"><code class="xref any py py-class docutils literal notranslate"><span class="pre">ReachabilityRet</span></code></a> for more details.</p>
+<p><strong>Successful Uninitialized Stack Variable with a result Detection</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;task_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;682c20e875eb4159890d35406be90b30&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;build_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;350f6e0ffd714313b8d6c9a864c75158&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;completed&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Explore&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;request_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UninitializedVariable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;detector_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;fast&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;detector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UninitializedVariable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;poi_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;function_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;syscall_adjtimex&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;variable_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;txc&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;artifact_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;d7b7bc165b1c4d379ea11c73562e5ee9&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;response_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UninitializedVariable&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;cases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Found stack variable use before initialization txc.tai@&#39;syscall_adjtimex&#39; @ 0x4014b6! (/tmp/tmppisodovc.c:115)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;symbolic_inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;detector_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UninitializedVariable&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;docker_image&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Successful Use After Free Run with a result Detection</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;task_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a448ba792f434bb0be38e8d65a0aeb58&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;build_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0b314d269ee34f84a69981478bf4ecbe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;completed&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Explore&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;request_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UAF&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A00000000ABCDEFGH.ppm\nB00000000ABCDEFGH.ppm\n&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;detector_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;fast&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;detector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UseAfterFree&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;poi_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;artifact_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;339463dc77f54b22acec6e6036f56e1c&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;response_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UAF&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;cases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Found use after free when reading address 0x425b00 @ 0x40160d (/tmp/tmpwy5w117e.c:166)!  Allocated @ 0x4011f5 (/tmp/tmpwy5w117e.c:44). Deallocated @ 0x401273 (/tmp/tmpwy5w117e.c:54).&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;symbolic_inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;detector_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UseAfterFree&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;docker_image&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Completed Mantiserve Run with no Detections</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;task_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;31d16591696d44d9b0aa0cd98c892d5a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;build_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;d01e95ffe06b44e78f391b2cd20e603a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;completed&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Explore&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;request_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UAF&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;stdin_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;concrete_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A00000000ABCDEFGH.ppm\nB00000000ABCDEFGH.ppm\n&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;detector_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;fast&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;detector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UseAfterFree&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;poi_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;use_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badfile.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;use_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">166</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;free_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;badfile.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;free_line&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;command_line_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;artifact_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;303d53ae09464498816ad7806ca64bca&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;response_msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/UAF&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;cases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;docker_image&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mantiserve-final-states">
+<h2>Mantiserve Final States<a class="headerlink" href="#mantiserve-final-states" title="Permalink to this headline">¶</a></h2>
+<p>Mantiserve tasks will have an associated <code class="docutils literal notranslate"><span class="pre">state</span></code> field in the returned object
+from the <a class="reference external" href="api.htmll#operation/_get_manticore_task_api_v1_manticore_tasks__task_id__get">tasks/{task_id}</a>
+Mantiserve REST endpoint. You will know that a task has stopped running when any
+of the following states appear.</p>
+<ul class="simple">
+<li><p><strong>Failed</strong> - Mantiserve task was killed by a REST request (See <a class="reference internal" href="#kill-manti-task"><span class="std std-ref">Killing
+a Task</span></a>) or Manticore encountered an unrecoverable error</p></li>
+<li><p><strong>Completed</strong> - Mantiserve either finished execution normally or found a
+detector result with <code class="docutils literal notranslate"><span class="pre">fast</span></code> mode and exited early</p></li>
+</ul>
+</div>
+<div class="section" id="strategies-for-activating-mantiserve">
+<span id="strategies-for-activation"></span><h2>Strategies for Activating Mantiserve<a class="headerlink" href="#strategies-for-activating-mantiserve" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Using Fast Mode with a Detector</strong></p></li>
+</ul>
+<p>Mantiserve requests can be time consuming on large binaries, particularly if
+using a detector with purely symbolic input. Specifying <code class="docutils literal notranslate"><span class="pre">fast</span></code> to true will
+allow Manticore to notify immediately when a detection is made, instead
+searching indefinitely.</p>
+<ul class="simple">
+<li><p><strong>Kill Mantiserve Tasks</strong></p></li>
+</ul>
+<p>After a significant amount of time has passed it might be advantageous to kill
+a Mantiserve task, view the logs, and give a more specific or different kind of
+request.</p>
+<p>Mantiserve tasks can utilize a large amount of resources on large programs, so
+it is important to be aware the number of tasks currently running.</p>
+<ul class="simple">
+<li><p><strong>Specify a Target (POI Information) with a Detector</strong></p></li>
+</ul>
+<p>Providing detectors with a target (<code class="docutils literal notranslate"><span class="pre">poi_info</span></code>) ensures that a detector will
+only look for that target or set of targets on a specific path, not returning
+early with results that are not of interest. Additionally, in the case of the
+Uninitialized Stack Variable Detector and the Variable Bounds Access Detector
+specifying a target helps limit the functions and variables that are watched,
+reducing overhead.</p>
+</div>
+<div class="section" id="developer-python-api-documentation">
+<h2>Developer Python API Documentation<a class="headerlink" href="#developer-python-api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="api/Mantiserve/modules.html"><span class="doc">mantiserve</span></a> for Python package documentation.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="under-constrained-manticore.html" class="btn btn-neutral float-right" title="Under-constrained Manticore" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="usagefinder.html" class="btn btn-neutral float-left" title="UsageFinder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

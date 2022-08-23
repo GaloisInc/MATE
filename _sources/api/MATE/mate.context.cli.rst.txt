@@ -1,0 +1,7 @@
+mate.context.cli module
+=======================
+
+.. automodule:: mate.context.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:

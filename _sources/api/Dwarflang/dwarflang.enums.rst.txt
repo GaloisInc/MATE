@@ -1,0 +1,7 @@
+dwarflang.enums module
+======================
+
+.. automodule:: dwarflang.enums
+   :members:
+   :undoc-members:
+   :show-inheritance:

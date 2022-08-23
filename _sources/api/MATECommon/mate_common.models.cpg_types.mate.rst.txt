@@ -1,0 +1,7 @@
+mate\_common.models.cpg\_types.mate module
+==========================================
+
+.. automodule:: mate_common.models.cpg_types.mate
+   :members:
+   :undoc-members:
+   :show-inheritance:

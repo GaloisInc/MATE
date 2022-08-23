@@ -1,0 +1,2790 @@
+##########
+CPG Schema
+##########
+
+Given an LLVM bitcode file representing a C or C++ program, MATE builds a Code Property Graph (CPG).
+The CPG is a *labeled property graph*, meaning a graph where every node or edge has a collection of *attributes*, i.e. key/value pairs.
+For example, many of the nodes in the CPG represent parts of the syntax of the input program, like ``Function`` nodes.
+``Function`` nodes have attributes like "name", which can be accessed through the query interface.
+
+This document describes the kinds of nodes and edges in the CPG, along with the
+various attributes attached to them. It is generated from the MATE JSON schemata.
+
+******************
+General Guidelines
+******************
+
+The CPG contains three different representations of the input program
+corresponding to the following stages of compilation:
+
+- LLVM IR
+- LLVM middle-end ("MI" nodes and edges)
+- Binary ("MC" and "ASM" nodes and edges)
+
+The LLVM IR is considered the "default" representation, since it is most similar to the source language (C/C++). Therefore, generic names like ``Function``, ``Block``, ``Instruction``, and ``Argument`` refer to LLVM IR constructs. Nodes representing LLVM middle-end constructs have kinds prefixed by ``Machine``, and binary-level node kinds are prefixed by ``ASM``.
+
+*****
+Nodes
+*****
+
+``LocalVariable``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``LocalVariable`` nodes:
+
+.. image:: /schema.LocalVariable.png
+   :alt: Entity-relationship diagram for LocalVariable nodes
+   :target: ./schema.LocalVariable.png
+
+
+An LLVM-level stack-local variable
+
+*Attributes:*
+
+- ``pretty_string``
+
+  - type: ``string``
+
+- ``name``: The source-level name of this local variable
+
+  - type: ``string``
+
+- ``location``: The variable's location: :ref:`#/definitions/location`
+
+- ``node_kind``
+
+
+``DWARFLocalVariable``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``DWARFLocalVariable`` nodes:
+
+.. image:: /schema.DWARFLocalVariable.png
+   :alt: Entity-relationship diagram for DWARFLocalVariable nodes
+   :target: ./schema.DWARFLocalVariable.png
+
+
+A DWARF-level stack-local variable
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``name``
+
+  - type: ``string``
+
+- ``kind``
+
+- ``arg``
+
+- ``parameter``
+
+- ``type_id``: A compressed representation of the function's DWARF type
+
+  - type: ``string``
+
+- ``dwarf_scope``: The variable's DWARF scope: :ref:`#/definitions/dwarf_scope`
+
+- ``source_location``: The variable's source location: :ref:`#/definitions/source_location`
+
+- ``source_scope``: The variable's source scope: :ref:`#/definitions/source_scope`
+
+- ``artificial``: Whether the variable is artificial
+
+  - type: ``boolean``
+
+- ``dwarf_location``: The memory location of this local variable, if not optimized away: :ref:`#/definitions/dwarf_location`
+
+
+``ASMGlobalVariable``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ASMGlobalVariable`` nodes:
+
+.. image:: /schema.ASMGlobalVariable.png
+   :alt: Entity-relationship diagram for ASMGlobalVariable nodes
+   :target: ./schema.ASMGlobalVariable.png
+
+
+A program global variable at the binary level
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``pretty_string``
+
+  - type: ``string``
+
+- ``thread_local``
+
+  - type: ``boolean``
+
+- ``definition_location``: :ref:`#/definitions/definition_location`
+
+- ``definition``: Indicates whether this visitation of the global variable is a definition
+
+  - type: ``boolean``
+
+- ``local_to_unit``: Indicates whether or not this global variable is local to this translation unit
+
+  - type: ``boolean``
+
+- ``source_scope``: :ref:`#/definitions/source_scope`
+
+- ``type_id``
+
+  - type: ``string``
+
+- ``name``: The source-level name of this global variable
+
+  - type: ``string``
+
+- ``dwarf_location``: :ref:`#/definitions/dwarf_location`
+
+- ``va``
+
+  - type: ``integer``
+
+
+``Function``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Function`` nodes:
+
+.. image:: /schema.Function.png
+   :alt: Entity-relationship diagram for Function nodes
+   :target: ./schema.Function.png
+
+
+LLVM IR functions
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``name``: The name of the LLVM function. For functions generated by compiling C code, this is often the same name that appears in the source, e.g. '@recv' (at the LLVM level) corresponds to 'recv' (at the C level). However, compiled from other languages, the names will often be mangled. The source-level name will generally appear as a substring in the LLVM-level name.
+
+  - type: ``string``
+
+- ``demangled_name``: The demangled name of the function.
+
+  - type: ``string``
+
+- ``is_declaration``: True if this function has no definition.
+
+  - type: ``boolean``
+
+- ``alignment``
+
+  - type: ``integer``
+
+- ``section``
+
+  - type: ``string``
+
+- ``location``: :ref:`#/definitions/location`
+
+- ``pretty_string``
+
+  - type: ``string``
+
+
+``Argument``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Argument`` nodes:
+
+.. image:: /schema.Argument.png
+   :alt: Entity-relationship diagram for Argument nodes
+   :target: ./schema.Argument.png
+
+
+A formal parameter to an LLVM function
+
+*Attributes:*
+
+- ``pretty_string``
+
+  - type: ``string``
+
+- ``name``: The source-level name of this formal parameter
+
+  - type: ``string``
+
+- ``node_kind``
+
+- ``location``: :ref:`#/definitions/location`
+
+- ``might_be_null``: True when the pointer analysis determines the parameter could be a null pointer
+
+  - type: ``boolean``
+
+- ``argument_number``
+
+  - type: ``integer``
+
+
+``DWARFArgument``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``DWARFArgument`` nodes:
+
+.. image:: /schema.DWARFArgument.png
+   :alt: Entity-relationship diagram for DWARFArgument nodes
+   :target: ./schema.DWARFArgument.png
+
+
+A DWARF-level formal parameter to a function
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``kind``
+
+- ``arg``
+
+  - type: ``integer``
+
+- ``parameter``
+
+- ``name``: The source-level name of this formal parameter
+
+  - type: ``string``
+
+- ``dwarf_location``: The memory location of this formal parameter, if not optimized away: :ref:`#/definitions/dwarf_location`
+
+- ``type_id``
+
+  - type: ``string``
+
+- ``dwarf_scope``: :ref:`#/definitions/dwarf_scope`
+
+- ``source_location``: :ref:`#/definitions/source_location`
+
+- ``source_scope``: :ref:`#/definitions/source_scope`
+
+- ``artificial``
+
+  - type: ``boolean``
+
+- ``from_variadic_template``: True if this parameter is from a variadic template expansion; does not exist otherwise
+
+  - type: ``boolean``
+
+- ``original_name``: The original name of this argument, with no variadic index suffix
+
+  - type: ``string``
+
+- ``parameter_index``: The index of this argument into the overall list of arguments to the enclosing function
+
+  - type: ``integer``
+
+- ``variadic_index``: The index of this argument into all variadic arguments of this function
+
+  - type: ``integer``
+
+- ``template_index``: The index of this argument into the variadic arguments of its group (i.e., those with the same name)
+
+  - type: ``integer``
+
+
+``Block``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Block`` nodes:
+
+.. image:: /schema.Block.png
+   :alt: Entity-relationship diagram for Block nodes
+   :target: ./schema.Block.png
+
+
+LLVM IR basic blocks
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``pretty_string``
+
+  - type: ``string``
+
+- ``label``
+
+  - type: ``string``
+
+
+``GlobalVariable``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``GlobalVariable`` nodes:
+
+.. image:: /schema.GlobalVariable.png
+   :alt: Entity-relationship diagram for GlobalVariable nodes
+   :target: ./schema.GlobalVariable.png
+
+
+A program global variable at the LLVM level
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``is_constant``
+
+  - type: ``boolean``
+
+- ``is_declaration``: True if this global variable has no definition.
+
+  - type: ``boolean``
+
+- ``has_initializer``
+
+  - type: ``boolean``
+
+- ``name``
+
+  - type: ``string``
+
+- ``alignment``
+
+  - type: ``integer``
+
+- ``section``
+
+  - type: ``string``
+
+- ``location``: :ref:`#/definitions/location`
+
+- ``pretty_string``
+
+  - type: ``string``
+
+
+``Instruction``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Instruction`` nodes:
+
+.. image:: /schema.Instruction.png
+   :alt: Entity-relationship diagram for Instruction nodes
+   :target: ./schema.Instruction.png
+
+
+LLVM IR instructions
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``Alloca``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Alloca`` nodes:
+
+.. image:: /schema.Alloca.png
+   :alt: Entity-relationship diagram for Alloca nodes
+   :target: ./schema.Alloca.png
+
+
+LLVM IR ``alloca`` instructions
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``Call``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Call`` nodes:
+
+.. image:: /schema.Call.png
+   :alt: Entity-relationship diagram for Call nodes
+   :target: ./schema.Call.png
+
+
+LLVM IR ``call`` instructions
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``is_direct``
+
+  - type: ``boolean``
+
+
+``Invoke``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Invoke`` nodes:
+
+.. image:: /schema.Invoke.png
+   :alt: Entity-relationship diagram for Invoke nodes
+   :target: ./schema.Invoke.png
+
+
+LLVM IR ``invoke`` instructions
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``is_direct``
+
+  - type: ``boolean``
+
+
+``Memcpy``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Memcpy`` nodes:
+
+.. image:: /schema.Memcpy.png
+   :alt: Entity-relationship diagram for Memcpy nodes
+   :target: ./schema.Memcpy.png
+
+
+LLVM IR ``memcpy`` intrinsics
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``Memset``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Memset`` nodes:
+
+.. image:: /schema.Memset.png
+   :alt: Entity-relationship diagram for Memset nodes
+   :target: ./schema.Memset.png
+
+
+LLVM IR ``memset`` intrinsics
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``Load``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Load`` nodes:
+
+.. image:: /schema.Load.png
+   :alt: Entity-relationship diagram for Load nodes
+   :target: ./schema.Load.png
+
+
+LLVM IR ``load`` instructions
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``Resume``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Resume`` nodes:
+
+.. image:: /schema.Resume.png
+   :alt: Entity-relationship diagram for Resume nodes
+   :target: ./schema.Resume.png
+
+
+LLVM IR ``resume`` instructions
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``Ret``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Ret`` nodes:
+
+.. image:: /schema.Ret.png
+   :alt: Entity-relationship diagram for Ret nodes
+   :target: ./schema.Ret.png
+
+
+LLVM IR ``ret`` instructions
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``Store``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Store`` nodes:
+
+.. image:: /schema.Store.png
+   :alt: Entity-relationship diagram for Store nodes
+   :target: ./schema.Store.png
+
+
+LLVM IR ``store`` instructions
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``LLVMType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``LLVMType`` nodes:
+
+.. image:: /schema.LLVMType.png
+   :alt: Entity-relationship diagram for LLVMType nodes
+   :target: ./schema.LLVMType.png
+
+
+A type in the LLVM type system. See https://llvm.org/docs/LangRef.html#type-system for details.
+
+*Attributes:*
+
+- ``node_kind``
+
+  - type: ``object``
+
+- ``definition``: :ref:`#/definitions/llvm_type`
+
+  - type: ``object``
+
+- ``size_in_bits``: The number of bits necessary to hold the specified type. The following table (taken from the LLVM source code, see "Legal" in the documentation) contrasts this field with other size-related fields.
+
+::
+
+   /// Size examples:
+   ///
+   /// Type        SizeInBits  StoreSizeInBits  AllocSizeInBits[*]
+   /// ----        ----------  ---------------  ---------------
+   ///  i1            1           8                8
+   ///  i8            8           8                8
+   ///  i19          19          24               32
+   ///  i32          32          32               32
+   ///  i100        100         104              128
+   ///  i128        128         128              128
+   ///  Float        32          32               32
+   ///  Double       64          64               64
+   ///  X86_FP80     80          80               96
+   ///
+   /// [*] The alloc size depends on the alignment, and thus on the target.
+   ///     These values are for x86-32 linux.
+
+  - type: ``integer``
+
+- ``store_size_in_bits``: the maximum number of bits that may be overwritten by storing the specified type; always a multiple of 8
+
+  - type: ``integer``
+
+- ``alloc_size_in_bits``: the offset in bits between successive objects of the specified type, including alignment padding; always a multiple of 8
+
+  - type: ``integer``
+
+- ``abi_type_alignment``: the minimum ABI-required alignment for this type
+
+  - type: ``integer``
+
+- ``pretty_string``
+
+  - type: ``string``
+
+
+``Constant``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Constant`` nodes:
+
+.. image:: /schema.Constant.png
+   :alt: Entity-relationship diagram for Constant nodes
+   :target: ./schema.Constant.png
+
+
+A constant value in the LLVM IR
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``Variable``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Variable`` nodes:
+
+.. image:: /schema.Variable.png
+   :alt: Entity-relationship diagram for Variable nodes
+   :target: ./schema.Variable.png
+
+
+A variable in the LLVM IR
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``ConstantInt``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ConstantInt`` nodes:
+
+.. image:: /schema.ConstantInt.png
+   :alt: Entity-relationship diagram for ConstantInt nodes
+   :target: ./schema.ConstantInt.png
+
+
+A constant int value in the LLVM IR
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``constant_data_subclass``
+
+- ``constant_int_value``: The value of this integer constant.
+
+  - type: ``integer``
+
+
+``ConstantFP``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ConstantFP`` nodes:
+
+.. image:: /schema.ConstantFP.png
+   :alt: Entity-relationship diagram for ConstantFP nodes
+   :target: ./schema.ConstantFP.png
+
+
+A constant floating point value in the LLVM IR
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``constant_data_subclass``
+
+
+``ConstantString``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ConstantString`` nodes:
+
+.. image:: /schema.ConstantString.png
+   :alt: Entity-relationship diagram for ConstantString nodes
+   :target: ./schema.ConstantString.png
+
+
+A constant string value in the LLVM IR
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``string_value``
+
+  - type: ``string``
+
+
+``ConstantUndef``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ConstantUndef`` nodes:
+
+.. image:: /schema.ConstantUndef.png
+   :alt: Entity-relationship diagram for ConstantUndef nodes
+   :target: ./schema.ConstantUndef.png
+
+
+An undef value in the LLVM IR
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``constant_data_subclass``
+
+
+``UnclassifiedNode``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``UnclassifiedNode`` nodes:
+
+.. image:: /schema.UnclassifiedNode.png
+   :alt: Entity-relationship diagram for UnclassifiedNode nodes
+   :target: ./schema.UnclassifiedNode.png
+
+
+An as-of-yet underspecified node of the LLVM AST
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``pretty_string``
+
+  - type: ``string``
+
+
+``MachineFunction``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``MachineFunction`` nodes:
+
+.. image:: /schema.MachineFunction.png
+   :alt: Entity-relationship diagram for MachineFunction nodes
+   :target: ./schema.MachineFunction.png
+
+
+Named after the eponymous LLVM class, these nodes represent the LLVM middle-end's concept of a function.
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``offset``: The offset into the binary itself where this function is located.
+
+  - type: ``integer``
+
+- ``va_start``: The VA (Virtual Address) tells us where this function is located in the binary.
+
+  - type: ``integer``
+
+- ``va_end``: The VA (Virtual Address) tells us the last VA where the function is located in the binary.
+
+  - type: ``integer``
+
+- ``prologues``: Pairs of VA (Virtual Address) ranges where the function contains prologue code (e.g., stack setup)
+
+  - type: ``array``
+
+- ``epilogues``: Pairs of VA (Virtual Address) ranges where the function contains epilogue code (e.g., stack teardown)
+
+  - type: ``array``
+
+- ``operand``: TODO(lb)
+
+  - type: ``string``
+
+- ``name``: The corresponding LLVM IR function's name
+
+  - type: ``string``
+
+- ``is_mangled``: Whether or not this function's name has been mangled
+
+  - type: ``boolean``
+
+- ``demangled_name``: The demangled function name, or the regular name if not mangled
+
+  - type: ``string``
+
+- ``frame_info``: Information about this function's stack frame
+
+  - type: ``object``
+
+- ``type_id``: A compressed representation of the function's DWARF type
+
+  - type: ``string``
+
+- ``pretty_string``: A pretty representation of the function
+
+  - type: ``string``
+
+- ``source``: A list of source entries for this function
+
+  - type: ``array``
+
+- ``symbols``: The function's binary symbols
+
+  - type: ``array``
+
+
+``MachineBasicBlock``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``MachineBasicBlock`` nodes:
+
+.. image:: /schema.MachineBasicBlock.png
+   :alt: Entity-relationship diagram for MachineBasicBlock nodes
+   :target: ./schema.MachineBasicBlock.png
+
+
+Named after the eponymous LLVM class, these nodes represent the LLVM middle-end's concept of a basic block.
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``pretty_string``
+
+  - type: ``string``
+
+- ``number``: The numeric identifier for this basic block
+
+  - type: ``integer``
+
+- ``symbol``: The machine-addressable symbol for this basic block
+
+  - type: ``string``
+
+- ``can_fallthrough``: Whether or not this basic block can implicitly transfer control flow by falling through to the next
+
+  - type: ``boolean``
+
+- ``ends_in_return``: Whether or not this basic block ends in a return
+
+  - type: ``boolean``
+
+- ``is_epilogue_insertion_block``: Whether or not this basic block will contain generated epilogue code (e.g., for stack cleanup)
+
+  - type: ``boolean``
+
+- ``is_prologue_insertion_block``: Whether or not this basic block will contain generated prologue code (e.g., for stack setup)
+
+  - type: ``boolean``
+
+- ``address_taken``: Whether or not this basic block is potentially a target of an indirect branch
+
+  - type: ``boolean``
+
+- ``has_inline_asm``: Whether or not this block contains inlined assembly statements
+
+  - type: ``boolean``
+
+- ``preds``: The array of predecessor blocks, identified by their symbols
+
+  - type: ``array``
+
+- ``succs``: The array of successor blocks, identified by their symbols
+
+  - type: ``array``
+
+- ``instrs``: The array of middle-end instructions in this block
+
+  - type: ``array``
+
+
+``MachineInstr``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``MachineInstr`` nodes:
+
+.. image:: /schema.MachineInstr.png
+   :alt: Entity-relationship diagram for MachineInstr nodes
+   :target: ./schema.MachineInstr.png
+
+
+Named after the eponymous LLVM class, these nodes represent the LLVM middle-end's concept of an instruction.
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``pretty_string``
+
+  - type: ``string``
+
+- ``opcode``
+
+  - type: ``integer``
+
+- ``flags``
+
+  - type: ``integer``
+
+
+``ASMInst``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ASMInst`` nodes:
+
+.. image:: /schema.ASMInst.png
+   :alt: Entity-relationship diagram for ASMInst nodes
+   :target: ./schema.ASMInst.png
+
+
+An x86_64 instruction in the binary, including layout and semantic information
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``pretty_string``
+
+  - type: ``string``
+
+- ``va``
+
+  - type: ``integer``
+
+- ``size``: The decoded size of this instruction, in bytes
+
+  - type: ``integer``
+
+- ``mnemonic``: The assembly mnemonic for this instruction
+
+  - type: ``string``
+
+- ``asm``: The disassembled instruction, in Intel format
+
+  - type: ``string``
+
+- ``used_registers``: An array of register use information for this instruction
+
+  - type: ``array``
+
+- ``used_memory``: An array of memory use information for this instruction
+
+  - type: ``array``
+
+
+``ASMBlock``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ASMBlock`` nodes:
+
+.. image:: /schema.ASMBlock.png
+   :alt: Entity-relationship diagram for ASMBlock nodes
+   :target: ./schema.ASMBlock.png
+
+
+A basic block in the x86_64 binary
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``pretty_string``
+
+  - type: ``string``
+
+- ``unpaired``
+
+  - type: ``boolean``
+
+- ``va``
+
+  - type: ``integer``
+
+- ``va_end``
+
+  - type: ``integer``
+
+- ``size``: The size of this basic block, in bytes
+
+  - type: ``integer``
+
+- ``offset``
+
+  - type: ``integer``
+
+- ``func_offset``
+
+  - type: ``integer``
+
+- ``func_reference``
+
+  - type: ``string``
+
+- ``source``
+
+  - type: ``array``
+
+- ``filename``
+
+  - type: ``string``
+
+
+``ParamBinding``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ParamBinding`` nodes:
+
+.. image:: /schema.ParamBinding.png
+   :alt: Entity-relationship diagram for ParamBinding nodes
+   :target: ./schema.ParamBinding.png
+
+
+A node which connects argument values with formal parameters
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``arg_op_number``
+
+  - type: ``integer``
+
+
+``CallReturn``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``CallReturn`` nodes:
+
+.. image:: /schema.CallReturn.png
+   :alt: Entity-relationship diagram for CallReturn nodes
+   :target: ./schema.CallReturn.png
+
+
+A node that connects a value used in a return statement to the corresponding call site.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``MemoryLocation``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``MemoryLocation`` nodes:
+
+.. image:: /schema.MemoryLocation.png
+   :alt: Entity-relationship diagram for MemoryLocation nodes
+   :target: ./schema.MemoryLocation.png
+
+
+An abstract memory location represents a set of runtime heap locations.
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``pretty_string``
+
+  - type: ``string``
+
+- ``alias_set_identifier``
+
+  - type: ``string``
+
+- ``allocation_context``
+
+  - type: ``string``
+
+- ``allocation_size_bytes``: The number of bytes allocated on the heap, as determined by the points-to analysis.
+
+  - type: ``integer``
+
+
+``DataflowSignature``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``DataflowSignature`` nodes:
+
+.. image:: /schema.DataflowSignature.png
+   :alt: Entity-relationship diagram for DataflowSignature nodes
+   :target: ./schema.DataflowSignature.png
+
+
+Abstract representation of a dataflow derived from a signature
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``tags``
+
+  - type: ``array``
+
+- ``context``
+
+  - type: ``string``
+
+- ``deallocator``
+
+  - type: ``string``
+
+
+``InputSignature``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``InputSignature`` nodes:
+
+.. image:: /schema.InputSignature.png
+   :alt: Entity-relationship diagram for InputSignature nodes
+   :target: ./schema.InputSignature.png
+
+
+Abstract representation of a dataflow input derived from a signature
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``tags``
+
+  - type: ``array``
+
+- ``context``
+
+  - type: ``string``
+
+
+``OutputSignature``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``OutputSignature`` nodes:
+
+.. image:: /schema.OutputSignature.png
+   :alt: Entity-relationship diagram for OutputSignature nodes
+   :target: ./schema.OutputSignature.png
+
+
+Abstract representation of a dataflow output derived from a signature
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``tags``
+
+  - type: ``array``
+
+- ``context``
+
+  - type: ``string``
+
+
+``DWARFType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``DWARFType`` nodes:
+
+.. image:: /schema.DWARFType.png
+   :alt: Entity-relationship diagram for DWARFType nodes
+   :target: ./schema.DWARFType.png
+
+
+The DWARF representation of a type in the program
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``BasicType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``BasicType`` nodes:
+
+.. image:: /schema.BasicType.png
+   :alt: Entity-relationship diagram for BasicType nodes
+   :target: ./schema.BasicType.png
+
+
+A basic DWARF type, corresponding to basic C or C++ types like ``int``.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``CompositeType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``CompositeType`` nodes:
+
+.. image:: /schema.CompositeType.png
+   :alt: Entity-relationship diagram for CompositeType nodes
+   :target: ./schema.CompositeType.png
+
+
+A composite DWARF type.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``CompositeCachedType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``CompositeCachedType`` nodes:
+
+.. image:: /schema.CompositeCachedType.png
+   :alt: Entity-relationship diagram for CompositeCachedType nodes
+   :target: ./schema.CompositeCachedType.png
+
+
+A composite cached DWARF type.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``StructureType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``StructureType`` nodes:
+
+.. image:: /schema.StructureType.png
+   :alt: Entity-relationship diagram for StructureType nodes
+   :target: ./schema.StructureType.png
+
+
+A DWARF struct type, corresponding to a C or C++ ``struct``.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``ArrayType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ArrayType`` nodes:
+
+.. image:: /schema.ArrayType.png
+   :alt: Entity-relationship diagram for ArrayType nodes
+   :target: ./schema.ArrayType.png
+
+
+A DWARF array type, corresponding to a C or C++ array type.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``EnumType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``EnumType`` nodes:
+
+.. image:: /schema.EnumType.png
+   :alt: Entity-relationship diagram for EnumType nodes
+   :target: ./schema.EnumType.png
+
+
+A DWARF enumeration type, corresponding to a C or C++ ``enum`` type.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``UnionType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``UnionType`` nodes:
+
+.. image:: /schema.UnionType.png
+   :alt: Entity-relationship diagram for UnionType nodes
+   :target: ./schema.UnionType.png
+
+
+A DWARF union type, corresponding to a C or C++ ``union`` type.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``ClassType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``ClassType`` nodes:
+
+.. image:: /schema.ClassType.png
+   :alt: Entity-relationship diagram for ClassType nodes
+   :target: ./schema.ClassType.png
+
+
+A DWARF class type, corresponding to a C++ ``class``.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``DerivedType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``DerivedType`` nodes:
+
+.. image:: /schema.DerivedType.png
+   :alt: Entity-relationship diagram for DerivedType nodes
+   :target: ./schema.DerivedType.png
+
+
+A DWARF derived type.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``SubroutineType``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``SubroutineType`` nodes:
+
+.. image:: /schema.SubroutineType.png
+   :alt: Entity-relationship diagram for SubroutineType nodes
+   :target: ./schema.SubroutineType.png
+
+
+A DWARF subroutine type, corresponding to a C or C++ function or method type.
+
+*Attributes:*
+
+- ``node_kind``
+
+
+``Module``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``Module`` nodes:
+
+.. image:: /schema.Module.png
+   :alt: Entity-relationship diagram for Module nodes
+   :target: ./schema.Module.png
+
+
+The unified LLVM bitcode module that the program was compiled from
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``module_name``: The name of the LLVM module
+
+  - type: ``string``
+
+- ``source_file``: The source file that this module was loaded from, if from a single source file
+
+  - type: ``string``
+
+- ``target_triple``: The LLVM target triple
+
+  - type: ``string``
+
+- ``data_layout``: The LLVM datalayout string
+
+  - type: ``string``
+
+- ``symbols``: A list of all symbols in the module
+
+  - type: ``array``
+
+
+``TranslationUnit``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``TranslationUnit`` nodes:
+
+.. image:: /schema.TranslationUnit.png
+   :alt: Entity-relationship diagram for TranslationUnit nodes
+   :target: ./schema.TranslationUnit.png
+
+
+A translation unit in the compiled program
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``source_language``: The source language for this translation unit, as a ``DW_LANG_`` constant
+
+  - type: ``string``
+
+- ``producer``: An identifier for the compiler or tool that produced this translation unit
+
+  - type: ``string``
+
+- ``flags``: The command line arguments that produced this translation unit
+
+  - type: ``string``
+
+- ``filename``: The input/source filename for this translation unit
+
+  - type: ``string``
+
+
+``PLTStub``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``PLTStub`` nodes:
+
+.. image:: /schema.PLTStub.png
+   :alt: Entity-relationship diagram for PLTStub nodes
+   :target: ./schema.PLTStub.png
+
+
+A stub for a function that's accessed through the binary's Procedure Linkage Table
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``symbol``: The linker symbol for this PLT entry
+
+  - type: ``string``
+
+- ``va``: The virtual address of this PLT entry
+
+  - type: ``integer``
+
+
+``VTable``
+===============================================================================================================================================
+
+The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to ``VTable`` nodes:
+
+.. image:: /schema.VTable.png
+   :alt: Entity-relationship diagram for VTable nodes
+   :target: ./schema.VTable.png
+
+
+A virtual table for a C++ class
+
+*Attributes:*
+
+- ``node_kind``
+
+- ``va``: The virtual address for the virtual table itself
+
+  - type: ``integer``
+
+- ``size``: The size of the virtual table, in bytes. This includes the RTTI and 'offset to base' fields
+
+  - type: ``integer``
+
+- ``symbol``: The linker symbol for this virtual table
+
+  - type: ``string``
+
+- ``class_name``: The name of the C++ class that this virtual table belongs to
+
+  - type: ``string``
+
+- ``rtti_va``: The virtual address to the RTTI entry for this virtual table
+
+  - type: ``integer``
+
+- ``members``: The virtual addresses for each entry in the virtual table
+
+  - type: ``array``
+
+
+
+*****
+Edges
+*****
+
+``FunctionToLocalVariable``
+===============================================================================================================================================
+
+
+These edges map LLVM-level functions to source-level local variables that the corresponding source-level function allocates.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``FunctionToArgument``
+===============================================================================================================================================
+
+
+Connects a function to its argument nodes.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``FunctionToEntryBlock``
+===============================================================================================================================================
+
+
+Functions have a unique first basic block, which is always executed when that function is called.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``BlockToParentFunction``
+===============================================================================================================================================
+
+
+Connects a basic block to its enclosing function.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``BlockToSuccessorBlock``
+===============================================================================================================================================
+
+
+A block has a set of successor blocks, which is where control flow may transfer to from its terminator instruction.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``InstructionToSuccessorInstruction``
+===============================================================================================================================================
+
+
+An instruction's (control-flow) successors are the instructions that can execute immediately after it.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``condition``: Conditions appear on successor edges out of block terminator instructions such as 'br', which may transfer control to multiple targets.
+
+
+``BlockToEntryInstruction``
+===============================================================================================================================================
+
+
+Connects a basic block to its first instrution.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``BlockToTerminatorInstruction``
+===============================================================================================================================================
+
+
+Connects a basic block to its last instruction.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``InstructionToParentBlock``
+===============================================================================================================================================
+
+
+Every instruction belongs to one block
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``HasLLVMType``
+===============================================================================================================================================
+
+
+Every LLVM 'Value' has a type, this edge captures that relationship.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``Callgraph``
+===============================================================================================================================================
+
+
+This edge relates a function to functions it may call.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``caller_context``
+
+  - type: ``string``
+
+- ``callee_context``
+
+  - type: ``string``
+
+- ``mod_ref_behavior``: :ref:`#/definitions/mod_ref_behavior`
+
+
+``CallToFunction``
+===============================================================================================================================================
+
+
+This edge relates a 'call' or 'invoke' instruction to the function being called based on the pointer analysis.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``caller_context``
+
+  - type: ``string``
+
+- ``callee_context``
+
+  - type: ``string``
+
+- ``mod_ref_behavior``: :ref:`#/definitions/mod_ref_behavior`
+
+
+``MIFunctionToIRFunction``
+===============================================================================================================================================
+
+
+LLVM middle-end functions are paired with the corresponding LLVM IR function
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``MIFunctionToDWARFArgument``
+===============================================================================================================================================
+
+
+This edge relates a middle-end function to each of the formal parameters that occur in the function's original source
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``MIFunctionToDWARFLocalVariable``
+===============================================================================================================================================
+
+
+This edge relates a middle-end function to each of the local variables that occur in the function's original source
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``MIFunctionToVTable``
+===============================================================================================================================================
+
+
+This edge relates a middle-end function to its virtual table entries
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``MIBlockToIRBlock``
+===============================================================================================================================================
+
+
+LLVM middle-end basic blocks are paired with the corresponding LLVM IR basic block where possible
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``MIBlockToASMBlock``
+===============================================================================================================================================
+
+
+x86_64 basic blocks are paired with the corresponding LLVM middle-end basic block where possible
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``BlockToControlDependentBlock``
+===============================================================================================================================================
+
+
+Connects a basic block to all basic blocks whose execution may depend on the control-flow exiting the block.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``condition``: The value of the branch condition when leaving the terminating instruction of the block.
+
+- ``controls``: True if execution of the control dependent block is entirely dependent on the control-flow exiting the block.
+
+  - type: ``boolean``
+
+
+``TerminatorInstructionToControlDependentInstruction``
+===============================================================================================================================================
+
+
+Connects a branching instruction to all instructions whose execution depends on the control-flow exiting the instruction.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``condition``: The value of the branch condition when leaving the terminating instruction.
+
+- ``controls``: True if execution of the control instruction block is entirely dependent on the control-flow exiting the terminator instruction.
+
+  - type: ``boolean``
+
+
+``FunctionEntryToControlDependentBlock``
+===============================================================================================================================================
+
+
+Connects a function to all basic blocks whose execution depends solely on control-flow entering the function.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``condition``
+
+- ``controls``: True if execution of the control dependent block is entirely dependent on the control-flow entering the function.
+
+  - type: ``boolean``
+
+
+``FunctionEntryToControlDependentInstruction``
+===============================================================================================================================================
+
+
+Connects a function to all instructions whose execution depends solely on control-flow entering the function.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``condition``
+
+- ``controls``: True if execution of the control dependent instruction is entirely dependent on the control-flow entering the function.
+
+  - type: ``boolean``
+
+
+``ValueDefinitionToUse``
+===============================================================================================================================================
+
+
+This edge is similar to LLVM's Use class, it connects a LLVM User with the LLVM Value it uses. This is a generic concept and applies in particular to e.g. an instruction 'using' its operands.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``operand_number``
+
+  - type: ``integer``
+
+- ``incoming_block``
+
+  - type: ``integer``
+
+- ``is_callee``: Is the value being used a function being called by this ``invoke`` or ``call`` instruction?
+
+  - type: ``boolean``
+
+- ``is_argument_operand``: Is the value being used as an argument to the function being called by this ``invoke`` or ``call`` instruction?
+
+  - type: ``boolean``
+
+
+``CallToParamBinding``
+===============================================================================================================================================
+
+
+This edge connects a 'call' or 'invoke' instruction to all the relevant 'ParamBinding' nodes.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``caller_context``
+
+  - type: ``string``
+
+- ``callee_context``
+
+  - type: ``string``
+
+
+``OperandToParamBinding``
+===============================================================================================================================================
+
+
+This edge connects a value used as an argument to an 'Argument' node, via a 'ParamBinding' node.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``caller_context``
+
+  - type: ``string``
+
+- ``callee_context``
+
+  - type: ``string``
+
+
+``ParamBindingToArg``
+===============================================================================================================================================
+
+
+This edge connects a value used as an argument to an 'Argument' node, via a 'ParamBinding' node.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``caller_context``
+
+  - type: ``string``
+
+- ``callee_context``
+
+  - type: ``string``
+
+
+``SameCall``
+===============================================================================================================================================
+
+
+This edge connects a 'ParamBinding' node with a 'CallReturn' node that corresponds to the same call site.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``ReturnValueToCallReturn``
+===============================================================================================================================================
+
+
+This edge connects a value used in a return instruction to the corresponding callsite, via a 'CallReturn' node.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``caller_context``
+
+  - type: ``string``
+
+- ``callee_context``
+
+  - type: ``string``
+
+
+``ReturnInstructionToCallReturn``
+===============================================================================================================================================
+
+
+This edge connects a return instruction to the corresponding callsite, via a 'CallReturn' node.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``caller_context``
+
+  - type: ``string``
+
+- ``callee_context``
+
+  - type: ``string``
+
+
+``CallReturnToCaller``
+===============================================================================================================================================
+
+
+This edge connects a value used in a return statement to the corresponding callsite, via a 'CallReturn' node.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``caller_context``
+
+  - type: ``string``
+
+- ``callee_context``
+
+  - type: ``string``
+
+
+``PointsTo``
+===============================================================================================================================================
+
+
+Connects a node representing a pointer to memory locations it might refer to.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``MayAlias``
+===============================================================================================================================================
+
+
+This edge connects two abstract memory locations that could represent the same field or array index if they abstract the same concrete memory object. For example, 'buf[*]' and 'buf[0]'.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``MustAlias``
+===============================================================================================================================================
+
+
+This edge connects two abstract memory locations that must represent the same field or array index if they abstract the same concrete memory object.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``Subregion``
+===============================================================================================================================================
+
+
+This edge connects an abstract memory location to memory locations that are its immediate subobjects. For example, 'buf[1]' is a subobject of 'buf'.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``Contains``
+===============================================================================================================================================
+
+
+This edge connects an abstract memory location to memory locations that it contains, recursively. For example, 'buf[1]' is a subobject of 'buf'.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``StoreMemory``
+===============================================================================================================================================
+
+
+Connects an instruction to memory locations it may store to.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``LoadMemory``
+===============================================================================================================================================
+
+
+Connects an instruction to memory locations it may load from.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``Allocates``
+===============================================================================================================================================
+
+
+This edge connects an 'alloca' instruction or call to 'malloc' with an abstract memory location.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``CreatesVar``
+===============================================================================================================================================
+
+
+This edge links an `alloca` to the Variable it creates
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``ValueToStorePointer``
+===============================================================================================================================================
+
+
+TODO(lb)
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``LoadPointerToValue``
+===============================================================================================================================================
+
+
+TODO(lb)
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``DefinitionToValueLoad``
+===============================================================================================================================================
+
+
+TODO(lb)
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``ClobberInstructionToValueLoad``
+===============================================================================================================================================
+
+
+TODO(lb)
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``HasDWARFType``
+===============================================================================================================================================
+
+
+This edge connects variables (and function arguments) to their DWARF type information
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``DWARFTypeToBaseType``
+===============================================================================================================================================
+
+
+This edge connects a DWARF derived type to its "base" type (or a "base" type to its deriving type(s))
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``DWARFTypeToRecursiveType``
+===============================================================================================================================================
+
+
+This edge connects a recursive DWARF type to its initial type definition
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``DWARFTypeToMemberType``
+===============================================================================================================================================
+
+
+This edge connects a DWARF type to its constituent member types (fields, union variants, etc.)
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``DWARFTypeToTemplateParamType``
+===============================================================================================================================================
+
+
+This edge connects a DWARF type to its constituent template parameter types
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``DWARFTypeToReturnType``
+===============================================================================================================================================
+
+
+This edge connects a DWARF type to its constituent function return type
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``DWARFTypeToParamType``
+===============================================================================================================================================
+
+
+This edge connects a DWARF type to its constituent function parameter types
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``DWARFTypeToParentType``
+===============================================================================================================================================
+
+
+This edge connects a DWARF type to the parent class or structure that it inherits from
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``GlobalToInitializer``
+===============================================================================================================================================
+
+
+This edge connects global variables to their (constant) initializers
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``ModuleToTranslationUnit``
+===============================================================================================================================================
+
+
+This edge connects the main LLVM module to each of its constituent translation units
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``LocalVariableToDWARFLocalVariable``
+===============================================================================================================================================
+
+
+This edge connects an LLVM-level local variable to its DWARF counterpart
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``ArgumentToDWARFArgument``
+===============================================================================================================================================
+
+
+This edge connects an LLVM-level function argument to its DWARF counterpart
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+
+``DataflowSignature``
+===============================================================================================================================================
+
+
+This edge represents dataflows that are external to the program and included via signatures
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``DirectDataflowSignature``
+===============================================================================================================================================
+
+
+This edge represents dataflows that are external to the program and included via signatures; this is a direct flow, meaning the target value is computed from the source value.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``IndirectDataflowSignature``
+===============================================================================================================================================
+
+
+This edge represents dataflows that are external to the program and included via signatures; this is an indirect flow, meaning the target's value changes depending on the source value, but it is not computed from the source value.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``ControlDataflowSignature``
+===============================================================================================================================================
+
+
+This edge represents dataflows that are external to the program and included via signatures; this is a control flow, meaning the source value effects whether the target value is computed.
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``DataflowSignatureForCallSite``
+===============================================================================================================================================
+
+
+This edge connects a dataflow signature with the callsite it models
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``DataflowSignatureForFunction``
+===============================================================================================================================================
+
+
+This edge connects a dataflow signature with the function it models
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``FunctionToPLTStub``
+===============================================================================================================================================
+
+
+This edge connects an LLVM-level function to its PLT stub in the compiled program, if it has one
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+``PLTStubToVTable``
+===============================================================================================================================================
+
+
+This edge connects a PLT stub to the virtual tables that it's present in, if any
+
+
+*Attributes:*
+
+- ``edge_kind``
+
+- ``context``
+
+  - type: ``string``
+
+
+
+***********
+Definitions
+***********
+
+
+.. _#/definitions/dwarf_type_kind:
+
+#/definitions/dwarf_type_kind
+===============================================================================================================================================
+
+
+.. _#/definitions/constant:
+
+#/definitions/constant
+===============================================================================================================================================
+
+
+.. _#/definitions/instruction:
+
+#/definitions/instruction
+===============================================================================================================================================
+
+
+.. _#/definitions/location:
+
+#/definitions/location
+===============================================================================================================================================
+
+A location in a source-language file
+
+ - type: ``object``
+ - attributes:
+
+   - ``file``: A location in a source-language file
+
+     - type: ``string``
+
+
+   - ``dir``: A location in a source-language file
+
+     - type: ``string``
+
+
+   - ``column``: A location in a source-language file
+
+     - type: ``integer``
+
+
+   - ``line``: A location in a source-language file
+
+     - type: ``integer``
+
+
+   - ``function``: A location in a source-language file
+
+     - type: ``string``
+
+
+   - ``compressed_id``: A location in a source-language file
+
+     - type: ``string``
+
+
+
+.. _#/definitions/definition_location:
+
+#/definitions/definition_location
+===============================================================================================================================================
+
+A definition location for a global variable in a source-language file
+
+ - type: ``object``
+ - attributes:
+
+   - ``directory``: A definition location for a global variable in a source-language file
+
+     - type: ``string``
+
+
+   - ``filename``: A definition location for a global variable in a source-language file
+
+     - type: ``string``
+
+
+   - ``line``: A definition location for a global variable in a source-language file
+
+     - type: ``integer``
+
+
+
+.. _#/definitions/dwarf_location:
+
+#/definitions/dwarf_location
+===============================================================================================================================================
+
+Location of this variable in memory, expressed as either an absolute address or an offset from a register
+
+ - type: ``array``
+ - attributes:
+
+
+.. _#/definitions/dwarf_type_common_info:
+
+#/definitions/dwarf_type_common_info
+===============================================================================================================================================
+
+A subobject common to every variant of dwarf_type
+
+ - type: ``object``
+ - attributes:
+
+   - ``name``: The name of the type, or empty if inapplicable
+
+     - type: ``string``
+
+
+   - ``tag``: The DWARF tag (DW_TAG_*) for the type
+
+     - type: ``string``
+
+
+   - ``size``: The size of the type, in bytes
+
+     - type: ``integer``
+
+
+   - ``align``: The alignment of the type, in bytes
+
+     - type: ``integer``
+
+
+   - ``offset``: The offset of this type within its parent, if applicable
+
+     - type: ``integer``
+
+
+   - ``forward_decl``: Whether or not this type is forward-declared
+
+     - type: ``boolean``
+
+
+   - ``virtual``: Whether or not this type is virtual
+
+     - type: ``boolean``
+
+
+   - ``artificial``: Whether or not this type is artificial (i.e., not present in source)
+
+     - type: ``boolean``
+
+
+
+.. _#/definitions/dwarf_template_param:
+
+#/definitions/dwarf_template_param
+===============================================================================================================================================
+
+A C++ template type or value parameter
+
+ - type: ``object``
+ - attributes:
+
+
+.. _#/definitions/dwarf_template_param_value:
+
+#/definitions/dwarf_template_param_value
+===============================================================================================================================================
+
+A value in a C++ template value parameter
+
+ - type: ``object``
+ - attributes:
+
+
+.. _#/definitions/dwarf_type:
+
+#/definitions/dwarf_type
+===============================================================================================================================================
+
+A structured representation of C types, using DWARF identifiers.
+
+ - type: ``object``
+ - attributes:
+
+
+.. _#/definitions/source_scope:
+
+#/definitions/source_scope
+===============================================================================================================================================
+
+Source scoping information using DWARF
+
+ - type: ``object``
+ - attributes:
+
+   - ``filename``: The basename of the source file that this scope appears in
+
+     - type: ``string``
+
+
+   - ``directory``: The directory of the source file that this scope appears in
+
+     - type: ``string``
+
+
+   - ``name``: The scope's name, if named
+
+     - type: ``string``
+
+
+   - ``linkage_name``: The scope's linkage name, if available and named
+
+     - type: ``string``
+
+
+   - ``tag``: The DWARF tag corresponding to the scope kind
+
+     - type: ``string``
+
+
+   - ``parent_scope``: Source scoping information using DWARF: :ref:`#/definitions/source_scope`
+
+     - type: ``object``
+
+
+
+.. _#/definitions/dwarf_scope:
+
+#/definitions/dwarf_scope
+===============================================================================================================================================
+
+A representation of the nearest enclosing lexical scope. The enclosing scope will also contain VA range information, unless it has been optimized away.
+
+ - type: ``object``
+ - attributes:
+
+   - ``tag``: The DWARF tag for this scope
+
+     - type: ``string``
+
+
+   - ``line``: The source line that the scope starts on
+
+     - type: ``integer``
+
+
+   - ``contiguous``: Whether the scope is laid out continuously in the binary
+
+     - type: ``boolean``
+
+
+   - ``inlined``: Whether the scope has been inlined
+
+     - type: ``boolean``
+
+
+   - ``va_start``: The start virtual address for the scope, if contiguous and not inlined
+
+     - type: ``integer``
+
+
+   - ``va_end``: The end virtual address for the scope, if contiguous and not inlined
+
+     - type: ``integer``
+
+
+   - ``range_list``: A list of virtual address ranges, if the scope is non-contiguous and not inlined
+
+     - type: ``array``
+
+
+
+.. _#/definitions/source_location:
+
+#/definitions/source_location
+===============================================================================================================================================
+
+The source location for a program feature
+
+ - type: ``object``
+ - attributes:
+
+   - ``line``: The source line
+
+     - type: ``integer``
+
+
+   - ``column``: The source column
+
+     - type: ``integer``
+
+
+   - ``probably_optimized_away``: Whether this location was probably optimized away
+
+     - type: ``boolean``
+
+
+   - ``llvm_func_name``: The LLVM-level name of the function that this location is in
+
+     - type: ``string``
+
+
+   - ``func_name``: The binary-level name of the function that this location is in
+
+     - type: ``string``
+
+
+   - ``bb_operand``: The LLVM-level basic block operand that this location is in
+
+     - type: ``string``
+
+
+
+.. _#/definitions/llvm_type:
+
+#/definitions/llvm_type
+===============================================================================================================================================
+
+A structured representation of types in the LLVM type system. See https://llvm.org/docs/LangRef.html#type-system.
+
+ - attributes:
+
+
+.. _#/definitions/value:
+
+#/definitions/value
+===============================================================================================================================================
+
+Generally an instance of LLVM's 'Value' class, these have associated unstructured, human-readable string representations
+
+ - type: ``object``
+ - attributes:
+
+   - ``pretty_string``: Generally an instance of LLVM's 'Value' class, these have associated unstructured, human-readable string representations
+
+     - type: ``string``
+
+
+
+.. _#/definitions/symbol:
+
+#/definitions/symbol
+===============================================================================================================================================
+
+A symbol in the compiled program's symbol table (.symtab)
+
+ - type: ``object``
+ - attributes:
+
+   - ``name``: The symbol's name
+
+     - type: ``string``
+
+
+   - ``va``: The symbol's target address
+
+     - type: ``integer``
+
+
+   - ``size``: The size, in bytes, of the entity represented by this symbol
+
+     - type: ``integer``
+
+
+   - ``binding``: The symbol's binding
+
+     - type: ``string``
+
+
+   - ``type``: The symbol's type
+
+     - type: ``string``
+
+
+   - ``visibility``: The symbol's visibility
+
+     - type: ``string``
+
+
+
+.. _#/definitions/mod_ref_behavior:
+
+#/definitions/mod_ref_behavior
+===============================================================================================================================================
+
+

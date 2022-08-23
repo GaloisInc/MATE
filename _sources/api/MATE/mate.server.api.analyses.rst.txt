@@ -1,0 +1,7 @@
+mate.server.api.analyses module
+===============================
+
+.. automodule:: mate.server.api.analyses
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+mate.build.common module
+========================
+
+.. automodule:: mate.build.common
+   :members:
+   :undoc-members:
+   :show-inheritance:

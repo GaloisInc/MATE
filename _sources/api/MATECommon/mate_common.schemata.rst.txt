@@ -1,0 +1,7 @@
+mate\_common.schemata module
+============================
+
+.. automodule:: mate_common.schemata
+   :members:
+   :undoc-members:
+   :show-inheritance:

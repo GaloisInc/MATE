@@ -1,0 +1,7 @@
+mate.server.api.compilations module
+===================================
+
+.. automodule:: mate.server.api.compilations
+   :members:
+   :undoc-members:
+   :show-inheritance:

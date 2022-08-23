@@ -1,0 +1,23 @@
+mate.integration package
+========================
+
+.. automodule:: mate.integration
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.integration.challenge_broker
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.integration.bridge

@@ -1,0 +1,7 @@
+mate.build.tob\_chess\_utils.tools.quotidian module
+===================================================
+
+.. automodule:: mate.build.tob_chess_utils.tools.quotidian
+   :members:
+   :undoc-members:
+   :show-inheritance:

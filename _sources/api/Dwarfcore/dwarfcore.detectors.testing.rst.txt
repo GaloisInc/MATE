@@ -1,0 +1,7 @@
+dwarfcore.detectors.testing module
+==================================
+
+.. automodule:: dwarfcore.detectors.testing
+   :members:
+   :undoc-members:
+   :show-inheritance:

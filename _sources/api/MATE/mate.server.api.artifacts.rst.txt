@@ -1,0 +1,7 @@
+mate.server.api.artifacts module
+================================
+
+.. automodule:: mate.server.api.artifacts
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Environment variables in the MATE container &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MATE API Documentation" href="api/index.html" />
+    <link rel="prev" title="MATE Traces" href="trace.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Environment variables in the MATE container</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mate-bdist-root"><code class="docutils literal notranslate"><span class="pre">MATE_BDIST_ROOT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mate-default-memory-limit-gb"><code class="docutils literal notranslate"><span class="pre">MATE_DEFAULT_MEMORY_LIMIT_GB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#llvm-wedlock-install-dir"><code class="docutils literal notranslate"><span class="pre">LLVM_WEDLOCK_INSTALL_DIR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#llvm-wedlock-bin"><code class="docutils literal notranslate"><span class="pre">LLVM_WEDLOCK_BIN</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#llvm-dir"><code class="docutils literal notranslate"><span class="pre">LLVM_DIR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clang-dir"><code class="docutils literal notranslate"><span class="pre">Clang_DIR</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#path"><code class="docutils literal notranslate"><span class="pre">PATH</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Environment variables in the MATE container</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/environment.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="environment-variables-in-the-mate-container">
+<h1>Environment variables in the MATE container<a class="headerlink" href="#environment-variables-in-the-mate-container" title="Permalink to this headline">¶</a></h1>
+<p>This document lists and describes the environment variables defined and used by the various MATE
+Docker containers.</p>
+<p>Variables that are <strong>not</strong> listed in this document <strong>may</strong> be defined for internal build and
+configuration purposes. These unlisted variables should <strong>not</strong> be relied upon.</p>
+<div class="section" id="mate-bdist-root">
+<h2><code class="docutils literal notranslate"><span class="pre">MATE_BDIST_ROOT</span></code><a class="headerlink" href="#mate-bdist-root" title="Permalink to this headline">¶</a></h2>
+<p>Provenance: <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> or <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code></p>
+<p>Container default: <code class="docutils literal notranslate"><span class="pre">/mate/.out/bdist</span></code> (dev) <em>or</em> <code class="docutils literal notranslate"><span class="pre">/opt/mate</span></code> (dist)</p>
+<p><code class="docutils literal notranslate"><span class="pre">MATE_BDIST_ROOT</span></code> provides an absolute reference to the MATE “distribution”;
+i.e. a hermetic collection of all libraries, executables, and resources needed
+to run MATE.</p>
+</div>
+<div class="section" id="mate-default-memory-limit-gb">
+<h2><code class="docutils literal notranslate"><span class="pre">MATE_DEFAULT_MEMORY_LIMIT_GB</span></code><a class="headerlink" href="#mate-default-memory-limit-gb" title="Permalink to this headline">¶</a></h2>
+<p>Provenance: <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> or <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code></p>
+<p>Container default: <code class="docutils literal notranslate"><span class="pre">32</span></code></p>
+<p>This variable sets the default memory limit for individual builds, in gibibytes.
+The memory limit can still be overridden on a per-build basis.</p>
+</div>
+<div class="section" id="llvm-wedlock-install-dir">
+<h2><code class="docutils literal notranslate"><span class="pre">LLVM_WEDLOCK_INSTALL_DIR</span></code><a class="headerlink" href="#llvm-wedlock-install-dir" title="Permalink to this headline">¶</a></h2>
+<p>Provenance: <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> or <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code></p>
+<p>Container default: <code class="docutils literal notranslate"><span class="pre">${MATE_BDIST_ROOT}/llvm-wedlock</span></code></p>
+<p>This is an organization variable that will be useful for setting <code class="docutils literal notranslate"><span class="pre">LLVM_BIN</span></code> and <code class="docutils literal notranslate"><span class="pre">LLVM_DIR</span></code>
+in the case that they ever change or need to be reset to use wedlock-specific tools/libraries.</p>
+<p>This is the install path for all tools built in the <code class="docutils literal notranslate"><span class="pre">llvm-wedlock</span></code> repository.</p>
+<p><strong>Note</strong>: This directory does not necessarily include wedlock-related <code class="docutils literal notranslate"><span class="pre">opt</span></code> passes – they are
+located in <code class="docutils literal notranslate"><span class="pre">LLVM_PASS_DIR</span></code>.</p>
+</div>
+<div class="section" id="llvm-wedlock-bin">
+<h2><code class="docutils literal notranslate"><span class="pre">LLVM_WEDLOCK_BIN</span></code><a class="headerlink" href="#llvm-wedlock-bin" title="Permalink to this headline">¶</a></h2>
+<p>Provenance: <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> or <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code></p>
+<p>Container default: None.</p>
+<p>By default, MATE will discover a functional Wedlock build of the LLVM toolchain under
+<code class="docutils literal notranslate"><span class="pre">${MATE_BDIST_ROOT}/llvm-wedlock/bin</span></code>. This variable can be used to <em>override</em> that
+default, specifying a separate Wedlock build of LLVM for testing or debugging purposes.</p>
+</div>
+<div class="section" id="llvm-dir">
+<h2><code class="docutils literal notranslate"><span class="pre">LLVM_DIR</span></code><a class="headerlink" href="#llvm-dir" title="Permalink to this headline">¶</a></h2>
+<p>Provenance: <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> or <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code></p>
+<p>Container default: <code class="docutils literal notranslate"><span class="pre">${LLVM_WEDLOCK_INSTALL_DIR}/lib/cmake/llvm</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">LLVM_DIR</span></code> variable’s value will be a directory, under which CMake configuration for building
+LLVM passes will be present.</p>
+</div>
+<div class="section" id="clang-dir">
+<h2><code class="docutils literal notranslate"><span class="pre">Clang_DIR</span></code><a class="headerlink" href="#clang-dir" title="Permalink to this headline">¶</a></h2>
+<p>Provenance: <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> or <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code></p>
+<p>Container default: <code class="docutils literal notranslate"><span class="pre">${LLVM_WEDLOCK_INSTALL_DIR}/lib/cmake/clang</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Clang_DIR</span></code> variable’s value will be a directory, under which CMake configuration for building
+Clang analyses will be present.</p>
+</div>
+<div class="section" id="path">
+<h2><code class="docutils literal notranslate"><span class="pre">PATH</span></code><a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h2>
+<p>Provenance: <code class="docutils literal notranslate"><span class="pre">mate-dev</span></code> or <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable’s value will contain multiple additional paths. Container consumers should not
+rely on the presence of any particular path or upon path orderings other than specified below.</p>
+<p><code class="docutils literal notranslate"><span class="pre">gclang</span></code> and <code class="docutils literal notranslate"><span class="pre">gclang++</span></code> should <em>not</em> be present on the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>; they will be supplied
+under <code class="docutils literal notranslate"><span class="pre">${MATE_BIST_ROOT}/libexec</span></code>. Similarly, the llvm-wedlock toolchain’s programs
+should <em>not</em> be present by default: any components that wish to use them should load
+the Wedlock LLVM <code class="docutils literal notranslate"><span class="pre">bin</span></code> path onto the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> temporarily (or access them directly).</p>
+<p>Furthermore, any specific versions of tools used/required by the tools manually installed in this
+Docker image will almost certainly take precedence over system-installed tools.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="api/index.html" class="btn btn-neutral float-right" title="MATE API Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="trace.html" class="btn btn-neutral float-left" title="MATE Traces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

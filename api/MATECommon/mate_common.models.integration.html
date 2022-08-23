@@ -1,0 +1,1326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate_common.models.integration module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate_common.models.manticore module" href="mate_common.models.manticore.html" />
+    <link rel="prev" title="mate_common.models.graphs module" href="mate_common.models.graphs.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATECommon API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate_common.html">mate_common package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate_common.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate_common.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATECommon API Reference</a> &raquo;</li>
+        
+          <li><a href="mate_common.html">mate_common package</a> &raquo;</li>
+        
+          <li><a href="mate_common.models.html">mate_common.models package</a> &raquo;</li>
+        
+      <li>mate_common.models.integration module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATECommon/mate_common.models.integration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate_common.models.integration">
+<span id="mate-common-models-integration-module"></span><h1>mate_common.models.integration module<a class="headerlink" href="#module-mate_common.models.integration" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Addr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Addr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pydantic.types.PositiveInt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Addr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A binary address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>va</strong> (<em>pydantic.types.PositiveInt</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Addr.va">
+<span class="sig-name descname"><span class="pre">va</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pydantic.types.PositiveInt</span></em><a class="headerlink" href="#mate_common.models.integration.Addr.va" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Assertion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Assertion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location:</span> <span class="pre">mate_common.models.integration.Addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraint:</span> <span class="pre">List[mate_common.models.integration.Constraint]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Assertion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Assertions are used to add constraints during the execution of a program.</p>
+<p>These constraints only apply to symbolic values and must be true _after_ the execution of the
+location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>location</strong> (<a class="reference internal" href="#mate_common.models.integration.Addr" title="mate_common.models.integration.Addr"><em>mate_common.models.integration.Addr</em></a>) – </p></li>
+<li><p><strong>constraint</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.Constraint" title="mate_common.models.integration.Constraint"><em>mate_common.models.integration.Constraint</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Assertion.constraint">
+<span class="sig-name descname"><span class="pre">constraint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.Constraint" title="mate_common.models.integration.Constraint"><span class="pre">mate_common.models.integration.Constraint</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.Assertion.constraint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Assertion.location">
+<span class="sig-name descname"><span class="pre">location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.Addr" title="mate_common.models.integration.Addr"><span class="pre">mate_common.models.integration.Addr</span></a></em><a class="headerlink" href="#mate_common.models.integration.Assertion.location" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.ConcreteHeapOOBOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">ConcreteHeapOOBOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fast:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector:</span> <span class="pre">Literal[&lt;Detector.ConcreteHeapOOB:</span> <span class="pre">'ConcreteHeapOOB'&gt;]</span> <span class="pre">=</span> <span class="pre">Detector.ConcreteHeapOOB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.ConcreteHeapOOBOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.DetectorOptionsBase" title="mate_common.models.integration.DetectorOptionsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.DetectorOptionsBase</span></code></a></p>
+<p>A testing detector that creates a case for every OOB access in the heap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fast</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>detector</strong> (<em>Literal</em><em>[</em><em>&lt;Detector.ConcreteHeapOOB: 'ConcreteHeapOOB'&gt;</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ConcreteHeapOOBOptions.detector">
+<span class="sig-name descname"><span class="pre">detector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal[&lt;Detector.ConcreteHeapOOB:</span> <span class="pre">'ConcreteHeapOOB'&gt;]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConcreteHeapOOB'</span></em><a class="headerlink" href="#mate_common.models.integration.ConcreteHeapOOBOptions.detector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Constraint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id:</span> <span class="pre">List[mate_common.models.integration.SMTIdentifier]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Constraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Constraint to apply to identifier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>str</em>) – </p></li>
+<li><p><strong>id</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.SMTIdentifier" title="mate_common.models.integration.SMTIdentifier"><em>mate_common.models.integration.SMTIdentifier</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Constraint.expr">
+<span class="sig-name descname"><span class="pre">expr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.Constraint.expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Constraint.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.SMTIdentifier" title="mate_common.models.integration.SMTIdentifier"><span class="pre">mate_common.models.integration.SMTIdentifier</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.Constraint.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Decl">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Decl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Decl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An initial declaration for symbolic variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>value</strong> (<em>str</em>) – </p></li>
+<li><p><strong>expr</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Decl.expr">
+<span class="sig-name descname"><span class="pre">expr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.Decl.expr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Decl.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.Decl.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Decl.value">
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.Decl.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.DetectAllPathsOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">DetectAllPathsOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fast:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector:</span> <span class="pre">Literal[&lt;Detector.DetectAllPaths:</span> <span class="pre">'DetectAllPaths'&gt;]</span> <span class="pre">=</span> <span class="pre">Detector.DetectAllPaths</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.DetectAllPathsOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.DetectorOptionsBase" title="mate_common.models.integration.DetectorOptionsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.DetectorOptionsBase</span></code></a></p>
+<p>A testing detector that fires when each state terminates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fast</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>detector</strong> (<em>Literal</em><em>[</em><em>&lt;Detector.DetectAllPaths: 'DetectAllPaths'&gt;</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.DetectAllPathsOptions.detector">
+<span class="sig-name descname"><span class="pre">detector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal[&lt;Detector.DetectAllPaths:</span> <span class="pre">'DetectAllPaths'&gt;]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DetectAllPaths'</span></em><a class="headerlink" href="#mate_common.models.integration.DetectAllPathsOptions.detector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Detector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Detector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Detector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Supported detectors for Manticore.</p>
+<p>See the <a class="reference internal" href="../Dwarfcore/dwarfcore.html#module-dwarfcore" title="dwarfcore"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">dwarfcore</span></code></a> module for more info.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Detector.ConcreteHeapOOB">
+<span class="sig-name descname"><span class="pre">ConcreteHeapOOB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConcreteHeapOOB'</span></em><a class="headerlink" href="#mate_common.models.integration.Detector.ConcreteHeapOOB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Detector.DetectAllPaths">
+<span class="sig-name descname"><span class="pre">DetectAllPaths</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DetectAllPaths'</span></em><a class="headerlink" href="#mate_common.models.integration.Detector.DetectAllPaths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Detector.UnderconstrainedOOB">
+<span class="sig-name descname"><span class="pre">UnderconstrainedOOB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UnderconstrainedOOB'</span></em><a class="headerlink" href="#mate_common.models.integration.Detector.UnderconstrainedOOB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Detector.UninitializedVar">
+<span class="sig-name descname"><span class="pre">UninitializedVar</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UninitializedVariable'</span></em><a class="headerlink" href="#mate_common.models.integration.Detector.UninitializedVar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Detector.UseAfterFree">
+<span class="sig-name descname"><span class="pre">UseAfterFree</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UseAfterFree'</span></em><a class="headerlink" href="#mate_common.models.integration.Detector.UseAfterFree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Detector.VariableBoundsAccess">
+<span class="sig-name descname"><span class="pre">VariableBoundsAccess</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'VariableBoundsAccess'</span></em><a class="headerlink" href="#mate_common.models.integration.Detector.VariableBoundsAccess" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.DetectorOptionsBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">DetectorOptionsBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fast</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.DetectorOptionsBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Common fields for detector options.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fast</strong> (<em>bool</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.DetectorOptionsBase.fast">
+<span class="sig-name descname"><span class="pre">fast</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#mate_common.models.integration.DetectorOptionsBase.fast" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExplorationTree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">ExplorationTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_id:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases:</span> <span class="pre">List[mate_common.models.integration.ReachingTestCase]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices:</span> <span class="pre">List[Tuple[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">int]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">children:</span> <span class="pre">List[mate_common.models.integration.ExplorationTree]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_msg:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.ExplorationTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A tree representing exploration choices and containing potential errors detected during
+program exploration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_id</strong> (<em>int</em>) – </p></li>
+<li><p><strong>cases</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.ReachingTestCase" title="mate_common.models.integration.ReachingTestCase"><em>mate_common.models.integration.ReachingTestCase</em></a><em>]</em>) – </p></li>
+<li><p><strong>choices</strong> (<em>List</em><em>[</em><em>Tuple</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>children</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.ExplorationTree" title="mate_common.models.integration.ExplorationTree"><em>mate_common.models.integration.ExplorationTree</em></a><em>]</em>) – </p></li>
+<li><p><strong>error_msg</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExplorationTree.add_state">
+<span class="sig-name descname"><span class="pre">add_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#mate_common.models.integration.ExplorationTree.add_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a state to the exploration tree.</p>
+<p>Return true on success</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent_id</strong> (<em>int</em>) – </p></li>
+<li><p><strong>state_id</strong> (<em>int</em>) – </p></li>
+<li><p><strong>choice</strong> (<em>Tuple</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExplorationTree.cases">
+<span class="sig-name descname"><span class="pre">cases</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.ReachingTestCase" title="mate_common.models.integration.ReachingTestCase"><span class="pre">mate_common.models.integration.ReachingTestCase</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.ExplorationTree.cases" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExplorationTree.children">
+<span class="sig-name descname"><span class="pre">children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.ExplorationTree" title="mate_common.models.integration.ExplorationTree"><span class="pre">mate_common.models.integration.ExplorationTree</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.ExplorationTree.children" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExplorationTree.choices">
+<span class="sig-name descname"><span class="pre">choices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.ExplorationTree.choices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExplorationTree.error_msg">
+<span class="sig-name descname"><span class="pre">error_msg</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate_common.models.integration.ExplorationTree.error_msg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExplorationTree.get_state">
+<span class="sig-name descname"><span class="pre">get_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.ExplorationTree" title="mate_common.models.integration.ExplorationTree"><span class="pre">mate_common.models.integration.ExplorationTree</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate_common.models.integration.ExplorationTree.get_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a state in the exploration tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state_id</strong> (<em>int</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="#mate_common.models.integration.ExplorationTree" title="mate_common.models.integration.ExplorationTree">mate_common.models.integration.ExplorationTree</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExplorationTree.iter_cases">
+<span class="sig-name descname"><span class="pre">iter_cases</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.ReachingTestCase" title="mate_common.models.integration.ReachingTestCase"><span class="pre">mate_common.models.integration.ReachingTestCase</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate_common.models.integration.ExplorationTree.iter_cases" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Iterable[<a class="reference internal" href="#mate_common.models.integration.ReachingTestCase" title="mate_common.models.integration.ReachingTestCase">mate_common.models.integration.ReachingTestCase</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExplorationTree.state_id">
+<span class="sig-name descname"><span class="pre">state_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mate_common.models.integration.ExplorationTree.state_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Explore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Explore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command_line_flags:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete_start:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdin_size:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env:</span> <span class="pre">Dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_options:</span> <span class="pre">List[Union[mate_common.models.integration.DetectAllPathsOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.VariableBoundsAccessOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.UninitializedVarOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.UseAfterFreeOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.UnderconstrainedOOBOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.ConcreteHeapOOBOptions]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Explore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A message that will configure Manticore to explore with an optionally enabled detector
+without much direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>command_line_flags</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>concrete_start</strong> (<em>str</em>) – </p></li>
+<li><p><strong>stdin_size</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>env</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>detector_options</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.DetectAllPathsOptions" title="mate_common.models.integration.DetectAllPathsOptions"><em>mate_common.models.integration.DetectAllPathsOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.VariableBoundsAccessOptions" title="mate_common.models.integration.VariableBoundsAccessOptions"><em>mate_common.models.integration.VariableBoundsAccessOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.UninitializedVarOptions" title="mate_common.models.integration.UninitializedVarOptions"><em>mate_common.models.integration.UninitializedVarOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.UseAfterFreeOptions" title="mate_common.models.integration.UseAfterFreeOptions"><em>mate_common.models.integration.UseAfterFreeOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.UnderconstrainedOOBOptions" title="mate_common.models.integration.UnderconstrainedOOBOptions"><em>mate_common.models.integration.UnderconstrainedOOBOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.ConcreteHeapOOBOptions" title="mate_common.models.integration.ConcreteHeapOOBOptions"><em>mate_common.models.integration.ConcreteHeapOOBOptions</em></a><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Explore.command_line_flags">
+<span class="sig-name descname"><span class="pre">command_line_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.Explore.command_line_flags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Explore.concrete_start">
+<span class="sig-name descname"><span class="pre">concrete_start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#mate_common.models.integration.Explore.concrete_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Explore.detector_options">
+<span class="sig-name descname"><span class="pre">detector_options</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.DetectAllPathsOptions" title="mate_common.models.integration.DetectAllPathsOptions"><span class="pre">mate_common.models.integration.DetectAllPathsOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.VariableBoundsAccessOptions" title="mate_common.models.integration.VariableBoundsAccessOptions"><span class="pre">mate_common.models.integration.VariableBoundsAccessOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.UninitializedVarOptions" title="mate_common.models.integration.UninitializedVarOptions"><span class="pre">mate_common.models.integration.UninitializedVarOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.UseAfterFreeOptions" title="mate_common.models.integration.UseAfterFreeOptions"><span class="pre">mate_common.models.integration.UseAfterFreeOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.UnderconstrainedOOBOptions" title="mate_common.models.integration.UnderconstrainedOOBOptions"><span class="pre">mate_common.models.integration.UnderconstrainedOOBOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.ConcreteHeapOOBOptions" title="mate_common.models.integration.ConcreteHeapOOBOptions"><span class="pre">mate_common.models.integration.ConcreteHeapOOBOptions</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.Explore.detector_options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Explore.env">
+<span class="sig-name descname"><span class="pre">env</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.Explore.env" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Explore.stdin_size">
+<span class="sig-name descname"><span class="pre">stdin_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">256</span></em><a class="headerlink" href="#mate_common.models.integration.Explore.stdin_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Explore.timeout">
+<span class="sig-name descname"><span class="pre">timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate_common.models.integration.Explore.timeout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">ExploreFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command_line_flags:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete_start:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdin_size:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env:</span> <span class="pre">Dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_options:</span> <span class="pre">List[Union[mate_common.models.integration.DetectAllPathsOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.VariableBoundsAccessOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.UninitializedVarOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.UseAfterFreeOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.UnderconstrainedOOBOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.ConcreteHeapOOBOptions]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_function:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_constraints:</span> <span class="pre">Optional[List[str]]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primitive_ptr_policy:</span> <span class="pre">Optional[mate_common.models.integration.UnboundedPtrPolicy]</span> <span class="pre">=</span> <span class="pre">UnboundedPtrPolicy(policy_type=&lt;UnboundedPtrPolicyType.DEFAULT:</span> <span class="pre">'default'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_alternatives=3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_values=None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex_ptr_policy:</span> <span class="pre">Optional[mate_common.models.integration.UnboundedPtrPolicy]</span> <span class="pre">=</span> <span class="pre">UnboundedPtrPolicy(policy_type=&lt;UnboundedPtrPolicyType.DEFAULT:</span> <span class="pre">'default'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_alternatives=3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_values=None)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.ExploreFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.Explore" title="mate_common.models.integration.Explore"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.Explore</span></code></a></p>
+<p>A message that configures Manticore to explore a single function using underconstrained
+symbolic execution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>command_line_flags</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>concrete_start</strong> (<em>str</em>) – </p></li>
+<li><p><strong>stdin_size</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>env</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>detector_options</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.DetectAllPathsOptions" title="mate_common.models.integration.DetectAllPathsOptions"><em>mate_common.models.integration.DetectAllPathsOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.VariableBoundsAccessOptions" title="mate_common.models.integration.VariableBoundsAccessOptions"><em>mate_common.models.integration.VariableBoundsAccessOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.UninitializedVarOptions" title="mate_common.models.integration.UninitializedVarOptions"><em>mate_common.models.integration.UninitializedVarOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.UseAfterFreeOptions" title="mate_common.models.integration.UseAfterFreeOptions"><em>mate_common.models.integration.UseAfterFreeOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.UnderconstrainedOOBOptions" title="mate_common.models.integration.UnderconstrainedOOBOptions"><em>mate_common.models.integration.UnderconstrainedOOBOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.ConcreteHeapOOBOptions" title="mate_common.models.integration.ConcreteHeapOOBOptions"><em>mate_common.models.integration.ConcreteHeapOOBOptions</em></a><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>target_function</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>input_constraints</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>primitive_ptr_policy</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><em>mate_common.models.integration.UnboundedPtrPolicy</em></a><em>]</em>) – </p></li>
+<li><p><strong>complex_ptr_policy</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><em>mate_common.models.integration.UnboundedPtrPolicy</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreFunction.complex_ptr_policy">
+<span class="sig-name descname"><span class="pre">complex_ptr_policy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><span class="pre">mate_common.models.integration.UnboundedPtrPolicy</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">UnboundedPtrPolicy(policy_type=&lt;UnboundedPtrPolicyType.DEFAULT:</span> <span class="pre">'default'&gt;,</span> <span class="pre">max_alternatives=3,</span> <span class="pre">custom_values=None)</span></em><a class="headerlink" href="#mate_common.models.integration.ExploreFunction.complex_ptr_policy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreFunction.input_constraints">
+<span class="sig-name descname"><span class="pre">input_constraints</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate_common.models.integration.ExploreFunction.input_constraints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreFunction.primitive_ptr_policy">
+<span class="sig-name descname"><span class="pre">primitive_ptr_policy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><span class="pre">mate_common.models.integration.UnboundedPtrPolicy</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">UnboundedPtrPolicy(policy_type=&lt;UnboundedPtrPolicyType.DEFAULT:</span> <span class="pre">'default'&gt;,</span> <span class="pre">max_alternatives=3,</span> <span class="pre">custom_values=None)</span></em><a class="headerlink" href="#mate_common.models.integration.ExploreFunction.primitive_ptr_policy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreFunction.target_function">
+<span class="sig-name descname"><span class="pre">target_function</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate_common.models.integration.ExploreFunction.target_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreRet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">ExploreRet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exploration_tree:</span> <span class="pre">Optional[mate_common.models.integration.ExplorationTree]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases:</span> <span class="pre">List[mate_common.models.integration.ReachingTestCase]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warnings:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.ExploreRet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Results message after processing of an <a class="reference internal" href="#mate_common.models.integration.Explore" title="mate_common.models.integration.Explore"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Explore</span></code></a> message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – </p></li>
+<li><p><strong>exploration_tree</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.ExplorationTree" title="mate_common.models.integration.ExplorationTree"><em>mate_common.models.integration.ExplorationTree</em></a><em>]</em>) – </p></li>
+<li><p><strong>cases</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.ReachingTestCase" title="mate_common.models.integration.ReachingTestCase"><em>mate_common.models.integration.ReachingTestCase</em></a><em>]</em>) – </p></li>
+<li><p><strong>warnings</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreRet.cases">
+<span class="sig-name descname"><span class="pre">cases</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.ReachingTestCase" title="mate_common.models.integration.ReachingTestCase"><span class="pre">mate_common.models.integration.ReachingTestCase</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.ExploreRet.cases" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreRet.exploration_tree">
+<span class="sig-name descname"><span class="pre">exploration_tree</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.ExplorationTree" title="mate_common.models.integration.ExplorationTree"><span class="pre">mate_common.models.integration.ExplorationTree</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate_common.models.integration.ExploreRet.exploration_tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreRet.path">
+<span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.ExploreRet.path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ExploreRet.warnings">
+<span class="sig-name descname"><span class="pre">warnings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.ExploreRet.warnings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.FreeUseInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">FreeUseInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">free_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">free_line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.FreeUseInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Use and free filename(s) and line numbers for input into use after free detection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>use_file</strong> (<em>str</em>) – </p></li>
+<li><p><strong>use_line</strong> (<em>int</em>) – </p></li>
+<li><p><strong>free_file</strong> (<em>str</em>) – </p></li>
+<li><p><strong>free_line</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.FreeUseInfo.free_file">
+<span class="sig-name descname"><span class="pre">free_file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.FreeUseInfo.free_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.FreeUseInfo.free_line">
+<span class="sig-name descname"><span class="pre">free_line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mate_common.models.integration.FreeUseInfo.free_line" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.FreeUseInfo.use_file">
+<span class="sig-name descname"><span class="pre">use_file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.FreeUseInfo.use_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.FreeUseInfo.use_line">
+<span class="sig-name descname"><span class="pre">use_line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mate_common.models.integration.FreeUseInfo.use_line" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.FunctionVariableInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">FunctionVariableInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.FunctionVariableInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Targeted function and variable name for input to uninitialized stack-variable use
+detection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function_name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>variable_name</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.FunctionVariableInfo.function_name">
+<span class="sig-name descname"><span class="pre">function_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.FunctionVariableInfo.function_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.FunctionVariableInfo.variable_name">
+<span class="sig-name descname"><span class="pre">variable_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.FunctionVariableInfo.variable_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Model">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">python_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Replacement Model for a piece of native code, like a function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>python_code</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Model.python_code">
+<span class="sig-name descname"><span class="pre">python_code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.Model.python_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.ORMConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">ORMConfig</span></span><a class="headerlink" href="#mate_common.models.integration.ORMConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ORMConfig.orm_mode">
+<span class="sig-name descname"><span class="pre">orm_mode</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#mate_common.models.integration.ORMConfig.orm_mode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Reachability">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Reachability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command_line_flags:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete_start:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdin_size:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env:</span> <span class="pre">Dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_options:</span> <span class="pre">List[Union[mate_common.models.integration.DetectAllPathsOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.VariableBoundsAccessOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.UninitializedVarOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.UseAfterFreeOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.UnderconstrainedOOBOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mate_common.models.integration.ConcreteHeapOOBOptions]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">waypoints:</span> <span class="pre">List[mate_common.models.integration.Waypoint]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraint_vars:</span> <span class="pre">List[mate_common.models.integration.Decl]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Reachability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.Explore" title="mate_common.models.integration.Explore"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.Explore</span></code></a></p>
+<p>Reachability message is the top-level message that represents constraints for POIs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>command_line_flags</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>concrete_start</strong> (<em>str</em>) – </p></li>
+<li><p><strong>stdin_size</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>env</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>detector_options</strong> (<em>List</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.DetectAllPathsOptions" title="mate_common.models.integration.DetectAllPathsOptions"><em>mate_common.models.integration.DetectAllPathsOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.VariableBoundsAccessOptions" title="mate_common.models.integration.VariableBoundsAccessOptions"><em>mate_common.models.integration.VariableBoundsAccessOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.UninitializedVarOptions" title="mate_common.models.integration.UninitializedVarOptions"><em>mate_common.models.integration.UninitializedVarOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.UseAfterFreeOptions" title="mate_common.models.integration.UseAfterFreeOptions"><em>mate_common.models.integration.UseAfterFreeOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.UnderconstrainedOOBOptions" title="mate_common.models.integration.UnderconstrainedOOBOptions"><em>mate_common.models.integration.UnderconstrainedOOBOptions</em></a><em>, </em><a class="reference internal" href="#mate_common.models.integration.ConcreteHeapOOBOptions" title="mate_common.models.integration.ConcreteHeapOOBOptions"><em>mate_common.models.integration.ConcreteHeapOOBOptions</em></a><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>timeout</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>waypoints</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.Waypoint" title="mate_common.models.integration.Waypoint"><em>mate_common.models.integration.Waypoint</em></a><em>]</em>) – </p></li>
+<li><p><strong>constraint_vars</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.Decl" title="mate_common.models.integration.Decl"><em>mate_common.models.integration.Decl</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Reachability.constraint_vars">
+<span class="sig-name descname"><span class="pre">constraint_vars</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.Decl" title="mate_common.models.integration.Decl"><span class="pre">mate_common.models.integration.Decl</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.Reachability.constraint_vars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Reachability.waypoints">
+<span class="sig-name descname"><span class="pre">waypoints</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.Waypoint" title="mate_common.models.integration.Waypoint"><span class="pre">mate_common.models.integration.Waypoint</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.Reachability.waypoints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachabilityRet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">ReachabilityRet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exploration_tree:</span> <span class="pre">Optional[mate_common.models.integration.ExplorationTree]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cases:</span> <span class="pre">List[mate_common.models.integration.ReachingTestCase]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warnings:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.ReachabilityRet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.ExploreRet" title="mate_common.models.integration.ExploreRet"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.ExploreRet</span></code></a></p>
+<p>Results message after processing of the <a class="reference internal" href="#mate_common.models.integration.Reachability" title="mate_common.models.integration.Reachability"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Reachability</span></code></a> message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – </p></li>
+<li><p><strong>exploration_tree</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.ExplorationTree" title="mate_common.models.integration.ExplorationTree"><em>mate_common.models.integration.ExplorationTree</em></a><em>]</em>) – </p></li>
+<li><p><strong>cases</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.ReachingTestCase" title="mate_common.models.integration.ReachingTestCase"><em>mate_common.models.integration.ReachingTestCase</em></a><em>]</em>) – </p></li>
+<li><p><strong>warnings</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>success</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachabilityRet.success">
+<span class="sig-name descname"><span class="pre">success</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate_common.models.integration.ReachabilityRet.success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingInput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">ReachingInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbolic_values:</span> <span class="pre">List[mate_common.models.integration.ReachingValue]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.ReachingInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Information about symbolic input that has reached a destination of importance within the
+program during execution.</p>
+<p>Each input has an associated name in Manticore that gives some insight on its origin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>symbolic_values</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.ReachingValue" title="mate_common.models.integration.ReachingValue"><em>mate_common.models.integration.ReachingValue</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingInput.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.ReachingInput.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingInput.symbolic_values">
+<span class="sig-name descname"><span class="pre">symbolic_values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.ReachingValue" title="mate_common.models.integration.ReachingValue"><span class="pre">mate_common.models.integration.ReachingValue</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.ReachingInput.symbolic_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">ReachingTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_triggered:</span> <span class="pre">Optional[mate_common.models.integration.Detector]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbolic_inputs:</span> <span class="pre">List[mate_common.models.integration.ReachingInput]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.ReachingTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A summary of a set of inputs and description that have been saved for replay on a binary.</p>
+<p><code class="docutils literal notranslate"><span class="pre">description</span></code> is human-readable free-form text that gives insight on what Manticore detected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>description</strong> (<em>str</em>) – </p></li>
+<li><p><strong>detector_triggered</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.Detector" title="mate_common.models.integration.Detector"><em>mate_common.models.integration.Detector</em></a><em>]</em>) – </p></li>
+<li><p><strong>symbolic_inputs</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.ReachingInput" title="mate_common.models.integration.ReachingInput"><em>mate_common.models.integration.ReachingInput</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingTestCase.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.ReachingTestCase.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingTestCase.detector_triggered">
+<span class="sig-name descname"><span class="pre">detector_triggered</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.Detector" title="mate_common.models.integration.Detector"><span class="pre">mate_common.models.integration.Detector</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate_common.models.integration.ReachingTestCase.detector_triggered" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingTestCase.symbolic_inputs">
+<span class="sig-name descname"><span class="pre">symbolic_inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.ReachingInput" title="mate_common.models.integration.ReachingInput"><span class="pre">mate_common.models.integration.ReachingInput</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.ReachingTestCase.symbolic_inputs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingValue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">ReachingValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbolic_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete_value_base64</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.ReachingValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A symbolic representation of the reaching input and a single, concrete, base64-encoded
+value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbolic_value</strong> (<em>str</em>) – </p></li>
+<li><p><strong>concrete_value_base64</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingValue.concrete_value_base64">
+<span class="sig-name descname"><span class="pre">concrete_value_base64</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.ReachingValue.concrete_value_base64" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.ReachingValue.symbolic_value">
+<span class="sig-name descname"><span class="pre">symbolic_value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.ReachingValue.symbolic_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Register">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Registers for machine-code. Must match up with what appears in the binary.</p>
+<p>NOTE: If there is a better way of normalizing the register names,
+we might not need this.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Register.RIP">
+<span class="sig-name descname"><span class="pre">RIP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'RIP'</span></em><a class="headerlink" href="#mate_common.models.integration.Register.RIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Replacement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Replacement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate_common.models.integration.Addr" title="mate_common.models.integration.Addr"><span class="pre">mate_common.models.integration.Addr</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate_common.models.integration.Model" title="mate_common.models.integration.Model"><span class="pre">mate_common.models.integration.Model</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Replacement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A replacement for a function call. A “replacement” will intercept control-flow to replace the
+logic at the specified location. If it will replace a function call, then the location should
+appear at the very first instruction within the function that is being replaced (to catch all
+calls). The model will then need to return control-flow back to the caller using standard
+calling convention rules.</p>
+<p>NOTE: This has yet to be implemented or tested.</p>
+<p>These are added _before_ the execution of location</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>location</strong> (<a class="reference internal" href="#mate_common.models.integration.Addr" title="mate_common.models.integration.Addr"><em>mate_common.models.integration.Addr</em></a>) – </p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="#mate_common.models.integration.Model" title="mate_common.models.integration.Model"><em>mate_common.models.integration.Model</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Replacement.location">
+<span class="sig-name descname"><span class="pre">location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.Addr" title="mate_common.models.integration.Addr"><span class="pre">mate_common.models.integration.Addr</span></a></em><a class="headerlink" href="#mate_common.models.integration.Replacement.location" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Replacement.model">
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.Model" title="mate_common.models.integration.Model"><span class="pre">mate_common.models.integration.Model</span></a></em><a class="headerlink" href="#mate_common.models.integration.Replacement.model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.SMTIdentifier">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">SMTIdentifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.Register" title="mate_common.models.integration.Register"><span class="pre">mate_common.models.integration.Register</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.SMTIdentifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Identifier for SMT expressions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>identifier</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.Register" title="mate_common.models.integration.Register"><em>mate_common.models.integration.Register</em></a><em>, </em><em>str</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.SMTIdentifier.identifier">
+<span class="sig-name descname"><span class="pre">identifier</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.Register" title="mate_common.models.integration.Register"><span class="pre">mate_common.models.integration.Register</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.SMTIdentifier.identifier" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Target">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'target'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> (<em>str</em>) – </p></li>
+<li><p><strong>id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>type</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Target.event">
+<span class="sig-name descname"><span class="pre">event</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.Target.event" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Target.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.integration.Target.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Target.type">
+<span class="sig-name descname"><span class="pre">type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'target'</span></em><a class="headerlink" href="#mate_common.models.integration.Target.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnboundedPtrPolicy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">UnboundedPtrPolicy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate_common.models.integration.UnboundedPtrPolicyType" title="mate_common.models.integration.UnboundedPtrPolicyType"><span class="pre">mate_common.models.integration.UnboundedPtrPolicyType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">UnboundedPtrPolicyType.DEFAULT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_alternatives</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.UnboundedPtrPolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Policy for handling unbounded pointers in under-constrained Manticore.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>policy_type</strong> (<a class="reference internal" href="#mate_common.models.integration.UnboundedPtrPolicyType" title="mate_common.models.integration.UnboundedPtrPolicyType"><em>mate_common.models.integration.UnboundedPtrPolicyType</em></a>) – </p></li>
+<li><p><strong>max_alternatives</strong> (<em>int</em>) – </p></li>
+<li><p><strong>custom_values</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>int</em><em>]</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnboundedPtrPolicy.custom_values">
+<span class="sig-name descname"><span class="pre">custom_values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate_common.models.integration.UnboundedPtrPolicy.custom_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnboundedPtrPolicy.max_alternatives">
+<span class="sig-name descname"><span class="pre">max_alternatives</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#mate_common.models.integration.UnboundedPtrPolicy.max_alternatives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnboundedPtrPolicy.policy_type">
+<span class="sig-name descname"><span class="pre">policy_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.UnboundedPtrPolicyType" title="mate_common.models.integration.UnboundedPtrPolicyType"><span class="pre">mate_common.models.integration.UnboundedPtrPolicyType</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'default'</span></em><a class="headerlink" href="#mate_common.models.integration.UnboundedPtrPolicy.policy_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnboundedPtrPolicyType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">UnboundedPtrPolicyType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.UnboundedPtrPolicyType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Strategy for handling unbounded pointers.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnboundedPtrPolicyType.CUSTOM">
+<span class="sig-name descname"><span class="pre">CUSTOM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'custom'</span></em><a class="headerlink" href="#mate_common.models.integration.UnboundedPtrPolicyType.CUSTOM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnboundedPtrPolicyType.DEFAULT">
+<span class="sig-name descname"><span class="pre">DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'default'</span></em><a class="headerlink" href="#mate_common.models.integration.UnboundedPtrPolicyType.DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnderconstrainedOOBOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">UnderconstrainedOOBOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fast:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector:</span> <span class="pre">Literal[&lt;Detector.UnderconstrainedOOB:</span> <span class="pre">'UnderconstrainedOOB'&gt;]</span> <span class="pre">=</span> <span class="pre">Detector.UnderconstrainedOOB</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.UnderconstrainedOOBOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.DetectorOptionsBase" title="mate_common.models.integration.DetectorOptionsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.DetectorOptionsBase</span></code></a></p>
+<p>A testing detector that creates a case for every OOB access in underconstrained symex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fast</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>detector</strong> (<em>Literal</em><em>[</em><em>&lt;Detector.UnderconstrainedOOB: 'UnderconstrainedOOB'&gt;</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnderconstrainedOOBOptions.detector">
+<span class="sig-name descname"><span class="pre">detector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal[&lt;Detector.UnderconstrainedOOB:</span> <span class="pre">'UnderconstrainedOOB'&gt;]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UnderconstrainedOOB'</span></em><a class="headerlink" href="#mate_common.models.integration.UnderconstrainedOOBOptions.detector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnderconstrainedTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">UnderconstrainedTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_triggered:</span> <span class="pre">Optional[mate_common.models.integration.Detector]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbolic_inputs:</span> <span class="pre">List[mate_common.models.integration.ReachingInput]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va_mapping:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.UnderconstrainedTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.ReachingTestCase" title="mate_common.models.integration.ReachingTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.ReachingTestCase</span></code></a></p>
+<p>A test case generated by under-constrained Manticore.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>description</strong> (<em>str</em>) – </p></li>
+<li><p><strong>detector_triggered</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.Detector" title="mate_common.models.integration.Detector"><em>mate_common.models.integration.Detector</em></a><em>]</em>) – </p></li>
+<li><p><strong>symbolic_inputs</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.ReachingInput" title="mate_common.models.integration.ReachingInput"><em>mate_common.models.integration.ReachingInput</em></a><em>]</em>) – </p></li>
+<li><p><strong>uid</strong> (<em>int</em>) – </p></li>
+<li><p><strong>va</strong> (<em>int</em>) – </p></li>
+<li><p><strong>va_mapping</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>condition</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>constraints</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnderconstrainedTestCase.condition">
+<span class="sig-name descname"><span class="pre">condition</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate_common.models.integration.UnderconstrainedTestCase.condition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnderconstrainedTestCase.constraints">
+<span class="sig-name descname"><span class="pre">constraints</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.UnderconstrainedTestCase.constraints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnderconstrainedTestCase.uid">
+<span class="sig-name descname"><span class="pre">uid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#mate_common.models.integration.UnderconstrainedTestCase.uid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnderconstrainedTestCase.va">
+<span class="sig-name descname"><span class="pre">va</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#mate_common.models.integration.UnderconstrainedTestCase.va" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UnderconstrainedTestCase.va_mapping">
+<span class="sig-name descname"><span class="pre">va_mapping</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate_common.models.integration.UnderconstrainedTestCase.va_mapping" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.UninitializedVarOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">UninitializedVarOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fast:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector:</span> <span class="pre">Literal[&lt;Detector.UninitializedVar:</span> <span class="pre">'UninitializedVariable'&gt;]</span> <span class="pre">=</span> <span class="pre">&lt;Detector.UninitializedVar:</span> <span class="pre">'UninitializedVariable'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poi_info:</span> <span class="pre">List[mate_common.models.integration.FunctionVariableInfo]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.UninitializedVarOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.DetectorOptionsBase" title="mate_common.models.integration.DetectorOptionsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.DetectorOptionsBase</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fast</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>detector</strong> (<em>Literal</em><em>[</em><em>&lt;Detector.UninitializedVar: 'UninitializedVariable'&gt;</em><em>]</em>) – </p></li>
+<li><p><strong>poi_info</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.FunctionVariableInfo" title="mate_common.models.integration.FunctionVariableInfo"><em>mate_common.models.integration.FunctionVariableInfo</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UninitializedVarOptions.detector">
+<span class="sig-name descname"><span class="pre">detector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal[&lt;Detector.UninitializedVar:</span> <span class="pre">'UninitializedVariable'&gt;]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UninitializedVariable'</span></em><a class="headerlink" href="#mate_common.models.integration.UninitializedVarOptions.detector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UninitializedVarOptions.poi_info">
+<span class="sig-name descname"><span class="pre">poi_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.FunctionVariableInfo" title="mate_common.models.integration.FunctionVariableInfo"><span class="pre">mate_common.models.integration.FunctionVariableInfo</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.UninitializedVarOptions.poi_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.UseAfterFreeOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">UseAfterFreeOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fast:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector:</span> <span class="pre">Literal[&lt;Detector.UseAfterFree:</span> <span class="pre">'UseAfterFree'&gt;]</span> <span class="pre">=</span> <span class="pre">&lt;Detector.UseAfterFree:</span> <span class="pre">'UseAfterFree'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poi_info:</span> <span class="pre">List[mate_common.models.integration.FreeUseInfo]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.UseAfterFreeOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.DetectorOptionsBase" title="mate_common.models.integration.DetectorOptionsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.DetectorOptionsBase</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fast</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>detector</strong> (<em>Literal</em><em>[</em><em>&lt;Detector.UseAfterFree: 'UseAfterFree'&gt;</em><em>]</em>) – </p></li>
+<li><p><strong>poi_info</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.FreeUseInfo" title="mate_common.models.integration.FreeUseInfo"><em>mate_common.models.integration.FreeUseInfo</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UseAfterFreeOptions.detector">
+<span class="sig-name descname"><span class="pre">detector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal[&lt;Detector.UseAfterFree:</span> <span class="pre">'UseAfterFree'&gt;]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UseAfterFree'</span></em><a class="headerlink" href="#mate_common.models.integration.UseAfterFreeOptions.detector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.UseAfterFreeOptions.poi_info">
+<span class="sig-name descname"><span class="pre">poi_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.FreeUseInfo" title="mate_common.models.integration.FreeUseInfo"><span class="pre">mate_common.models.integration.FreeUseInfo</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.UseAfterFreeOptions.poi_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.VariableBoundsAccessOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">VariableBoundsAccessOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fast:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector:</span> <span class="pre">Literal[&lt;Detector.VariableBoundsAccess:</span> <span class="pre">'VariableBoundsAccess'&gt;]</span> <span class="pre">=</span> <span class="pre">&lt;Detector.VariableBoundsAccess:</span> <span class="pre">'VariableBoundsAccess'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poi_info:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.VariableBoundsAccessOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_common.models.integration.DetectorOptionsBase" title="mate_common.models.integration.DetectorOptionsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.integration.DetectorOptionsBase</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fast</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>detector</strong> (<em>Literal</em><em>[</em><em>&lt;Detector.VariableBoundsAccess: 'VariableBoundsAccess'&gt;</em><em>]</em>) – </p></li>
+<li><p><strong>poi_info</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.VariableBoundsAccessOptions.detector">
+<span class="sig-name descname"><span class="pre">detector</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Literal[&lt;Detector.VariableBoundsAccess:</span> <span class="pre">'VariableBoundsAccess'&gt;]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'VariableBoundsAccess'</span></em><a class="headerlink" href="#mate_common.models.integration.VariableBoundsAccessOptions.detector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.VariableBoundsAccessOptions.poi_info">
+<span class="sig-name descname"><span class="pre">poi_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.VariableBoundsAccessOptions.poi_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.integration.Waypoint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.integration.</span></span><span class="sig-name descname"><span class="pre">Waypoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start:</span> <span class="pre">mate_common.models.integration.Addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end:</span> <span class="pre">mate_common.models.integration.Addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asserts:</span> <span class="pre">List[mate_common.models.integration.Assertion]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacements:</span> <span class="pre">List[mate_common.models.integration.Replacement]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.integration.Waypoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Waypoint message relates to a specific area of code and contains relevant information for
+that area.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<a class="reference internal" href="#mate_common.models.integration.Addr" title="mate_common.models.integration.Addr"><em>mate_common.models.integration.Addr</em></a>) – </p></li>
+<li><p><strong>end</strong> (<a class="reference internal" href="#mate_common.models.integration.Addr" title="mate_common.models.integration.Addr"><em>mate_common.models.integration.Addr</em></a>) – </p></li>
+<li><p><strong>asserts</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.Assertion" title="mate_common.models.integration.Assertion"><em>mate_common.models.integration.Assertion</em></a><em>]</em>) – </p></li>
+<li><p><strong>replacements</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.integration.Replacement" title="mate_common.models.integration.Replacement"><em>mate_common.models.integration.Replacement</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Waypoint.asserts">
+<span class="sig-name descname"><span class="pre">asserts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.Assertion" title="mate_common.models.integration.Assertion"><span class="pre">mate_common.models.integration.Assertion</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.Waypoint.asserts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Waypoint.end">
+<span class="sig-name descname"><span class="pre">end</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.Addr" title="mate_common.models.integration.Addr"><span class="pre">mate_common.models.integration.Addr</span></a></em><a class="headerlink" href="#mate_common.models.integration.Waypoint.end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Waypoint.replacements">
+<span class="sig-name descname"><span class="pre">replacements</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.integration.Replacement" title="mate_common.models.integration.Replacement"><span class="pre">mate_common.models.integration.Replacement</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.integration.Waypoint.replacements" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.integration.Waypoint.start">
+<span class="sig-name descname"><span class="pre">start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.integration.Addr" title="mate_common.models.integration.Addr"><span class="pre">mate_common.models.integration.Addr</span></a></em><a class="headerlink" href="#mate_common.models.integration.Waypoint.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate_common.models.manticore.html" class="btn btn-neutral float-right" title="mate_common.models.manticore module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate_common.models.graphs.html" class="btn btn-neutral float-left" title="mate_common.models.graphs module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

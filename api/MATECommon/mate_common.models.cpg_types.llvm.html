@@ -1,0 +1,653 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate_common.models.cpg_types.llvm module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate_common.models.cpg_types.mate module" href="mate_common.models.cpg_types.mate.html" />
+    <link rel="prev" title="mate_common.models.cpg_types.intrinsics module" href="mate_common.models.cpg_types.intrinsics.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATECommon API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate_common.html">mate_common package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate_common.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate_common.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATECommon API Reference</a> &raquo;</li>
+        
+          <li><a href="mate_common.html">mate_common package</a> &raquo;</li>
+        
+          <li><a href="mate_common.models.html">mate_common.models package</a> &raquo;</li>
+        
+          <li><a href="mate_common.models.cpg_types.html">mate_common.models.cpg_types package</a> &raquo;</li>
+        
+      <li>mate_common.models.cpg_types.llvm module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATECommon/mate_common.models.cpg_types.llvm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate_common.models.cpg_types.llvm">
+<span id="mate-common-models-cpg-types-llvm-module"></span><h1>mate_common.models.cpg_types.llvm module<a class="headerlink" href="#module-mate_common.models.cpg_types.llvm" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.LLVMConstantData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.cpg_types.llvm.</span></span><span class="sig-name descname"><span class="pre">LLVMConstantData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.cpg_types.llvm.LLVMConstantData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Types of constant data in LLVM.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_AGGREGATE_ZERO">
+<span class="sig-name descname"><span class="pre">CONSTANT_AGGREGATE_ZERO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantAggregateZero'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_AGGREGATE_ZERO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_DATA_ARRAY">
+<span class="sig-name descname"><span class="pre">CONSTANT_DATA_ARRAY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantDataArray'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_DATA_ARRAY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_DATA_VECTOR">
+<span class="sig-name descname"><span class="pre">CONSTANT_DATA_VECTOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantDataVector'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_DATA_VECTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_FP">
+<span class="sig-name descname"><span class="pre">CONSTANT_FP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantFP'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_FP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_INT">
+<span class="sig-name descname"><span class="pre">CONSTANT_INT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantInt'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_INT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_POINTER_NULL">
+<span class="sig-name descname"><span class="pre">CONSTANT_POINTER_NULL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantPointerNull'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_POINTER_NULL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_TOKEN_NONE">
+<span class="sig-name descname"><span class="pre">CONSTANT_TOKEN_NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantTokenNone'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_TOKEN_NONE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_UNDEF">
+<span class="sig-name descname"><span class="pre">CONSTANT_UNDEF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UndefValue'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.LLVMConstantData.CONSTANT_UNDEF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.cpg_types.llvm.</span></span><span class="sig-name descname"><span class="pre">Opcode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Valid values for the <code class="docutils literal notranslate"><span class="pre">opcode</span></code> attribute.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.ADD">
+<span class="sig-name descname"><span class="pre">ADD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'add'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.ADD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.ADDRSPACECAST">
+<span class="sig-name descname"><span class="pre">ADDRSPACECAST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'addrspacecast'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.ADDRSPACECAST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.ALLOCA">
+<span class="sig-name descname"><span class="pre">ALLOCA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'alloca'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.ALLOCA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.AND">
+<span class="sig-name descname"><span class="pre">AND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'and'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.AND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.ASHR">
+<span class="sig-name descname"><span class="pre">ASHR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ashr'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.ASHR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.ATOMICCMPXCHG">
+<span class="sig-name descname"><span class="pre">ATOMICCMPXCHG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'atomiccmpxchg'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.ATOMICCMPXCHG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.ATOMICRMW">
+<span class="sig-name descname"><span class="pre">ATOMICRMW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'atomicrmw'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.ATOMICRMW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.BITCAST">
+<span class="sig-name descname"><span class="pre">BITCAST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bitcast'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.BITCAST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.BR">
+<span class="sig-name descname"><span class="pre">BR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'br'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.BR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.CALL">
+<span class="sig-name descname"><span class="pre">CALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'call'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.CALL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.CALLSITE">
+<span class="sig-name descname"><span class="pre">CALLSITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'callsite'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.CALLSITE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.CATCHPAD">
+<span class="sig-name descname"><span class="pre">CATCHPAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'catchpad'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.CATCHPAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.CATCHRET">
+<span class="sig-name descname"><span class="pre">CATCHRET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'catchret'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.CATCHRET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.CATCHSWITCH">
+<span class="sig-name descname"><span class="pre">CATCHSWITCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'catchswitch'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.CATCHSWITCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.CLEANUPPAD">
+<span class="sig-name descname"><span class="pre">CLEANUPPAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cleanuppad'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.CLEANUPPAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.CLEANUPRET">
+<span class="sig-name descname"><span class="pre">CLEANUPRET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cleanupret'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.CLEANUPRET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.EXTRACTELEMENT">
+<span class="sig-name descname"><span class="pre">EXTRACTELEMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'extractelement'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.EXTRACTELEMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.EXTRACTVALUE">
+<span class="sig-name descname"><span class="pre">EXTRACTVALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'extractvalue'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.EXTRACTVALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FADD">
+<span class="sig-name descname"><span class="pre">FADD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fadd'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FADD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FCMP">
+<span class="sig-name descname"><span class="pre">FCMP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fcmp'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FCMP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FDIV">
+<span class="sig-name descname"><span class="pre">FDIV</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fdiv'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FDIV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FENCE">
+<span class="sig-name descname"><span class="pre">FENCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fence'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FENCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FMUL">
+<span class="sig-name descname"><span class="pre">FMUL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fmul'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FMUL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FNEG">
+<span class="sig-name descname"><span class="pre">FNEG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fneg'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FNEG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FPEXT">
+<span class="sig-name descname"><span class="pre">FPEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fpext'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FPEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FPTOSI">
+<span class="sig-name descname"><span class="pre">FPTOSI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fptosi'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FPTOSI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FPTOUI">
+<span class="sig-name descname"><span class="pre">FPTOUI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fptoui'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FPTOUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FPTRUNC">
+<span class="sig-name descname"><span class="pre">FPTRUNC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fptrunc'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FPTRUNC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FREM">
+<span class="sig-name descname"><span class="pre">FREM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'frem'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FREM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.FSUB">
+<span class="sig-name descname"><span class="pre">FSUB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'fsub'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.FSUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.GETELEMENTPTR">
+<span class="sig-name descname"><span class="pre">GETELEMENTPTR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'getelementptr'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.GETELEMENTPTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.ICMP">
+<span class="sig-name descname"><span class="pre">ICMP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'icmp'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.ICMP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.INDIRECTBR">
+<span class="sig-name descname"><span class="pre">INDIRECTBR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'indirectbr'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.INDIRECTBR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.INSERTELEMENT">
+<span class="sig-name descname"><span class="pre">INSERTELEMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'insertelement'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.INSERTELEMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.INSERTVALUE">
+<span class="sig-name descname"><span class="pre">INSERTVALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'insertvalue'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.INSERTVALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.INTTOPTR">
+<span class="sig-name descname"><span class="pre">INTTOPTR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'inttoptr'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.INTTOPTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.INVOKE">
+<span class="sig-name descname"><span class="pre">INVOKE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'invoke'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.INVOKE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.LANDINGPAD">
+<span class="sig-name descname"><span class="pre">LANDINGPAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'landingpad'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.LANDINGPAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.LOAD">
+<span class="sig-name descname"><span class="pre">LOAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'load'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.LOAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.LSHR">
+<span class="sig-name descname"><span class="pre">LSHR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'lshr'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.LSHR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.MUL">
+<span class="sig-name descname"><span class="pre">MUL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mul'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.MUL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.OR">
+<span class="sig-name descname"><span class="pre">OR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'or'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.OR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.PHI">
+<span class="sig-name descname"><span class="pre">PHI</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'phi'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.PHI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.PTRTOINT">
+<span class="sig-name descname"><span class="pre">PTRTOINT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ptrtoint'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.PTRTOINT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.RESUME">
+<span class="sig-name descname"><span class="pre">RESUME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'resume'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.RESUME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.RET">
+<span class="sig-name descname"><span class="pre">RET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ret'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.RET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.SDIV">
+<span class="sig-name descname"><span class="pre">SDIV</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sdiv'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.SDIV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.SELECT">
+<span class="sig-name descname"><span class="pre">SELECT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'select'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.SELECT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.SEXT">
+<span class="sig-name descname"><span class="pre">SEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sext'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.SEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.SHL">
+<span class="sig-name descname"><span class="pre">SHL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'shl'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.SHL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.SHUFFLEVECTOR">
+<span class="sig-name descname"><span class="pre">SHUFFLEVECTOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'shufflevector'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.SHUFFLEVECTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.SITOFP">
+<span class="sig-name descname"><span class="pre">SITOFP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sitofp'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.SITOFP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.SREM">
+<span class="sig-name descname"><span class="pre">SREM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'srem'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.SREM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.STORE">
+<span class="sig-name descname"><span class="pre">STORE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'store'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.STORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.SUB">
+<span class="sig-name descname"><span class="pre">SUB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sub'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.SUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.SWITCH">
+<span class="sig-name descname"><span class="pre">SWITCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'switch'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.SWITCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.TRUNC">
+<span class="sig-name descname"><span class="pre">TRUNC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'trunc'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.TRUNC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.UDIV">
+<span class="sig-name descname"><span class="pre">UDIV</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'udiv'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.UDIV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.UITOFP">
+<span class="sig-name descname"><span class="pre">UITOFP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'uitofp'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.UITOFP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.UNREACHABLE">
+<span class="sig-name descname"><span class="pre">UNREACHABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'unreachable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.UNREACHABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.UREM">
+<span class="sig-name descname"><span class="pre">UREM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'urem'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.UREM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.VAARG">
+<span class="sig-name descname"><span class="pre">VAARG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'vaarg'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.VAARG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.XOR">
+<span class="sig-name descname"><span class="pre">XOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'xor'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.XOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.llvm.Opcode.ZEXT">
+<span class="sig-name descname"><span class="pre">ZEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'zext'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.llvm.Opcode.ZEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate_common.models.cpg_types.mate.html" class="btn btn-neutral float-right" title="mate_common.models.cpg_types.mate module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate_common.models.cpg_types.intrinsics.html" class="btn btn-neutral float-left" title="mate_common.models.cpg_types.intrinsics module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

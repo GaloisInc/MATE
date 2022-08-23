@@ -1,0 +1,7 @@
+dwarfcore.detectors.uninitialized\_stack\_variable module
+=========================================================
+
+.. automodule:: dwarfcore.detectors.uninitialized_stack_variable
+   :members:
+   :undoc-members:
+   :show-inheritance:

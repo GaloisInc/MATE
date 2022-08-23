@@ -1,0 +1,7 @@
+mate\_query.cfl module
+======================
+
+.. automodule:: mate_query.cfl
+   :members:
+   :undoc-members:
+   :show-inheritance:

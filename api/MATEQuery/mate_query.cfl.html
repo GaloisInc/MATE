@@ -1,0 +1,1637 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate_query.cfl module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate_query.config module" href="mate_query.config.html" />
+    <link rel="prev" title="mate_query.cpg.query.query_helpers module" href="mate_query.cpg.query.query_helpers.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATEQuery API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate_query.html">mate_query package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="mate_query.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="mate_query.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATEQuery API Reference</a> &raquo;</li>
+        
+          <li><a href="mate_query.html">mate_query package</a> &raquo;</li>
+        
+      <li>mate_query.cfl module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATEQuery/mate_query.cfl.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate_query.cfl">
+<span id="mate-query-cfl-module"></span><h1>mate_query.cfl module<a class="headerlink" href="#module-mate_query.cfl" title="Permalink to this headline">¶</a></h1>
+<p>See documentation on <code class="docutils literal notranslate"><span class="pre">CFLPath</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cfl.CFLPath">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">CFLPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">info:</span> <span class="pre">Any,</span> <span class="pre">source:</span> <span class="pre">Any,</span> <span class="pre">source_stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">target:</span> <span class="pre">Any,</span> <span class="pre">edge:</span> <span class="pre">Any,</span> <span class="pre">trace:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">state:</span> <span class="pre">Any,</span> <span class="pre">stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">stack_top:</span> <span class="pre">Any,</span> <span class="pre">c:</span> <span class="pre">Any,</span> <span class="pre">edge_symbol_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">transition_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">is_reversed:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">stepped_over_functions:</span> <span class="pre">ClassVar[set[str]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">cfl:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cfl.CFLPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <a class="reference internal" href="mate_query.db.html#mate_query.db.Path" title="mate_query.db.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.db.Path</span></code></a></p>
+<p>A Context-Free-Language path query.</p>
+<p>CFL queries find paths in the CPG such that concatenation of all the
+symbols/labels of the edges of the path form a word in some context-free
+language. Incremental detection of CFL-paths is done by a push-down
+automaton (PDA) encoded as a recursive SQL query.</p>
+<p>These ‘queries’ actually consist of a few distinct database operations:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">populate_edge_symbol_table</span></code> constructs a table of symbols for (a relevant subset of) CPG edges. The mapping from edges to symbols is surjective and functional.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">populate_transition_table</span></code> constructs a table of transitions for this PDA, where a transition consists of a functional mapping from a (source state, source stack, input symbol) tuple to a (new state, new stack) tuple.</p></li>
+<li><p>The recursive query that finds CFL-paths is defined in <code class="docutils literal notranslate"><span class="pre">db.PathBuilder.build</span></code>.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source_stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>target</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>trace</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>state</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>stack_top</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>c</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge_symbol_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>transition_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>is_reversed</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+<li><p><strong>stepped_over_functions</strong> (<em>ClassVar</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>cfl</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CFLPath.cfl">
+<span class="sig-name descname"><span class="pre">cfl</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#mate_query.cfl.CFLPath.cfl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CFLPath.edge_symbol_table_name">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">edge_symbol_table_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mate_query.cfl.CFLPath.edge_symbol_table_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CFLPath.populate_edge_symbol_table">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_edge_symbol_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CFLPath.populate_edge_symbol_table" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CFLPath.populate_transition_table">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_transition_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CFLPath.populate_transition_table" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CFLPath.table_name_prefix">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table_name_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mate_query.cfl.CFLPath.table_name_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a table prefix to be used when creating edge symbol and transition tables.</p>
+<p>If multiple instantiations of a <code class="docutils literal notranslate"><span class="pre">Path</span></code> class return the same prefix, the resulting tables
+will be shared between instances, reducing the amount of pre-computation required.</p>
+<p>If different instances require distinct tables, <code class="docutils literal notranslate"><span class="pre">table_name_prefix</span></code> should return
+distinct prefixes.</p>
+<p>The name will be converted to lower case and truncated to 16 characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CFLPath.transition_symbol_table_name">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transition_symbol_table_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mate_query.cfl.CFLPath.transition_symbol_table_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CFLPath.update_edge_symbol_table_statistics">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_edge_symbol_table_statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CFLPath.update_edge_symbol_table_statistics" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CFLPath.update_transition_table_statistics">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_transition_table_statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CFLPath.update_transition_table_statistics" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">CSCFGPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">info:</span> <span class="pre">Any,</span> <span class="pre">source:</span> <span class="pre">Any,</span> <span class="pre">source_stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">target:</span> <span class="pre">Any,</span> <span class="pre">edge:</span> <span class="pre">Any,</span> <span class="pre">trace:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">state:</span> <span class="pre">Any,</span> <span class="pre">stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">stack_top:</span> <span class="pre">Any,</span> <span class="pre">c:</span> <span class="pre">Any,</span> <span class="pre">edge_symbol_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">transition_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">is_reversed:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">stepped_over_functions:</span> <span class="pre">ClassVar[set[str]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">cfl:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cfl.CSCFGPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cfl.ContextSensitiveCFLPath" title="mate_query.cfl.ContextSensitiveCFLPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cfl.ContextSensitiveCFLPath</span></code></a></p>
+<p>Inter-procedural context-sensitive (CS) control-flow graph (CFG) paths.</p>
+<p>These use context-sensitive information from the points-to analysis, and do
+call-return matching. If an unmatched return is encountered, then the PDA
+returns to any feasible control-flow context of the caller (as determined
+by the MATE pointer analysis).</p>
+<p>In the PDA for this class, “context” usually refers to a k-limited (where k
+is usually relatively low, like 1 or 2) list of callsites (stack frames).
+The PDA encoded by this class has:</p>
+<ul>
+<li><dl class="simple">
+<dt>States:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">INTRA</span></code>: The next step should follow intra-procedural control</dt><dd><p>flow</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">INTER</span></code>: The next step should follow inter-procedural control</dt><dd><p>flow</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Edge symbols (variables appear <code class="docutils literal notranslate"><span class="pre">&lt;in</span> <span class="pre">angle</span> <span class="pre">brackets&gt;</span></code>, tokens are
+separated by spaces for clarity):</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">step_instruction</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.INSTRUCTION_TO_SUCCESSOR_INSTRUCTION</span></code>)</p></li>
+<li><p>Condition: The target node is an instruction which is not a <code class="docutils literal notranslate"><span class="pre">call</span></code>,
+<code class="docutils literal notranslate"><span class="pre">invoke</span></code> or <code class="docutils literal notranslate"><span class="pre">ret</span></code>, <strong>or</strong> it is a <code class="docutils literal notranslate"><span class="pre">call</span></code> or invoke to a
+externally defined function (i.e., an LLVM declaration).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">step_instruction_stop</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.INSTRUCTION_TO_SUCCESSOR_INSTRUCTION</span></code></p></li>
+<li><p>Condition: The target node is a <code class="docutils literal notranslate"><span class="pre">call</span></code>, <code class="docutils literal notranslate"><span class="pre">invoke</span></code> or <code class="docutils literal notranslate"><span class="pre">ret</span></code>
+instruction to a defined function.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.CALL_TO_FUNCTION</span></code></p></li>
+<li><p>Condition: The target node is a <code class="docutils literal notranslate"><span class="pre">Function</span></code> called by the source
+(instruction) node in (control-flow) context <code class="docutils literal notranslate"><span class="pre">&lt;caller</span>
+<span class="pre">context&gt;</span></code>, resulting in context <code class="docutils literal notranslate"><span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">entry_block</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.FUNCTION_TO_ENTRY_BLOCK</span></code></p></li>
+<li><p>Condition: None</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">entry_instruction</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.BLOCK_TO_ENTRY_INSTRUCTION</span></code></p></li>
+<li><p>Condition: None</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">return_instruction</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.RETURN_INSTRUCTION_TO_CALL_RETURN</span></code></p></li>
+<li><p>Condition: None</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">:</span> <span class="pre">&lt;instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.CALL_RETURN_TO_CALLER</span></code></p></li>
+<li><p>Condition: The target is the <code class="docutils literal notranslate"><span class="pre">call</span></code> or <code class="docutils literal notranslate"><span class="pre">invoke</span></code> instruction
+for the call to the function that the control flow is returning
+from. The call occurred in context <code class="docutils literal notranslate"><span class="pre">&lt;caller</span> <span class="pre">context&gt;</span></code>,
+resulting in context <code class="docutils literal notranslate"><span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>Stack symbol templates/formats:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;context&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Transitions (variables appear <code class="docutils literal notranslate"><span class="pre">&lt;in</span> <span class="pre">angle</span> <span class="pre">brackets&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">push</span></code> is the
+cons constructor for the stack type, <code class="docutils literal notranslate"><span class="pre">bot</span></code> is the bottom of the stack):</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">step_instruction</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">step_instruction_stop</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTER</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Description: TODO(lb)</p></li>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTER</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction</span> <span class="pre">0&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context</span> <span class="pre">0&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context</span> <span class="pre">0&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">push(call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction</span> <span class="pre">0&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context</span> <span class="pre">0&gt;</span> <span class="pre">:</span> <span class="pre">&lt;callee</span> <span class="pre">context</span> <span class="pre">0&gt;))</span></code></p></li>
+<li><p>Where: <code class="docutils literal notranslate"><span class="pre">&lt;callee</span> <span class="pre">context</span> <span class="pre">0&gt;</span> <span class="pre">=</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span></code> and the callee
+function of the existing stack frame is the caller context of the
+new stack frame.</p></li>
+<li><p>TODO(lb): how does that relate to <code class="docutils literal notranslate"><span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span></code>?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Description: Call with empty stack</p></li>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTER</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">bot)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Description: TODO(lb)</p></li>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTER</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;caller</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">push(&lt;caller</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;))</span></code></p></li>
+<li><p>Where: <code class="docutils literal notranslate"><span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span></code> may call <code class="docutils literal notranslate"><span class="pre">&lt;function&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">entry_block</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">entry_instruction</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTER</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">return_instruction</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Description: Return with a call on the stack</p></li>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Description: Return with an empty stack</p></li>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;caller</span> <span class="pre">context&gt;,</span> <span class="pre">bot)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">:</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New state: <code class="docutils literal notranslate"><span class="pre">INTRA</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;caller</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source_stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>target</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>trace</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>state</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>stack_top</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>c</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge_symbol_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>transition_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>is_reversed</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+<li><p><strong>stepped_over_functions</strong> (<em>ClassVar</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>cfl</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.c">
+<span class="sig-name descname"><span class="pre">c</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.c" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.edge">
+<span class="sig-name descname"><span class="pre">edge</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.info">
+<span class="sig-name descname"><span class="pre">info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.initial_stack">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_stack</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ClauseElement</span></span></span><a class="headerlink" href="#mate_query.cfl.CSCFGPath.initial_stack" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ClauseElement</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.initial_state">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ClauseElement</span></span></span><a class="headerlink" href="#mate_query.cfl.CSCFGPath.initial_state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ClauseElement</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.populate_edge_symbol_table">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_edge_symbol_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CSCFGPath.populate_edge_symbol_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocess the graph’s edge table and give each edge a symbol to be used during during
+CFL-based path extension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.populate_transition_table">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_transition_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CSCFGPath.populate_transition_table" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.source">
+<span class="sig-name descname"><span class="pre">source</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.source_stack">
+<span class="sig-name descname"><span class="pre">source_stack</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.source_stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.stack">
+<span class="sig-name descname"><span class="pre">stack</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.stack_top">
+<span class="sig-name descname"><span class="pre">stack_top</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.stack_top" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.state">
+<span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.stepped_over_functions">
+<span class="sig-name descname"><span class="pre">stepped_over_functions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.stepped_over_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.table_name_prefix">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table_name_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mate_query.cfl.CSCFGPath.table_name_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a table prefix to be used when creating edge symbol and transition tables.</p>
+<p>If multiple instantiations of a <code class="docutils literal notranslate"><span class="pre">Path</span></code> class return the same prefix, the resulting tables
+will be shared between instances, reducing the amount of pre-computation required.</p>
+<p>If different instances require distinct tables, <code class="docutils literal notranslate"><span class="pre">table_name_prefix</span></code> should return
+distinct prefixes.</p>
+<p>The name will be converted to lower case and truncated to 16 characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.target">
+<span class="sig-name descname"><span class="pre">target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSCFGPath.trace">
+<span class="sig-name descname"><span class="pre">trace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CSCFGPath.trace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">CSDataflowPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">info:</span> <span class="pre">Any,</span> <span class="pre">source:</span> <span class="pre">Any,</span> <span class="pre">source_stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">target:</span> <span class="pre">Any,</span> <span class="pre">edge:</span> <span class="pre">Any,</span> <span class="pre">trace:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">state:</span> <span class="pre">Any,</span> <span class="pre">stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">stack_top:</span> <span class="pre">Any,</span> <span class="pre">c:</span> <span class="pre">Any,</span> <span class="pre">edge_symbol_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">transition_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">is_reversed:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">stepped_over_functions:</span> <span class="pre">ClassVar[set[str]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">cfl:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cfl.CSDataflowPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cfl.ContextSensitiveCFLPath" title="mate_query.cfl.ContextSensitiveCFLPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cfl.ContextSensitiveCFLPath</span></code></a></p>
+<p>Thin dataflow paths that use context-sensitivity (CS) from the points-to analysis.</p>
+<p>The PDA encoded by this class has:</p>
+<ul>
+<li><dl class="simple">
+<dt>States:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DATAFLOW</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Edge symbols (variables appear <code class="docutils literal notranslate"><span class="pre">&lt;in</span> <span class="pre">angle</span> <span class="pre">brackets&gt;</span></code>, tokens are
+separated by spaces for clarity):</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">value_definition_to_use</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.VALUE_DEFINITION_TO_USE</span></code></p></li>
+<li><p>Condition: The target node is an instruction which is not a
+<code class="docutils literal notranslate"><span class="pre">call</span></code>, <code class="docutils literal notranslate"><span class="pre">invoke</span></code> or <code class="docutils literal notranslate"><span class="pre">load</span></code>; <strong>and</strong> the use is not as the
+first operand of a <code class="docutils literal notranslate"><span class="pre">store</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataflow_from_memory</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.DATAFLOW_SIGNATURE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.DIRECT_DATAFLOW_SIGNATURE</span></code>, plus
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.INDIRECT_DATAFLOW_SIGNATURE</span></code> if <code class="docutils literal notranslate"><span class="pre">thin</span></code> is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p>Condition: The target node is a dataflow, input, or output
+signature, and the source node is a memory location.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataflow_from_value</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.DATAFLOW_SIGNATURE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.DIRECT_DATAFLOW_SIGNATURE</span></code>, plus
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.INDIRECT_DATAFLOW_SIGNATURE</span></code> if <code class="docutils literal notranslate"><span class="pre">thin</span></code> is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p>Condition: The target node is a dataflow, input, or output
+signature, and the source node is <em>not</em> a memory location (i.e.,
+it is an LLVM value).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataflow_from_value</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.DATAFLOW_SIGNATURE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.DIRECT_DATAFLOW_SIGNATURE</span></code>, plus
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.INDIRECT_DATAFLOW_SIGNATURE</span></code> if <code class="docutils literal notranslate"><span class="pre">thin</span></code> is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p>Condition: The target node is a dataflow, input, or output
+signature, and the source node is <em>not</em> a memory location (i.e.,
+it is an LLVM value).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataflow_to_memory</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.DATAFLOW_SIGNATURE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.DIRECT_DATAFLOW_SIGNATURE</span></code>, plus
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.INDIRECT_DATAFLOW_SIGNATURE</span></code> if <code class="docutils literal notranslate"><span class="pre">thin</span></code> is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p>Condition: The target node is a memory location.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataflow_to_value</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.DATAFLOW_SIGNATURE</span></code>,
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.DIRECT_DATAFLOW_SIGNATURE</span></code>, plus
+<code class="docutils literal notranslate"><span class="pre">EdgeKind.INDIRECT_DATAFLOW_SIGNATURE</span></code> if <code class="docutils literal notranslate"><span class="pre">thin</span></code> is
+<code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p>Condition: The target node is <em>not</em> a memory location (i.e., it
+is an LLVM value).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">load</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.LOAD_MEMORY</span></code></p></li>
+<li><p>Condition: None</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">store</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.STORE_MEMORY</span></code></p></li>
+<li><p>Condition: None</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">operand_to_param_binding</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.OPERAND_TO_PARAM_BINDING</span></code></p></li>
+<li><p>Condition: None</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.PARAM_BINDING_TO_ARG</span></code></p></li>
+<li><p>Condition: The parameter was bound by this call in this calling
+context</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">return_value_to_call_return</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.RETURN_VALUE_TO_CALL_RETURN</span></code></p></li>
+<li><p>Condition: None</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Symbol:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>Edge kinds: <code class="docutils literal notranslate"><span class="pre">EdgeKind.CALL_RETURN_TO_CALLER</span></code></p></li>
+<li><p>Condition: This return is from a (potential) call in context
+<code class="docutils literal notranslate"><span class="pre">&lt;caller</span> <span class="pre">context&gt;</span></code>, resulting in callee context <code class="docutils literal notranslate"><span class="pre">&lt;callee</span>
+<span class="pre">context&gt;</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Stack symbol templates/formats:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>Transitions (variables appear <code class="docutils literal notranslate"><span class="pre">&lt;in</span> <span class="pre">angle</span> <span class="pre">brackets&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">push</span></code> is the
+cons constructor for the stack type, <code class="docutils literal notranslate"><span class="pre">bot</span></code> is the bottom of the stack,
+all input and output states are <code class="docutils literal notranslate"><span class="pre">DATAFLOW</span></code>):</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">value_definition_to_use</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">operand_to_param_binding</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">return_value_to_call_return</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Description: TODO(lb)</p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction</span> <span class="pre">0&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context</span> <span class="pre">0&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context</span> <span class="pre">0&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">push(call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction</span> <span class="pre">0&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context</span> <span class="pre">0&gt;</span> <span class="pre">:</span> <span class="pre">&lt;callee</span> <span class="pre">context</span> <span class="pre">0&gt;))</span></code></p></li>
+<li><p>Where: <code class="docutils literal notranslate"><span class="pre">&lt;callee</span> <span class="pre">context</span> <span class="pre">0&gt;</span> <span class="pre">=</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span></code> and the callee
+function of the existing stack frame is the caller context of the
+new stack frame.</p></li>
+<li><p>TODO(lb): how does that relate to <code class="docutils literal notranslate"><span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span></code>?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;caller</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">push(&lt;context&gt;,</span> <span class="pre">bot))</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(call</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Description: Return with an empty stack</p></li>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;caller</span> <span class="pre">context&gt;,</span> <span class="pre">bot)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">:</span> <span class="pre">&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">:</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;caller</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">load</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">store</span> <span class="pre">:</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">store</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">store</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Similar rules where <code class="docutils literal notranslate"><span class="pre">dataflow_from_memory</span></code> is to
+<code class="docutils literal notranslate"><span class="pre">dataflow_to_memory</span></code> as <code class="docutils literal notranslate"><span class="pre">load</span></code> is to <code class="docutils literal notranslate"><span class="pre">store</span></code>…</p></li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">dataflow_from_value</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">dataflow_from_value</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;context&gt;,</span> <span class="pre">bot)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">bot)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">dataflow_from_value</span> <span class="pre">:</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">bot)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">dataflow_to_value</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;context&gt;,</span> <span class="pre">&lt;s&gt;)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">bot</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">dataflow_to_value</span> <span class="pre">:</span> <span class="pre">&lt;context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;context&gt;,</span> <span class="pre">bot)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Transition:</dt><dd><ul>
+<li><p>Input stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">bot)</span></code></p></li>
+<li><p>Edge symbol: <code class="docutils literal notranslate"><span class="pre">dataflow_to_value</span> <span class="pre">:</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;</span></code></p></li>
+<li><p>New stack: <code class="docutils literal notranslate"><span class="pre">push(&lt;call</span> <span class="pre">instruction&gt;</span> <span class="pre">:</span> <span class="pre">&lt;caller</span> <span class="pre">context&gt;</span> <span class="pre">--&gt;</span> <span class="pre">&lt;callee</span> <span class="pre">context&gt;,</span> <span class="pre">bot)</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Transitions for a reversed automaton are dual in some sense…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source_stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>target</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>trace</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>state</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>stack_top</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>c</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge_symbol_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>transition_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>is_reversed</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+<li><p><strong>stepped_over_functions</strong> (<em>ClassVar</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>cfl</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.c">
+<span class="sig-name descname"><span class="pre">c</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.c" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.edge">
+<span class="sig-name descname"><span class="pre">edge</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.info">
+<span class="sig-name descname"><span class="pre">info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.initial_stack">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_stack</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ClauseElement</span></span></span><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.initial_stack" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ClauseElement</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.initial_state">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ClauseElement</span></span></span><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.initial_state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ClauseElement</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.populate_edge_symbol_table">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_edge_symbol_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.populate_edge_symbol_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocess the graph’s edge table and give each edge a symbol to be used during
+during CFL-based path extension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.populate_transition_table">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_transition_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.populate_transition_table" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.source">
+<span class="sig-name descname"><span class="pre">source</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.source_stack">
+<span class="sig-name descname"><span class="pre">source_stack</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.source_stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.stack">
+<span class="sig-name descname"><span class="pre">stack</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.stack_top">
+<span class="sig-name descname"><span class="pre">stack_top</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.stack_top" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.state">
+<span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.stepped_over_functions">
+<span class="sig-name descname"><span class="pre">stepped_over_functions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.stepped_over_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.table_name_prefix">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table_name_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.table_name_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a table prefix to be used when creating edge symbol and transition tables.</p>
+<p>If multiple instantiations of a <code class="docutils literal notranslate"><span class="pre">Path</span></code> class return the same prefix, the resulting tables
+will be shared between instances, reducing the amount of pre-computation required.</p>
+<p>If different instances require distinct tables, <code class="docutils literal notranslate"><span class="pre">table_name_prefix</span></code> should return
+distinct prefixes.</p>
+<p>The name will be converted to lower case and truncated to 16 characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.target">
+<span class="sig-name descname"><span class="pre">target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSDataflowPath.trace">
+<span class="sig-name descname"><span class="pre">trace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CSDataflowPath.trace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CSThinDataflowPath">
+<span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">CSThinDataflowPath</span></span><a class="headerlink" href="#mate_query.cfl.CSThinDataflowPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cfl.ConfigureDFGPath.&lt;locals&gt;.CSDataflowPath</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">CallGraphPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">info:</span> <span class="pre">Any,</span> <span class="pre">source:</span> <span class="pre">Any,</span> <span class="pre">source_stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">target:</span> <span class="pre">Any,</span> <span class="pre">edge:</span> <span class="pre">Any,</span> <span class="pre">trace:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">state:</span> <span class="pre">Any,</span> <span class="pre">stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">stack_top:</span> <span class="pre">Any,</span> <span class="pre">c:</span> <span class="pre">Any,</span> <span class="pre">edge_symbol_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">transition_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">is_reversed:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">stepped_over_functions:</span> <span class="pre">ClassVar[set[str]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">cfl:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cfl.CallGraphPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cfl.CFLPath" title="mate_query.cfl.CFLPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cfl.CFLPath</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source_stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>target</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>trace</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>state</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>stack_top</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>c</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge_symbol_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>transition_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>is_reversed</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+<li><p><strong>stepped_over_functions</strong> (<em>ClassVar</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>cfl</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.c">
+<span class="sig-name descname"><span class="pre">c</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.c" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.edge">
+<span class="sig-name descname"><span class="pre">edge</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.info">
+<span class="sig-name descname"><span class="pre">info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.initial_stack">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_stack</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ClauseElement</span></span></span><a class="headerlink" href="#mate_query.cfl.CallGraphPath.initial_stack" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ClauseElement</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.initial_state">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ClauseElement</span></span></span><a class="headerlink" href="#mate_query.cfl.CallGraphPath.initial_state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ClauseElement</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.populate_edge_symbol_table">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_edge_symbol_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CallGraphPath.populate_edge_symbol_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preprocess the graph’s edge table and give each edge a symbol to be used during during
+CFL-based path extension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.populate_transition_table">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_transition_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate_query.cfl.CallGraphPath.populate_transition_table" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.source">
+<span class="sig-name descname"><span class="pre">source</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.source_stack">
+<span class="sig-name descname"><span class="pre">source_stack</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.source_stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.stack">
+<span class="sig-name descname"><span class="pre">stack</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.stack_top">
+<span class="sig-name descname"><span class="pre">stack_top</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.stack_top" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.state">
+<span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.stepped_over_functions">
+<span class="sig-name descname"><span class="pre">stepped_over_functions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.stepped_over_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.table_name_prefix">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">table_name_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mate_query.cfl.CallGraphPath.table_name_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a table prefix to be used when creating edge symbol and transition tables.</p>
+<p>If multiple instantiations of a <code class="docutils literal notranslate"><span class="pre">Path</span></code> class return the same prefix, the resulting tables
+will be shared between instances, reducing the amount of pre-computation required.</p>
+<p>If different instances require distinct tables, <code class="docutils literal notranslate"><span class="pre">table_name_prefix</span></code> should return
+distinct prefixes.</p>
+<p>The name will be converted to lower case and truncated to 16 characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.target">
+<span class="sig-name descname"><span class="pre">target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.CallGraphPath.trace">
+<span class="sig-name descname"><span class="pre">trace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.CallGraphPath.trace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate_query.cfl.ConfigureCFGPath">
+<span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">ConfigureCFGPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_unmatched_returns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate_query.cfl.ConfigureCFGPath" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>allow_unmatched_returns</strong> (<em>bool</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Type[<a class="reference internal" href="mate_query.db.html#mate_query.db.Path" title="mate_query.db.Path">Path</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate_query.cfl.ConfigureDFGPath">
+<span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">ConfigureDFGPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate_query.cfl.ConfigureDFGPath" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>thin</strong> (<em>bool</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Type[<a class="reference internal" href="mate_query.db.html#mate_query.db.Path" title="mate_query.db.Path">Path</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">ContextSensitiveCFLPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">info:</span> <span class="pre">Any,</span> <span class="pre">source:</span> <span class="pre">Any,</span> <span class="pre">source_stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">target:</span> <span class="pre">Any,</span> <span class="pre">edge:</span> <span class="pre">Any,</span> <span class="pre">trace:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">state:</span> <span class="pre">Any,</span> <span class="pre">stack:</span> <span class="pre">Tuple[Any,</span> <span class="pre">...],</span> <span class="pre">stack_top:</span> <span class="pre">Any,</span> <span class="pre">c:</span> <span class="pre">Any,</span> <span class="pre">edge_symbol_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">transition_table:</span> <span class="pre">Optional[Table]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">is_reversed:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">stepped_over_functions:</span> <span class="pre">ClassVar[set[str]]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">cfl:</span> <span class="pre">ClassVar[bool]</span> <span class="pre">=</span> <span class="pre">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cfl.CFLPath" title="mate_query.cfl.CFLPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cfl.CFLPath</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>source_stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>target</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>trace</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>state</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>stack</strong> (<em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>...</em><em>]</em>) – </p></li>
+<li><p><strong>stack_top</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>c</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>edge_symbol_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>transition_table</strong> (<em>Optional</em><em>[</em><em>Table</em><em>]</em>) – </p></li>
+<li><p><strong>is_reversed</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+<li><p><strong>stepped_over_functions</strong> (<em>ClassVar</em><em>[</em><em>set</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>cfl</strong> (<em>ClassVar</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.c">
+<span class="sig-name descname"><span class="pre">c</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.c" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.edge">
+<span class="sig-name descname"><span class="pre">edge</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.info">
+<span class="sig-name descname"><span class="pre">info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.select_callsite_stack_symbols">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_callsite_stack_symbols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Select</span></span></span><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.select_callsite_stack_symbols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct partial stack symbols of the form:</p>
+<blockquote>
+<div><p>&lt;call instruction&gt; : &lt;caller context&gt; –&gt; &lt;callee context&gt;</p>
+</div></blockquote>
+<p>With columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stack_symbol</span></code>: The overall symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callsite</span></code>: caller instruction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller</span></code>: calling function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee</span></code>: called function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p></li>
+</ul>
+<p>This select is used as a variable in complex rules in PDAs, where the
+above partial stack symbol gets concatenated onto the tokens <code class="docutils literal notranslate"><span class="pre">call:</span></code>
+or <code class="docutils literal notranslate"><span class="pre">return:</span></code>, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">call</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">call</span> <span class="n">instruction</span><span class="o">&gt;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="n">caller</span> <span class="n">context</span><span class="o">&gt;</span> <span class="o">--&gt;</span> <span class="o">&lt;</span><span class="n">callee</span> <span class="n">context</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This overall symbol gets pushed to or popped from the PDA stack during
+transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Select</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.select_context_stack_symbols">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_context_stack_symbols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Select</span></span></span><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.select_context_stack_symbols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct stack symbols of the form <code class="docutils literal notranslate"><span class="pre">&lt;context&gt;</span></code>.</p>
+<p>with columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">stack_symbol</span></code>: The context</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">function</span></code>: The function</p></li>
+</ul>
+<p>where there exists some callgraph edge out of (resp., into)
+<code class="docutils literal notranslate"><span class="pre">&lt;function&gt;</span></code> with caller (resp., callee) context <code class="docutils literal notranslate"><span class="pre">&lt;context&gt;</span></code>.</p>
+<p>This select is used as a variable in complex rules in PDAs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>graph</strong> (<em>CPG</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Select</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.source">
+<span class="sig-name descname"><span class="pre">source</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.source_stack">
+<span class="sig-name descname"><span class="pre">source_stack</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.source_stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.stack">
+<span class="sig-name descname"><span class="pre">stack</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.stack_top">
+<span class="sig-name descname"><span class="pre">stack_top</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.stack_top" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.state">
+<span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.stepped_over_functions">
+<span class="sig-name descname"><span class="pre">stepped_over_functions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.stepped_over_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.target">
+<span class="sig-name descname"><span class="pre">target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ContextSensitiveCFLPath.trace">
+<span class="sig-name descname"><span class="pre">trace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cfl.ContextSensitiveCFLPath.trace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.ForwardCFGPath">
+<span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">ForwardCFGPath</span></span><a class="headerlink" href="#mate_query.cfl.ForwardCFGPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inter-procedural control-flow graph (CFG) paths, in the forwards direction.</p>
+<p>Matches calls and returns up to unbounded depth, rather than using
+context-sensitivity information from the pointer analysis.</p>
+<p>When encountering a return when the call stack is empty, can return to any
+callsite, which is problematic for performance and precision (in contract to
+context-sensitive variants below which use points-to analysis information).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cfl.UnmatchedForwardCFGPath">
+<span class="sig-prename descclassname"><span class="pre">mate_query.cfl.</span></span><span class="sig-name descname"><span class="pre">UnmatchedForwardCFGPath</span></span><a class="headerlink" href="#mate_query.cfl.UnmatchedForwardCFGPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <code class="docutils literal notranslate"><span class="pre">ForwardCFGPath</span></code> but doesn’t match calls and returns.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate_query.config.html" class="btn btn-neutral float-right" title="mate_query.config module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate_query.cpg.query.query_helpers.html" class="btn btn-neutral float-left" title="mate_query.cpg.query.query_helpers module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+mate.server.api package
+=======================
+
+.. automodule:: mate.server.api
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.server.api.graphs
+   mate.server.api.proxy
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.server.api.analyses
+   mate.server.api.artifacts
+   mate.server.api.builds
+   mate.server.api.common
+   mate.server.api.compilations
+   mate.server.api.manticore
+   mate.server.api.status
+   mate.server.api.types

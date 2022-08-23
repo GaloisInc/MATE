@@ -1,0 +1,7 @@
+mate\_query.storage module
+==========================
+
+.. automodule:: mate_query.storage
+   :members:
+   :undoc-members:
+   :show-inheritance:

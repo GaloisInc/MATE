@@ -1,0 +1,7 @@
+mate\_query.config module
+=========================
+
+.. automodule:: mate_query.config
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+mate.poi.analysis.UninitializedStackMemory module
+=================================================
+
+.. automodule:: mate.poi.analysis.UninitializedStackMemory
+   :members:
+   :undoc-members:
+   :show-inheritance:

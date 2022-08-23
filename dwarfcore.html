@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Dwarfcore &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cclyzer++" href="standalonepa.html" />
+    <link rel="prev" title="Command-Line Tools Reference" href="cli.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Dwarfcore</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#detectors">Detectors:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#internal-plugins-not-available-via-rest-api">Internal Plugins (Not available via REST API):</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variable-bounds-detection">Variable Bounds Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uninitialized-stack-variable-detection">Uninitialized Stack Variable Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-after-free-detection">Use After Free Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Dwarfcore</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/dwarfcore.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dwarfcore">
+<h1>Dwarfcore<a class="headerlink" href="#dwarfcore" title="Permalink to this headline">¶</a></h1>
+<p>Dwarfcore is a framework for building plugins that query and expose MATE CPG
+information (including but not limited to DWARF debug information) to the
+Manticore symbolic execution engine used by Mantiserve. Dwarfcore internal
+plugins are used to build <code class="docutils literal notranslate"><span class="pre">Detector</span></code>s, which are the capabilities made
+available to MATE users via the <a class="reference internal" href="mantiserve.html"><span class="doc">Mantiserve</span></a> REST API.</p>
+<div class="section" id="detectors">
+<h2>Detectors:<a class="headerlink" href="#detectors" title="Permalink to this headline">¶</a></h2>
+<p>The following built-in Dwarfcore Detectors are available to users of Mantiserve:</p>
+<ul class="simple">
+<li><p><strong>Variable Bounds Access Detector</strong> -
+(<a class="reference internal" href="api/Dwarfcore/dwarfcore.detectors.dwarf_variables.html#dwarfcore.detectors.dwarf_variables.DwarfVariables" title="dwarfcore.detectors.dwarf_variables.DwarfVariables"><code class="xref py py-class docutils literal notranslate"><span class="pre">DwarfVariables</span></code></a>) - Detects
+out-of-bounds accesses in arrays</p></li>
+<li><p><strong>Uninitialized Stack Variable Detector</strong> -
+(<a class="reference internal" href="api/Dwarfcore/dwarfcore.detectors.uninitialized_stack_variable.html#dwarfcore.detectors.uninitialized_stack_variable.DetectUninitializedStackVariable" title="dwarfcore.detectors.uninitialized_stack_variable.DetectUninitializedStackVariable"><code class="xref py py-class docutils literal notranslate"><span class="pre">DetectUninitializedStackVariable</span></code></a>)
+- Detects reads from uninitialized stack objects</p></li>
+<li><p><strong>Use After Free Detector</strong> -
+(<a class="reference internal" href="api/Dwarfcore/dwarfcore.detectors.uaf.html#dwarfcore.detectors.uaf.DetectUseAfterFree" title="dwarfcore.detectors.uaf.DetectUseAfterFree"><code class="xref py py-class docutils literal notranslate"><span class="pre">DetectUseAfterFree</span></code></a>) - Detects memory
+accesses to freed memory from calls to malloc and free</p></li>
+</ul>
+</div>
+<div class="section" id="internal-plugins-not-available-via-rest-api">
+<h2>Internal Plugins (Not available via REST API):<a class="headerlink" href="#internal-plugins-not-available-via-rest-api" title="Permalink to this headline">¶</a></h2>
+<p>While not exposed directly to Mantiserve users, the following internal plugins
+are available for use in developing new detectors:</p>
+<ul class="simple">
+<li><p><strong>Function Tracer</strong> - (<a class="reference internal" href="api/Dwarfcore/dwarfcore.plugins.dwarf_trace.html#dwarfcore.plugins.dwarf_trace.DwarfTrace" title="dwarfcore.plugins.dwarf_trace.DwarfTrace"><code class="xref py py-class docutils literal notranslate"><span class="pre">DwarfTrace</span></code></a>) -
+Traces functions during <code class="docutils literal notranslate"><span class="pre">Mantiserve</span></code> execution</p></li>
+<li><p><strong>Variable Tracker</strong> -
+(<a class="reference internal" href="api/Dwarfcore/dwarfcore.plugins.dwarf_track_variables.html#dwarfcore.plugins.dwarf_track_variables.DwarfTrackVariables" title="dwarfcore.plugins.dwarf_track_variables.DwarfTrackVariables"><code class="xref py py-class docutils literal notranslate"><span class="pre">DwarfTrackVariables</span></code></a>) -
+Tracks stack variable information</p></li>
+<li><p><strong>Heap Memory Tracker</strong> -
+(<a class="reference internal" href="api/Dwarfcore/dwarfcore.plugins.heap_common.html#dwarfcore.plugins.heap_common.TrackHeapInformation" title="dwarfcore.plugins.heap_common.TrackHeapInformation"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrackHeapInformation</span></code></a>) - Records
+memory allocations for the malloc library and system heap</p></li>
+</ul>
+<p>See the <a class="reference internal" href="api/Dwarfcore/modules.html"><span class="doc">Dwarfcore API</span></a> for Python package
+documentation.</p>
+</div>
+<div class="section" id="variable-bounds-detection">
+<h2>Variable Bounds Detection<a class="headerlink" href="#variable-bounds-detection" title="Permalink to this headline">¶</a></h2>
+<p>The Dwarfcore variable bounds <code class="docutils literal notranslate"><span class="pre">Detector</span></code> is used primarily to detect
+out-of-bounds memory accesses when indexing into variables with large sizes,
+like arrays.</p>
+<p>Dwarfcore extracts variable memory boundary information so that when Manticore
+performs symbolic (or concrete) memory accesses, it knows when a value could be
+in or is outside of a variable’s contiguous boundary in memory. Due to the
+current implementation’s technique of checking <em>every</em> memory access, the
+recommended way of running this plugin is by specifying function and variable
+pairs for which memory accesses should be analyzed.</p>
+<p>Upon success (without using <code class="docutils literal notranslate"><span class="pre">fast</span></code> mode), the Manticore logs (as pulled from
+the <a class="reference external" href="api.html#operation/_get_artifact_api_v1_artifacts__artifact_id__get">artifacts</a>
+listing associated with a Mantiserve task ID, which is accessible through a <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+request to the
+<a class="reference external" href="api.html#operation/_get_manticore_task_api_v1_manticore_tasks__task_id__get">tasks/{task_id}</a>
+<a class="reference internal" href="mantiserve.html"><span class="doc">Mantiserve</span></a> REST endpoint) will display relevant messages similar to the following at the end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DEBUG</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="n">ARGV_index</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;50&#39;</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Generated</span> <span class="n">testcase</span> <span class="n">No</span><span class="o">.</span> <span class="mi">0</span> <span class="o">-</span> <span class="mh">0x401148</span> <span class="n">within</span> <span class="n">function</span><span class="p">:</span> <span class="s1">&#39;overflow_field&#39;</span><span class="o">@/</span><span class="n">mate</span><span class="o">/</span><span class="n">frontend</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">programs</span><span class="o">/</span><span class="n">triple_nested_structs</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span>  <span class="n">Symbolic</span> <span class="n">memory</span> <span class="n">access</span> <span class="n">could</span> <span class="n">be</span> <span class="n">out</span> <span class="n">of</span> <span class="n">bounds</span> <span class="n">upper</span> <span class="p">(</span><span class="mh">0x7ffffffff752</span><span class="p">)</span> <span class="ow">or</span> <span class="n">lower</span> <span class="p">(</span><span class="mh">0x7ffffffff720</span><span class="p">)</span>
+
+<span class="o">...</span>
+
+<span class="n">DEBUG</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="n">ARGV_index</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;0&#39;</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Generated</span> <span class="n">testcase</span> <span class="n">No</span><span class="o">.</span> <span class="mi">1</span> <span class="o">-</span> <span class="mh">0x401148</span> <span class="n">within</span> <span class="n">function</span><span class="p">:</span> <span class="s1">&#39;overflow_field&#39;</span><span class="o">@/</span><span class="n">mate</span><span class="o">/</span><span class="n">frontend</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">programs</span><span class="o">/</span><span class="n">triple_nested_structs</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span>  <span class="n">Symbolic</span> <span class="n">memory</span> <span class="n">access</span> <span class="n">could</span> <span class="n">b</span>
+
+<span class="o">...</span>
+
+<span class="n">DEBUG</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="n">ARGV_index</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;200&#39;</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Generated</span> <span class="n">testcase</span> <span class="n">No</span><span class="o">.</span> <span class="mi">2</span> <span class="o">-</span> <span class="mh">0x401148</span> <span class="n">within</span> <span class="n">function</span><span class="p">:</span> <span class="s1">&#39;overflow_field&#39;</span><span class="o">@/</span><span class="n">mate</span><span class="o">/</span><span class="n">frontend</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">programs</span><span class="o">/</span><span class="n">triple_nested_structs</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span>  <span class="n">Symbolic</span> <span class="n">memory</span> <span class="n">access</span> <span class="n">could</span> <span class="n">b</span>
+
+<span class="o">...</span>
+
+<span class="n">DEBUG</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="n">ARGV_index</span><span class="p">:</span> <span class="sa">b</span><span class="s1">&#39;200&#39;</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Generated</span> <span class="n">testcase</span> <span class="n">No</span><span class="o">.</span> <span class="mi">3</span> <span class="o">-</span> <span class="mh">0x401148</span> <span class="n">within</span> <span class="n">function</span><span class="p">:</span> <span class="s1">&#39;overflow_field&#39;</span><span class="o">@/</span><span class="n">mate</span><span class="o">/</span><span class="n">frontend</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">programs</span><span class="o">/</span><span class="n">triple_nested_structs</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span>  <span class="n">Symbolic</span> <span class="n">memory</span> <span class="n">access</span> <span class="n">could</span> <span class="n">be</span> <span class="n">out</span> <span class="n">of</span> <span class="n">bounds</span> <span class="n">upper</span> <span class="p">(</span><span class="mh">0x7ffffffff7e8</span><span class="p">)</span> <span class="ow">or</span> <span class="n">lower</span> <span class="p">(</span><span class="mh">0x7ffffffff720</span><span class="p">)</span>
+
+<span class="o">...</span>
+
+<span class="n">DEBUG</span><span class="p">:</span> <span class="n">Manticore</span> <span class="n">finished</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">ARGV_index</span></code> indicates the symbolic variable (<code class="docutils literal notranslate"><span class="pre">ARGV_index</span></code> because
+it’s a command-line value and <code class="docutils literal notranslate"><span class="pre">_index</span></code> because it’s used as an index for our
+test; this symbolic variable is named explicitly) and its value is printed as a
+proof for repeating the discovery. Manticore also generates test cases when it
+find that the State’s symbolic <code class="docutils literal notranslate"><span class="pre">ARGV_index</span></code> could point to different
+variables or no variable, which gives the analyst opportunity to dig deeper
+into the program logic with both cases.</p>
+</div>
+<div class="section" id="uninitialized-stack-variable-detection">
+<h2>Uninitialized Stack Variable Detection<a class="headerlink" href="#uninitialized-stack-variable-detection" title="Permalink to this headline">¶</a></h2>
+<p>This <code class="docutils literal notranslate"><span class="pre">Detector</span></code> detects the use of uninitialized stack variables. In order to
+detect this Dwarfcore provides the detector with variable scoping and
+initialization status information.</p>
+<p>Dwarfcore is able to keep track of variables across function boundaries and
+track when they are read and written. If a variable (or field within that
+variable) is read before it has been written, the detector will print useful
+information about the access. Without specifying any target function variable
+pairs the detector defaults to checking every stack variable, thus it’s
+recommended way to specify any function and variable pairs for which
+uninitialized use should be analyzed.</p>
+<p>Upon success (using <code class="docutils literal notranslate"><span class="pre">fast</span></code> mode), the Manticore logs (as pulled from
+the <a class="reference external" href="api.html#operation/_get_artifact_api_v1_artifacts__artifact_id__get">artifacts</a>
+listing associated with a Mantiserve task ID, which is accessible through a <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+request to the
+<a class="reference external" href="api.html#operation/_get_manticore_task_api_v1_manticore_tasks__task_id__get">tasks/{task_id}</a>
+<a class="reference internal" href="mantiserve.html"><span class="doc">Mantiserve</span></a> REST endpoint) will display relevant messages similar to the following at the end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INFO: Generated testcase No. 0 - Found stack variable use before initialization txc.tai@&#39;syscall_adjtimex&#39; @ 0x4014b6! (/mate/frontend/test/programs/poi-kernel-cve-uninit.c:115)
+DEBUG: Manticore finished
+</pre></div>
+</div>
+</div>
+<div class="section" id="use-after-free-detection">
+<h2>Use After Free Detection<a class="headerlink" href="#use-after-free-detection" title="Permalink to this headline">¶</a></h2>
+<p>As the name implies, this <code class="docutils literal notranslate"><span class="pre">Detector</span></code> detects and validates UAF
+vulnerabilities.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Detector</span></code> captures all calls to malloc and related standard library functions. From each
+call, the <code class="docutils literal notranslate"><span class="pre">Detector</span></code> extracts argument and return information for each
+allocation.</p>
+<p>The associated MATE logs with this behavior will be similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Invoking</span> <span class="n">calloc</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">element</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">of</span> <span class="n">size</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">calloc</span> <span class="n">ret</span> <span class="n">val</span><span class="p">:</span> <span class="mh">0x435c60</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Invoking</span> <span class="n">malloc</span> <span class="k">for</span> <span class="n">size</span><span class="p">:</span> <span class="mi">288</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">malloc</span> <span class="n">ret</span> <span class="n">val</span><span class="p">:</span> <span class="mh">0x445c70</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>The detector then uses this information to record when an allocation range
+(allocation start address to allocation start + offset requested in malloc
+allocation) is malloced and freed.  If the program tries to access an address
+in an allocation range marked as free then a UAF has been detected!</p>
+<p>In order to detect all UAF vulnerabilities it’s important to keep allocations
+unique.</p>
+<p>For example, if an object A holds a range of memory addresses which it frees
+and then are allocated to a new object B. The detector needs to be able to
+distinguish between an access to the address by A and an access to the address
+by B. (An access by A would be a UAF but an access by B would not). In order to
+create this vital distinction the detector prevents all calls to <code class="docutils literal notranslate"><span class="pre">free()</span></code>
+from executing, forcing every allocation to have it’s own unique <em>new</em> address.
+As a result the following will appear in the logs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DEBUG</span><span class="p">:</span> <span class="n">Not</span> <span class="n">executing</span> <span class="n">call</span> <span class="n">to</span> <span class="n">free</span><span class="p">()</span> <span class="k">for</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">order</span> <span class="n">to</span> <span class="n">keep</span> <span class="n">heap</span> <span class="n">addresses</span> <span class="n">unique</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Upon success (using <code class="docutils literal notranslate"><span class="pre">fast</span></code> mode), the Manticore logs (as pulled from
+the <a class="reference external" href="api.html#operation/_get_artifact_api_v1_artifacts__artifact_id__get">artifacts</a>
+listing associated with a Mantiserve task ID, which is accessible through a <code class="docutils literal notranslate"><span class="pre">GET</span></code>
+request to the
+<a class="reference external" href="api.html#operation/_get_manticore_task_api_v1_manticore_tasks__task_id__get">tasks/{task_id}</a>
+<a class="reference internal" href="mantiserve.html"><span class="doc">Mantiserve</span></a> REST endpoint) will display relevant messages similar to the following at the end:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INFO: Generated testcase No. 0 - Found use after free when reading address 0x425b00 @ 0x40160d (/tmp/tmpdwzt42n0.c:166)!  Allocated @ 0x4011f5 (/tmp/tmpdwzt42n0.c:44). Deallocated @ 0x401273 (/tmp/tmpdwzt42n0.c:54).
+DEBUG: Manticore finished
+</pre></div>
+</div>
+<p>Where the return message will be in the generated Manticore testcases:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Found use after free when reading address 0x425b00 @ 0x40160d (/tmp/tmpdwzt42n0.c:166)!  Allocated @ 0x4011f5 (/tmp/tmpdwzt42n0.c:44). Deallocated @ 0x401273 (/tmp/tmpdwzt42n0.c:54).
+</pre></div>
+</div>
+<p>The testcase results can be found through a <code class="docutils literal notranslate"><span class="pre">GET</span></code> request to the <a class="reference external" href="api.html#operation/_get_manticore_task_api_v1_manticore_tasks__task_id__get">tasks/{task_id}</a>
+<a class="reference internal" href="mantiserve.html"><span class="doc">Mantiserve</span></a> REST endpoint and found in
+the <code class="docutils literal notranslate"><span class="pre">response_msg</span></code> field of the returned object.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="standalonepa.html" class="btn btn-neutral float-right" title="cclyzer++" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cli.html" class="btn btn-neutral float-left" title="Command-Line Tools Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

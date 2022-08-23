@@ -1,0 +1,7 @@
+mate.server.api.graphs.queries module
+=====================================
+
+.. automodule:: mate.server.api.graphs.queries
+   :members:
+   :undoc-members:
+   :show-inheritance:

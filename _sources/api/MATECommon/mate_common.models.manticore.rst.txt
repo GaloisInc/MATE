@@ -1,0 +1,7 @@
+mate\_common.models.manticore module
+====================================
+
+.. automodule:: mate_common.models.manticore
+   :members:
+   :undoc-members:
+   :show-inheritance:

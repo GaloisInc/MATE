@@ -1,0 +1,7 @@
+mate.poi.analysis.VariableLengthStackObject module
+==================================================
+
+.. automodule:: mate.poi.analysis.VariableLengthStackObject
+   :members:
+   :undoc-members:
+   :show-inheritance:

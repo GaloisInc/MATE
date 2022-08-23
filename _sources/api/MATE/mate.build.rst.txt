@@ -1,0 +1,26 @@
+mate.build package
+==================
+
+.. automodule:: mate.build
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.build.tob_chess_utils
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.build.build
+   mate.build.common
+   mate.build.compile
+   mate.build.signatures

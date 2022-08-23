@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate_common.models.manticore module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate_common.assertions module" href="mate_common.assertions.html" />
+    <link rel="prev" title="mate_common.models.integration module" href="mate_common.models.integration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATECommon API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate_common.html">mate_common package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate_common.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate_common.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATECommon API Reference</a> &raquo;</li>
+        
+          <li><a href="mate_common.html">mate_common package</a> &raquo;</li>
+        
+          <li><a href="mate_common.models.html">mate_common.models package</a> &raquo;</li>
+        
+      <li>mate_common.models.manticore module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATECommon/mate_common.models.manticore.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate_common.models.manticore">
+<span id="mate-common-models-manticore-module"></span><h1>mate_common.models.manticore module<a class="headerlink" href="#module-mate_common.models.manticore" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.manticore.ExploreFunctionOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.manticore.</span></span><span class="sig-name descname"><span class="pre">ExploreFunctionOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">docker_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">docker_memory_limit_mb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mebibytes</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">65536</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explore_msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.ExploreFunction" title="mate_common.models.integration.ExploreFunction"><span class="pre">mate_common.models.integration.ExploreFunction</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.manticore.ExploreFunctionOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.manticore._MantiserveTaskOptions</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>docker_image</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>docker_memory_limit_mb</strong> (<em>Mebibytes</em>) – </p></li>
+<li><p><strong>explore_msg</strong> (<a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.ExploreFunction" title="mate_common.models.integration.ExploreFunction"><em>mate_common.models.integration.ExploreFunction</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.ExploreFunctionOptions.explore_msg">
+<span class="sig-name descname"><span class="pre">explore_msg</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.ExploreFunction" title="mate_common.models.integration.ExploreFunction"><span class="pre">mate_common.models.integration.ExploreFunction</span></a></em><a class="headerlink" href="#mate_common.models.manticore.ExploreFunctionOptions.explore_msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>An Explore message that directs Manticore to explore one function
+using underconstrained symbolic execution.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.manticore.ExploreOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.manticore.</span></span><span class="sig-name descname"><span class="pre">ExploreOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">docker_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">docker_memory_limit_mb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mebibytes</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">65536</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explore_msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.Explore" title="mate_common.models.integration.Explore"><span class="pre">mate_common.models.integration.Explore</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.manticore.ExploreOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.manticore._MantiserveTaskOptions</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>docker_image</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>docker_memory_limit_mb</strong> (<em>Mebibytes</em>) – </p></li>
+<li><p><strong>explore_msg</strong> (<a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.Explore" title="mate_common.models.integration.Explore"><em>mate_common.models.integration.Explore</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.ExploreOptions.explore_msg">
+<span class="sig-name descname"><span class="pre">explore_msg</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.Explore" title="mate_common.models.integration.Explore"><span class="pre">mate_common.models.integration.Explore</span></a></em><a class="headerlink" href="#mate_common.models.manticore.ExploreOptions.explore_msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>An Explore message that allows Manticore to explore the
+executable without much direction. See the schema model for more
+information.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskInformation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.manticore.</span></span><span class="sig-name descname"><span class="pre">MantiserveTaskInformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artifact_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate_common.models.manticore.MantiserveTaskKind" title="mate_common.models.manticore.MantiserveTaskKind"><span class="pre">mate_common.models.manticore.MantiserveTaskKind</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate_common.models.manticore.MantiserveTaskState" title="mate_common.models.manticore.MantiserveTaskState"><span class="pre">mate_common.models.manticore.MantiserveTaskState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">docker_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pydantic.main.BaseModel</span></code></p>
+<p>Metadata about a Mantiserve task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task_id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>build_id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>artifact_ids</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="#mate_common.models.manticore.MantiserveTaskKind" title="mate_common.models.manticore.MantiserveTaskKind"><em>mate_common.models.manticore.MantiserveTaskKind</em></a>) – </p></li>
+<li><p><strong>request</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>result</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>state</strong> (<a class="reference internal" href="#mate_common.models.manticore.MantiserveTaskState" title="mate_common.models.manticore.MantiserveTaskState"><em>mate_common.models.manticore.MantiserveTaskState</em></a>) – </p></li>
+<li><p><strong>docker_image</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskInformation.artifact_ids">
+<span class="sig-name descname"><span class="pre">artifact_ids</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskInformation.artifact_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>The IDs of any artifacts associated with this Mantiserve task.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskInformation.build_id">
+<span class="sig-name descname"><span class="pre">build_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskInformation.build_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The associated MATE build’s ID.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskInformation.docker_image">
+<span class="sig-name descname"><span class="pre">docker_image</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskInformation.docker_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Docker image that the task was configured with, if any.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskInformation.kind">
+<span class="sig-name descname"><span class="pre">kind</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.manticore.MantiserveTaskKind" title="mate_common.models.manticore.MantiserveTaskKind"><span class="pre">mate_common.models.manticore.MantiserveTaskKind</span></a></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskInformation.kind" title="Permalink to this definition">¶</a></dt>
+<dd><p>The kind of Mantiserve task.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskInformation.request">
+<span class="sig-name descname"><span class="pre">request</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskInformation.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>The request that kicked off this Mantiserve task.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskInformation.result">
+<span class="sig-name descname"><span class="pre">result</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskInformation.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>The task’s result, if any.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskInformation.state">
+<span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate_common.models.manticore.MantiserveTaskState" title="mate_common.models.manticore.MantiserveTaskState"><span class="pre">mate_common.models.manticore.MantiserveTaskState</span></a></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskInformation.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>The task’s state.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskInformation.task_id">
+<span class="sig-name descname"><span class="pre">task_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskInformation.task_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The unique ID for this Mantiserve task.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskKind">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.manticore.</span></span><span class="sig-name descname"><span class="pre">MantiserveTaskKind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskKind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Supported Mantiserve tasks.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskKind.Explore">
+<span class="sig-name descname"><span class="pre">Explore</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Explore'</span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskKind.Explore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskKind.ExploreFunction">
+<span class="sig-name descname"><span class="pre">ExploreFunction</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ExploreFunction'</span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskKind.ExploreFunction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskKind.Reachability">
+<span class="sig-name descname"><span class="pre">Reachability</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Reachability'</span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskKind.Reachability" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskState">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.manticore.</span></span><span class="sig-name descname"><span class="pre">MantiserveTaskState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="mate_common.state_machine.html#mate_common.state_machine.StateMachineMixin" title="mate_common.state_machine.StateMachineMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.state_machine.StateMachineMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration of the different states that a <code class="docutils literal notranslate"><span class="pre">MantiserveTask</span></code> can be in.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskState.Completed">
+<span class="sig-name descname"><span class="pre">Completed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'completed'</span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskState.Completed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskState.Created">
+<span class="sig-name descname"><span class="pre">Created</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'created'</span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskState.Created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskState.Failed">
+<span class="sig-name descname"><span class="pre">Failed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'failed'</span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskState.Failed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.MantiserveTaskState.Running">
+<span class="sig-name descname"><span class="pre">Running</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'running'</span></em><a class="headerlink" href="#mate_common.models.manticore.MantiserveTaskState.Running" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.manticore.ReachabilityOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.manticore.</span></span><span class="sig-name descname"><span class="pre">ReachabilityOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">docker_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">docker_memory_limit_mb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mebibytes</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">65536</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reach_msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.Reachability" title="mate_common.models.integration.Reachability"><span class="pre">mate_common.models.integration.Reachability</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.manticore.ReachabilityOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.models.manticore._MantiserveTaskOptions</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>docker_image</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>docker_memory_limit_mb</strong> (<em>Mebibytes</em>) – </p></li>
+<li><p><strong>reach_msg</strong> (<a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.Reachability" title="mate_common.models.integration.Reachability"><em>mate_common.models.integration.Reachability</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.ReachabilityOptions.reach_msg">
+<span class="sig-name descname"><span class="pre">reach_msg</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.Reachability" title="mate_common.models.integration.Reachability"><span class="pre">mate_common.models.integration.Reachability</span></a></em><a class="headerlink" href="#mate_common.models.manticore.ReachabilityOptions.reach_msg" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Reachability message that directs Manticore along a path.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.manticore.UnderConstrainedOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.manticore.</span></span><span class="sig-name descname"><span class="pre">UnderConstrainedOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_until</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">native_array_size_policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><span class="pre">mate_common.models.integration.UnboundedPtrPolicy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex_array_size_policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><span class="pre">mate_common.models.integration.UnboundedPtrPolicy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_fix_errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><span class="pre">mate_common.models.manticore.UserDefinedConstraint</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.manticore.UnderConstrainedOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pydantic.main.BaseModel</span></code></p>
+<p>Input to the under-constrained plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_function</strong> (<em>str</em>) – </p></li>
+<li><p><strong>init_until</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>native_array_size_policy</strong> (<a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><em>mate_common.models.integration.UnboundedPtrPolicy</em></a>) – </p></li>
+<li><p><strong>complex_array_size_policy</strong> (<a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><em>mate_common.models.integration.UnboundedPtrPolicy</em></a>) – </p></li>
+<li><p><strong>auto_fix_errors</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>input_constraints</strong> (<em>List</em><em>[</em><a class="reference internal" href="#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><em>mate_common.models.manticore.UserDefinedConstraint</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.UnderConstrainedOptions.auto_fix_errors">
+<span class="sig-name descname"><span class="pre">auto_fix_errors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mate_common.models.manticore.UnderConstrainedOptions.auto_fix_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically fix out-of-bounds errors:
+- When False, manticore will terminate a state as soon as it results
+in a possible OOB error
+- When True, if manticore detects a possible OOB error, it will try
+to harden the state constraints to enforce the OOB to become a correct
+memory access, and then resume exploring the state</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.UnderConstrainedOptions.complex_array_size_policy">
+<span class="sig-name descname"><span class="pre">complex_array_size_policy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><span class="pre">mate_common.models.integration.UnboundedPtrPolicy</span></a></em><a class="headerlink" href="#mate_common.models.manticore.UnderConstrainedOptions.complex_array_size_policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Policy used to handle under-constrained raw pointers
+to complex types (SomeClass*, vector&lt;SomeClass&gt;*, …)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.UnderConstrainedOptions.init_until">
+<span class="sig-name descname"><span class="pre">init_until</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.manticore.UnderConstrainedOptions.init_until" title="Permalink to this definition">¶</a></dt>
+<dd><p>Address until which to run the program before jumping to the
+target function. If not specified, program will be initialised
+until it reaches main()</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.UnderConstrainedOptions.input_constraints">
+<span class="sig-name descname"><span class="pre">input_constraints</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><span class="pre">mate_common.models.manticore.UserDefinedConstraint</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.manticore.UnderConstrainedOptions.input_constraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional symbolic constraints to initialise manticore with</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.UnderConstrainedOptions.native_array_size_policy">
+<span class="sig-name descname"><span class="pre">native_array_size_policy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><span class="pre">mate_common.models.integration.UnboundedPtrPolicy</span></a></em><a class="headerlink" href="#mate_common.models.manticore.UnderConstrainedOptions.native_array_size_policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Policy used to handle under-constrained raw pointers
+to native types (int*, char*, …)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.manticore.UnderConstrainedOptions.target_function">
+<span class="sig-name descname"><span class="pre">target_function</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate_common.models.manticore.UnderConstrainedOptions.target_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to execute in under-constrained mode</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.manticore.UserDefinedConstraint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.manticore.</span></span><span class="sig-name descname"><span class="pre">UserDefinedConstraint</span></span><a class="headerlink" href="#mate_common.models.manticore.UserDefinedConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<p>A symbolic constraint defined by the user.</p>
+<p>It consists simply in a string that will later be translated into actual Constraint objects by
+manticore itself</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate_common.assertions.html" class="btn btn-neutral float-right" title="mate_common.assertions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate_common.models.integration.html" class="btn btn-neutral float-left" title="mate_common.models.integration module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

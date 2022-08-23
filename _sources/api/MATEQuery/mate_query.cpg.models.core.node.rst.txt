@@ -1,0 +1,7 @@
+mate\_query.cpg.models.core.node module
+=======================================
+
+.. automodule:: mate_query.cpg.models.core.node
+   :members:
+   :undoc-members:
+   :show-inheritance:

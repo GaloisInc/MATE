@@ -1,0 +1,7 @@
+MATECommon API Reference
+========================
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_common

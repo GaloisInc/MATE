@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>dwarfcore.dwarfcore module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="dwarfcore.helper module" href="dwarfcore.helper.html" />
+    <link rel="prev" title="dwarfcore.plugins.heap_common module" href="dwarfcore.plugins.heap_common.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Dwarfcore API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="dwarfcore.html">dwarfcore package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dwarfcore.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="dwarfcore.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">Dwarfcore API Reference</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.html">dwarfcore package</a> &raquo;</li>
+        
+      <li>dwarfcore.dwarfcore module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/Dwarfcore/dwarfcore.dwarfcore.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-dwarfcore.dwarfcore">
+<span id="dwarfcore-dwarfcore-module"></span><h1>dwarfcore.dwarfcore module<a class="headerlink" href="#module-dwarfcore.dwarfcore" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the DwarfCore class that plugins will use to query DWARF information.</p>
+<p>DwarfCore does not actually parse the DWARF information itself. It extracts the
+information from the MATE CPG.</p>
+<p>There could be a difference between what Manticore uses for the VA of a
+function or location and what DWARF information lists. Care must be taken
+to make sure that the correct associated VA is used. One case this occurs is
+when a binary is compiled with a dynamic base address, i.e.
+position-independent code (PIC) with the <code class="docutils literal notranslate"><span class="pre">ET_DYN</span></code> ELF attribute. The DWARF
+information will report from a 0x0 offset, but Manticore loads the code at an
+arbitrary offset (see Manticore’s <code class="docutils literal notranslate"><span class="pre">Linux.BASE_DYN_ADDR_32</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Linux.BASE_DYN_ADDR</span></code> constants).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.Address">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.dwarfcore.</span></span><span class="sig-name descname"><span class="pre">Address</span></span><a class="headerlink" href="#dwarfcore.dwarfcore.Address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+<p>Convenience class for pretty-printing addresses.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfAddress">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.dwarfcore.</span></span><span class="sig-name descname"><span class="pre">DwarfAddress</span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dwarfcore.dwarfcore.Address" title="dwarfcore.dwarfcore.Address"><code class="xref py py-class docutils literal notranslate"><span class="pre">dwarfcore.dwarfcore.Address</span></code></a></p>
+<p>An address that DWARF debug info uses.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.dwarfcore.</span></span><span class="sig-name descname"><span class="pre">DwarfCore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph"><span class="pre">mate_query.db.Graph</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">program_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Session" title="mate_query.db.Session"><em>Session</em></a>) – </p></li>
+<li><p><strong>cpg</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph"><em>Graph</em></a>) – </p></li>
+<li><p><strong>program_path</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Path" title="mate_query.db.Path"><em>Path</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.all_functions">
+<span class="sig-name descname"><span class="pre">all_functions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarfcore.dwarfcore.DwarfAddress" title="dwarfcore.dwarfcore.DwarfAddress"><span class="pre">dwarfcore.dwarfcore.DwarfAddress</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.all_functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all known functions, local and dynamic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Mapping of DWARF address to function name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dict[<a class="reference internal" href="#dwarfcore.dwarfcore.DwarfAddress" title="dwarfcore.dwarfcore.DwarfAddress">dwarfcore.dwarfcore.DwarfAddress</a>, str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.first_insn_writing_to_reg">
+<span class="sig-name descname"><span class="pre">first_insn_writing_to_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">disasm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">capstone.Cs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.first_insn_writing_to_reg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the first instruction that writes to the register reg_name in the given code segment
+with the given disassembler.</p>
+<p>Returns the first offset of the instruction that writes to the register
+or None if no instructions in the range write to the register</p>
+<p>A use case is to find when a function prologue writes to the base
+pointer register that begins the scope of stack-based variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>disasm</strong> (<em>capstone.Cs</em>) – </p></li>
+<li><p><strong>code</strong> (<em>bytes</em>) – </p></li>
+<li><p><strong>reg_name</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.func_addr_tree">
+<span class="sig-name descname"><span class="pre">func_addr_tree</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../MATE/mate.build.tob_chess_utils.range_avl_tree.html#mate.build.tob_chess_utils.range_avl_tree.RangeAVL" title="mate.build.tob_chess_utils.range_avl_tree.RangeAVL"><span class="pre">mate.build.tob_chess_utils.range_avl_tree.RangeAVL</span></a></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.func_addr_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data structure for fast lookup of mapping from DWARF VA to function name.</p>
+<p>This is useful because a function is a _range_ of VAs, and a RangeAVL
+tree will take care of comparing bounds on the passed VA to find the
+correct function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>RangeAVL tree of DWARF VA to function name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../MATE/mate.build.tob_chess_utils.range_avl_tree.html#mate.build.tob_chess_utils.range_avl_tree.RangeAVL" title="mate.build.tob_chess_utils.range_avl_tree.RangeAVL">mate.build.tob_chess_utils.range_avl_tree.RangeAVL</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.func_name_from_va">
+<span class="sig-name descname"><span class="pre">func_name_from_va</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress"><span class="pre">dwarfcore.dwarfcore.ManticoreAddress</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">manticore.core.smtlib.expression.Expression</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.func_name_from_va" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the mangled function name from a given Manticore VA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.dwarfcore.DwarfCore.func_name_from_va.params.va"></span><strong>va</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.dwarfcore.DwarfCore.func_name_from_va.params.va">¶</a> – Manticore VA</p></li>
+<li><p><strong>va</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress"><em>dwarfcore.dwarfcore.ManticoreAddress</em></a><em>, </em><em>manticore.core.smtlib.expression.Expression</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function name or None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Optional[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.last_insn_writing_to_reg">
+<span class="sig-name descname"><span class="pre">last_insn_writing_to_reg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">disasm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">capstone.Cs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.last_insn_writing_to_reg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the last instruction that writes to the register in the given code segment.</p>
+<p>Returns the last offset of the instruction that writes to the register
+or None if no instructions in the range write to the register</p>
+<p>A use case is to find when a function prologue writes to the base
+pointer register that ends the scope of stack-based variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>disasm</strong> (<em>capstone.Cs</em>) – </p></li>
+<li><p><strong>code</strong> (<em>bytes</em>) – </p></li>
+<li><p><strong>reg_name</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.source_info_from_va">
+<span class="sig-name descname"><span class="pre">source_info_from_va</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binary_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress"><span class="pre">dwarfcore.dwarfcore.ManticoreAddress</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../MATE/mate.build.tob_chess_utils.dwarf.html#mate.build.tob_chess_utils.dwarf.SourceCodeInfo" title="mate.build.tob_chess_utils.dwarf.SourceCodeInfo"><span class="pre">mate.build.tob_chess_utils.dwarf.SourceCodeInfo</span></a></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.source_info_from_va" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>binary_path</strong> (<em>str</em>) – </p></li>
+<li><p><strong>va</strong> (<a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress"><em>dwarfcore.dwarfcore.ManticoreAddress</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../MATE/mate.build.tob_chess_utils.dwarf.html#mate.build.tob_chess_utils.dwarf.SourceCodeInfo" title="mate.build.tob_chess_utils.dwarf.SourceCodeInfo">mate.build.tob_chess_utils.dwarf.SourceCodeInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.start_va_of_function">
+<span class="sig-name descname"><span class="pre">start_va_of_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarfcore.dwarfcore.DwarfAddress" title="dwarfcore.dwarfcore.DwarfAddress"><span class="pre">dwarfcore.dwarfcore.DwarfAddress</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.start_va_of_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the start VA (DWARF-VA) of given function or None if not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.dwarfcore.DwarfCore.start_va_of_function.params.func"></span><strong>func</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.dwarfcore.DwarfCore.start_va_of_function.params.func">¶</a> – Function name</p></li>
+<li><p><strong>func</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DWARF VA or None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Optional[<a class="reference internal" href="#dwarfcore.dwarfcore.DwarfAddress" title="dwarfcore.dwarfcore.DwarfAddress">dwarfcore.dwarfcore.DwarfAddress</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.start_va_of_function_m">
+<span class="sig-name descname"><span class="pre">start_va_of_function_m</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress"><span class="pre">dwarfcore.dwarfcore.ManticoreAddress</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.start_va_of_function_m" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the start VA (Manticore-VA) of given function or None if not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.dwarfcore.DwarfCore.start_va_of_function_m.params.func"></span><strong>func</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.dwarfcore.DwarfCore.start_va_of_function_m.params.func">¶</a> – Function name</p></li>
+<li><p><strong>func</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Manticore VA or None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Optional[<a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress">dwarfcore.dwarfcore.ManticoreAddress</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.va_to_func_in_cpg">
+<span class="sig-name descname"><span class="pre">va_to_func_in_cpg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress"><span class="pre">ManticoreAddress</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Expression</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">MachineFunction</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.va_to_func_in_cpg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the DWARF information for a function, given a Manticore VA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.dwarfcore.DwarfCore.va_to_func_in_cpg.params.va"></span><strong>va</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.dwarfcore.DwarfCore.va_to_func_in_cpg.params.va">¶</a> – Manticore VA</p></li>
+<li><p><strong>va</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress"><em>ManticoreAddress</em></a><em>, </em><em>Expression</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Function information or None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Optional[<a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.ast.mc.html#mate_query.cpg.models.node.ast.mc.MachineFunction" title="mate_query.cpg.models.node.ast.mc.MachineFunction">MachineFunction</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfCore.variables_at_va">
+<span class="sig-name descname"><span class="pre">variables_at_va</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress"><span class="pre">dwarfcore.dwarfcore.ManticoreAddress</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">manticore.core.smtlib.expression.Expression</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.native.state.State</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">manticore.native.cpu.abstractcpu.RegisterFile</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATE/mate.build.tob_chess_utils.dwarf.html#mate.build.tob_chess_utils.dwarf.MantiDwarfTypeInfo" title="mate.build.tob_chess_utils.dwarf.MantiDwarfTypeInfo"><span class="pre">mate.build.tob_chess_utils.dwarf.MantiDwarfTypeInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfCore.variables_at_va" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the variables that are in scope at a Manticore VA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.dwarfcore.DwarfCore.variables_at_va.params.va"></span><strong>va</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.dwarfcore.DwarfCore.variables_at_va.params.va">¶</a> – Manticore VA of instruction to be executed</p></li>
+<li><p><span class="target" id="dwarfcore.dwarfcore.DwarfCore.variables_at_va.params.state"></span><strong>state</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.dwarfcore.DwarfCore.variables_at_va.params.state">¶</a> – Manticore state to look up register values</p></li>
+<li><p><span class="target" id="dwarfcore.dwarfcore.DwarfCore.variables_at_va.params.regfile"></span><strong>regfile</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.dwarfcore.DwarfCore.variables_at_va.params.regfile">¶</a> – Optional register file to use for register values
+instead of from state’s</p></li>
+<li><p><strong>va</strong> (<em>Union</em><em>[</em><a class="reference internal" href="#dwarfcore.dwarfcore.ManticoreAddress" title="dwarfcore.dwarfcore.ManticoreAddress"><em>dwarfcore.dwarfcore.ManticoreAddress</em></a><em>, </em><em>manticore.core.smtlib.expression.Expression</em><em>]</em>) – </p></li>
+<li><p><strong>state</strong> (<em>manticore.native.state.State</em>) – </p></li>
+<li><p><strong>regfile</strong> (<em>Optional</em><em>[</em><em>manticore.native.cpu.abstractcpu.RegisterFile</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Mapping of variables where keys are “params” and “vars”
+and the values are custom dictionary that describe the variables</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="../MATE/mate.build.tob_chess_utils.dwarf.html#mate.build.tob_chess_utils.dwarf.MantiDwarfTypeInfo" title="mate.build.tob_chess_utils.dwarf.MantiDwarfTypeInfo">mate.build.tob_chess_utils.dwarf.MantiDwarfTypeInfo</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.DwarfcoreException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.dwarfcore.</span></span><span class="sig-name descname"><span class="pre">DwarfcoreException</span></span><a class="headerlink" href="#dwarfcore.dwarfcore.DwarfcoreException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Generic dwarfcore exception.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.ManticoreAddress">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.dwarfcore.</span></span><span class="sig-name descname"><span class="pre">ManticoreAddress</span></span><a class="headerlink" href="#dwarfcore.dwarfcore.ManticoreAddress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dwarfcore.dwarfcore.Address" title="dwarfcore.dwarfcore.Address"><code class="xref py py-class docutils literal notranslate"><span class="pre">dwarfcore.dwarfcore.Address</span></code></a></p>
+<p>An address that Manticore uses.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.VariableOperations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.dwarfcore.</span></span><span class="sig-name descname"><span class="pre">VariableOperations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">write</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.dwarfcore.VariableOperations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>read</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>write</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.VariableOperations.read">
+<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dwarfcore.dwarfcore.VariableOperations.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.VariableOperations.write">
+<span class="sig-name descname"><span class="pre">write</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dwarfcore.dwarfcore.VariableOperations.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.dwarfcore.variables_for_function">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.dwarfcore.</span></span><span class="sig-name descname"><span class="pre">variables_for_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph"><span class="pre">mate_query.db.Graph</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#dwarfcore.dwarfcore.variables_for_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all variables this function could access during execution.</p>
+<p>This includes locals, arguments, and globals</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.dwarfcore.variables_for_function.params.cpg"></span><strong>cpg</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.dwarfcore.variables_for_function.params.cpg">¶</a> – CPG handle</p></li>
+<li><p><span class="target" id="dwarfcore.dwarfcore.variables_for_function.params.func_name"></span><strong>func_name</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.dwarfcore.variables_for_function.params.func_name">¶</a> – Function name to lookup</p></li>
+<li><p><strong>session</strong> (<em>sqlalchemy.orm.session.Session</em>) – </p></li>
+<li><p><strong>cpg</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph"><em>mate_query.db.Graph</em></a>) – </p></li>
+<li><p><strong>func_name</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of variables that the function could access</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dwarfcore.helper.html" class="btn btn-neutral float-right" title="dwarfcore.helper module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dwarfcore.plugins.heap_common.html" class="btn btn-neutral float-left" title="dwarfcore.plugins.heap_common module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

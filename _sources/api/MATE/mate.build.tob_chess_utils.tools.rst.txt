@@ -1,0 +1,18 @@
+mate.build.tob\_chess\_utils.tools package
+==========================================
+
+.. automodule:: mate.build.tob_chess_utils.tools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.build.tob_chess_utils.tools.aspirin
+   mate.build.tob_chess_utils.tools.margin
+   mate.build.tob_chess_utils.tools.migraine
+   mate.build.tob_chess_utils.tools.quotidian

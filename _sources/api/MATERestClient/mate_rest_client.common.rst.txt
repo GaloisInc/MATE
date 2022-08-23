@@ -1,0 +1,7 @@
+mate\_rest\_client.common module
+================================
+
+.. automodule:: mate_rest_client.common
+   :members:
+   :undoc-members:
+   :show-inheritance:

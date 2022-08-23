@@ -1,0 +1,7 @@
+mate\_query.cpg.query.cfg\_avoiding module
+==========================================
+
+.. automodule:: mate_query.cpg.query.cfg_avoiding
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+mate.build.tob\_chess\_utils.types module
+=========================================
+
+.. automodule:: mate.build.tob_chess_utils.types
+   :members:
+   :undoc-members:
+   :show-inheritance:

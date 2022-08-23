@@ -1,0 +1,7 @@
+mate.tasks.analyze module
+=========================
+
+.. automodule:: mate.tasks.analyze
+   :members:
+   :undoc-members:
+   :show-inheritance:

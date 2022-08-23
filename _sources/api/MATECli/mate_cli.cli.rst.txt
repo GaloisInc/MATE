@@ -1,0 +1,7 @@
+mate\_cli.cli module
+====================
+
+.. automodule:: mate_cli.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:

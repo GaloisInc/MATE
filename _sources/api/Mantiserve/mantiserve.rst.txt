@@ -1,0 +1,29 @@
+mantiserve package
+==================
+
+.. automodule:: mantiserve
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mantiserve.tasks
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mantiserve.apogee_ex1_specific
+   mantiserve.context
+   mantiserve.exceptions
+   mantiserve.hooks
+   mantiserve.liftsmt2
+   mantiserve.logging
+   mantiserve.mantireach

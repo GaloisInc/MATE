@@ -1,0 +1,7 @@
+mate\_query.cpg.models.node.dwarf module
+========================================
+
+.. automodule:: mate_query.cpg.models.node.dwarf
+   :members:
+   :undoc-members:
+   :show-inheritance:

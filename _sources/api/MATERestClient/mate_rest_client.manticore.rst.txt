@@ -1,0 +1,7 @@
+mate\_rest\_client.manticore module
+===================================
+
+.. automodule:: mate_rest_client.manticore
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+mantiserve.exceptions module
+============================
+
+.. automodule:: mantiserve.exceptions
+   :members:
+   :undoc-members:
+   :show-inheritance:

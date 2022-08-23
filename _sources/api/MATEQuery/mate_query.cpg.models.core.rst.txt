@@ -1,0 +1,19 @@
+mate\_query.cpg.models.core package
+===================================
+
+.. automodule:: mate_query.cpg.models.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_query.cpg.models.core.base
+   mate_query.cpg.models.core.cpg
+   mate_query.cpg.models.core.edge
+   mate_query.cpg.models.core.node
+   mate_query.cpg.models.core.relationships

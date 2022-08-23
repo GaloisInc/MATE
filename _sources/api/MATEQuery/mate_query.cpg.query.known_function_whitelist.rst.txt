@@ -1,0 +1,7 @@
+mate\_query.cpg.query.known\_function\_whitelist module
+=======================================================
+
+.. automodule:: mate_query.cpg.query.known_function_whitelist
+   :members:
+   :undoc-members:
+   :show-inheritance:

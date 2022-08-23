@@ -1,0 +1,1914 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate_query.cpg.models.node.ast.llvm module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate_query.cpg.models.node.ast.mc module" href="mate_query.cpg.models.node.ast.mc.html" />
+    <link rel="prev" title="mate_query.cpg.models.node.ast.bin module" href="mate_query.cpg.models.node.ast.bin.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATEQuery API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate_query.html">mate_query package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate_query.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate_query.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATEQuery API Reference</a> &raquo;</li>
+        
+          <li><a href="mate_query.html">mate_query package</a> &raquo;</li>
+        
+          <li><a href="mate_query.cpg.html">mate_query.cpg package</a> &raquo;</li>
+        
+          <li><a href="mate_query.cpg.models.html">mate_query.cpg.models package</a> &raquo;</li>
+        
+          <li><a href="mate_query.cpg.models.node.html">mate_query.cpg.models.node package</a> &raquo;</li>
+        
+          <li><a href="mate_query.cpg.models.node.ast.html">mate_query.cpg.models.node.ast package</a> &raquo;</li>
+        
+      <li>mate_query.cpg.models.node.ast.llvm module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATEQuery/mate_query.cpg.models.node.ast.llvm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate_query.cpg.models.node.ast.llvm">
+<span id="mate-query-cpg-models-node-ast-llvm-module"></span><h1>mate_query.cpg.models.node.ast.llvm module<a class="headerlink" href="#module-mate_query.cpg.models.node.ast.llvm" title="Permalink to this headline">¶</a></h1>
+<p>Nodes in the LLVM AST.</p>
+<p>At runtime, the models here are accessed via attributes on a CPG, not directly.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Alloca">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Alloca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Alloca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Instruction" title="mate_query.cpg.models.node.ast.llvm.Instruction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Instruction</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">alloca</span></code> instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Alloca.variable">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Alloca.variable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Argument">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Argument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Argument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Variable" title="mate_query.cpg.models.node.ast.llvm.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Variable</span></code></a></p>
+<p>A formal parameter to an LLVM function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Argument.allocation_site">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allocation_site</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Argument.allocation_site" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Argument.argument_number">
+<span class="sig-name descname"><span class="pre">argument_number</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Argument.argument_number" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Argument.as_dwarf">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">as_dwarf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Argument.as_dwarf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Argument.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Argument.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>A location in a source-language file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Argument.memory_locations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">memory_locations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">MemoryLocation</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Argument.memory_locations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Argument.might_be_null">
+<span class="sig-name descname"><span class="pre">might_be_null</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Argument.might_be_null" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when the pointer analysis determines the parameter could be a null pointer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Argument.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Argument.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The source-level name of this formal parameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>LLVM IR basic blocks</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block.controls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">controls</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block.controls" title="Permalink to this definition">¶</a></dt>
+<dd><p>The blocks controlled by this block.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block.entry">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block.entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>The entry instruction for this block.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block.instructions">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instructions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block.instructions" title="Permalink to this definition">¶</a></dt>
+<dd><p>All instructions in this block.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block.label">
+<span class="sig-name descname"><span class="pre">label</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block.label" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block.mi_blocks">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mi_blocks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block.mi_blocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>All middle-end blocks (<a href="#id1"><span class="problematic" id="id2">``</span></a>MachineBasicBlock``s) for this IR block.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block.pretty_string">
+<span class="sig-name descname"><span class="pre">pretty_string</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block.pretty_string" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block.sorted_mi_blocks">
+<span class="sig-name descname"><span class="pre">sorted_mi_blocks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">typing.Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Node</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block.sorted_mi_blocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a href="#id3"><span class="problematic" id="id4">``</span></a>MachineBasicBlock``s for this block, sorted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>typing.Iterable[<a class="reference internal" href="mate_query.cpg.models.core.node.html#mate_query.cpg.models.core.node.Node" title="mate_query.cpg.models.core.node.Node">Node</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block.successors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">successors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block.successors" title="Permalink to this definition">¶</a></dt>
+<dd><p>The successor blocks for this block.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Block.terminator">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminator</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Block.terminator" title="Permalink to this definition">¶</a></dt>
+<dd><p>The terminator instruction for this block.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CSComparator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">CSComparator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CSComparator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.ext.hybrid.Comparator</span></code></p>
+<p>A specialized SQLAlchemy Comparator for <code class="docutils literal notranslate"><span class="pre">ConstantString</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CSComparator.operate">
+<span class="sig-name descname"><span class="pre">operate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CSComparator.operate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Operate on an argument.</p>
+<p>This is the lowest level of operation, raises
+<code class="xref py py-class docutils literal notranslate"><span class="pre">NotImplementedError</span></code> by default.</p>
+<p>Overriding this on a subclass can allow common
+behavior to be applied to all operations.
+For example, overriding <code class="xref py py-class docutils literal notranslate"><span class="pre">ColumnOperators</span></code>
+to apply <code class="docutils literal notranslate"><span class="pre">func.lower()</span></code> to the left and right
+side:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyComparator</span><span class="p">(</span><span class="n">ColumnOperators</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">operate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">func</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="mate_query.cpg.models.node.ast.llvm.CSComparator.operate.params.op"></span><strong>op</strong><a class="paramlink headerlink reference internal" href="#mate_query.cpg.models.node.ast.llvm.CSComparator.operate.params.op">¶</a> – Operator callable.</p></li>
+<li><p><span class="target" id="mate_query.cpg.models.node.ast.llvm.CSComparator.operate.params.*other"></span><strong>*other</strong><a class="paramlink headerlink reference internal" href="#mate_query.cpg.models.node.ast.llvm.CSComparator.operate.params.*other">¶</a> – the ‘other’ side of the operation. Will
+be a single scalar for most operations.</p></li>
+<li><p><span class="target" id="mate_query.cpg.models.node.ast.llvm.CSComparator.operate.params.**kwargs"></span><strong>**kwargs</strong><a class="paramlink headerlink reference internal" href="#mate_query.cpg.models.node.ast.llvm.CSComparator.operate.params.**kwargs">¶</a> – modifiers.  These may be passed by special
+operators such as <code class="xref py py-meth docutils literal notranslate"><span class="pre">ColumnOperators.contains()</span></code>.</p></li>
+<li><p><strong>op</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>other</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>_kwargs</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CSComparator.prop">
+<span class="sig-name descname"><span class="pre">prop</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CSComparator.prop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CSComparator.property">
+<span class="sig-name descname"><span class="pre">property</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CSComparator.property" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Call">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.CallSite" title="mate_query.cpg.models.node.ast.llvm.CallSite"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.CallSite</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">call</span></code> instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Call.is_direct">
+<span class="sig-name descname"><span class="pre">is_direct</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Call.is_direct" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallReturn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">CallReturn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>A node that connects a value used in a return statement to the corresponding call site.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallReturn.bindings">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bindings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallReturn.bindings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallReturn.callsite">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callsite</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallReturn.callsite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallReturn.instruction">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instruction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallReturn.instruction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallReturn.returns_from">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">returns_from</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallReturn.returns_from" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallReturn.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallReturn.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">CallSite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Instruction" title="mate_query.cpg.models.node.ast.llvm.Instruction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Instruction</span></code></a></p>
+<p>LLVM IR instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument1">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument2">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument3">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument4">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument4</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument5">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument5</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument6">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument6</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument7">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument7</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument8">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument8</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument9">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument9</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.argument_relationship">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">RelationshipProperty</span></span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.argument_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cpg</strong> (<em>CPG</em>) – </p></li>
+<li><p><strong>number</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>RelationshipProperty</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.callee_operand">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callee_operand</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.callee_operand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.calls">
+<span class="sig-name descname"><span class="pre">calls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">fns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.calls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.CallSite.signatures">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">signatures</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.CallSite.signatures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>A constant value in the LLVM IR</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.can_trap">
+<span class="sig-name descname"><span class="pre">can_trap</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.can_trap" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if evaluation of this constant could trap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.constant_data_subclass">
+<span class="sig-name descname"><span class="pre">constant_data_subclass</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.constant_data_subclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this constant had a type that was a subclass of the LLVM class ConstantData, which subclass was it?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.contains_undef">
+<span class="sig-name descname"><span class="pre">contains_undef</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.contains_undef" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if this is a vector constant that includes any undefined elements</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.is_all_ones_value">
+<span class="sig-name descname"><span class="pre">is_all_ones_value</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.is_all_ones_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if this is the value that would be returned by LLVM’s getAllOnesValue</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.is_nan">
+<span class="sig-name descname"><span class="pre">is_nan</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.is_nan" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if this is a floating-point NaN constant or a vector floating-point constant with all NaN elements</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.is_normal_fp">
+<span class="sig-name descname"><span class="pre">is_normal_fp</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.is_normal_fp" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if this is a normal (as opposed to denormal) floating-point scalar constant or a vector constant with all normal elements</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.is_null_value">
+<span class="sig-name descname"><span class="pre">is_null_value</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.is_null_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if this is the value that would be returned by LLVM’s getNullValue</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.is_one_value">
+<span class="sig-name descname"><span class="pre">is_one_value</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.is_one_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if the value is one</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.is_zero_value">
+<span class="sig-name descname"><span class="pre">is_zero_value</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.is_zero_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if the value is negative zero or null value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Constant.pretty_string">
+<span class="sig-name descname"><span class="pre">pretty_string</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Constant.pretty_string" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ConstantFP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">ConstantFP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ConstantFP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Constant" title="mate_query.cpg.models.node.ast.llvm.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Constant</span></code></a></p>
+<p>A constant floating point value in the LLVM IR</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ConstantInt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">ConstantInt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ConstantInt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Constant" title="mate_query.cpg.models.node.ast.llvm.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Constant</span></code></a></p>
+<p>A constant int value in the LLVM IR</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ConstantInt.constant_int_value">
+<span class="sig-name descname"><span class="pre">constant_int_value</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ConstantInt.constant_int_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value of this integer constant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ConstantString">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">ConstantString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ConstantString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Constant" title="mate_query.cpg.models.node.ast.llvm.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Constant</span></code></a></p>
+<p>A constant string value in the LLVM IR</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ConstantString.string_value">
+<span class="sig-name descname"><span class="pre">string_value</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ConstantString.string_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ConstantUndef">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">ConstantUndef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ConstantUndef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Constant" title="mate_query.cpg.models.node.ast.llvm.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Constant</span></code></a></p>
+<p>An undef value in the LLVM IR</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>LLVM IR functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.alignment">
+<span class="sig-name descname"><span class="pre">alignment</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.alignment" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.arguments">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">arguments</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.as_salient">
+<span class="sig-name descname"><span class="pre">as_salient</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../MATECommon/mate_common.models.analyses.html#mate_common.models.analyses.SalientFunction" title="mate_common.models.analyses.SalientFunction"><span class="pre">mate_common.models.analyses.SalientFunction</span></a></span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.as_salient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <code class="docutils literal notranslate"><span class="pre">SalientFunction</span></code> from this <code class="docutils literal notranslate"><span class="pre">Function</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../MATECommon/mate_common.models.analyses.html#mate_common.models.analyses.SalientFunction" title="mate_common.models.analyses.SalientFunction">mate_common.models.analyses.SalientFunction</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.blocks">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">blocks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.blocks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.callees">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callees</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.callees" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.callsites">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callsites</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.callsites" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.demangled_name">
+<span class="sig-name descname"><span class="pre">demangled_name</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.demangled_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The demangled name of the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.entry_block">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entry_block</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.entry_block" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.entry_controls_blocks">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entry_controls_blocks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.entry_controls_blocks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.entry_controls_instructions">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entry_controls_instructions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.entry_controls_instructions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.is_declaration">
+<span class="sig-name descname"><span class="pre">is_declaration</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.is_declaration" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if this function has no definition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>A location in a source-language file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.machine_functions">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">machine_functions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.machine_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the LLVM function. For functions generated by compiling C code, this is often the same name that appears in the source, e.g. <a class="reference external" href="mailto:'&#37;&#52;&#48;recv">‘<span>&#64;</span>recv</a>’ (at the LLVM level) corresponds to ‘recv’ (at the C level). However, compiled from other languages, the names will often be mangled. The source-level name will generally appear as a substring in the LLVM-level name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.plt_stub">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plt_stub</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.plt_stub" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.pretty_string">
+<span class="sig-name descname"><span class="pre">pretty_string</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.pretty_string" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.section">
+<span class="sig-name descname"><span class="pre">section</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.section" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Function.signatures">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">signatures</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Function.signatures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">GlobalVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Variable" title="mate_query.cpg.models.node.ast.llvm.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Variable</span></code></a></p>
+<p>A program global variable at the LLVM level</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable.alignment">
+<span class="sig-name descname"><span class="pre">alignment</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable.alignment" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable.has_initializer">
+<span class="sig-name descname"><span class="pre">has_initializer</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable.has_initializer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable.initializer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initializer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable.initializer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable.is_constant">
+<span class="sig-name descname"><span class="pre">is_constant</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable.is_constant" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable.is_declaration">
+<span class="sig-name descname"><span class="pre">is_declaration</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable.is_declaration" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if this global variable has no definition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>A location in a source-language file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable.memory_locations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">memory_locations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">MemoryLocation</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable.memory_locations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.GlobalVariable.section">
+<span class="sig-name descname"><span class="pre">section</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.GlobalVariable.section" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Instruction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>LLVM IR instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.controls">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">controls</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.intrinsic">
+<span class="sig-name descname"><span class="pre">intrinsic</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.intrinsic" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this field is set, this instruction is a call to an LLVM intrinsic function, and this field is the ID of that intrinsic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>A location in a source-language file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.might_be_null">
+<span class="sig-name descname"><span class="pre">might_be_null</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.might_be_null" title="Permalink to this definition">¶</a></dt>
+<dd><p>True when the pointer analysis determines the value could be a null pointer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.opcode">
+<span class="sig-name descname"><span class="pre">opcode</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.opcode" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand0">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand1">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand1</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand2">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand2</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand3">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand3</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand4">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand4</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand5">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand5</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand6">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand6</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand7">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand7</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand8">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand8</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand9">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand9</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.operand_relationship">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand_relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cpg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operand_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operand_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">Node</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">RelationshipProperty</span></span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.operand_relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifications of the operands of an LLVM instruction.</p>
+<p>Arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cpg</span></code>: The CPG</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operand_number</span></code>: The operand number</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operand_class</span></code>: The <code class="docutils literal notranslate"><span class="pre">Node</span></code> subclass that should be on the other end
+of the use edge/relationship, if it’s more specific than LLVM’s <code class="docutils literal notranslate"><span class="pre">Value</span></code>
+class (e.g. the first operand of a <code class="docutils literal notranslate"><span class="pre">CallSite</span></code>) node should be a
+<code class="docutils literal notranslate"><span class="pre">Function</span></code>, but the other operands could be any <code class="docutils literal notranslate"><span class="pre">Node</span></code> in the LLVM
+AST).</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cpg</strong> (<em>CPG</em>) – </p></li>
+<li><p><strong>operand_number</strong> (<em>int</em>) – </p></li>
+<li><p><strong>operand_class</strong> (<em>Optional</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="mate_query.cpg.models.core.node.html#mate_query.cpg.models.core.node.Node" title="mate_query.cpg.models.core.node.Node"><em>Node</em></a><em>]</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>RelationshipProperty</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.pretty_string">
+<span class="sig-name descname"><span class="pre">pretty_string</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.pretty_string" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.ssa_name">
+<span class="sig-name descname"><span class="pre">ssa_name</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.ssa_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the SSA variable that this instruction ‘returns’ to, if set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.successors">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">successors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.successors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Instruction.uses">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">uses</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Instruction.uses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Intrinsic">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Intrinsic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Intrinsic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Call" title="mate_query.cpg.models.node.ast.llvm.Call"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Call</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">call</span></code> instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Intrinsic.overloaded">
+<span class="sig-name descname"><span class="pre">overloaded</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Intrinsic.overloaded" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Invoke">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Invoke</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Invoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.CallSite" title="mate_query.cpg.models.node.ast.llvm.CallSite"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.CallSite</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">invoke</span></code> instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Invoke.is_direct">
+<span class="sig-name descname"><span class="pre">is_direct</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Invoke.is_direct" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">LLVMType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>A type in the LLVM type system. See <a class="reference external" href="https://llvm.org/docs/LangRef.html#type-system">https://llvm.org/docs/LangRef.html#type-system</a> for details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.abi_type_alignment">
+<span class="sig-name descname"><span class="pre">abi_type_alignment</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.abi_type_alignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>the minimum ABI-required alignment for this type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.alloc_size_in_bits">
+<span class="sig-name descname"><span class="pre">alloc_size_in_bits</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.alloc_size_in_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>the offset in bits between successive objects of the specified type, including alignment padding; always a multiple of 8</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.arguments">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">arguments</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.arguments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.array_size">
+<span class="sig-name descname"><span class="pre">array_size</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.array_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.blocks">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">blocks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.blocks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.constants">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">constants</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.constants" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.definition">
+<span class="sig-name descname"><span class="pre">definition</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.definition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.functions">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">functions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.get" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.global_variables">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">global_variables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.global_variables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.instructions">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">instructions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.instructions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.is_array_type">
+<span class="sig-name descname"><span class="pre">is_array_type</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.is_array_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.is_function_type">
+<span class="sig-name descname"><span class="pre">is_function_type</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.is_function_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.is_named_struct_type">
+<span class="sig-name descname"><span class="pre">is_named_struct_type</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.is_named_struct_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.is_pointer_type">
+<span class="sig-name descname"><span class="pre">is_pointer_type</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.is_pointer_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.is_struct_type">
+<span class="sig-name descname"><span class="pre">is_struct_type</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.is_struct_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.is_void">
+<span class="sig-name descname"><span class="pre">is_void</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.is_void" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.pretty_string">
+<span class="sig-name descname"><span class="pre">pretty_string</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.pretty_string" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.size_in_bits">
+<span class="sig-name descname"><span class="pre">size_in_bits</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.size_in_bits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LLVMType.store_size_in_bits">
+<span class="sig-name descname"><span class="pre">store_size_in_bits</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LLVMType.store_size_in_bits" title="Permalink to this definition">¶</a></dt>
+<dd><p>the maximum number of bits that may be overwritten by storing the specified type; always a multiple of 8</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Load">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Instruction" title="mate_query.cpg.models.node.ast.llvm.Instruction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Instruction</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">load</span></code> instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Load.pointer_operand">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pointer_operand</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Load.pointer_operand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LocalVariable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">LocalVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LocalVariable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Variable" title="mate_query.cpg.models.node.ast.llvm.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Variable</span></code></a></p>
+<p>An LLVM-level stack-local variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LocalVariable.allocation_site">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">allocation_site</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LocalVariable.allocation_site" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LocalVariable.as_dwarf">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">as_dwarf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LocalVariable.as_dwarf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LocalVariable.llvm_type">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">llvm_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LocalVariable.llvm_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LocalVariable.location">
+<span class="sig-name descname"><span class="pre">location</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LocalVariable.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>A location in a source-language file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LocalVariable.memory_locations">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">memory_locations</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">MemoryLocation</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LocalVariable.memory_locations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LocalVariable.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LocalVariable.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The source-level name of this local variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.LocalVariable.parent_function">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parent_function</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.LocalVariable.parent_function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memcpy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Memcpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memcpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Intrinsic" title="mate_query.cpg.models.node.ast.llvm.Intrinsic"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Intrinsic</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">memcpy</span></code> intrinsics</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memcpy.dest">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dest</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memcpy.dest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memcpy.overloaded">
+<span class="sig-name descname"><span class="pre">overloaded</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memcpy.overloaded" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memcpy.size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memcpy.size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memcpy.src">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">src</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memcpy.src" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memcpy.volatile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volatile</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memcpy.volatile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Memset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Intrinsic" title="mate_query.cpg.models.node.ast.llvm.Intrinsic"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Intrinsic</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">memset</span></code> intrinsics</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memset.overloaded">
+<span class="sig-name descname"><span class="pre">overloaded</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memset.overloaded" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memset.pointer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pointer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memset.pointer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memset.size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memset.size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memset.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memset.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Memset.volatile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volatile</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Memset.volatile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Module">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>The unified LLVM bitcode module that the program was compiled from</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Module.data_layout">
+<span class="sig-name descname"><span class="pre">data_layout</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Module.data_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>The LLVM datalayout string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Module.module_name">
+<span class="sig-name descname"><span class="pre">module_name</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Module.module_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the LLVM module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Module.source_file">
+<span class="sig-name descname"><span class="pre">source_file</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Module.source_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>The source file that this module was loaded from, if from a single source file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Module.symbols">
+<span class="sig-name descname"><span class="pre">symbols</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Module.symbols" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of all symbols in the module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Module.target_triple">
+<span class="sig-name descname"><span class="pre">target_triple</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Module.target_triple" title="Permalink to this definition">¶</a></dt>
+<dd><p>The LLVM target triple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Module.translation_units">
+<span class="sig-name descname"><span class="pre">translation_units</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">RelationshipProperty</span></span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Module.translation_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sequence of all source-level translation units in this module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>RelationshipProperty</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ParamBinding">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">ParamBinding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ParamBinding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>A node which connects argument values with formal parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ParamBinding.arg_op_number">
+<span class="sig-name descname"><span class="pre">arg_op_number</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ParamBinding.arg_op_number" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ParamBinding.argument">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">argument</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ParamBinding.argument" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ParamBinding.callsite">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callsite</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ParamBinding.callsite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.ParamBinding.operand">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operand</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.ParamBinding.operand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Resume">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Resume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Resume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Instruction" title="mate_query.cpg.models.node.ast.llvm.Instruction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Instruction</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">resume</span></code> instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Resume.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Resume.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Ret">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Ret</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Ret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Instruction" title="mate_query.cpg.models.node.ast.llvm.Instruction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Instruction</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">ret</span></code> instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Ret.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Ret.value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Store">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mate_query.cpg.models.node.ast.llvm.Instruction" title="mate_query.cpg.models.node.ast.llvm.Instruction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node.ast.llvm.Instruction</span></code></a></p>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">store</span></code> instructions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Store.pointer_operand">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pointer_operand</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Store.pointer_operand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Store.value_operand">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value_operand</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">RelationshipProperty</span></em><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Store.value_operand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.UnclassifiedNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">UnclassifiedNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.UnclassifiedNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>An as-of-yet underspecified node of the LLVM AST</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.UnclassifiedNode.pretty_string">
+<span class="sig-name descname"><span class="pre">pretty_string</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.UnclassifiedNode.pretty_string" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Variable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.node.ast.llvm.</span></span><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">NodeKind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mate_query.cpg.models.node._typechecking.NodeMixin</span></code></p>
+<p>A variable in the LLVM IR</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uuid</strong> (<em>str</em>) – </p></li>
+<li><p><strong>kind</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.cpg_types.mate.html#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>NodeKind</em></a>) – </p></li>
+<li><p><strong>attributes</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.node.ast.llvm.Variable.pretty_string">
+<span class="sig-name descname"><span class="pre">pretty_string</span></span><a class="headerlink" href="#mate_query.cpg.models.node.ast.llvm.Variable.pretty_string" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate_query.cpg.models.node.ast.mc.html" class="btn btn-neutral float-right" title="mate_query.cpg.models.node.ast.mc module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate_query.cpg.models.node.ast.bin.html" class="btn btn-neutral float-left" title="mate_query.cpg.models.node.ast.bin module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

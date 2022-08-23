@@ -1,0 +1,7 @@
+mate\_rest\_client.pois module
+==============================
+
+.. automodule:: mate_rest_client.pois
+   :members:
+   :undoc-members:
+   :show-inheritance:

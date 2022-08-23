@@ -1,0 +1,7 @@
+mate.poi.analysis.TruncatedInteger module
+=========================================
+
+.. automodule:: mate.poi.analysis.TruncatedInteger
+   :members:
+   :undoc-members:
+   :show-inheritance:

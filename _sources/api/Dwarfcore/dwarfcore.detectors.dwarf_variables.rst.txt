@@ -1,0 +1,7 @@
+dwarfcore.detectors.dwarf\_variables module
+===========================================
+
+.. automodule:: dwarfcore.detectors.dwarf_variables
+   :members:
+   :undoc-members:
+   :show-inheritance:

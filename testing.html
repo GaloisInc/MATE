@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Writing and running MATE’s tests &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MATE Tooling Architecture" href="architecture.html" />
+    <link rel="prev" title="Hacking on MATE" href="hacking.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing and running MATE’s tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mate-s-test-suites">MATE’s test suites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-tests">Running the tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cpg-dwarfcore-and-mantiserve-tests">CPG, Dwarfcore, and Mantiserve tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-tests">Integration tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#legacy-and-pointer-analysis-tests">“Legacy” and pointer analysis tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Writing and running MATE’s tests</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/testing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-and-running-mate-s-tests">
+<h1>Writing and running MATE’s tests<a class="headerlink" href="#writing-and-running-mate-s-tests" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This page is intended for the developers of MATE only – it is not relevant for users.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page assumes that you have a functional MATE development environment.
+See <a class="reference internal" href="hacking.html"><span class="doc">Hacking on MATE</span></a> for build instructions.</p>
+</div>
+<div class="section" id="mate-s-test-suites">
+<h2>MATE’s test suites<a class="headerlink" href="#mate-s-test-suites" title="Permalink to this headline">¶</a></h2>
+<p>The MATE codebase contains multiple suites of unit and integration tests, all of
+which are controlled by <code class="docutils literal notranslate"><span class="pre">pytest</span></code>:</p>
+<ul class="simple">
+<li><p>Unit tests for the CPG live under <code class="docutils literal notranslate"><span class="pre">tests/postgres</span></code></p></li>
+<li><p>Dwarfcore-specific tests live under <code class="docutils literal notranslate"><span class="pre">tests/dwarfcore</span></code></p></li>
+<li><p>Mantiserve-specific tests live under <code class="docutils literal notranslate"><span class="pre">tests/mantiserve</span></code></p></li>
+<li><p>Integration tests live under <code class="docutils literal notranslate"><span class="pre">tests/integration</span></code></p></li>
+<li><p>Pointer analysis tests live under <code class="docutils literal notranslate"><span class="pre">llvm/PointerAnalysis/test</span></code></p></li>
+<li><p>“Legacy” tests (mostly for datastructures) live under <code class="docutils literal notranslate"><span class="pre">frontend/test</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="running-the-tests">
+<h2>Running the tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h2>
+<p>All of MATE’s tests are run in the CI, either with each commit or on a schedule
+(for more intensive integration tests). However, they can all be run locally
+with a normal MATE development environment as well.</p>
+<div class="section" id="cpg-dwarfcore-and-mantiserve-tests">
+<h3>CPG, Dwarfcore, and Mantiserve tests<a class="headerlink" href="#cpg-dwarfcore-and-mantiserve-tests" title="Permalink to this headline">¶</a></h3>
+<p>Running any of these test suites requires a similar setup.</p>
+<p>You’ll need two terminal windows available.</p>
+<p>In your first window, use <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> to bring up the <code class="docutils literal notranslate"><span class="pre">db</span></code>
+<code class="docutils literal notranslate"><span class="pre">storage</span></code>, and <code class="docutils literal notranslate"><span class="pre">mate-runtime-state</span></code> services:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose up -V db storage mate-runtime-state
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mate-runtime-state</span></code> container is vital to the correct execution
+of tests that use containers for isolation. It exits successfully once its
+job is finished, so do not be concerned if it does not stay running.</p>
+</div>
+<p>These services are <strong>stable</strong>: you do <strong>not</strong> have to bring them up with each
+test suite invocation.</p>
+<p>In your second window, use <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> to run the test suite you’re
+interested in:</p>
+<ul class="simple">
+<li><p>CPG tests: <code class="docutils literal notranslate"><span class="pre">test</span></code></p></li>
+<li><p>Dwarfcore tests: <code class="docutils literal notranslate"><span class="pre">dwarfcore-test</span></code></p></li>
+<li><p>Mantiserve tests: <code class="docutils literal notranslate"><span class="pre">mantiserve-test</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># CPG tests</span>
+docker-compose <span class="se">\</span>
+  -f docker-compose.yml <span class="se">\</span>
+  -f docker-compose.test.yml <span class="se">\</span>
+  run -v <span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/mate&quot;</span> <span class="nb">test</span>
+
+<span class="c1"># Dwarfcore tests</span>
+docker-compose <span class="se">\</span>
+  -f docker-compose.yml <span class="se">\</span>
+  -f docker-compose.test.yml <span class="se">\</span>
+  run -v <span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/mate&quot;</span> dwarfcore-test
+
+<span class="c1"># Mantiserve tests</span>
+docker-compose <span class="se">\</span>
+  -f docker-compose.yml <span class="se">\</span>
+  -f docker-compose.test.yml <span class="se">\</span>
+  run -v <span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/mate&quot;</span> mantiserve-test
+</pre></div>
+</div>
+<p>These <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> targets run <code class="docutils literal notranslate"><span class="pre">pytest</span></code> under the hood, so you can
+pass additional flags to control <code class="docutils literal notranslate"><span class="pre">pytest</span></code>’s behavior. For example, to
+run the CPG tests in “fail-fast” mode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose <span class="se">\</span>
+  -f docker-compose.yml <span class="se">\</span>
+  -f docker-compose.test.yml <span class="se">\</span>
+  run -v <span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/mate&quot;</span> <span class="nb">test</span> -- -- -x
+</pre></div>
+</div>
+<p>or to run just a single test (<code class="docutils literal notranslate"><span class="pre">test_allocation_sizes</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose <span class="se">\</span>
+  -f docker-compose.yml <span class="se">\</span>
+  -f docker-compose.test.yml <span class="se">\</span>
+  run -v <span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/mate&quot;</span> <span class="nb">test</span> -- -- -k test_allocation_sizes
+</pre></div>
+</div>
+<p>Once you’re done testing, you can bring the entire test environment down
+with <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose <span class="se">\</span>
+  -f docker-compose.yml <span class="se">\</span>
+  -f docker-compose.test.yml <span class="se">\</span>
+  down -v --remove-orphans
+</pre></div>
+</div>
+</div>
+<div class="section" id="integration-tests">
+<h3>Integration tests<a class="headerlink" href="#integration-tests" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These tests are extremely resource intensive, and should almost never be
+run locally.</p>
+</div>
+<p>The integration tests are nearly identical to the CPG, etc. tests above. Like
+above, you’ll need two terminal windows.</p>
+<p>In your first window:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose up -V db storage mate-runtime-state
+</pre></div>
+</div>
+<p>In your second window, use <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> to run the integration tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose <span class="se">\</span>
+  -f docker-compose.yml <span class="se">\</span>
+  -f docker-compose.test.yml <span class="se">\</span>
+  run -v <span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/mate&quot;</span> challenge-test
+</pre></div>
+</div>
+<p>Separately, you can choose to enable intensive invariant tests in the normal
+test suite by setting <code class="docutils literal notranslate"><span class="pre">MATE_INTEGRATION_TESTS=1</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose <span class="se">\</span>
+  -f docker-compose.yml <span class="se">\</span>
+  -f docker-compose.test.yml <span class="se">\</span>
+  run -v <span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/mate&quot;</span> -e <span class="nv">MATE_INTEGRATION_TESTS</span><span class="o">=</span><span class="m">1</span> <span class="nb">test</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="legacy-and-pointer-analysis-tests">
+<h3>“Legacy” and pointer analysis tests<a class="headerlink" href="#legacy-and-pointer-analysis-tests" title="Permalink to this headline">¶</a></h3>
+<p>The “legacy” and pointer analysis tests do not require access to CPGs, and
+therefore can be run outside of a <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> environment.</p>
+<p>To run the “legacy” and pointer analysis tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/mate -it mate-dev:latest ./shake.sh -j pytests -- -- -x
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="architecture.html" class="btn btn-neutral float-right" title="MATE Tooling Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hacking.html" class="btn btn-neutral float-left" title="Hacking on MATE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

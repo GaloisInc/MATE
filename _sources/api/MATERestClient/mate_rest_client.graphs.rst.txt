@@ -1,0 +1,7 @@
+mate\_rest\_client.graphs module
+================================
+
+.. automodule:: mate_rest_client.graphs
+   :members:
+   :undoc-members:
+   :show-inheritance:

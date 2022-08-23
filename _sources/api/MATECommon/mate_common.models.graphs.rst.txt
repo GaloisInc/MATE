@@ -1,0 +1,7 @@
+mate\_common.models.graphs module
+=================================
+
+.. automodule:: mate_common.models.graphs
+   :members:
+   :undoc-members:
+   :show-inheritance:

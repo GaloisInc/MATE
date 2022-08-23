@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>MATE Tooling Architecture &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Working with the CHESS System" href="chess-system.html" />
+    <link rel="prev" title="Writing and running MATE’s tests" href="testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MATE Tooling Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#analysis-workflow">Analysis Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-architecture">System architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#component-index">Component index</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compilation-components">Compilation components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#blight">blight</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gllvm">GLLVM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compilation-tasks">Compilation tasks</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cpg-generation-components">CPG generation components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#llvm-middle-end-passes">LLVM middle-end passes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#points-to-analysis">Points-to analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#machine-code-mapping-tools">Machine-code mapping tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-tasks">Build tasks</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#analysis-components">Analysis components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cpg-query-language">CPG Query Language</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#context-free-language-reachability-queries">Context-free language reachability queries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#poi-framework">POI framework</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#poi-analyses">POI analyses</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#user-interface-components">User interface components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ui-client-and-flowfinder">ui-client and Flowfinder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mantiserve">Mantiserve</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>MATE Tooling Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/architecture.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mate-tooling-architecture">
+<h1>MATE Tooling Architecture<a class="headerlink" href="#mate-tooling-architecture" title="Permalink to this headline">¶</a></h1>
+<p>This page provides a high-level overview of MATE’s architecture,
+as well as an index for tools and instrumentation components within
+MATE.</p>
+<div class="section" id="analysis-workflow">
+<h2>Analysis Workflow<a class="headerlink" href="#analysis-workflow" title="Permalink to this headline">¶</a></h2>
+<p>The MATE workflow can be visualized as a transition from some source-code
+representation of a program, to a compilation that can produce one
+or more executables, to one CPG build per executable, and finally to individual
+analyses run on each CPG:</p>
+<img alt="_images/mate-workflow.png" src="_images/mate-workflow.png" />
+</div>
+<div class="section" id="system-architecture">
+<h2>System architecture<a class="headerlink" href="#system-architecture" title="Permalink to this headline">¶</a></h2>
+<p>The MATE system is decomposed into nine services which run as part of the overall
+CHESS system:</p>
+<dl class="simple">
+<dt>server</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">server</span></code> component presents a REST API that can be used to
+initiate individual steps of the analysis workflow depicted
+above. This API is used to coordinate analysis tasks in response to
+new challenges being submitted to the CHESS and also allows users
+to manually run analyses steps with custom options or changes in
+response to errors. The server API also implements backend queries
+for MATE UI components including FlowFinder.</p>
+</dd>
+<dt>executor</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">executor</span></code> component asynchronously processes long-running
+requests initiated by the <code class="docutils literal notranslate"><span class="pre">server</span></code> component, such as challenge
+compilation, CPG generation, and POI analyses. For compilation and
+CPG generation steps that depend on the challenge environment, the
+executor manages creating and executing docker containers served by
+the CHESS docker registry.</p>
+</dd>
+<dt>db</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">db</span></code> component runs a standard PostgreSQL installation and
+stores all generated Code Property Graphs. Any CHESS component
+(including other components of MATE) can access CPGs via the MATE
+domain-specific query language connecting to the database via
+the CHESS network. In addition to storing CPGs, the <code class="docutils literal notranslate"><span class="pre">db</span></code> component
+stores all persistent MATE system state.</p>
+</dd>
+<dt>storage</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">storage</span></code> component supplements the <code class="docutils literal notranslate"><span class="pre">db</span></code> component with a
+MinIO object store and is used to store large analysis artifacts
+such as challenge source code, compiled binaries, and logs.</p>
+</dd>
+<dt>bridge</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">bridge</span></code> component connects MATE to the CHESS message bus and
+is responsible for forwarding messages to other MATE
+components. The bridge component also creates analysis pipeline
+tasks for new challenges submitted to the CHESS challenge
+broker. These tasks run on the executor and execute the compilation,
+CPG generation, and POI analysis tasks in sequence for the challenge.</p>
+</dd>
+<dt>broker</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">broker</span></code> component is a MATE-internal message bus used to
+coordinate MATE components.</p>
+</dd>
+<dt>mate-ui</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">mate-ui</span></code> component serves a web-based user-interface to the
+MATE system. It provides interfaces to monitor the compilation and
+CPG generation processes, in addition to an interactive CPG
+visualization tool called Flowfinder.</p>
+</dd>
+<dt>notebook</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">notebook</span></code> component provides a Jupyter notebook environment
+for interacting with the MATE system via the Python domain-specific
+query language. It is intended as an expert-level interface for
+accessing the full capabilities of the MATE system.</p>
+</dd>
+<dt>mantiserve</dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">mantiserve</span></code> component exposes a REST API for running
+symbolic execution queries against challenge programs. The API
+allows symbolic execution tasks to be parameterized by specific
+detector plugins that monitor for potential vulnerabilities.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="component-index">
+<h2>Component index<a class="headerlink" href="#component-index" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="compilation-components">
+<h3>Compilation components<a class="headerlink" href="#compilation-components" title="Permalink to this headline">¶</a></h3>
+<p>The following tools and components are responsible for compiling a program into an
+LLVM bitcode module that is suitable for CPG generation.</p>
+<div class="section" id="blight">
+<span id="blight-desc"></span><h4>blight<a class="headerlink" href="#blight" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: ToB (<a class="reference external" href="https://github.com/trailofbits/blight">GitHub</a>)</p>
+<p><code class="docutils literal notranslate"><span class="pre">blight</span></code> is a build tool wrapper for C/C++ compilers (<code class="docutils literal notranslate"><span class="pre">cc</span></code> and <code class="docutils literal notranslate"><span class="pre">c++</span></code>) as well as the
+standalone preprocessor (<code class="docutils literal notranslate"><span class="pre">cpp</span></code>), assembler (<code class="docutils literal notranslate"><span class="pre">as</span></code>), linker (<code class="docutils literal notranslate"><span class="pre">ld</span></code>), and other standard
+build tools.</p>
+<p>MATE uses <code class="docutils literal notranslate"><span class="pre">blight</span></code> for instrumenting arbitrary program build systems, ensuring that
+they can be eventually ingested as CPGs. <code class="docutils literal notranslate"><span class="pre">blight</span></code>’s responsibilities include:</p>
+<ol class="arabic simple">
+<li><p>Ensuring that MATE’s required compilation flags are <em>always</em> passed to individual compiler
+invocations.</p></li>
+<li><p>Saving an accurate record of each step in a build process, to improve recompilation fidelity.</p></li>
+<li><p>Saving an accurate record of each output of each build step, so that multiple independent
+CPGs can be produced from a build system that produces more than one executable.</p></li>
+<li><p>Dispatching to <a class="reference internal" href="#gllvm-desc"><span class="std std-ref">GLLVM</span></a> for bitcode generation.</p></li>
+</ol>
+</div>
+<div class="section" id="gllvm">
+<span id="gllvm-desc"></span><h4>GLLVM<a class="headerlink" href="#gllvm" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: SRI-CSL (3rd-party, <a class="reference external" href="https://github.com/SRI-CSL/gllvm">GitHub</a>)</p>
+<p>GLLVM is a suite of tools for wrapping <code class="docutils literal notranslate"><span class="pre">clang</span></code> and <code class="docutils literal notranslate"><span class="pre">clang++</span></code> to emit bitcode for every
+intermediate output, as well combining those intermediate bitcode outputs into a unified
+LLVM IR module.</p>
+</div>
+<div class="section" id="compilation-tasks">
+<span id="compile-v2-desc"></span><h4>Compilation tasks<a class="headerlink" href="#compilation-tasks" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: ToB</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">frontend/mate/mate/build/compile.py</span></code> module manages the process
+of compiling challenges submitted to the CHESS system while monitoring
+and controlling the build process to create artifacts that can be
+analyzed by other MATE components. This module is responsible for
+creating docker environments in which to compile challenges on demand,
+inferring build system configurations and necessary options, and
+creating and storing artifacts for further analysis.</p>
+</div>
+</div>
+<div class="section" id="cpg-generation-components">
+<h3>CPG generation components<a class="headerlink" href="#cpg-generation-components" title="Permalink to this headline">¶</a></h3>
+<p>The following tools and components are responsible for generating various components of the CPG.</p>
+<div class="section" id="llvm-middle-end-passes">
+<span id="llvm-passes-desc"></span><h4>LLVM middle-end passes<a class="headerlink" href="#llvm-middle-end-passes" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: Galois</p>
+<p>There are three middle-end passes which read in bitcode and spew out analysis results. They are loaded dynamically using <code class="docutils literal notranslate"><span class="pre">opt</span></code>. Consult the LLVM documentation to learn about loading passes into <code class="docutils literal notranslate"><span class="pre">opt</span></code>.</p>
+<ul class="simple">
+<li><p>Our custom pointer analysis lives in <code class="docutils literal notranslate"><span class="pre">llvm/PointerAnalysis/PointerAnalysis.cpp</span></code>.</p></li>
+<li><p>The FactGenerator supports the pointer analysis. It outputs datalog relations about elements of the input program (such as, variable <code class="docutils literal notranslate"><span class="pre">x</span></code> points to value <code class="docutils literal notranslate"><span class="pre">y</span></code>), which are fed into <code class="docutils literal notranslate"><span class="pre">cclyzer</span></code> to infer more interesting facts related to pointer aliasing. These more interesting facts are then mapped back to LLVM concepts so they can be added to the CPG.</p></li>
+<li><p>Many nodes and edges of the CPG are created in <code class="docutils literal notranslate"><span class="pre">llvm/MATE/ASTGraphWriter.cpp</span></code>.</p></li>
+<li><p>Basic blocks are instrumented to generate a trace for the dynamic analysis in <code class="docutils literal notranslate"><span class="pre">llvm/MATE/TraceLogger.cpp</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="points-to-analysis">
+<span id="points-to-dec"></span><h4>Points-to analysis<a class="headerlink" href="#points-to-analysis" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: Galois</p>
+<p>MATE’s code property graph representation is built on top of the
+results of a whole-program points-to analysis. This analysis,
+implemented using the <a class="reference external" href="https://souffle-lang.github.io/">Soufflé</a>
+datalog engine, is a fork of the open-source LLVM points-to analysis
+<a class="reference external" href="https://github.com/plast-lab/cclyzer">cclyzer</a>. Improvements to
+the cclyzer analysis implemented as part of MATE include support for
+numerous bug fixes, support for context-sensitive analyses enabling
+greater precision for many programs, and experimental support for a
+more performant “Steensgaard”-style analysis mode.</p>
+<p>The points-to analysis implementation is located in the
+<code class="docutils literal notranslate"><span class="pre">llvm/PointerAnalysis/datalog</span></code> directory.</p>
+</div>
+<div class="section" id="machine-code-mapping-tools">
+<span id="headache-desc"></span><h4>Machine-code mapping tools<a class="headerlink" href="#machine-code-mapping-tools" title="Permalink to this headline">¶</a></h4>
+<p>These tools are responsible for incorporating binary-level information into the CPG and linking
+binary-level information against the core LLVM CPG elements.</p>
+<div class="section" id="nomina">
+<span id="nomina-desc"></span><h5>Nomina<a class="headerlink" href="#nomina" title="Permalink to this headline">¶</a></h5>
+<p>Provenance: ToB</p>
+<p>Nomina is an LLVM pass responsible for canonicalizing the names
+of basic blocks in LLVM bitcode. Nomina’s canonicalization enables
+different versions of LLVM running on potentially separate machines
+to consistently identify the same basic blocks and associate them
+with other program features.</p>
+<p>Known problems: None</p>
+<p>Expected problems: None</p>
+</div>
+<div class="section" id="headache">
+<h5>Headache<a class="headerlink" href="#headache" title="Permalink to this headline">¶</a></h5>
+<p>Provenance: ToB</p>
+<p>Headache is an LLVM pass with a collection of responsibilities:</p>
+<ul class="simple">
+<li><p>Extracting information about each compilation (i.e., translation) unit in the bitcode module</p></li>
+<li><p>Extracting variable information (VI) about each global, local, and argument in the bitcode module</p></li>
+<li><p>Extracting deduplicated DWARF type information (TI), for later pairing with the VI</p></li>
+</ul>
+<p>Headache’s compilation unit information extraction is used to inform <a class="reference internal" href="#quotidian-desc"><span class="std std-ref">quotidian</span></a>’s
+recompilation.</p>
+<p>Known problems: Headache’s type extraction for template parameters is incomplete.</p>
+<p>Expected problems: Headache performs scope unrolling to present a full picture of the lexical
+scope in which a variable appears. The complexities of DWARF mean that there are probably
+unhandled edge cases in Headache’s scope handling.</p>
+</div>
+<div class="section" id="wedlock">
+<span id="wedlock-desc"></span><h5>Wedlock<a class="headerlink" href="#wedlock" title="Permalink to this headline">¶</a></h5>
+<p>Provenance: ToB</p>
+<p>Wedlock is a <em>backend</em> LLVM pass responsible for pairing the IR representation of a bitcode
+module with LLVM’s “middle-end” representation.</p>
+<p>Known problems: Pretty-printing LLVM’s MIR is slow, so Wedlock doesn’t do it by default.</p>
+<p>Expected problems: Wedlock observes program features that are only produced during LLVM’s code
+generation phrase, such as <code class="docutils literal notranslate"><span class="pre">%unwind_resume</span></code> blocks for DWARF-style exception handling.
+These can’t be easily paired with the IR blocks seen during processing in LLVM frontend passes
+(i.e. <a class="reference internal" href="#nomina-desc"><span class="std std-ref">Nomina</span></a> and ASTGraphWriter) because they don’t exist in the IR
+until lowering begins.</p>
+</div>
+<div class="section" id="migraine">
+<span id="migrane-desc"></span><h5>migraine<a class="headerlink" href="#migraine" title="Permalink to this headline">¶</a></h5>
+<p>Provenance: ToB</p>
+<p>migraine is a Python module and utility responsible for emitting a patch of assembler directives
+based on <a class="reference internal" href="#wedlock-desc"><span class="std std-ref">Wedlock</span></a>’s output. migraine’s assembler directive patch is later used during
+recompilation to generate a special <code class="docutils literal notranslate"><span class="pre">.migraine_addrs</span></code> section that <a class="reference internal" href="#aspirin-desc"><span class="std std-ref">aspirin</span></a> uses for
+basic block pairing.</p>
+<p>Known problems: None.</p>
+<p>Expected problems: None.</p>
+</div>
+<div class="section" id="aspirin">
+<span id="aspirin-desc"></span><h5>aspirin<a class="headerlink" href="#aspirin" title="Permalink to this headline">¶</a></h5>
+<p>Provenance: ToB</p>
+<p>aspirin is a Python module and utility with a collection of responsibilities:</p>
+<ul class="simple">
+<li><p>Pairing each IR-level function and basic block with layout information
+(i.e. virtual address, offset, and size) in the “canonical” compiled binary</p></li>
+<li><p>Pairing <a class="reference internal" href="#headache-desc"><span class="std std-ref">Machine-code mapping tools</span></a>’s variable information with each parameter and local variable in the
+compiled binary, including scoping information</p></li>
+</ul>
+<p>Known problems: aspirin’s handling of inlined functions, scopes, and variables is probably
+deficient due to DWARF’s complexity.</p>
+<p>Expected problems: None.</p>
+</div>
+<div class="section" id="margin-walker">
+<span id="margin-walker-desc"></span><h5>margin-walker<a class="headerlink" href="#margin-walker" title="Permalink to this headline">¶</a></h5>
+<p>Provenance: ToB</p>
+<p>margin-walker is a Python module and utility responsible for emitting MATE-compatible CPG records
+based on the combined input of <a class="reference internal" href="#wedlock-desc"><span class="std std-ref">Wedlock</span></a> and <a class="reference internal" href="#aspirin-desc"><span class="std std-ref">aspirin</span></a>, as well as
+<a class="reference internal" href="#headache-desc"><span class="std std-ref">Machine-code mapping tools</span></a>’s type information.</p>
+<p>Known problems: None.</p>
+<p>Expected problems: margin-walker’s runtime and memory usage will probably grow (roughly)
+quadratically with program size.</p>
+</div>
+<div class="section" id="quotidian">
+<span id="quotidian-desc"></span><h5>quotidian<a class="headerlink" href="#quotidian" title="Permalink to this headline">¶</a></h5>
+<p>Provenance: ToB</p>
+<p>quotidian is a Python module and utility that represents the primary ingress and egress for all ToB
+provided instrumentation. It takes <em>either</em> a bitcode input <em>or</em> a G/WLLVM-compiled binary input.</p>
+<p>quotidian does not require <a class="reference internal" href="#nomina-desc"><span class="std std-ref">Nomina</span></a> to be run in the input bitcode beforehand. However,
+failing to do so and using quotidian’s bitcode elsewhere <em>will</em> cause canonicalization issues.</p>
+<p>Known problems: None.</p>
+<p>Expected problems: None.</p>
+</div>
+<div class="section" id="machine-code-mapping-dependencies">
+<h5>Machine code mapping dependencies<a class="headerlink" href="#machine-code-mapping-dependencies" title="Permalink to this headline">¶</a></h5>
+<p>The following depicts the dependency relations between various ToB tools and the JSONL ultimately
+generated for insertion into the CPG.</p>
+<img alt="Dependency relations between ToB tools and the CPG" src="_images/tob-tool-graph.png" />
+<p>The above image should be kept up-to-date with the following
+MermaidJS specification:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="n">TD</span>
+<span class="n">A</span><span class="p">[</span><span class="n">CPG</span> <span class="n">JSONL</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">margin</span><span class="o">-</span><span class="n">walker</span><span class="o">|</span><span class="n">E</span><span class="p">[</span><span class="n">Wedlock</span> <span class="n">JSONL</span><span class="p">]</span>
+<span class="n">A</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">margin</span><span class="o">-</span><span class="n">walker</span><span class="o">|</span><span class="n">L</span>
+<span class="n">F</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">migraine</span><span class="o">|</span><span class="n">E</span>
+<span class="n">F</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">migraine</span><span class="o">|</span><span class="n">G</span><span class="p">[</span><span class="n">Migraine</span> <span class="n">patch</span><span class="p">]</span>
+<span class="n">G</span> <span class="o">--&gt;</span> <span class="n">E</span>
+<span class="n">F</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">migraine</span><span class="o">|</span><span class="n">H</span><span class="p">[</span><span class="n">Unpatched</span> <span class="n">ASM</span><span class="p">]</span>
+<span class="n">E</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">wedlock</span><span class="o">|</span><span class="n">I</span><span class="p">[</span><span class="n">Headache</span> <span class="n">IR</span><span class="p">]</span>
+<span class="n">H</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">wedlock</span><span class="o">|</span><span class="n">I</span>
+<span class="n">I</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">headache</span><span class="o">|</span><span class="n">J</span><span class="p">[</span><span class="n">Canonicalized</span> <span class="n">IR</span><span class="p">]</span>
+<span class="n">J</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">nomina</span><span class="o">|</span><span class="n">K</span><span class="p">[</span><span class="n">Uncanonicalized</span> <span class="n">IR</span><span class="p">]</span>
+<span class="n">K</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">clang</span><span class="o">|</span><span class="n">N</span><span class="p">[</span><span class="n">Source</span><span class="p">]</span>
+<span class="n">M</span><span class="p">[</span><span class="n">Compiled</span> <span class="n">binary</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">llc</span><span class="o">|</span><span class="n">F</span><span class="p">[</span><span class="n">Migraine</span> <span class="n">ASM</span><span class="p">]</span>
+<span class="n">L</span><span class="p">[</span><span class="n">Aspirin</span> <span class="n">JSONL</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">aspirin</span><span class="o">|</span><span class="n">M</span>
+<span class="n">L</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">aspirin</span><span class="o">|</span><span class="n">Q</span><span class="p">[</span><span class="n">headache</span> <span class="n">VI</span> <span class="n">JSONL</span><span class="p">]</span>
+<span class="n">Q</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">headache</span><span class="o">|</span><span class="n">J</span>
+<span class="n">P</span><span class="p">[</span><span class="n">headache</span> <span class="n">TI</span> <span class="n">JSONL</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">headache</span><span class="o">|</span><span class="n">J</span>
+<span class="n">O</span><span class="p">[</span><span class="n">CU</span> <span class="n">JSONL</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">headache</span><span class="o">|</span><span class="n">J</span>
+<span class="n">A</span> <span class="o">--&gt;</span> <span class="o">|</span><span class="n">margin</span><span class="o">-</span><span class="n">walker</span><span class="o">|</span><span class="n">P</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="build-tasks">
+<h4>Build tasks<a class="headerlink" href="#build-tasks" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: ToB</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">frontend/mate/mate/build/build.py</span></code> module manages the process
+of creating code property graphs for challenges submitted to the CHESS
+system. This module is responsible for creating docker environments in
+which to recompile challenges and perform machine code mapping, along
+with managing the overall CPG generation process. This module also
+manages incorporating source code information in the CPG and applying
+analysis signatures.</p>
+</div>
+</div>
+<div class="section" id="analysis-components">
+<h3>Analysis components<a class="headerlink" href="#analysis-components" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="cpg-query-language">
+<h4>CPG Query Language<a class="headerlink" href="#cpg-query-language" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: Galois</p>
+<p>MATE includes a domain-specific query language for accessing
+information in the CPG. This interface abstracts the core
+property-graph representation stored in the PostgreSQL database and
+provides a programmatic, object-based interface in the Python
+programming language. This query language, built using the
+<a class="reference external" href="https://docs.sqlalchemy.org/en/13/">SQLAlchemy ORM</a>, is used to
+implement MATE’s automated analyses and user interface, and is also
+available to expert users via the Jupyter Notebook service. The
+language is implemented in the <code class="docutils literal notranslate"><span class="pre">frontend/mate-query/mate_query/cpg</span></code> directory.</p>
+</div>
+<div class="section" id="context-free-language-reachability-queries">
+<h4>Context-free language reachability queries<a class="headerlink" href="#context-free-language-reachability-queries" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: Galois</p>
+<p>In addition to the core query language, MATE provides specialized
+queries for answering “context-free language” (CFL) reachability
+queries. CFL-reachability queries are reachability queries on the
+graph that impose additional constraints about the nodes or edges
+visited by paths in the graph—for example, requiring the
+control-flow paths along function invocation and return paths
+represent matching control transfers that can be realized by concrete
+executions. To support CFL-reachability queries, MATE implements a
+general-purpose API for implementing graph traversals guided by a
+specified push-down automata that tracks required conditions. MATE
+includes built-in CFL-reachability analyses for precise control-flow,
+dataflow, and call-graph queries. The CFL-reachability framework is
+implemented in the modules <code class="docutils literal notranslate"><span class="pre">frontend/mate-query/mate_query/db.py</span></code> and
+<code class="docutils literal notranslate"><span class="pre">frontend/mate-query/mate_query/cfl.py</span></code>. The module
+<code class="docutils literal notranslate"><span class="pre">frontend/mate-query/mate_query/cpg/query/cfg_avoiding.py</span></code> implements a wrapper
+around the functionality for common vulnerability discovery queries
+that require identifying control-flow paths within the program that do
+not visit specific nodes.</p>
+</div>
+<div class="section" id="poi-framework">
+<h4>POI framework<a class="headerlink" href="#poi-framework" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: Galois</p>
+<p>The “Points of Interest” (POI) framework provides facilities to register,
+run, and store results from automated analyses of the code property
+graph. POI analyses are managed via a REST API implemented in
+<code class="docutils literal notranslate"><span class="pre">frontend/mate/mate/server/api/analyses.py</span></code> and are executed by the
+<code class="docutils literal notranslate"><span class="pre">executor</span></code> component.</p>
+</div>
+<div class="section" id="poi-analyses">
+<h4>POI analyses<a class="headerlink" href="#poi-analyses" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: Galois/ToB</p>
+<p>The current release of MATE includes the following built-in POI analyses. The
+primary CPG layer(s) used in the analysis are listed at the end of each
+description.</p>
+<ul class="simple">
+<li><p><strong>CommandInjection</strong>: Finds calls to output functions (e.g. <code class="docutils literal notranslate"><span class="pre">write</span></code>) with
+potential SQL keywords in string arguments, detecting SQL injection (SQLi)
+vulnerabilities. (AST)</p></li>
+<li><p><strong>PathTraversal</strong>: Find calls to filesystem operations where the path may be
+influenced by user input, detecting path traversal vulnerabilities. (DFG)</p></li>
+<li><p><strong>PointerDisclosure</strong>: Finds pointer-typed values that may be output to the
+user, detecting vulnerabilities that may allow an attacker to circumvent
+memory protections like ASLR and stack canaries. (DFG)</p></li>
+<li><p><strong>UserStringComparisonLength</strong>: Finds string and memory comparison calls where
+the comparison length may be controlled by user input, detecting various
+memory corruption vulnerabilities. (DFG)</p></li>
+<li><p><strong>VariableLengthStackObject</strong>: Detects uses of C99-style variable-length
+arrays (VLAs) or the alloca library routine where the user can control the
+size of the stack allocation, detecting vulnerability to certain stack-based
+attacks. (DFG)</p></li>
+<li><p><strong>OverflowableAllocations</strong>: Finds calls to dynamic allocations (e.g.
+<code class="docutils literal notranslate"><span class="pre">malloc</span></code>) where the size calculation may be influenced by user input,
+detecting unsafe or unintended heap accesses. (DFG)</p></li>
+<li><p><strong>TruncatedInteger</strong>: Finds calls to dynamic allocations where the size may be
+influenced by user input and the input is truncated and used elsewhere as a
+signed integer, detecting vulnerabilities in which an attacker may gain
+control of the heap. (DFG)</p></li>
+<li><p><strong>IteratorInvalidation</strong>: Finds uses of C++ iterators subsequent to
+iterator-invalidating collection modifications, detecting vulnerabilities
+resulting from invalid iterator accesses. (CFG)</p></li>
+<li><p><strong>UninitializedStackMemory</strong>: Finds potential intra- and inter-procedural uses
+of uninitialized stack memory, detecting potential information leaks or
+computation on invalid data. (CFG, PTG)</p></li>
+<li><p><strong>UseAfterFree</strong>: Finds potential uses of heap-allocated memory after calls to
+<code class="docutils literal notranslate"><span class="pre">free</span></code>, detecting UAF vulnerabilities. (CFG, PTG)</p></li>
+</ul>
+<p>These analyses are implemented as Python modules in the
+<code class="docutils literal notranslate"><span class="pre">frontend/mate/mate/poi/analysis</span></code> directory.</p>
+</div>
+</div>
+<div class="section" id="user-interface-components">
+<h3>User interface components<a class="headerlink" href="#user-interface-components" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="ui-client-and-flowfinder">
+<h4>ui-client and Flowfinder<a class="headerlink" href="#ui-client-and-flowfinder" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: Galois</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ui-client</span></code> directory includes the browser-based frontend
+interface to the MATE system, implemented in Typescript using the
+React framework. It provides a user-facing interfacing for monitoring
+MATE system status and viewing analysis results. Backend queries
+supporting the interface are executed by the <code class="docutils literal notranslate"><span class="pre">server</span></code> component and
+implemented by modules in the <code class="docutils literal notranslate"><span class="pre">frontend/mate/mate/server/api</span></code> directory.</p>
+<p>Flowfinder is a browser-based graphical user interface for accessing
+the MATE CPG and exploring MATE analysis results. It is implemented
+in Typescript using React and the cytoscape.js graph visualization
+framework.</p>
+</div>
+<div class="section" id="mantiserve">
+<h4>Mantiserve<a class="headerlink" href="#mantiserve" title="Permalink to this headline">¶</a></h4>
+<p>Provenance: ToB</p>
+<p>MATE’s symbolic execution capabilities are exposed via the Mantiserve component,
+located in the <code class="docutils literal notranslate"><span class="pre">mantiserve</span></code> directory. Mantiserve provides a REST API for
+configuring symbolic execution tasks, enabling detectors for a variety of bug
+classes, and managing the lifecycle of individual runs of the underlying
+Manticore symbolic execution platform. Mantiserve additionally adapts
+Manticore’s runtime environment, allowing Manticore runs to be isolated within
+containers that are identical to the “normal” execution environment for a
+target.</p>
+<p>Mantiserve tasks are configured to run one or more “detectors,” representing the
+dynamic counterpart to MATE’s static “POI” analyses. Each detector has access to
+the MATE CPG for the targeted program, including a queryable graph
+representation of the program’s binary layout and debug information (via DWARF).
+These detectors are written using Manticore’s public plugin API, and are located
+in the <code class="docutils literal notranslate"><span class="pre">dwarfcore</span></code> directory.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="chess-system.html" class="btn btn-neutral float-right" title="Working with the CHESS System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="testing.html" class="btn btn-neutral float-left" title="Writing and running MATE’s tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

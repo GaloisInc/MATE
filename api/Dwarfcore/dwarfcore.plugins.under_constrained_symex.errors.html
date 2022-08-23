@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>dwarfcore.plugins.under_constrained_symex.errors module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="dwarfcore.plugins.under_constrained_symex.exceptions module" href="dwarfcore.plugins.under_constrained_symex.exceptions.html" />
+    <link rel="prev" title="dwarfcore.plugins.under_constrained_symex.dwarf_helper module" href="dwarfcore.plugins.under_constrained_symex.dwarf_helper.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Dwarfcore API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="dwarfcore.html">dwarfcore package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="dwarfcore.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dwarfcore.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">Dwarfcore API Reference</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.html">dwarfcore package</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.plugins.html">dwarfcore.plugins package</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.plugins.under_constrained_symex.html">dwarfcore.plugins.under_constrained_symex package</a> &raquo;</li>
+        
+      <li>dwarfcore.plugins.under_constrained_symex.errors module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/Dwarfcore/dwarfcore.plugins.under_constrained_symex.errors.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-dwarfcore.plugins.under_constrained_symex.errors">
+<span id="dwarfcore-plugins-under-constrained-symex-errors-module"></span><h1>dwarfcore.plugins.under_constrained_symex.errors module<a class="headerlink" href="#module-dwarfcore.plugins.under_constrained_symex.errors" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.AccessKind">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.</span></span><span class="sig-name descname"><span class="pre">AccessKind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.AccessKind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.AccessKind.READ">
+<span class="sig-name descname"><span class="pre">READ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'read'</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.AccessKind.READ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.AccessKind.WRITE">
+<span class="sig-name descname"><span class="pre">WRITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'write'</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.AccessKind.WRITE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.</span></span><span class="sig-name descname"><span class="pre">ErrorManager</span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class used to check and handle for memory access errors during underconstrained symbolic
+execution.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access">
+<span class="sig-name descname"><span class="pre">check_oob_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.AccessKind" title="dwarfcore.plugins.under_constrained_symex.errors.AccessKind"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.AccessKind</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">manticore.core.smtlib.expression.Expression</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_oob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether a memory access can exceed the bounds of a memory object. If the offset can
+be out of bounds, create an error case.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.access"></span><strong>access</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.access">¶</a> – type of memory access (read or write)</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.obj"></span><strong>obj</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.obj">¶</a> – memory object to access</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.offset"></span><strong>offset</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.offset">¶</a> – offset at which to read/write in ‘obj’</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.size"></span><strong>size</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.size">¶</a> – number of bytes to read/write</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.memory"></span><strong>memory</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.memory">¶</a> – the current UC memory</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.pc"></span><strong>pc</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.pc">¶</a> – the address of the instruction reading memory</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.fix_error"></span><strong>fix_error</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.check_oob_access.params.fix_error">¶</a> – if set to True and if offset can be out of bounds, try to add a constraint to the
+constraint set such that to enforce ‘offset’ to be in within the bounds of ‘obj’</p></li>
+<li><p><strong>access</strong> (<a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.AccessKind" title="dwarfcore.plugins.under_constrained_symex.errors.AccessKind"><em>dwarfcore.plugins.under_constrained_symex.errors.AccessKind</em></a>) – </p></li>
+<li><p><strong>offset</strong> (<em>Union</em><em>[</em><em>manticore.core.smtlib.expression.Expression</em><em>, </em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>size</strong> (<em>int</em>) – </p></li>
+<li><p><strong>pc</strong> (<em>int</em>) – </p></li>
+<li><p><strong>fix_oob</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.record_error">
+<span class="sig-name descname"><span class="pre">record_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.ErrorManager.record_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.ExecError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.</span></span><span class="sig-name descname"><span class="pre">ExecError</span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.ExecError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A base class representing an error during execution.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.ExecError.is_oob">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_oob</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.ExecError.is_oob" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.OOBError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.</span></span><span class="sig-name descname"><span class="pre">OOBError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.constraints.ConstraintSet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.OOBError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.ExecError" title="dwarfcore.plugins.under_constrained_symex.errors.ExecError"><code class="xref py py-class docutils literal notranslate"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.ExecError</span></code></a></p>
+<p>A base class representing an out of bounds memory access error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pc</strong> (<em>int</em>) – </p></li>
+<li><p><strong>cond</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p></li>
+<li><p><strong>constraints</strong> (<em>manticore.core.smtlib.constraints.ConstraintSet</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.OOBError.is_oob">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_oob</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.OOBError.is_oob" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.OOBReadError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.</span></span><span class="sig-name descname"><span class="pre">OOBReadError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.constraints.ConstraintSet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.OOBReadError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.OOBError" title="dwarfcore.plugins.under_constrained_symex.errors.OOBError"><code class="xref py py-class docutils literal notranslate"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.OOBError</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pc</strong> (<em>int</em>) – </p></li>
+<li><p><strong>cond</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p></li>
+<li><p><strong>constraints</strong> (<em>manticore.core.smtlib.constraints.ConstraintSet</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.OOBWriteError">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.</span></span><span class="sig-name descname"><span class="pre">OOBWriteError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cond</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.constraints.ConstraintSet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.OOBWriteError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.errors.OOBError" title="dwarfcore.plugins.under_constrained_symex.errors.OOBError"><code class="xref py py-class docutils literal notranslate"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.OOBError</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pc</strong> (<em>int</em>) – </p></li>
+<li><p><strong>cond</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p></li>
+<li><p><strong>constraints</strong> (<em>manticore.core.smtlib.constraints.ConstraintSet</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.</span></span><span class="sig-name descname"><span class="pre">UnderconstrainedOOB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manticore</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.native.manticore.Manticore</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">manticore.core.plugin.Plugin</span></code></p>
+<p>Detector for under-constrained OOB errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>manticore</strong> (<em>manticore.native.manticore.Manticore</em>) – </p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.MCORE_TESTCASE_LIST">
+<span class="sig-name descname"><span class="pre">MCORE_TESTCASE_LIST</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UnderconstrainedOOBDetector_test_cases'</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.MCORE_TESTCASE_LIST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.manticore">
+<span class="sig-name descname"><span class="pre">manticore</span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.manticore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.new_testcase_uid">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new_testcase_uid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.new_testcase_uid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.record_testcases">
+<span class="sig-name descname"><span class="pre">record_testcases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.native.state.State</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.record_testcases" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>manticore.native.state.State</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.results">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">results</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UnderconstrainedTestCase" title="mate_common.models.integration.UnderconstrainedTestCase"><span class="pre">mate_common.models.integration.UnderconstrainedTestCase</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any test case results found during execution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.will_terminate_state_callback">
+<span class="sig-name descname"><span class="pre">will_terminate_state_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_reason</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB.will_terminate_state_callback" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dwarfcore.plugins.under_constrained_symex.exceptions.html" class="btn btn-neutral float-right" title="dwarfcore.plugins.under_constrained_symex.exceptions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dwarfcore.plugins.under_constrained_symex.dwarf_helper.html" class="btn btn-neutral float-left" title="dwarfcore.plugins.under_constrained_symex.dwarf_helper module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

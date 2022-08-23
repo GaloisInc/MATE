@@ -1,0 +1,7 @@
+mantiserve.logging module
+=========================
+
+.. automodule:: mantiserve.logging
+   :members:
+   :undoc-members:
+   :show-inheritance:

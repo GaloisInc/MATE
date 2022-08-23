@@ -1,0 +1,7 @@
+mate.server.api.proxy.routes module
+===================================
+
+.. automodule:: mate.server.api.proxy.routes
+   :members:
+   :undoc-members:
+   :show-inheritance:

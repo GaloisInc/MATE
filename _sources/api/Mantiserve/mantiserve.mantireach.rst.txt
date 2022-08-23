@@ -1,0 +1,7 @@
+mantiserve.mantireach module
+============================
+
+.. automodule:: mantiserve.mantireach
+   :members:
+   :undoc-members:
+   :show-inheritance:

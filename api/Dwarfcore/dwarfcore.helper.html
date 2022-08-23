@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>dwarfcore.helper module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="dwarfcore.logging module" href="dwarfcore.logging.html" />
+    <link rel="prev" title="dwarfcore.dwarfcore module" href="dwarfcore.dwarfcore.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Dwarfcore API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="dwarfcore.html">dwarfcore package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="dwarfcore.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="dwarfcore.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">Dwarfcore API Reference</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.html">dwarfcore package</a> &raquo;</li>
+        
+      <li>dwarfcore.helper module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/Dwarfcore/dwarfcore.helper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-dwarfcore.helper">
+<span id="dwarfcore-helper-module"></span><h1>dwarfcore.helper module<a class="headerlink" href="#module-dwarfcore.helper" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.helper.enable_detectors">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.helper.</span></span><span class="sig-name descname"><span class="pre">enable_detectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.native.manticore.Manticore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dwarfcore</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dwarfcore.dwarfcore.html#dwarfcore.dwarfcore.DwarfCore" title="dwarfcore.dwarfcore.DwarfCore"><span class="pre">dwarfcore.dwarfcore.DwarfCore</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.DetectAllPathsOptions" title="mate_common.models.integration.DetectAllPathsOptions"><span class="pre">mate_common.models.integration.DetectAllPathsOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.VariableBoundsAccessOptions" title="mate_common.models.integration.VariableBoundsAccessOptions"><span class="pre">mate_common.models.integration.VariableBoundsAccessOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UninitializedVarOptions" title="mate_common.models.integration.UninitializedVarOptions"><span class="pre">mate_common.models.integration.UninitializedVarOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UseAfterFreeOptions" title="mate_common.models.integration.UseAfterFreeOptions"><span class="pre">mate_common.models.integration.UseAfterFreeOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UnderconstrainedOOBOptions" title="mate_common.models.integration.UnderconstrainedOOBOptions"><span class="pre">mate_common.models.integration.UnderconstrainedOOBOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.ConcreteHeapOOBOptions" title="mate_common.models.integration.ConcreteHeapOOBOptions"><span class="pre">mate_common.models.integration.ConcreteHeapOOBOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.DetectAllPathsOptions" title="mate_common.models.integration.DetectAllPathsOptions"><span class="pre">mate_common.models.integration.DetectAllPathsOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.VariableBoundsAccessOptions" title="mate_common.models.integration.VariableBoundsAccessOptions"><span class="pre">mate_common.models.integration.VariableBoundsAccessOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UninitializedVarOptions" title="mate_common.models.integration.UninitializedVarOptions"><span class="pre">mate_common.models.integration.UninitializedVarOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UseAfterFreeOptions" title="mate_common.models.integration.UseAfterFreeOptions"><span class="pre">mate_common.models.integration.UseAfterFreeOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UnderconstrainedOOBOptions" title="mate_common.models.integration.UnderconstrainedOOBOptions"><span class="pre">mate_common.models.integration.UnderconstrainedOOBOptions</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.ConcreteHeapOOBOptions" title="mate_common.models.integration.ConcreteHeapOOBOptions"><span class="pre">mate_common.models.integration.ConcreteHeapOOBOptions</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_underconstrained</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dwarfcore.detectors.heap_oob.html#dwarfcore.detectors.heap_oob.ConcreteHeapOOB" title="dwarfcore.detectors.heap_oob.ConcreteHeapOOB"><span class="pre">dwarfcore.detectors.heap_oob.ConcreteHeapOOB</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="dwarfcore.plugins.under_constrained_symex.errors.html#dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB" title="dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB"><span class="pre">dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="dwarfcore.detectors.dwarf_variables.html#dwarfcore.detectors.dwarf_variables.DwarfVariables" title="dwarfcore.detectors.dwarf_variables.DwarfVariables"><span class="pre">dwarfcore.detectors.dwarf_variables.DwarfVariables</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="dwarfcore.detectors.uninitialized_stack_variable.html#dwarfcore.detectors.uninitialized_stack_variable.DetectUninitializedStackVariable" title="dwarfcore.detectors.uninitialized_stack_variable.DetectUninitializedStackVariable"><span class="pre">dwarfcore.detectors.uninitialized_stack_variable.DetectUninitializedStackVariable</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="dwarfcore.detectors.uaf.html#dwarfcore.detectors.uaf.DetectUseAfterFree" title="dwarfcore.detectors.uaf.DetectUseAfterFree"><span class="pre">dwarfcore.detectors.uaf.DetectUseAfterFree</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.helper.enable_detectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize specified detectors with options and add them to Manticore instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.helper.enable_detectors.params.m"></span><strong>m</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.enable_detectors.params.m">¶</a> – The manticore instance to add detectors</p></li>
+<li><p><span class="target" id="dwarfcore.helper.enable_detectors.params.dwarfcore"></span><strong>dwarfcore</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.enable_detectors.params.dwarfcore">¶</a> – The Dwarfcore object</p></li>
+<li><p><span class="target" id="dwarfcore.helper.enable_detectors.params.detector_options"></span><strong>detector_options</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.enable_detectors.params.detector_options">¶</a> – The detectors with options to enable</p></li>
+<li><p><span class="target" id="dwarfcore.helper.enable_detectors.params.is_underconstrained"></span><strong>is_underconstrained</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.enable_detectors.params.is_underconstrained">¶</a> – Whether the detectors will run in the context of a UC Manticore task</p></li>
+<li><p><strong>m</strong> (<em>manticore.native.manticore.Manticore</em>) – </p></li>
+<li><p><strong>dwarfcore</strong> (<a class="reference internal" href="dwarfcore.dwarfcore.html#dwarfcore.dwarfcore.DwarfCore" title="dwarfcore.dwarfcore.DwarfCore"><em>dwarfcore.dwarfcore.DwarfCore</em></a>) – </p></li>
+<li><p><strong>detector_options</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.DetectAllPathsOptions" title="mate_common.models.integration.DetectAllPathsOptions"><em>mate_common.models.integration.DetectAllPathsOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.VariableBoundsAccessOptions" title="mate_common.models.integration.VariableBoundsAccessOptions"><em>mate_common.models.integration.VariableBoundsAccessOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UninitializedVarOptions" title="mate_common.models.integration.UninitializedVarOptions"><em>mate_common.models.integration.UninitializedVarOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UseAfterFreeOptions" title="mate_common.models.integration.UseAfterFreeOptions"><em>mate_common.models.integration.UseAfterFreeOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UnderconstrainedOOBOptions" title="mate_common.models.integration.UnderconstrainedOOBOptions"><em>mate_common.models.integration.UnderconstrainedOOBOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.ConcreteHeapOOBOptions" title="mate_common.models.integration.ConcreteHeapOOBOptions"><em>mate_common.models.integration.ConcreteHeapOOBOptions</em></a><em>, </em><em>None</em><em>, </em><em>Iterable</em><em>[</em><em>Union</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.DetectAllPathsOptions" title="mate_common.models.integration.DetectAllPathsOptions"><em>mate_common.models.integration.DetectAllPathsOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.VariableBoundsAccessOptions" title="mate_common.models.integration.VariableBoundsAccessOptions"><em>mate_common.models.integration.VariableBoundsAccessOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UninitializedVarOptions" title="mate_common.models.integration.UninitializedVarOptions"><em>mate_common.models.integration.UninitializedVarOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UseAfterFreeOptions" title="mate_common.models.integration.UseAfterFreeOptions"><em>mate_common.models.integration.UseAfterFreeOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UnderconstrainedOOBOptions" title="mate_common.models.integration.UnderconstrainedOOBOptions"><em>mate_common.models.integration.UnderconstrainedOOBOptions</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.ConcreteHeapOOBOptions" title="mate_common.models.integration.ConcreteHeapOOBOptions"><em>mate_common.models.integration.ConcreteHeapOOBOptions</em></a><em>]</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>is_underconstrained</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The instantiations of the chosen detectors, in order specified</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[Union[<a class="reference internal" href="dwarfcore.detectors.heap_oob.html#dwarfcore.detectors.heap_oob.ConcreteHeapOOB" title="dwarfcore.detectors.heap_oob.ConcreteHeapOOB">dwarfcore.detectors.heap_oob.ConcreteHeapOOB</a>, <a class="reference internal" href="dwarfcore.plugins.under_constrained_symex.errors.html#dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB" title="dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB">dwarfcore.plugins.under_constrained_symex.errors.UnderconstrainedOOB</a>, <a class="reference internal" href="dwarfcore.detectors.dwarf_variables.html#dwarfcore.detectors.dwarf_variables.DwarfVariables" title="dwarfcore.detectors.dwarf_variables.DwarfVariables">dwarfcore.detectors.dwarf_variables.DwarfVariables</a>, <a class="reference internal" href="dwarfcore.detectors.uninitialized_stack_variable.html#dwarfcore.detectors.uninitialized_stack_variable.DetectUninitializedStackVariable" title="dwarfcore.detectors.uninitialized_stack_variable.DetectUninitializedStackVariable">dwarfcore.detectors.uninitialized_stack_variable.DetectUninitializedStackVariable</a>, <a class="reference internal" href="dwarfcore.detectors.uaf.html#dwarfcore.detectors.uaf.DetectUseAfterFree" title="dwarfcore.detectors.uaf.DetectUseAfterFree">dwarfcore.detectors.uaf.DetectUseAfterFree</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.helper.manticore_explore">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.helper.</span></span><span class="sig-name descname"><span class="pre">manticore_explore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bin_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Session" title="mate_query.db.Session"><span class="pre">mate_query.db.Session</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph"><span class="pre">mate_query.db.Graph</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">explore_msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.Explore" title="mate_common.models.integration.Explore"><span class="pre">mate_common.models.integration.Explore</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.ExploreFunction" title="mate_common.models.integration.ExploreFunction"><span class="pre">mate_common.models.integration.ExploreFunction</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">logging.Logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">manticore_workspace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.ExploreRet" title="mate_common.models.integration.ExploreRet"><span class="pre">mate_common.models.integration.ExploreRet</span></a></span></span><a class="headerlink" href="#dwarfcore.helper.manticore_explore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run Manticore in exploration mode with configuration determined by <code class="docutils literal notranslate"><span class="pre">explore_msg</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.helper.manticore_explore.params.bin_path"></span><strong>bin_path</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.manticore_explore.params.bin_path">¶</a> – The path to the binary being executed</p></li>
+<li><p><span class="target" id="dwarfcore.helper.manticore_explore.params.ctxt"></span><strong>ctxt</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.manticore_explore.params.ctxt">¶</a> – Global context for settings and options</p></li>
+<li><p><span class="target" id="dwarfcore.helper.manticore_explore.params.explore_msg"></span><strong>explore_msg</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.manticore_explore.params.explore_msg">¶</a> – The message to configure Manticore for exploration</p></li>
+<li><p><span class="target" id="dwarfcore.helper.manticore_explore.params.manticore_workspace"></span><strong>manticore_workspace</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.manticore_explore.params.manticore_workspace">¶</a> – Location where Manticore will place execution artifacts</p></li>
+<li><p><strong>bin_path</strong> (<em>pathlib.Path</em>) – </p></li>
+<li><p><strong>session</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Session" title="mate_query.db.Session"><em>mate_query.db.Session</em></a>) – </p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph"><em>mate_query.db.Graph</em></a>) – </p></li>
+<li><p><strong>explore_msg</strong> (<em>Union</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.Explore" title="mate_common.models.integration.Explore"><em>mate_common.models.integration.Explore</em></a><em>, </em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.ExploreFunction" title="mate_common.models.integration.ExploreFunction"><em>mate_common.models.integration.ExploreFunction</em></a><em>]</em>) – </p></li>
+<li><p><strong>logger</strong> (<em>logging.Logger</em>) – </p></li>
+<li><p><strong>manticore_workspace</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An <code class="docutils literal notranslate"><span class="pre">ExploreReturn</span></code> message with details of input that triggered a detector</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.ExploreRet" title="mate_common.models.integration.ExploreRet">mate_common.models.integration.ExploreRet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.helper.setup_generic_manticore">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.helper.</span></span><span class="sig-name descname"><span class="pre">setup_generic_manticore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prog_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdin_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dwarfcore</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dwarfcore.dwarfcore.html#dwarfcore.dwarfcore.DwarfCore" title="dwarfcore.dwarfcore.DwarfCore"><span class="pre">dwarfcore.dwarfcore.DwarfCore</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.helper.setup_generic_manticore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up some generic settings for Manticore and initialize Manticore with the above arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.helper.setup_generic_manticore.params.prog_path"></span><strong>prog_path</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_generic_manticore.params.prog_path">¶</a> – Path to executable</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_generic_manticore.params.prog_args"></span><strong>prog_args</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_generic_manticore.params.prog_args">¶</a> – Arguments to executable</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_generic_manticore.params.env"></span><strong>env</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_generic_manticore.params.env">¶</a> – Extra environment variables, combined with existing environment</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_generic_manticore.params.workspace_path"></span><strong>workspace_path</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_generic_manticore.params.workspace_path">¶</a> – Path for Manticore to store intermediate files and
+findings (otherwise random temp file)</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_generic_manticore.params.concrete_start"></span><strong>concrete_start</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_generic_manticore.params.concrete_start">¶</a> – Concrete stdin to use before symbolic input</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_generic_manticore.params.stdin_size"></span><strong>stdin_size</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_generic_manticore.params.stdin_size">¶</a> – symbolic stdin size to use</p></li>
+<li><p><strong>prog_path</strong> (<em>pathlib.Path</em>) – </p></li>
+<li><p><strong>prog_args</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>env</strong> (<em>Optional</em><em>[</em><em>Mapping</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>workspace_path</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>concrete_start</strong> (<em>str</em>) – </p></li>
+<li><p><strong>stdin_size</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>dwarfcore</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="dwarfcore.dwarfcore.html#dwarfcore.dwarfcore.DwarfCore" title="dwarfcore.dwarfcore.DwarfCore"><em>dwarfcore.dwarfcore.DwarfCore</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Manticore instance ready to run and add plugins</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.helper.setup_under_constrained_manticore">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.helper.</span></span><span class="sig-name descname"><span class="pre">setup_under_constrained_manticore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prog_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Session" title="mate_query.db.Session"><span class="pre">mate_query.db.Session</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph"><span class="pre">mate_query.db.Graph</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><span class="pre">mate_common.models.manticore.UserDefinedConstraint</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_until</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">native_array_size_policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><span class="pre">mate_common.models.integration.UnboundedPtrPolicy</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex_array_size_policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><span class="pre">mate_common.models.integration.UnboundedPtrPolicy</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.helper.setup_under_constrained_manticore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set Manticore for under-constrained symbolic execution and initialize Manticore with the
+above arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.helper.setup_under_constrained_manticore.params.prog_path"></span><strong>prog_path</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_under_constrained_manticore.params.prog_path">¶</a> – Path to executable</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_under_constrained_manticore.params.session"></span><strong>session</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_under_constrained_manticore.params.session">¶</a> – DB session to query the CPG</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_under_constrained_manticore.params.graph"></span><strong>graph</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_under_constrained_manticore.params.graph">¶</a> – The code property graph for the executable</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_under_constrained_manticore.params.target"></span><strong>target</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_under_constrained_manticore.params.target">¶</a> – Name of the function to execute in under-constrained mode</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_under_constrained_manticore.params.input_constraints"></span><strong>input_constraints</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_under_constrained_manticore.params.input_constraints">¶</a> – Additional constraints on the symbolic state</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_under_constrained_manticore.params.init_until"></span><strong>init_until</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_under_constrained_manticore.params.init_until">¶</a> – Execute the binary normally until this address is reached,
+then jump directly to the target specified by <a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.Waypoint.start" title="mate_common.models.integration.Waypoint.start"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">start</span></code></a></p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_under_constrained_manticore.params.env"></span><strong>env</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_under_constrained_manticore.params.env">¶</a> – Extra environment variables, combined with existing environment</p></li>
+<li><p><span class="target" id="dwarfcore.helper.setup_under_constrained_manticore.params.workspace_path"></span><strong>workspace_path</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.helper.setup_under_constrained_manticore.params.workspace_path">¶</a> – Path for Manticore to store intermediate files and
+findings (otherwise random temp file)</p></li>
+<li><p><strong>prog_path</strong> (<em>pathlib.Path</em>) – </p></li>
+<li><p><strong>session</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Session" title="mate_query.db.Session"><em>mate_query.db.Session</em></a>) – </p></li>
+<li><p><strong>graph</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph"><em>mate_query.db.Graph</em></a>) – </p></li>
+<li><p><strong>target</strong> (<em>str</em>) – </p></li>
+<li><p><strong>input_constraints</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><em>mate_common.models.manticore.UserDefinedConstraint</em></a><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>init_until</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>native_array_size_policy</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><em>mate_common.models.integration.UnboundedPtrPolicy</em></a><em>]</em>) – </p></li>
+<li><p><strong>complex_array_size_policy</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.integration.html#mate_common.models.integration.UnboundedPtrPolicy" title="mate_common.models.integration.UnboundedPtrPolicy"><em>mate_common.models.integration.UnboundedPtrPolicy</em></a><em>]</em>) – </p></li>
+<li><p><strong>env</strong> (<em>Optional</em><em>[</em><em>Mapping</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>workspace_path</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Manticore instance ready to run and add plugins</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dwarfcore.logging.html" class="btn btn-neutral float-right" title="dwarfcore.logging module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dwarfcore.dwarfcore.html" class="btn btn-neutral float-left" title="dwarfcore.dwarfcore module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

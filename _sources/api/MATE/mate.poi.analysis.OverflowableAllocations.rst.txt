@@ -1,0 +1,7 @@
+mate.poi.analysis.OverflowableAllocations module
+================================================
+
+.. automodule:: mate.poi.analysis.OverflowableAllocations
+   :members:
+   :undoc-members:
+   :show-inheritance:

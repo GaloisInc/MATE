@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Debugging Challenge Build Failures &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="MATE System Overview" href="overview.html" />
+    <link rel="prev" title="Under-constrained Manticore" href="under-constrained-manticore.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Debugging Challenge Build Failures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#identifying-the-kind-of-failure">Identifying the kind of failure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-a-mate-compilation">Debugging a MATE compilation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fixing-your-compilation">Fixing Your Compilation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#compilation-step-failures">Compilation Step Failures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging-a-mate-build">Debugging a MATE build</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fixing-your-build">Fixing Your Build</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pointer-analysis-issues">Pointer Analysis Issues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#machine-code-mapping-issues">Machine-code Mapping Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Debugging Challenge Build Failures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/debugging-builds.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugging-challenge-build-failures">
+<h1>Debugging Challenge Build Failures<a class="headerlink" href="#debugging-challenge-build-failures" title="Permalink to this headline">¶</a></h1>
+<p>This page describes how to debug issues related to compiling challenge programs
+and building the associated Code Property Graph (CPG).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The information below applies to compilations and CPG builds that are
+performed through the REST API. The legacy <code class="docutils literal notranslate"><span class="pre">mate</span></code> CLI and its legacy build
+pipeline are not covered here.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The information below is written in the context of the MATE’s use within the
+integrated CHESS system. Most of the details apply to independent use of
+MATE as well.</p>
+</div>
+<p>When turning a program into a CPG, MATE goes through two primary phases: it
+first <em>compiles</em> the program into LLVM bitcode, and then it <em>builds</em> one or
+more CPGs from that bitcode. Both phases have multiple internal steps, each of
+which can fail. The sections below will help you debug some of the common
+sources of failures.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The debugging information below does <strong>not</strong> include environmental failure
+conditions, such as out-of-memory (OOM) errors or disk space exhaustion.</p>
+</div>
+<div class="section" id="identifying-the-kind-of-failure">
+<h2>Identifying the kind of failure<a class="headerlink" href="#identifying-the-kind-of-failure" title="Permalink to this headline">¶</a></h2>
+<p>To start debugging MATE’s behavior, we first need to know which phase
+(compilation or building) actually failed. To do this, we can start by
+checking the status of the compilation that we kicked off:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ http YOUR_CHESS_SYSTEM:8666/api/v1/compilations/YOUR-COMPILATION-ID
+</pre></div>
+</div>
+<p>This will return a JSON blob with metadata about the compilation, including
+a <code class="docutils literal notranslate"><span class="pre">state</span></code> field that indicates the compilation’s status:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;artifact_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;71d004a9b9df42ea925950e274636d25&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;b1959e0ab94941019fcb2f5535101ece&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;40cd28faf8744cd1a4b4af72f03cb078&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;c61de4d26c2d46bcba36eef744cb5355&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;51b37cc4ef154a9aae000c2c70be3e8d&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;build_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0a9d399e84eb4a21a1a849e4467015c1&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;compilation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1bc760aa2ce54cc399c112818879ba6d&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;containerized&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;containerized_infer_build&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;extra_compiler_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;make_targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;testbed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;source_artifact&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;artifact_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;71d004a9b9df42ea925950e274636d25&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mini-fenway-uaf.c&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;has_object&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;compile-target:c&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="hll"><span class="w">    </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;compiled&quot;</span><span class="w"></span>
+</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;state&quot;:</span> <span class="pre">&quot;created&quot;</span></code> indicates a freshly created compilation. Compilations
+should only be in this state for an <strong>extremely short period</strong>, i.e. for a few
+milliseconds until they’re picked up by the execution service. A compilation
+that lingers in this state is a <em>potential</em> indicator of an environmental
+failure in MATE itself, such as the <code class="docutils literal notranslate"><span class="pre">executor</span></code> service crashing. Consult
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">service</span> <span class="pre">ls</span></code> for more information. Keep in mind, however, that
+high load on the <code class="docutils literal notranslate"><span class="pre">executor</span></code> service may also result in pending compilations
+in the <code class="docutils literal notranslate"><span class="pre">created</span></code> state — if the services look healthy, then it’s likely
+that the compilation is simply scheduled behind other tasks and needs some
+time.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;state&quot;:</span> <span class="pre">&quot;compiling&quot;</span></code> indicates a compilation that’s still in progress,
+meaning that it can’t be used to produce CPG builds yet. A compilation process
+that stays in the <code class="docutils literal notranslate"><span class="pre">compiling</span></code> state for an unusually long time (i.e., more
+than an order of magnitude longer than the compilation would take outside of
+MATE) <em>might</em> indicate an error in MATE itself. No debugging action
+is immediately required for a compilation in this state.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;state&quot;:</span> <span class="pre">&quot;compiled&quot;</span></code> indicates a successful compilation, producing one
+or more bitcode outputs that are suitable for the CPG build pipeline.
+Follow the steps under <a class="reference internal" href="#debugging-mate-build"><span class="std std-ref">Debugging a MATE CPG build</span></a>
+for debugging failed builds once you’ve turned a compilation into CPG builds.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;state&quot;:</span> <span class="pre">&quot;failed&quot;</span></code> affirmatively indicates a failed compilation phase. Follow
+the steps under
+<a class="reference internal" href="#debugging-mate-compilation"><span class="std std-ref">Debugging a MATE compilation</span></a>.</p>
+</div>
+<div class="section" id="debugging-a-mate-compilation">
+<span id="debugging-mate-compilation"></span><h2>Debugging a MATE compilation<a class="headerlink" href="#debugging-a-mate-compilation" title="Permalink to this headline">¶</a></h2>
+<p>To begin debugging a MATE compilation, follow these steps:</p>
+<ol class="arabic">
+<li><p>First, check the Docker logs for the <code class="docutils literal notranslate"><span class="pre">executor</span></code> service, which handles
+compilation tasks. This will probably either be
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">service</span> <span class="pre">logs</span> <span class="pre">mate_executor_1</span></code> or
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">container</span> <span class="pre">logs</span> <span class="pre">mate_executor_1</span></code>, depending on your deployment.</p>
+<p>The most common sources of compilation errors at this level are as follows:</p>
+<ol class="arabic">
+<li><p>(CHESS system only) Challenge broker and Docker registry configuration
+errors. When compiling a brokerized challenge, MATE expects to be able to
+run containers from images that may originate behind Apogee’s VPN or are
+stored on a credential-protected ECS instance.</p></li>
+<li><p>(CHESS system only) Build system inference errors. When compiling a
+brokerized challenge, MATE attempts to collect the individual steps
+needed to build the challenge from the <code class="docutils literal notranslate"><span class="pre">Dockerfile.build</span></code> supplied
+with each challenge. To do this, MATE currently looks for a range of
+Dockerfile steps marked with <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">CHESS</span> <span class="pre">BUILD</span> <span class="pre">START</span></code> and
+<code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">CHESS</span> <span class="pre">BUILD</span> <span class="pre">END</span></code> and attempts to translate them into appropriate
+commands for running the build in a temporary directory within
+an already-spawned copy of the challenge’s image. This process isn’t
+perfect, and can fail (for example) if the build steps include a
+<code class="docutils literal notranslate"><span class="pre">WORKDIR</span></code> directive that MATE can’t relocate into a directory
+within its copy of the challenge source code. These may manifest as
+the entire challenge container terminating due to the <code class="docutils literal notranslate"><span class="pre">chdir</span></code> syscall
+failing.</p></li>
+<li><p>Compiler and linker flag errors. MATE runs compilations either in its own
+environment or in a challenge container, depending on how the compilation
+was requested. In both cases, MATE uses its own build of the LLVM compiler
+toolchain for the individual build steps.</p>
+<p>This introduces several avenues of failure. For non-containerized
+compilations, the MATE environment may be missing linkage or tool
+dependencies. Alternatively, the MATE LLVM toolchain may not have the
+correct language or flag features for the target.</p>
+</li>
+</ol>
+</li>
+<li><p>(CHESS system only) If the Docker logs don’t show any errors or the
+formatting of the errors is too difficult to follow, you may be able to
+obtain additional context from the compilation-only log stored with
+each containerized compilation attempt.</p>
+<p>To get this log, you can request all containerized compilation logs
+from the REST API and select just the one corresponding to your compilation
+ID:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http <span class="s1">&#39;YOUR_CHESS_SYSTEM:8666/api/v1/artifacts?kind=compile-output:compile-log&amp;detail=true&#39;</span>
+</pre></div>
+</div>
+<p>Once you have the artifact ID for the container log of interest, you can
+request the raw log contents:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http YOUR_CHESS_SYSTEM:8666/api/v1/artifacts/ARTIFACT-ID/object <span class="p">|</span> less
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="section" id="fixing-your-compilation">
+<span id="compilations-what-to-do"></span><h3>Fixing Your Compilation<a class="headerlink" href="#fixing-your-compilation" title="Permalink to this headline">¶</a></h3>
+<p>If you encounter any of the above failure modes, compilations can be re-created
+using the REST API after applying workarounds and fixes.</p>
+<div class="section" id="compilation-step-failures">
+<h4>Compilation Step Failures<a class="headerlink" href="#compilation-step-failures" title="Permalink to this headline">¶</a></h4>
+<p>If an individual step within the compilation process (such as a call to the C
+compiler) fails, you can try the following workarounds:</p>
+<ol class="arabic">
+<li><p>Disable build inference and run with an explicit set of <code class="docutils literal notranslate"><span class="pre">make</span></code> targets.</p>
+<p>For example, a compilation that only needs the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">server</span></code> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http POST YOUR_CHESS_SYSTEM:8666/api/v1/compilations <span class="se">\</span>
+   <span class="nv">kind</span><span class="o">=</span><span class="s2">&quot;your-target-kind&quot;</span> <span class="se">\</span>
+   <span class="nv">handle</span><span class="o">=</span><span class="s2">&quot;your-target-handle&quot;</span> <span class="se">\</span>
+   options:<span class="o">=</span><span class="s1">&#39;{&quot;containerized_infer_build&quot;: false, &quot;make_targets&quot;: [&quot;server&quot;]}&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Inject additional compiler flags into each <code class="docutils literal notranslate"><span class="pre">cc</span></code> and <code class="docutils literal notranslate"><span class="pre">c++</span></code> invocation.</p>
+<p>If you see individual compiler commands failing because of incorrect or
+overly conservative flags, you can add additional flags to every compilation
+step:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http POST YOUR_CHESS_SYSTEM:8666/api/v1/compilations <span class="se">\</span>
+   <span class="nv">kind</span><span class="o">=</span><span class="s2">&quot;your-target-kind&quot;</span> <span class="se">\</span>
+   <span class="nv">handle</span><span class="o">=</span><span class="s2">&quot;your-target-handle&quot;</span> <span class="se">\</span>
+   options:<span class="o">=</span><span class="s1">&#39;{&quot;extra_compiler_flags&quot;: [&quot;-some&quot;, &quot;-extras&quot;]}&#39;</span>
+</pre></div>
+</div>
+<p>Note that these flags are added to every compiler step, and that MATE already
+performs some flag manipulation by default (such as removing <code class="docutils literal notranslate"><span class="pre">-Werror</span></code>).</p>
+</li>
+<li><p>Attempt a combination of the above.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="debugging-a-mate-build">
+<span id="debugging-mate-build"></span><h2>Debugging a MATE build<a class="headerlink" href="#debugging-a-mate-build" title="Permalink to this headline">¶</a></h2>
+<p>To debug a MATE build, we can start by retrieving the build’s status from
+MATE’s REST API:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http YOUR_CHESS_SYSTEM:8666/api/v1/builds/YOUR-BUILD-ID
+</pre></div>
+</div>
+<p>This will return a JSON blob (abbreviated below) with metadata about the build,
+including a <code class="docutils literal notranslate"><span class="pre">state</span></code> field that indicates the build’s status:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="s2">&quot;artifact_ids&quot;</span>: <span class="o">[</span>
+        <span class="s2">&quot;51b37cc4ef154a9aae000c2c70be3e8d&quot;</span>,
+        <span class="s2">&quot;d45c693324744f948666e88b22cf7b57&quot;</span>,
+        <span class="s2">&quot;713969d7289d41a8bc9309dd4f9ba3ef&quot;</span>,
+        <span class="s2">&quot;9887d2b10968454484e841df312d98c5&quot;</span>,
+        <span class="s2">&quot;92a909d999b8403c8fb79bd7bfc50aa9&quot;</span>,
+        <span class="s2">&quot;b33e5f3b8a9444559a31e7c4eb173de9&quot;</span>,
+        <span class="s2">&quot;8d8e1f8563a44a46bd0afe64998aa170&quot;</span>
+    <span class="o">]</span>,
+    <span class="s2">&quot;artifacts&quot;</span>: <span class="o">[]</span>,
+    <span class="s2">&quot;bitcode_artifact&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;artifact_id&quot;</span>: <span class="s2">&quot;51b37cc4ef154a9aae000c2c70be3e8d&quot;</span>,
+        <span class="s2">&quot;attributes&quot;</span>: <span class="o">{</span>
+            <span class="s2">&quot;compile_output&quot;</span>: <span class="s2">&quot;c61de4d26c2d46bcba36eef744cb5355&quot;</span>,
+            <span class="s2">&quot;filename&quot;</span>: <span class="s2">&quot;tmpm9zfpcsn.bc&quot;</span>
+        <span class="o">}</span>,
+        <span class="s2">&quot;has_object&quot;</span>: true,
+        <span class="s2">&quot;kind&quot;</span>: <span class="s2">&quot;compile-output:bitcode&quot;</span>
+    <span class="o">}</span>,
+    <span class="s2">&quot;build_id&quot;</span>: <span class="s2">&quot;0a9d399e84eb4a21a1a849e4467015c1&quot;</span>,
+    <span class="s2">&quot;compilation&quot;</span>: <span class="o">{</span> ... <span class="o">}</span>,
+    <span class="s2">&quot;mantiserve_task_ids&quot;</span>: <span class="o">[]</span>,
+    <span class="s2">&quot;options&quot;</span>: <span class="o">{</span> ... <span class="o">}</span>,
+<span class="hll">    <span class="s2">&quot;state&quot;</span>: <span class="s2">&quot;built&quot;</span>
+</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>Like with compilations, <code class="docutils literal notranslate"><span class="pre">&quot;state&quot;:</span> <span class="pre">&quot;created&quot;</span></code> indicates a freshly created
+build. Builds should only be in the <code class="docutils literal notranslate"><span class="pre">created</span></code> state for an extremely short
+amount of time, under normal amounts of system load. A build that lingers in
+the <code class="docutils literal notranslate"><span class="pre">created</span></code> state for more than a few seconds is a <em>potential</em> indicator of
+an environmental failure in MATE itself, such as the executor service
+crashing. To confirm whether a MATE service has crashed, inspect the
+state of the Docker services with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">service</span> <span class="pre">ls</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;state&quot;:</span> <span class="pre">&quot;building&quot;</span></code>  indicates an in-progress CPG build. No debugging action
+is required for a build in this state.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;state&quot;:</span> <span class="pre">&quot;inserting&quot;</span></code> indicates a CPG build that has finished and is being
+turned into its final database representation. No debugging action is required
+for a build in this state.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;state&quot;:</span> <span class="pre">&quot;failed&quot;</span></code> affirmatively indicates a failed CPG build. To get to the
+root cause of the build failure, follow these steps:</p>
+<ol class="arabic">
+<li><p>First, check the Docker logs for the <code class="docutils literal notranslate"><span class="pre">executor</span></code> service, which handles
+build tasks. This will probably either be
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">service</span> <span class="pre">logs</span> <span class="pre">mate_executor_1</span></code> or
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">container</span> <span class="pre">logs</span> <span class="pre">mate_executor_1</span></code>, depending on your deployment.</p>
+<p>The most common sources of build errors at this level are as follows:</p>
+<ol class="arabic">
+<li><p>Errors during recompilation. In order to produce a CPG that contains
+LLVM backend and binary-level features, MATE “recompiles” the bitcode
+produced during the compilation phase with additional instrumentation.
+Like the original compilation process, this is susceptible to
+compiler configuration and linker flag errors.</p>
+<p>In particular, MATE attempts to produce as complete of a CPG as possible
+by merging the bitcode produced by the compilation phase with the bitcodes
+of any static or dynamic libraries produced by the same target’s build
+system that we infer as dependencies. This process isn’t perfect, and
+can cause linker errors for missing or duplicated symbols.</p>
+</li>
+<li><p>Errors and assertions during pointer analysis. MATE’s pointer analysis
+component contains assertions for unexpected conditions, which will cause
+a build failure if hit. The pointer analysis component may also abort
+with a segmentation fault on certain pathological bitcode inputs,
+or with a floating point exception.</p></li>
+<li><p>Resource exhaustion. MATE’s pointer analysis is limited to 32GB of RAM by
+default (or the value of <code class="docutils literal notranslate"><span class="pre">MATE_DEFAULT_MEMORY_LIMIT_GB</span></code>, if that
+environment variables is set in the MATE server container). If the pointer
+analysis exceeds the limit, the build will fail with an error message
+indicating it could not allocate enough memory. If more resources are
+available, consider re-running the build with a higher limit set via the
+build option <a class="reference internal" href="api/MATECommon/mate_common.models.builds.html#mate_common.models.builds.BuildOptions.memory_limit_mb" title="mate_common.models.builds.BuildOptions.memory_limit_mb"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">memory_limit_mb</span></code></a>.</p></li>
+<li><p>Errors and assertions during CPG construction. One of MATE’s last stages
+involves drawing edges from the LLVM-level nodes to the backend and
+binary-level nodes. This process attempts to be resilient, but makes
+certain fundamental assumptions about the correspondence between the
+different program representations (e.g., that arguments to a function
+recorded in the program’s DWARF information correspond approximately
+to the LLVM-level arguments to an LLVM-level function). Violations of
+these assumptions produce an assertion, which is propagated as a build
+error.</p></li>
+</ol>
+</li>
+<li><p>Certain subcomponents of the build phase run as native LLVM passes, and
+cannot log directly to Docker. When reviewing the Docker logs above fails,
+these subcomponent logs may be of more help. One or more more messages in
+the Docker logs will indicate which subcomponent logs to inspect:</p>
+<ol class="arabic simple">
+<li><p>A log message starting with <code class="docutils literal notranslate"><span class="pre">Wedlock</span> <span class="pre">encountered</span> <span class="pre">some</span> <span class="pre">interesting</span>
+<span class="pre">conditions</span></code> indicates that the “Wedlock” log should be inspected.
+The “Wedlock” log is stored as the <code class="docutils literal notranslate"><span class="pre">build-output:quotidian-wedlock-log</span></code>
+artifact for the build.</p></li>
+<li><p>A log message starting with <code class="docutils literal notranslate"><span class="pre">Headache</span> <span class="pre">encountered</span> <span class="pre">some</span> <span class="pre">interesting</span>
+<span class="pre">conditions</span></code> indicates that the “Headache” log should be inspected.
+The “Headache” log is stored as the
+<code class="docutils literal notranslate"><span class="pre">build-output:quotidian-headache-log</span></code> artifact for the build.</p></li>
+</ol>
+<p>In both cases, you can use the REST API to retrieve the log’s contents:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># change this as necessary</span>
+<span class="nv">build_id</span><span class="o">=</span>YOUR-BUILD-ID
+<span class="nv">target_log</span><span class="o">=</span>build-output:quotidian-wedlock-log
+
+<span class="nv">artifact_id</span><span class="o">=</span><span class="k">$(</span>http <span class="s2">&quot;YOUR_CHESS_SYSTEM:8666/api/v1/artifacts?kind=</span><span class="si">${</span><span class="nv">target_log</span><span class="si">}</span><span class="s2">&amp;detail=true&quot;</span> <span class="p">|</span> <span class="se">\</span>
+               jq -r --arg build_id <span class="s2">&quot;</span><span class="si">${</span><span class="nv">build_id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
+               <span class="s1">&#39;.[] | select(.build_ids | select(.[] == $build_id)) | .artifact_id&#39;</span><span class="k">)</span>
+
+http YOUR_CHESS_SYSTEM:8666/api/v1/artifacts/<span class="si">${</span><span class="nv">artifact_id</span><span class="si">}</span>/object <span class="p">|</span> less
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="section" id="fixing-your-build">
+<span id="builds-what-to-do"></span><h3>Fixing Your Build<a class="headerlink" href="#fixing-your-build" title="Permalink to this headline">¶</a></h3>
+<p>If you encounter any of the above failure modes, builds can be re-created using
+the REST API after applying workarounds and fixes.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>POI analyses are not run automatically for builds initiated by the <a class="reference external" href="api.html">REST API</a>
+rather than the challenge broker. To run POI analyses for a manually-created
+build, wait until the built has completed (its state is reported as <code class="docutils literal notranslate"><span class="pre">built</span></code>),
+and then submit a request to the <code class="docutils literal notranslate"><span class="pre">api/v1/analyses/run/{build_id}</span></code> endpoint
+supplying the build ID using either the REST API web page or at the command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http POST http://YOUR_CHESS_SYSTEM:8666/api/v1/analyses/run/<span class="si">${</span><span class="nv">build_id</span><span class="si">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pointer-analysis-issues">
+<h4>Pointer Analysis Issues<a class="headerlink" href="#pointer-analysis-issues" title="Permalink to this headline">¶</a></h4>
+<p>If you encounter resource exhaustion in the pointer analysis, you can try the
+following workarounds:</p>
+<ol class="arabic simple">
+<li><p>Try rebuilding with more RAM by setting the <code class="docutils literal notranslate"><span class="pre">memory_limit_mb</span></code> build option
+(though this might just fail again and/or take a long time, depending on the
+challenge).</p></li>
+<li><p>Try building with less context-sensitivity (see the <code class="docutils literal notranslate"><span class="pre">context_sensitivity</span></code>
+build option). The default is <code class="docutils literal notranslate"><span class="pre">2-callsite</span></code>, so you might try <code class="docutils literal notranslate"><span class="pre">2-caller</span></code>,
+<code class="docutils literal notranslate"><span class="pre">1-callsite</span></code> or even <code class="docutils literal notranslate"><span class="pre">insensitive</span></code>. The resulting analysis will be less
+precise, but hopefully more scalable.</p></li>
+<li><p>Try building without bitcode merging, i.e., set <code class="docutils literal notranslate"><span class="pre">merge_library_bitcode</span></code> to
+<code class="docutils literal notranslate"><span class="pre">false</span></code>. The resulting CPG may not be “complete” in the sense that it might
+not contain a representation of the whole challenge program with all its
+accompanying libraries. Some challenges may fail to build with
+<code class="docutils literal notranslate"><span class="pre">merge_library_bitcode</span></code> set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, particularly if they use complex
+linking instructions (e.g., libtool-based build systems).</p></li>
+</ol>
+</div>
+<div class="section" id="machine-code-mapping-issues">
+<h4>Machine-code Mapping Issues<a class="headerlink" href="#machine-code-mapping-issues" title="Permalink to this headline">¶</a></h4>
+<p>If you encounter errors in the machine-code mapping phase (“quotidian”), you can
+try disabling it entirely. This will not affect any current POIs, although it
+will make MATE’s integration with Manticore nonfunctional for this particular
+CPG.</p>
+<p>To disable machine-code mapping, set the <code class="docutils literal notranslate"><span class="pre">machine_code_mapping</span></code> build option
+to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="overview.html" class="btn btn-neutral float-right" title="MATE System Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="under-constrained-manticore.html" class="btn btn-neutral float-left" title="Under-constrained Manticore" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

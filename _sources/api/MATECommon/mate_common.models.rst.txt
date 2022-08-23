@@ -1,0 +1,31 @@
+mate\_common.models package
+===========================
+
+.. automodule:: mate_common.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_common.models.cpg_types
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_common.models.analyses
+   mate_common.models.artifacts
+   mate_common.models.builds
+   mate_common.models.bytes
+   mate_common.models.challenge_broker
+   mate_common.models.compilations
+   mate_common.models.graphs
+   mate_common.models.integration
+   mate_common.models.manticore

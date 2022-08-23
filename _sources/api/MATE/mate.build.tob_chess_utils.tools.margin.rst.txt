@@ -1,0 +1,7 @@
+mate.build.tob\_chess\_utils.tools.margin module
+================================================
+
+.. automodule:: mate.build.tob_chess_utils.tools.margin
+   :members:
+   :undoc-members:
+   :show-inheritance:

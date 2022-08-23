@@ -1,0 +1,7 @@
+mantiserve.apogee\_ex1\_specific module
+=======================================
+
+.. automodule:: mantiserve.apogee_ex1_specific
+   :members:
+   :undoc-members:
+   :show-inheritance:

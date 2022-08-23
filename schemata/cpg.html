@@ -1,0 +1,2688 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>CPG Schema &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MATE Signatures" href="../signatures.html" />
+    <link rel="prev" title="MATE System Overview" href="../overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CPG Schema</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-guidelines">General Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nodes">Nodes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#localvariable"><code class="docutils literal notranslate"><span class="pre">LocalVariable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarflocalvariable"><code class="docutils literal notranslate"><span class="pre">DWARFLocalVariable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asmglobalvariable"><code class="docutils literal notranslate"><span class="pre">ASMGlobalVariable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#function"><code class="docutils literal notranslate"><span class="pre">Function</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#argument"><code class="docutils literal notranslate"><span class="pre">Argument</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarfargument"><code class="docutils literal notranslate"><span class="pre">DWARFArgument</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#block"><code class="docutils literal notranslate"><span class="pre">Block</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#globalvariable"><code class="docutils literal notranslate"><span class="pre">GlobalVariable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instruction"><code class="docutils literal notranslate"><span class="pre">Instruction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alloca"><code class="docutils literal notranslate"><span class="pre">Alloca</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#call"><code class="docutils literal notranslate"><span class="pre">Call</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#invoke"><code class="docutils literal notranslate"><span class="pre">Invoke</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memcpy"><code class="docutils literal notranslate"><span class="pre">Memcpy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memset"><code class="docutils literal notranslate"><span class="pre">Memset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load"><code class="docutils literal notranslate"><span class="pre">Load</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resume"><code class="docutils literal notranslate"><span class="pre">Resume</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ret"><code class="docutils literal notranslate"><span class="pre">Ret</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#store"><code class="docutils literal notranslate"><span class="pre">Store</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#llvmtype"><code class="docutils literal notranslate"><span class="pre">LLVMType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constant"><code class="docutils literal notranslate"><span class="pre">Constant</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variable"><code class="docutils literal notranslate"><span class="pre">Variable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constantint"><code class="docutils literal notranslate"><span class="pre">ConstantInt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constantfp"><code class="docutils literal notranslate"><span class="pre">ConstantFP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constantstring"><code class="docutils literal notranslate"><span class="pre">ConstantString</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constantundef"><code class="docutils literal notranslate"><span class="pre">ConstantUndef</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unclassifiednode"><code class="docutils literal notranslate"><span class="pre">UnclassifiedNode</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#machinefunction"><code class="docutils literal notranslate"><span class="pre">MachineFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#machinebasicblock"><code class="docutils literal notranslate"><span class="pre">MachineBasicBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#machineinstr"><code class="docutils literal notranslate"><span class="pre">MachineInstr</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asminst"><code class="docutils literal notranslate"><span class="pre">ASMInst</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asmblock"><code class="docutils literal notranslate"><span class="pre">ASMBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parambinding"><code class="docutils literal notranslate"><span class="pre">ParamBinding</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#callreturn"><code class="docutils literal notranslate"><span class="pre">CallReturn</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#memorylocation"><code class="docutils literal notranslate"><span class="pre">MemoryLocation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataflowsignature"><code class="docutils literal notranslate"><span class="pre">DataflowSignature</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputsignature"><code class="docutils literal notranslate"><span class="pre">InputSignature</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#outputsignature"><code class="docutils literal notranslate"><span class="pre">OutputSignature</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarftype"><code class="docutils literal notranslate"><span class="pre">DWARFType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basictype"><code class="docutils literal notranslate"><span class="pre">BasicType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compositetype"><code class="docutils literal notranslate"><span class="pre">CompositeType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compositecachedtype"><code class="docutils literal notranslate"><span class="pre">CompositeCachedType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structuretype"><code class="docutils literal notranslate"><span class="pre">StructureType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arraytype"><code class="docutils literal notranslate"><span class="pre">ArrayType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enumtype"><code class="docutils literal notranslate"><span class="pre">EnumType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uniontype"><code class="docutils literal notranslate"><span class="pre">UnionType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#classtype"><code class="docutils literal notranslate"><span class="pre">ClassType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#derivedtype"><code class="docutils literal notranslate"><span class="pre">DerivedType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subroutinetype"><code class="docutils literal notranslate"><span class="pre">SubroutineType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#translationunit"><code class="docutils literal notranslate"><span class="pre">TranslationUnit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pltstub"><code class="docutils literal notranslate"><span class="pre">PLTStub</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtable"><code class="docutils literal notranslate"><span class="pre">VTable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#edges">Edges</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functiontolocalvariable"><code class="docutils literal notranslate"><span class="pre">FunctionToLocalVariable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functiontoargument"><code class="docutils literal notranslate"><span class="pre">FunctionToArgument</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functiontoentryblock"><code class="docutils literal notranslate"><span class="pre">FunctionToEntryBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blocktoparentfunction"><code class="docutils literal notranslate"><span class="pre">BlockToParentFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blocktosuccessorblock"><code class="docutils literal notranslate"><span class="pre">BlockToSuccessorBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instructiontosuccessorinstruction"><code class="docutils literal notranslate"><span class="pre">InstructionToSuccessorInstruction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blocktoentryinstruction"><code class="docutils literal notranslate"><span class="pre">BlockToEntryInstruction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blocktoterminatorinstruction"><code class="docutils literal notranslate"><span class="pre">BlockToTerminatorInstruction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instructiontoparentblock"><code class="docutils literal notranslate"><span class="pre">InstructionToParentBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hasllvmtype"><code class="docutils literal notranslate"><span class="pre">HasLLVMType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#callgraph"><code class="docutils literal notranslate"><span class="pre">Callgraph</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calltofunction"><code class="docutils literal notranslate"><span class="pre">CallToFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mifunctiontoirfunction"><code class="docutils literal notranslate"><span class="pre">MIFunctionToIRFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mifunctiontodwarfargument"><code class="docutils literal notranslate"><span class="pre">MIFunctionToDWARFArgument</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mifunctiontodwarflocalvariable"><code class="docutils literal notranslate"><span class="pre">MIFunctionToDWARFLocalVariable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mifunctiontovtable"><code class="docutils literal notranslate"><span class="pre">MIFunctionToVTable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miblocktoirblock"><code class="docutils literal notranslate"><span class="pre">MIBlockToIRBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miblocktoasmblock"><code class="docutils literal notranslate"><span class="pre">MIBlockToASMBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#blocktocontroldependentblock"><code class="docutils literal notranslate"><span class="pre">BlockToControlDependentBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#terminatorinstructiontocontroldependentinstruction"><code class="docutils literal notranslate"><span class="pre">TerminatorInstructionToControlDependentInstruction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functionentrytocontroldependentblock"><code class="docutils literal notranslate"><span class="pre">FunctionEntryToControlDependentBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functionentrytocontroldependentinstruction"><code class="docutils literal notranslate"><span class="pre">FunctionEntryToControlDependentInstruction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#valuedefinitiontouse"><code class="docutils literal notranslate"><span class="pre">ValueDefinitionToUse</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calltoparambinding"><code class="docutils literal notranslate"><span class="pre">CallToParamBinding</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operandtoparambinding"><code class="docutils literal notranslate"><span class="pre">OperandToParamBinding</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parambindingtoarg"><code class="docutils literal notranslate"><span class="pre">ParamBindingToArg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#samecall"><code class="docutils literal notranslate"><span class="pre">SameCall</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#returnvaluetocallreturn"><code class="docutils literal notranslate"><span class="pre">ReturnValueToCallReturn</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#returninstructiontocallreturn"><code class="docutils literal notranslate"><span class="pre">ReturnInstructionToCallReturn</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#callreturntocaller"><code class="docutils literal notranslate"><span class="pre">CallReturnToCaller</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pointsto"><code class="docutils literal notranslate"><span class="pre">PointsTo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mayalias"><code class="docutils literal notranslate"><span class="pre">MayAlias</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mustalias"><code class="docutils literal notranslate"><span class="pre">MustAlias</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subregion"><code class="docutils literal notranslate"><span class="pre">Subregion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contains"><code class="docutils literal notranslate"><span class="pre">Contains</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#storememory"><code class="docutils literal notranslate"><span class="pre">StoreMemory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loadmemory"><code class="docutils literal notranslate"><span class="pre">LoadMemory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#allocates"><code class="docutils literal notranslate"><span class="pre">Allocates</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#createsvar"><code class="docutils literal notranslate"><span class="pre">CreatesVar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#valuetostorepointer"><code class="docutils literal notranslate"><span class="pre">ValueToStorePointer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loadpointertovalue"><code class="docutils literal notranslate"><span class="pre">LoadPointerToValue</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitiontovalueload"><code class="docutils literal notranslate"><span class="pre">DefinitionToValueLoad</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clobberinstructiontovalueload"><code class="docutils literal notranslate"><span class="pre">ClobberInstructionToValueLoad</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hasdwarftype"><code class="docutils literal notranslate"><span class="pre">HasDWARFType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarftypetobasetype"><code class="docutils literal notranslate"><span class="pre">DWARFTypeToBaseType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarftypetorecursivetype"><code class="docutils literal notranslate"><span class="pre">DWARFTypeToRecursiveType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarftypetomembertype"><code class="docutils literal notranslate"><span class="pre">DWARFTypeToMemberType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarftypetotemplateparamtype"><code class="docutils literal notranslate"><span class="pre">DWARFTypeToTemplateParamType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarftypetoreturntype"><code class="docutils literal notranslate"><span class="pre">DWARFTypeToReturnType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarftypetoparamtype"><code class="docutils literal notranslate"><span class="pre">DWARFTypeToParamType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dwarftypetoparenttype"><code class="docutils literal notranslate"><span class="pre">DWARFTypeToParentType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#globaltoinitializer"><code class="docutils literal notranslate"><span class="pre">GlobalToInitializer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moduletotranslationunit"><code class="docutils literal notranslate"><span class="pre">ModuleToTranslationUnit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#localvariabletodwarflocalvariable"><code class="docutils literal notranslate"><span class="pre">LocalVariableToDWARFLocalVariable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#argumenttodwarfargument"><code class="docutils literal notranslate"><span class="pre">ArgumentToDWARFArgument</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">DataflowSignature</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#directdataflowsignature"><code class="docutils literal notranslate"><span class="pre">DirectDataflowSignature</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#indirectdataflowsignature"><code class="docutils literal notranslate"><span class="pre">IndirectDataflowSignature</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controldataflowsignature"><code class="docutils literal notranslate"><span class="pre">ControlDataflowSignature</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataflowsignatureforcallsite"><code class="docutils literal notranslate"><span class="pre">DataflowSignatureForCallSite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataflowsignatureforfunction"><code class="docutils literal notranslate"><span class="pre">DataflowSignatureForFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functiontopltstub"><code class="docutils literal notranslate"><span class="pre">FunctionToPLTStub</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pltstubtovtable"><code class="docutils literal notranslate"><span class="pre">PLTStubToVTable</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#definitions">Definitions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-dwarf-type-kind">#/definitions/dwarf_type_kind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-constant">#/definitions/constant</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-instruction">#/definitions/instruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-location">#/definitions/location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-definition-location">#/definitions/definition_location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-dwarf-location">#/definitions/dwarf_location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-dwarf-type-common-info">#/definitions/dwarf_type_common_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-dwarf-template-param">#/definitions/dwarf_template_param</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-dwarf-template-param-value">#/definitions/dwarf_template_param_value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-dwarf-type">#/definitions/dwarf_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-source-scope">#/definitions/source_scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-dwarf-scope">#/definitions/dwarf_scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-source-location">#/definitions/source_location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-llvm-type">#/definitions/llvm_type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-value">#/definitions/value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-symbol">#/definitions/symbol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#definitions-mod-ref-behavior">#/definitions/mod_ref_behavior</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>CPG Schema</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/schemata/cpg.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cpg-schema">
+<h1>CPG Schema<a class="headerlink" href="#cpg-schema" title="Permalink to this headline">¶</a></h1>
+<p>Given an LLVM bitcode file representing a C or C++ program, MATE builds a Code Property Graph (CPG).
+The CPG is a <em>labeled property graph</em>, meaning a graph where every node or edge has a collection of <em>attributes</em>, i.e. key/value pairs.
+For example, many of the nodes in the CPG represent parts of the syntax of the input program, like <code class="docutils literal notranslate"><span class="pre">Function</span></code> nodes.
+<code class="docutils literal notranslate"><span class="pre">Function</span></code> nodes have attributes like “name”, which can be accessed through the query interface.</p>
+<p>This document describes the kinds of nodes and edges in the CPG, along with the
+various attributes attached to them. It is generated from the MATE JSON schemata.</p>
+<div class="section" id="general-guidelines">
+<h2>General Guidelines<a class="headerlink" href="#general-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>The CPG contains three different representations of the input program
+corresponding to the following stages of compilation:</p>
+<ul class="simple">
+<li><p>LLVM IR</p></li>
+<li><p>LLVM middle-end (“MI” nodes and edges)</p></li>
+<li><p>Binary (“MC” and “ASM” nodes and edges)</p></li>
+</ul>
+<p>The LLVM IR is considered the “default” representation, since it is most similar to the source language (C/C++). Therefore, generic names like <code class="docutils literal notranslate"><span class="pre">Function</span></code>, <code class="docutils literal notranslate"><span class="pre">Block</span></code>, <code class="docutils literal notranslate"><span class="pre">Instruction</span></code>, and <code class="docutils literal notranslate"><span class="pre">Argument</span></code> refer to LLVM IR constructs. Nodes representing LLVM middle-end constructs have kinds prefixed by <code class="docutils literal notranslate"><span class="pre">Machine</span></code>, and binary-level node kinds are prefixed by <code class="docutils literal notranslate"><span class="pre">ASM</span></code>.</p>
+</div>
+<div class="section" id="nodes">
+<h2>Nodes<a class="headerlink" href="#nodes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="localvariable">
+<h3><code class="docutils literal notranslate"><span class="pre">LocalVariable</span></code><a class="headerlink" href="#localvariable" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">LocalVariable</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.LocalVariable.png"><img alt="Entity-relationship diagram for LocalVariable nodes" src="schema.LocalVariable.png" /></a>
+<p>An LLVM-level stack-local variable</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The source-level name of this local variable</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code>: The variable’s location: <a class="reference internal" href="#definitions-location"><span class="std std-ref">#/definitions/location</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="dwarflocalvariable">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFLocalVariable</span></code><a class="headerlink" href="#dwarflocalvariable" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">DWARFLocalVariable</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.DWARFLocalVariable.png"><img alt="Entity-relationship diagram for DWARFLocalVariable nodes" src="schema.DWARFLocalVariable.png" /></a>
+<p>A DWARF-level stack-local variable</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arg</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type_id</span></code>: A compressed representation of the function’s DWARF type</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dwarf_scope</span></code>: The variable’s DWARF scope: <a class="reference internal" href="#definitions-dwarf-scope"><span class="std std-ref">#/definitions/dwarf_scope</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_location</span></code>: The variable’s source location: <a class="reference internal" href="#definitions-source-location"><span class="std std-ref">#/definitions/source_location</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_scope</span></code>: The variable’s source scope: <a class="reference internal" href="#definitions-source-scope"><span class="std std-ref">#/definitions/source_scope</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">artificial</span></code>: Whether the variable is artificial</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dwarf_location</span></code>: The memory location of this local variable, if not optimized away: <a class="reference internal" href="#definitions-dwarf-location"><span class="std std-ref">#/definitions/dwarf_location</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="asmglobalvariable">
+<h3><code class="docutils literal notranslate"><span class="pre">ASMGlobalVariable</span></code><a class="headerlink" href="#asmglobalvariable" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ASMGlobalVariable</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ASMGlobalVariable.png"><img alt="Entity-relationship diagram for ASMGlobalVariable nodes" src="schema.ASMGlobalVariable.png" /></a>
+<p>A program global variable at the binary level</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thread_local</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">definition_location</span></code>: <a class="reference internal" href="#definitions-definition-location"><span class="std std-ref">#/definitions/definition_location</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">definition</span></code>: Indicates whether this visitation of the global variable is a definition</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">local_to_unit</span></code>: Indicates whether or not this global variable is local to this translation unit</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_scope</span></code>: <a class="reference internal" href="#definitions-source-scope"><span class="std std-ref">#/definitions/source_scope</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type_id</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The source-level name of this global variable</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dwarf_location</span></code>: <a class="reference internal" href="#definitions-dwarf-location"><span class="std std-ref">#/definitions/dwarf_location</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="function">
+<h3><code class="docutils literal notranslate"><span class="pre">Function</span></code><a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Function</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Function.png"><img alt="Entity-relationship diagram for Function nodes" src="schema.Function.png" /></a>
+<p>LLVM IR functions</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The name of the LLVM function. For functions generated by compiling C code, this is often the same name that appears in the source, e.g. <a class="reference external" href="mailto:'&#37;&#52;&#48;recv">‘<span>&#64;</span>recv</a>’ (at the LLVM level) corresponds to ‘recv’ (at the C level). However, compiled from other languages, the names will often be mangled. The source-level name will generally appear as a substring in the LLVM-level name.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">demangled_name</span></code>: The demangled name of the function.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_declaration</span></code>: True if this function has no definition.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alignment</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">section</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code>: <a class="reference internal" href="#definitions-location"><span class="std std-ref">#/definitions/location</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="argument">
+<h3><code class="docutils literal notranslate"><span class="pre">Argument</span></code><a class="headerlink" href="#argument" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Argument</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Argument.png"><img alt="Entity-relationship diagram for Argument nodes" src="schema.Argument.png" /></a>
+<p>A formal parameter to an LLVM function</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The source-level name of this formal parameter</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code>: <a class="reference internal" href="#definitions-location"><span class="std std-ref">#/definitions/location</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">might_be_null</span></code>: True when the pointer analysis determines the parameter could be a null pointer</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">argument_number</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="dwarfargument">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFArgument</span></code><a class="headerlink" href="#dwarfargument" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">DWARFArgument</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.DWARFArgument.png"><img alt="Entity-relationship diagram for DWARFArgument nodes" src="schema.DWARFArgument.png" /></a>
+<p>A DWARF-level formal parameter to a function</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arg</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The source-level name of this formal parameter</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dwarf_location</span></code>: The memory location of this formal parameter, if not optimized away: <a class="reference internal" href="#definitions-dwarf-location"><span class="std std-ref">#/definitions/dwarf_location</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type_id</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dwarf_scope</span></code>: <a class="reference internal" href="#definitions-dwarf-scope"><span class="std std-ref">#/definitions/dwarf_scope</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_location</span></code>: <a class="reference internal" href="#definitions-source-location"><span class="std std-ref">#/definitions/source_location</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_scope</span></code>: <a class="reference internal" href="#definitions-source-scope"><span class="std std-ref">#/definitions/source_scope</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">artificial</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_variadic_template</span></code>: True if this parameter is from a variadic template expansion; does not exist otherwise</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">original_name</span></code>: The original name of this argument, with no variadic index suffix</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameter_index</span></code>: The index of this argument into the overall list of arguments to the enclosing function</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variadic_index</span></code>: The index of this argument into all variadic arguments of this function</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">template_index</span></code>: The index of this argument into the variadic arguments of its group (i.e., those with the same name)</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="block">
+<h3><code class="docutils literal notranslate"><span class="pre">Block</span></code><a class="headerlink" href="#block" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Block</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Block.png"><img alt="Entity-relationship diagram for Block nodes" src="schema.Block.png" /></a>
+<p>LLVM IR basic blocks</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="globalvariable">
+<h3><code class="docutils literal notranslate"><span class="pre">GlobalVariable</span></code><a class="headerlink" href="#globalvariable" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">GlobalVariable</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.GlobalVariable.png"><img alt="Entity-relationship diagram for GlobalVariable nodes" src="schema.GlobalVariable.png" /></a>
+<p>A program global variable at the LLVM level</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_constant</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_declaration</span></code>: True if this global variable has no definition.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">has_initializer</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alignment</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">section</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code>: <a class="reference internal" href="#definitions-location"><span class="std std-ref">#/definitions/location</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="instruction">
+<h3><code class="docutils literal notranslate"><span class="pre">Instruction</span></code><a class="headerlink" href="#instruction" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Instruction</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Instruction.png"><img alt="Entity-relationship diagram for Instruction nodes" src="schema.Instruction.png" /></a>
+<p>LLVM IR instructions</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="alloca">
+<h3><code class="docutils literal notranslate"><span class="pre">Alloca</span></code><a class="headerlink" href="#alloca" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Alloca</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Alloca.png"><img alt="Entity-relationship diagram for Alloca nodes" src="schema.Alloca.png" /></a>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">alloca</span></code> instructions</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="call">
+<h3><code class="docutils literal notranslate"><span class="pre">Call</span></code><a class="headerlink" href="#call" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Call</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Call.png"><img alt="Entity-relationship diagram for Call nodes" src="schema.Call.png" /></a>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">call</span></code> instructions</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_direct</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="invoke">
+<h3><code class="docutils literal notranslate"><span class="pre">Invoke</span></code><a class="headerlink" href="#invoke" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Invoke</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Invoke.png"><img alt="Entity-relationship diagram for Invoke nodes" src="schema.Invoke.png" /></a>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">invoke</span></code> instructions</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_direct</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="memcpy">
+<h3><code class="docutils literal notranslate"><span class="pre">Memcpy</span></code><a class="headerlink" href="#memcpy" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Memcpy</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Memcpy.png"><img alt="Entity-relationship diagram for Memcpy nodes" src="schema.Memcpy.png" /></a>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">memcpy</span></code> intrinsics</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="memset">
+<h3><code class="docutils literal notranslate"><span class="pre">Memset</span></code><a class="headerlink" href="#memset" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Memset</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Memset.png"><img alt="Entity-relationship diagram for Memset nodes" src="schema.Memset.png" /></a>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">memset</span></code> intrinsics</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="load">
+<h3><code class="docutils literal notranslate"><span class="pre">Load</span></code><a class="headerlink" href="#load" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Load</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Load.png"><img alt="Entity-relationship diagram for Load nodes" src="schema.Load.png" /></a>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">load</span></code> instructions</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="resume">
+<h3><code class="docutils literal notranslate"><span class="pre">Resume</span></code><a class="headerlink" href="#resume" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Resume</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Resume.png"><img alt="Entity-relationship diagram for Resume nodes" src="schema.Resume.png" /></a>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">resume</span></code> instructions</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="ret">
+<h3><code class="docutils literal notranslate"><span class="pre">Ret</span></code><a class="headerlink" href="#ret" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Ret</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Ret.png"><img alt="Entity-relationship diagram for Ret nodes" src="schema.Ret.png" /></a>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">ret</span></code> instructions</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="store">
+<h3><code class="docutils literal notranslate"><span class="pre">Store</span></code><a class="headerlink" href="#store" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Store</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Store.png"><img alt="Entity-relationship diagram for Store nodes" src="schema.Store.png" /></a>
+<p>LLVM IR <code class="docutils literal notranslate"><span class="pre">store</span></code> instructions</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="llvmtype">
+<h3><code class="docutils literal notranslate"><span class="pre">LLVMType</span></code><a class="headerlink" href="#llvmtype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">LLVMType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.LLVMType.png"><img alt="Entity-relationship diagram for LLVMType nodes" src="schema.LLVMType.png" /></a>
+<p>A type in the LLVM type system. See <a class="reference external" href="https://llvm.org/docs/LangRef.html#type-system">https://llvm.org/docs/LangRef.html#type-system</a> for details.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">definition</span></code>: <a class="reference internal" href="#definitions-llvm-type"><span class="std std-ref">#/definitions/llvm_type</span></a></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size_in_bits</span></code>: The number of bits necessary to hold the specified type. The following table (taken from the LLVM source code, see “Legal” in the documentation) contrasts this field with other size-related fields.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> /// Size examples:
+ ///
+ /// Type        SizeInBits  StoreSizeInBits  AllocSizeInBits[*]
+ /// ----        ----------  ---------------  ---------------
+ ///  i1            1           8                8
+ ///  i8            8           8                8
+ ///  i19          19          24               32
+ ///  i32          32          32               32
+ ///  i100        100         104              128
+ ///  i128        128         128              128
+ ///  Float        32          32               32
+ ///  Double       64          64               64
+ ///  X86_FP80     80          80               96
+ ///
+ /// [*] The alloc size depends on the alignment, and thus on the target.
+ ///     These values are for x86-32 linux.
+
+- type: ``integer``
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">store_size_in_bits</span></code>: the maximum number of bits that may be overwritten by storing the specified type; always a multiple of 8</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alloc_size_in_bits</span></code>: the offset in bits between successive objects of the specified type, including alignment padding; always a multiple of 8</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">abi_type_alignment</span></code>: the minimum ABI-required alignment for this type</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="constant">
+<h3><code class="docutils literal notranslate"><span class="pre">Constant</span></code><a class="headerlink" href="#constant" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Constant</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Constant.png"><img alt="Entity-relationship diagram for Constant nodes" src="schema.Constant.png" /></a>
+<p>A constant value in the LLVM IR</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="variable">
+<h3><code class="docutils literal notranslate"><span class="pre">Variable</span></code><a class="headerlink" href="#variable" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Variable</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Variable.png"><img alt="Entity-relationship diagram for Variable nodes" src="schema.Variable.png" /></a>
+<p>A variable in the LLVM IR</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="constantint">
+<h3><code class="docutils literal notranslate"><span class="pre">ConstantInt</span></code><a class="headerlink" href="#constantint" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ConstantInt</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ConstantInt.png"><img alt="Entity-relationship diagram for ConstantInt nodes" src="schema.ConstantInt.png" /></a>
+<p>A constant int value in the LLVM IR</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">constant_data_subclass</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">constant_int_value</span></code>: The value of this integer constant.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="constantfp">
+<h3><code class="docutils literal notranslate"><span class="pre">ConstantFP</span></code><a class="headerlink" href="#constantfp" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ConstantFP</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ConstantFP.png"><img alt="Entity-relationship diagram for ConstantFP nodes" src="schema.ConstantFP.png" /></a>
+<p>A constant floating point value in the LLVM IR</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">constant_data_subclass</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="constantstring">
+<h3><code class="docutils literal notranslate"><span class="pre">ConstantString</span></code><a class="headerlink" href="#constantstring" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ConstantString</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ConstantString.png"><img alt="Entity-relationship diagram for ConstantString nodes" src="schema.ConstantString.png" /></a>
+<p>A constant string value in the LLVM IR</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">string_value</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="constantundef">
+<h3><code class="docutils literal notranslate"><span class="pre">ConstantUndef</span></code><a class="headerlink" href="#constantundef" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ConstantUndef</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ConstantUndef.png"><img alt="Entity-relationship diagram for ConstantUndef nodes" src="schema.ConstantUndef.png" /></a>
+<p>An undef value in the LLVM IR</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">constant_data_subclass</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="unclassifiednode">
+<h3><code class="docutils literal notranslate"><span class="pre">UnclassifiedNode</span></code><a class="headerlink" href="#unclassifiednode" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">UnclassifiedNode</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.UnclassifiedNode.png"><img alt="Entity-relationship diagram for UnclassifiedNode nodes" src="schema.UnclassifiedNode.png" /></a>
+<p>An as-of-yet underspecified node of the LLVM AST</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="machinefunction">
+<h3><code class="docutils literal notranslate"><span class="pre">MachineFunction</span></code><a class="headerlink" href="#machinefunction" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">MachineFunction</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.MachineFunction.png"><img alt="Entity-relationship diagram for MachineFunction nodes" src="schema.MachineFunction.png" /></a>
+<p>Named after the eponymous LLVM class, these nodes represent the LLVM middle-end’s concept of a function.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset</span></code>: The offset into the binary itself where this function is located.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va_start</span></code>: The VA (Virtual Address) tells us where this function is located in the binary.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va_end</span></code>: The VA (Virtual Address) tells us the last VA where the function is located in the binary.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prologues</span></code>: Pairs of VA (Virtual Address) ranges where the function contains prologue code (e.g., stack setup)</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epilogues</span></code>: Pairs of VA (Virtual Address) ranges where the function contains epilogue code (e.g., stack teardown)</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operand</span></code>: TODO(lb)</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The corresponding LLVM IR function’s name</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_mangled</span></code>: Whether or not this function’s name has been mangled</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">demangled_name</span></code>: The demangled function name, or the regular name if not mangled</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frame_info</span></code>: Information about this function’s stack frame</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type_id</span></code>: A compressed representation of the function’s DWARF type</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code>: A pretty representation of the function</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code>: A list of source entries for this function</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">symbols</span></code>: The function’s binary symbols</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="machinebasicblock">
+<h3><code class="docutils literal notranslate"><span class="pre">MachineBasicBlock</span></code><a class="headerlink" href="#machinebasicblock" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">MachineBasicBlock</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.MachineBasicBlock.png"><img alt="Entity-relationship diagram for MachineBasicBlock nodes" src="schema.MachineBasicBlock.png" /></a>
+<p>Named after the eponymous LLVM class, these nodes represent the LLVM middle-end’s concept of a basic block.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">number</span></code>: The numeric identifier for this basic block</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">symbol</span></code>: The machine-addressable symbol for this basic block</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">can_fallthrough</span></code>: Whether or not this basic block can implicitly transfer control flow by falling through to the next</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ends_in_return</span></code>: Whether or not this basic block ends in a return</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_epilogue_insertion_block</span></code>: Whether or not this basic block will contain generated epilogue code (e.g., for stack cleanup)</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_prologue_insertion_block</span></code>: Whether or not this basic block will contain generated prologue code (e.g., for stack setup)</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">address_taken</span></code>: Whether or not this basic block is potentially a target of an indirect branch</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">has_inline_asm</span></code>: Whether or not this block contains inlined assembly statements</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">preds</span></code>: The array of predecessor blocks, identified by their symbols</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">succs</span></code>: The array of successor blocks, identified by their symbols</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">instrs</span></code>: The array of middle-end instructions in this block</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="machineinstr">
+<h3><code class="docutils literal notranslate"><span class="pre">MachineInstr</span></code><a class="headerlink" href="#machineinstr" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">MachineInstr</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.MachineInstr.png"><img alt="Entity-relationship diagram for MachineInstr nodes" src="schema.MachineInstr.png" /></a>
+<p>Named after the eponymous LLVM class, these nodes represent the LLVM middle-end’s concept of an instruction.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">opcode</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flags</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="asminst">
+<h3><code class="docutils literal notranslate"><span class="pre">ASMInst</span></code><a class="headerlink" href="#asminst" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ASMInst</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ASMInst.png"><img alt="Entity-relationship diagram for ASMInst nodes" src="schema.ASMInst.png" /></a>
+<p>An x86_64 instruction in the binary, including layout and semantic information</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The decoded size of this instruction, in bytes</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mnemonic</span></code>: The assembly mnemonic for this instruction</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">asm</span></code>: The disassembled instruction, in Intel format</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">used_registers</span></code>: An array of register use information for this instruction</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">used_memory</span></code>: An array of memory use information for this instruction</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="asmblock">
+<h3><code class="docutils literal notranslate"><span class="pre">ASMBlock</span></code><a class="headerlink" href="#asmblock" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ASMBlock</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ASMBlock.png"><img alt="Entity-relationship diagram for ASMBlock nodes" src="schema.ASMBlock.png" /></a>
+<p>A basic block in the x86_64 binary</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unpaired</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va_end</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The size of this basic block, in bytes</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">func_offset</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">func_reference</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="parambinding">
+<h3><code class="docutils literal notranslate"><span class="pre">ParamBinding</span></code><a class="headerlink" href="#parambinding" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ParamBinding</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ParamBinding.png"><img alt="Entity-relationship diagram for ParamBinding nodes" src="schema.ParamBinding.png" /></a>
+<p>A node which connects argument values with formal parameters</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arg_op_number</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="callreturn">
+<h3><code class="docutils literal notranslate"><span class="pre">CallReturn</span></code><a class="headerlink" href="#callreturn" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">CallReturn</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.CallReturn.png"><img alt="Entity-relationship diagram for CallReturn nodes" src="schema.CallReturn.png" /></a>
+<p>A node that connects a value used in a return statement to the corresponding call site.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="memorylocation">
+<h3><code class="docutils literal notranslate"><span class="pre">MemoryLocation</span></code><a class="headerlink" href="#memorylocation" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">MemoryLocation</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.MemoryLocation.png"><img alt="Entity-relationship diagram for MemoryLocation nodes" src="schema.MemoryLocation.png" /></a>
+<p>An abstract memory location represents a set of runtime heap locations.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alias_set_identifier</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allocation_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allocation_size_bytes</span></code>: The number of bytes allocated on the heap, as determined by the points-to analysis.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="dataflowsignature">
+<h3><code class="docutils literal notranslate"><span class="pre">DataflowSignature</span></code><a class="headerlink" href="#dataflowsignature" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">DataflowSignature</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.DataflowSignature.png"><img alt="Entity-relationship diagram for DataflowSignature nodes" src="schema.DataflowSignature.png" /></a>
+<p>Abstract representation of a dataflow derived from a signature</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deallocator</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="inputsignature">
+<h3><code class="docutils literal notranslate"><span class="pre">InputSignature</span></code><a class="headerlink" href="#inputsignature" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">InputSignature</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.InputSignature.png"><img alt="Entity-relationship diagram for InputSignature nodes" src="schema.InputSignature.png" /></a>
+<p>Abstract representation of a dataflow input derived from a signature</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="outputsignature">
+<h3><code class="docutils literal notranslate"><span class="pre">OutputSignature</span></code><a class="headerlink" href="#outputsignature" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">OutputSignature</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.OutputSignature.png"><img alt="Entity-relationship diagram for OutputSignature nodes" src="schema.OutputSignature.png" /></a>
+<p>Abstract representation of a dataflow output derived from a signature</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="dwarftype">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFType</span></code><a class="headerlink" href="#dwarftype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">DWARFType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.DWARFType.png"><img alt="Entity-relationship diagram for DWARFType nodes" src="schema.DWARFType.png" /></a>
+<p>The DWARF representation of a type in the program</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="basictype">
+<h3><code class="docutils literal notranslate"><span class="pre">BasicType</span></code><a class="headerlink" href="#basictype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">BasicType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.BasicType.png"><img alt="Entity-relationship diagram for BasicType nodes" src="schema.BasicType.png" /></a>
+<p>A basic DWARF type, corresponding to basic C or C++ types like <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="compositetype">
+<h3><code class="docutils literal notranslate"><span class="pre">CompositeType</span></code><a class="headerlink" href="#compositetype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">CompositeType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.CompositeType.png"><img alt="Entity-relationship diagram for CompositeType nodes" src="schema.CompositeType.png" /></a>
+<p>A composite DWARF type.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="compositecachedtype">
+<h3><code class="docutils literal notranslate"><span class="pre">CompositeCachedType</span></code><a class="headerlink" href="#compositecachedtype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">CompositeCachedType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.CompositeCachedType.png"><img alt="Entity-relationship diagram for CompositeCachedType nodes" src="schema.CompositeCachedType.png" /></a>
+<p>A composite cached DWARF type.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="structuretype">
+<h3><code class="docutils literal notranslate"><span class="pre">StructureType</span></code><a class="headerlink" href="#structuretype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">StructureType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.StructureType.png"><img alt="Entity-relationship diagram for StructureType nodes" src="schema.StructureType.png" /></a>
+<p>A DWARF struct type, corresponding to a C or C++ <code class="docutils literal notranslate"><span class="pre">struct</span></code>.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="arraytype">
+<h3><code class="docutils literal notranslate"><span class="pre">ArrayType</span></code><a class="headerlink" href="#arraytype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ArrayType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ArrayType.png"><img alt="Entity-relationship diagram for ArrayType nodes" src="schema.ArrayType.png" /></a>
+<p>A DWARF array type, corresponding to a C or C++ array type.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="enumtype">
+<h3><code class="docutils literal notranslate"><span class="pre">EnumType</span></code><a class="headerlink" href="#enumtype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">EnumType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.EnumType.png"><img alt="Entity-relationship diagram for EnumType nodes" src="schema.EnumType.png" /></a>
+<p>A DWARF enumeration type, corresponding to a C or C++ <code class="docutils literal notranslate"><span class="pre">enum</span></code> type.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="uniontype">
+<h3><code class="docutils literal notranslate"><span class="pre">UnionType</span></code><a class="headerlink" href="#uniontype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">UnionType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.UnionType.png"><img alt="Entity-relationship diagram for UnionType nodes" src="schema.UnionType.png" /></a>
+<p>A DWARF union type, corresponding to a C or C++ <code class="docutils literal notranslate"><span class="pre">union</span></code> type.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="classtype">
+<h3><code class="docutils literal notranslate"><span class="pre">ClassType</span></code><a class="headerlink" href="#classtype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">ClassType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.ClassType.png"><img alt="Entity-relationship diagram for ClassType nodes" src="schema.ClassType.png" /></a>
+<p>A DWARF class type, corresponding to a C++ <code class="docutils literal notranslate"><span class="pre">class</span></code>.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="derivedtype">
+<h3><code class="docutils literal notranslate"><span class="pre">DerivedType</span></code><a class="headerlink" href="#derivedtype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">DerivedType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.DerivedType.png"><img alt="Entity-relationship diagram for DerivedType nodes" src="schema.DerivedType.png" /></a>
+<p>A DWARF derived type.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="subroutinetype">
+<h3><code class="docutils literal notranslate"><span class="pre">SubroutineType</span></code><a class="headerlink" href="#subroutinetype" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">SubroutineType</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.SubroutineType.png"><img alt="Entity-relationship diagram for SubroutineType nodes" src="schema.SubroutineType.png" /></a>
+<p>A DWARF subroutine type, corresponding to a C or C++ function or method type.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="module">
+<h3><code class="docutils literal notranslate"><span class="pre">Module</span></code><a class="headerlink" href="#module" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">Module</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.Module.png"><img alt="Entity-relationship diagram for Module nodes" src="schema.Module.png" /></a>
+<p>The unified LLVM bitcode module that the program was compiled from</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">module_name</span></code>: The name of the LLVM module</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_file</span></code>: The source file that this module was loaded from, if from a single source file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_triple</span></code>: The LLVM target triple</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_layout</span></code>: The LLVM datalayout string</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">symbols</span></code>: A list of all symbols in the module</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="translationunit">
+<h3><code class="docutils literal notranslate"><span class="pre">TranslationUnit</span></code><a class="headerlink" href="#translationunit" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">TranslationUnit</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.TranslationUnit.png"><img alt="Entity-relationship diagram for TranslationUnit nodes" src="schema.TranslationUnit.png" /></a>
+<p>A translation unit in the compiled program</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source_language</span></code>: The source language for this translation unit, as a <code class="docutils literal notranslate"><span class="pre">DW_LANG_</span></code> constant</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">producer</span></code>: An identifier for the compiler or tool that produced this translation unit</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flags</span></code>: The command line arguments that produced this translation unit</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: The input/source filename for this translation unit</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="pltstub">
+<h3><code class="docutils literal notranslate"><span class="pre">PLTStub</span></code><a class="headerlink" href="#pltstub" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">PLTStub</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.PLTStub.png"><img alt="Entity-relationship diagram for PLTStub nodes" src="schema.PLTStub.png" /></a>
+<p>A stub for a function that’s accessed through the binary’s Procedure Linkage Table</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">symbol</span></code>: The linker symbol for this PLT entry</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va</span></code>: The virtual address of this PLT entry</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="vtable">
+<h3><code class="docutils literal notranslate"><span class="pre">VTable</span></code><a class="headerlink" href="#vtable" title="Permalink to this headline">¶</a></h3>
+<p>The following is an entity-relationship diagram which displays the portion of the CPG schema relevant to <code class="docutils literal notranslate"><span class="pre">VTable</span></code> nodes:</p>
+<a class="reference external image-reference" href="./schema.VTable.png"><img alt="Entity-relationship diagram for VTable nodes" src="schema.VTable.png" /></a>
+<p>A virtual table for a C++ class</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va</span></code>: The virtual address for the virtual table itself</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The size of the virtual table, in bytes. This includes the RTTI and ‘offset to base’ fields</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">symbol</span></code>: The linker symbol for this virtual table</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class_name</span></code>: The name of the C++ class that this virtual table belongs to</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rtti_va</span></code>: The virtual address to the RTTI entry for this virtual table</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">members</span></code>: The virtual addresses for each entry in the virtual table</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="edges">
+<h2>Edges<a class="headerlink" href="#edges" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functiontolocalvariable">
+<h3><code class="docutils literal notranslate"><span class="pre">FunctionToLocalVariable</span></code><a class="headerlink" href="#functiontolocalvariable" title="Permalink to this headline">¶</a></h3>
+<p>These edges map LLVM-level functions to source-level local variables that the corresponding source-level function allocates.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="functiontoargument">
+<h3><code class="docutils literal notranslate"><span class="pre">FunctionToArgument</span></code><a class="headerlink" href="#functiontoargument" title="Permalink to this headline">¶</a></h3>
+<p>Connects a function to its argument nodes.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="functiontoentryblock">
+<h3><code class="docutils literal notranslate"><span class="pre">FunctionToEntryBlock</span></code><a class="headerlink" href="#functiontoentryblock" title="Permalink to this headline">¶</a></h3>
+<p>Functions have a unique first basic block, which is always executed when that function is called.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="blocktoparentfunction">
+<h3><code class="docutils literal notranslate"><span class="pre">BlockToParentFunction</span></code><a class="headerlink" href="#blocktoparentfunction" title="Permalink to this headline">¶</a></h3>
+<p>Connects a basic block to its enclosing function.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="blocktosuccessorblock">
+<h3><code class="docutils literal notranslate"><span class="pre">BlockToSuccessorBlock</span></code><a class="headerlink" href="#blocktosuccessorblock" title="Permalink to this headline">¶</a></h3>
+<p>A block has a set of successor blocks, which is where control flow may transfer to from its terminator instruction.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="instructiontosuccessorinstruction">
+<h3><code class="docutils literal notranslate"><span class="pre">InstructionToSuccessorInstruction</span></code><a class="headerlink" href="#instructiontosuccessorinstruction" title="Permalink to this headline">¶</a></h3>
+<p>An instruction’s (control-flow) successors are the instructions that can execute immediately after it.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">condition</span></code>: Conditions appear on successor edges out of block terminator instructions such as ‘br’, which may transfer control to multiple targets.</p></li>
+</ul>
+</div>
+<div class="section" id="blocktoentryinstruction">
+<h3><code class="docutils literal notranslate"><span class="pre">BlockToEntryInstruction</span></code><a class="headerlink" href="#blocktoentryinstruction" title="Permalink to this headline">¶</a></h3>
+<p>Connects a basic block to its first instrution.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="blocktoterminatorinstruction">
+<h3><code class="docutils literal notranslate"><span class="pre">BlockToTerminatorInstruction</span></code><a class="headerlink" href="#blocktoterminatorinstruction" title="Permalink to this headline">¶</a></h3>
+<p>Connects a basic block to its last instruction.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="instructiontoparentblock">
+<h3><code class="docutils literal notranslate"><span class="pre">InstructionToParentBlock</span></code><a class="headerlink" href="#instructiontoparentblock" title="Permalink to this headline">¶</a></h3>
+<p>Every instruction belongs to one block</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="hasllvmtype">
+<h3><code class="docutils literal notranslate"><span class="pre">HasLLVMType</span></code><a class="headerlink" href="#hasllvmtype" title="Permalink to this headline">¶</a></h3>
+<p>Every LLVM ‘Value’ has a type, this edge captures that relationship.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="callgraph">
+<h3><code class="docutils literal notranslate"><span class="pre">Callgraph</span></code><a class="headerlink" href="#callgraph" title="Permalink to this headline">¶</a></h3>
+<p>This edge relates a function to functions it may call.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mod_ref_behavior</span></code>: <a class="reference internal" href="#definitions-mod-ref-behavior"><span class="std std-ref">#/definitions/mod_ref_behavior</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="calltofunction">
+<h3><code class="docutils literal notranslate"><span class="pre">CallToFunction</span></code><a class="headerlink" href="#calltofunction" title="Permalink to this headline">¶</a></h3>
+<p>This edge relates a ‘call’ or ‘invoke’ instruction to the function being called based on the pointer analysis.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mod_ref_behavior</span></code>: <a class="reference internal" href="#definitions-mod-ref-behavior"><span class="std std-ref">#/definitions/mod_ref_behavior</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="mifunctiontoirfunction">
+<h3><code class="docutils literal notranslate"><span class="pre">MIFunctionToIRFunction</span></code><a class="headerlink" href="#mifunctiontoirfunction" title="Permalink to this headline">¶</a></h3>
+<p>LLVM middle-end functions are paired with the corresponding LLVM IR function</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="mifunctiontodwarfargument">
+<h3><code class="docutils literal notranslate"><span class="pre">MIFunctionToDWARFArgument</span></code><a class="headerlink" href="#mifunctiontodwarfargument" title="Permalink to this headline">¶</a></h3>
+<p>This edge relates a middle-end function to each of the formal parameters that occur in the function’s original source</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="mifunctiontodwarflocalvariable">
+<h3><code class="docutils literal notranslate"><span class="pre">MIFunctionToDWARFLocalVariable</span></code><a class="headerlink" href="#mifunctiontodwarflocalvariable" title="Permalink to this headline">¶</a></h3>
+<p>This edge relates a middle-end function to each of the local variables that occur in the function’s original source</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="mifunctiontovtable">
+<h3><code class="docutils literal notranslate"><span class="pre">MIFunctionToVTable</span></code><a class="headerlink" href="#mifunctiontovtable" title="Permalink to this headline">¶</a></h3>
+<p>This edge relates a middle-end function to its virtual table entries</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="miblocktoirblock">
+<h3><code class="docutils literal notranslate"><span class="pre">MIBlockToIRBlock</span></code><a class="headerlink" href="#miblocktoirblock" title="Permalink to this headline">¶</a></h3>
+<p>LLVM middle-end basic blocks are paired with the corresponding LLVM IR basic block where possible</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="miblocktoasmblock">
+<h3><code class="docutils literal notranslate"><span class="pre">MIBlockToASMBlock</span></code><a class="headerlink" href="#miblocktoasmblock" title="Permalink to this headline">¶</a></h3>
+<p>x86_64 basic blocks are paired with the corresponding LLVM middle-end basic block where possible</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="blocktocontroldependentblock">
+<h3><code class="docutils literal notranslate"><span class="pre">BlockToControlDependentBlock</span></code><a class="headerlink" href="#blocktocontroldependentblock" title="Permalink to this headline">¶</a></h3>
+<p>Connects a basic block to all basic blocks whose execution may depend on the control-flow exiting the block.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">condition</span></code>: The value of the branch condition when leaving the terminating instruction of the block.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">controls</span></code>: True if execution of the control dependent block is entirely dependent on the control-flow exiting the block.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="terminatorinstructiontocontroldependentinstruction">
+<h3><code class="docutils literal notranslate"><span class="pre">TerminatorInstructionToControlDependentInstruction</span></code><a class="headerlink" href="#terminatorinstructiontocontroldependentinstruction" title="Permalink to this headline">¶</a></h3>
+<p>Connects a branching instruction to all instructions whose execution depends on the control-flow exiting the instruction.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">condition</span></code>: The value of the branch condition when leaving the terminating instruction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">controls</span></code>: True if execution of the control instruction block is entirely dependent on the control-flow exiting the terminator instruction.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="functionentrytocontroldependentblock">
+<h3><code class="docutils literal notranslate"><span class="pre">FunctionEntryToControlDependentBlock</span></code><a class="headerlink" href="#functionentrytocontroldependentblock" title="Permalink to this headline">¶</a></h3>
+<p>Connects a function to all basic blocks whose execution depends solely on control-flow entering the function.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">condition</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">controls</span></code>: True if execution of the control dependent block is entirely dependent on the control-flow entering the function.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="functionentrytocontroldependentinstruction">
+<h3><code class="docutils literal notranslate"><span class="pre">FunctionEntryToControlDependentInstruction</span></code><a class="headerlink" href="#functionentrytocontroldependentinstruction" title="Permalink to this headline">¶</a></h3>
+<p>Connects a function to all instructions whose execution depends solely on control-flow entering the function.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">condition</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">controls</span></code>: True if execution of the control dependent instruction is entirely dependent on the control-flow entering the function.</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="valuedefinitiontouse">
+<h3><code class="docutils literal notranslate"><span class="pre">ValueDefinitionToUse</span></code><a class="headerlink" href="#valuedefinitiontouse" title="Permalink to this headline">¶</a></h3>
+<p>This edge is similar to LLVM’s Use class, it connects a LLVM User with the LLVM Value it uses. This is a generic concept and applies in particular to e.g. an instruction ‘using’ its operands.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operand_number</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">incoming_block</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_callee</span></code>: Is the value being used a function being called by this <code class="docutils literal notranslate"><span class="pre">invoke</span></code> or <code class="docutils literal notranslate"><span class="pre">call</span></code> instruction?</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_argument_operand</span></code>: Is the value being used as an argument to the function being called by this <code class="docutils literal notranslate"><span class="pre">invoke</span></code> or <code class="docutils literal notranslate"><span class="pre">call</span></code> instruction?</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="calltoparambinding">
+<h3><code class="docutils literal notranslate"><span class="pre">CallToParamBinding</span></code><a class="headerlink" href="#calltoparambinding" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a ‘call’ or ‘invoke’ instruction to all the relevant ‘ParamBinding’ nodes.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="operandtoparambinding">
+<h3><code class="docutils literal notranslate"><span class="pre">OperandToParamBinding</span></code><a class="headerlink" href="#operandtoparambinding" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a value used as an argument to an ‘Argument’ node, via a ‘ParamBinding’ node.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="parambindingtoarg">
+<h3><code class="docutils literal notranslate"><span class="pre">ParamBindingToArg</span></code><a class="headerlink" href="#parambindingtoarg" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a value used as an argument to an ‘Argument’ node, via a ‘ParamBinding’ node.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="samecall">
+<h3><code class="docutils literal notranslate"><span class="pre">SameCall</span></code><a class="headerlink" href="#samecall" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a ‘ParamBinding’ node with a ‘CallReturn’ node that corresponds to the same call site.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="returnvaluetocallreturn">
+<h3><code class="docutils literal notranslate"><span class="pre">ReturnValueToCallReturn</span></code><a class="headerlink" href="#returnvaluetocallreturn" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a value used in a return instruction to the corresponding callsite, via a ‘CallReturn’ node.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="returninstructiontocallreturn">
+<h3><code class="docutils literal notranslate"><span class="pre">ReturnInstructionToCallReturn</span></code><a class="headerlink" href="#returninstructiontocallreturn" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a return instruction to the corresponding callsite, via a ‘CallReturn’ node.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="callreturntocaller">
+<h3><code class="docutils literal notranslate"><span class="pre">CallReturnToCaller</span></code><a class="headerlink" href="#callreturntocaller" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a value used in a return statement to the corresponding callsite, via a ‘CallReturn’ node.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">caller_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callee_context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="pointsto">
+<h3><code class="docutils literal notranslate"><span class="pre">PointsTo</span></code><a class="headerlink" href="#pointsto" title="Permalink to this headline">¶</a></h3>
+<p>Connects a node representing a pointer to memory locations it might refer to.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="mayalias">
+<h3><code class="docutils literal notranslate"><span class="pre">MayAlias</span></code><a class="headerlink" href="#mayalias" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects two abstract memory locations that could represent the same field or array index if they abstract the same concrete memory object. For example, ‘buf[*]’ and ‘buf[0]’.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="mustalias">
+<h3><code class="docutils literal notranslate"><span class="pre">MustAlias</span></code><a class="headerlink" href="#mustalias" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects two abstract memory locations that must represent the same field or array index if they abstract the same concrete memory object.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="subregion">
+<h3><code class="docutils literal notranslate"><span class="pre">Subregion</span></code><a class="headerlink" href="#subregion" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects an abstract memory location to memory locations that are its immediate subobjects. For example, ‘buf[1]’ is a subobject of ‘buf’.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="contains">
+<h3><code class="docutils literal notranslate"><span class="pre">Contains</span></code><a class="headerlink" href="#contains" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects an abstract memory location to memory locations that it contains, recursively. For example, ‘buf[1]’ is a subobject of ‘buf’.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="storememory">
+<h3><code class="docutils literal notranslate"><span class="pre">StoreMemory</span></code><a class="headerlink" href="#storememory" title="Permalink to this headline">¶</a></h3>
+<p>Connects an instruction to memory locations it may store to.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="loadmemory">
+<h3><code class="docutils literal notranslate"><span class="pre">LoadMemory</span></code><a class="headerlink" href="#loadmemory" title="Permalink to this headline">¶</a></h3>
+<p>Connects an instruction to memory locations it may load from.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="allocates">
+<h3><code class="docutils literal notranslate"><span class="pre">Allocates</span></code><a class="headerlink" href="#allocates" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects an ‘alloca’ instruction or call to ‘malloc’ with an abstract memory location.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="createsvar">
+<h3><code class="docutils literal notranslate"><span class="pre">CreatesVar</span></code><a class="headerlink" href="#createsvar" title="Permalink to this headline">¶</a></h3>
+<p>This edge links an <code class="xref any docutils literal notranslate"><span class="pre">alloca</span></code> to the Variable it creates</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="valuetostorepointer">
+<h3><code class="docutils literal notranslate"><span class="pre">ValueToStorePointer</span></code><a class="headerlink" href="#valuetostorepointer" title="Permalink to this headline">¶</a></h3>
+<p>TODO(lb)</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="loadpointertovalue">
+<h3><code class="docutils literal notranslate"><span class="pre">LoadPointerToValue</span></code><a class="headerlink" href="#loadpointertovalue" title="Permalink to this headline">¶</a></h3>
+<p>TODO(lb)</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="definitiontovalueload">
+<h3><code class="docutils literal notranslate"><span class="pre">DefinitionToValueLoad</span></code><a class="headerlink" href="#definitiontovalueload" title="Permalink to this headline">¶</a></h3>
+<p>TODO(lb)</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="clobberinstructiontovalueload">
+<h3><code class="docutils literal notranslate"><span class="pre">ClobberInstructionToValueLoad</span></code><a class="headerlink" href="#clobberinstructiontovalueload" title="Permalink to this headline">¶</a></h3>
+<p>TODO(lb)</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="hasdwarftype">
+<h3><code class="docutils literal notranslate"><span class="pre">HasDWARFType</span></code><a class="headerlink" href="#hasdwarftype" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects variables (and function arguments) to their DWARF type information</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="dwarftypetobasetype">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFTypeToBaseType</span></code><a class="headerlink" href="#dwarftypetobasetype" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a DWARF derived type to its “base” type (or a “base” type to its deriving type(s))</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="dwarftypetorecursivetype">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFTypeToRecursiveType</span></code><a class="headerlink" href="#dwarftypetorecursivetype" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a recursive DWARF type to its initial type definition</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="dwarftypetomembertype">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFTypeToMemberType</span></code><a class="headerlink" href="#dwarftypetomembertype" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a DWARF type to its constituent member types (fields, union variants, etc.)</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="dwarftypetotemplateparamtype">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFTypeToTemplateParamType</span></code><a class="headerlink" href="#dwarftypetotemplateparamtype" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a DWARF type to its constituent template parameter types</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="dwarftypetoreturntype">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFTypeToReturnType</span></code><a class="headerlink" href="#dwarftypetoreturntype" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a DWARF type to its constituent function return type</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="dwarftypetoparamtype">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFTypeToParamType</span></code><a class="headerlink" href="#dwarftypetoparamtype" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a DWARF type to its constituent function parameter types</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="dwarftypetoparenttype">
+<h3><code class="docutils literal notranslate"><span class="pre">DWARFTypeToParentType</span></code><a class="headerlink" href="#dwarftypetoparenttype" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a DWARF type to the parent class or structure that it inherits from</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="globaltoinitializer">
+<h3><code class="docutils literal notranslate"><span class="pre">GlobalToInitializer</span></code><a class="headerlink" href="#globaltoinitializer" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects global variables to their (constant) initializers</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="moduletotranslationunit">
+<h3><code class="docutils literal notranslate"><span class="pre">ModuleToTranslationUnit</span></code><a class="headerlink" href="#moduletotranslationunit" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects the main LLVM module to each of its constituent translation units</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="localvariabletodwarflocalvariable">
+<h3><code class="docutils literal notranslate"><span class="pre">LocalVariableToDWARFLocalVariable</span></code><a class="headerlink" href="#localvariabletodwarflocalvariable" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects an LLVM-level local variable to its DWARF counterpart</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="argumenttodwarfargument">
+<h3><code class="docutils literal notranslate"><span class="pre">ArgumentToDWARFArgument</span></code><a class="headerlink" href="#argumenttodwarfargument" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects an LLVM-level function argument to its DWARF counterpart</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3><code class="docutils literal notranslate"><span class="pre">DataflowSignature</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>This edge represents dataflows that are external to the program and included via signatures</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="directdataflowsignature">
+<h3><code class="docutils literal notranslate"><span class="pre">DirectDataflowSignature</span></code><a class="headerlink" href="#directdataflowsignature" title="Permalink to this headline">¶</a></h3>
+<p>This edge represents dataflows that are external to the program and included via signatures; this is a direct flow, meaning the target value is computed from the source value.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="indirectdataflowsignature">
+<h3><code class="docutils literal notranslate"><span class="pre">IndirectDataflowSignature</span></code><a class="headerlink" href="#indirectdataflowsignature" title="Permalink to this headline">¶</a></h3>
+<p>This edge represents dataflows that are external to the program and included via signatures; this is an indirect flow, meaning the target’s value changes depending on the source value, but it is not computed from the source value.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="controldataflowsignature">
+<h3><code class="docutils literal notranslate"><span class="pre">ControlDataflowSignature</span></code><a class="headerlink" href="#controldataflowsignature" title="Permalink to this headline">¶</a></h3>
+<p>This edge represents dataflows that are external to the program and included via signatures; this is a control flow, meaning the source value effects whether the target value is computed.</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="dataflowsignatureforcallsite">
+<h3><code class="docutils literal notranslate"><span class="pre">DataflowSignatureForCallSite</span></code><a class="headerlink" href="#dataflowsignatureforcallsite" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a dataflow signature with the callsite it models</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="dataflowsignatureforfunction">
+<h3><code class="docutils literal notranslate"><span class="pre">DataflowSignatureForFunction</span></code><a class="headerlink" href="#dataflowsignatureforfunction" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a dataflow signature with the function it models</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="functiontopltstub">
+<h3><code class="docutils literal notranslate"><span class="pre">FunctionToPLTStub</span></code><a class="headerlink" href="#functiontopltstub" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects an LLVM-level function to its PLT stub in the compiled program, if it has one</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="pltstubtovtable">
+<h3><code class="docutils literal notranslate"><span class="pre">PLTStubToVTable</span></code><a class="headerlink" href="#pltstubtovtable" title="Permalink to this headline">¶</a></h3>
+<p>This edge connects a PLT stub to the virtual tables that it’s present in, if any</p>
+<p><em>Attributes:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_kind</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="definitions">
+<h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="definitions-dwarf-type-kind">
+<span id="id2"></span><h3>#/definitions/dwarf_type_kind<a class="headerlink" href="#definitions-dwarf-type-kind" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="definitions-constant">
+<span id="id3"></span><h3>#/definitions/constant<a class="headerlink" href="#definitions-constant" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="definitions-instruction">
+<span id="id4"></span><h3>#/definitions/instruction<a class="headerlink" href="#definitions-instruction" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="definitions-location">
+<span id="id5"></span><h3>#/definitions/location<a class="headerlink" href="#definitions-location" title="Permalink to this headline">¶</a></h3>
+<p>A location in a source-language file</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">file</span></code>: A location in a source-language file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dir</span></code>: A location in a source-language file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">column</span></code>: A location in a source-language file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">line</span></code>: A location in a source-language file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">function</span></code>: A location in a source-language file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compressed_id</span></code>: A location in a source-language file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-definition-location">
+<span id="id6"></span><h3>#/definitions/definition_location<a class="headerlink" href="#definitions-definition-location" title="Permalink to this headline">¶</a></h3>
+<p>A definition location for a global variable in a source-language file</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">directory</span></code>: A definition location for a global variable in a source-language file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: A definition location for a global variable in a source-language file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">line</span></code>: A definition location for a global variable in a source-language file</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-dwarf-location">
+<span id="id7"></span><h3>#/definitions/dwarf_location<a class="headerlink" href="#definitions-dwarf-location" title="Permalink to this headline">¶</a></h3>
+<p>Location of this variable in memory, expressed as either an absolute address or an offset from a register</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+<li><p>attributes:</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-dwarf-type-common-info">
+<span id="id8"></span><h3>#/definitions/dwarf_type_common_info<a class="headerlink" href="#definitions-dwarf-type-common-info" title="Permalink to this headline">¶</a></h3>
+<p>A subobject common to every variant of dwarf_type</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The name of the type, or empty if inapplicable</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tag</span></code>: The DWARF tag (DW_TAG_*) for the type</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The size of the type, in bytes</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">align</span></code>: The alignment of the type, in bytes</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset</span></code>: The offset of this type within its parent, if applicable</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">forward_decl</span></code>: Whether or not this type is forward-declared</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">virtual</span></code>: Whether or not this type is virtual</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">artificial</span></code>: Whether or not this type is artificial (i.e., not present in source)</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-dwarf-template-param">
+<span id="id9"></span><h3>#/definitions/dwarf_template_param<a class="headerlink" href="#definitions-dwarf-template-param" title="Permalink to this headline">¶</a></h3>
+<p>A C++ template type or value parameter</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-dwarf-template-param-value">
+<span id="id10"></span><h3>#/definitions/dwarf_template_param_value<a class="headerlink" href="#definitions-dwarf-template-param-value" title="Permalink to this headline">¶</a></h3>
+<p>A value in a C++ template value parameter</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-dwarf-type">
+<span id="id11"></span><h3>#/definitions/dwarf_type<a class="headerlink" href="#definitions-dwarf-type" title="Permalink to this headline">¶</a></h3>
+<p>A structured representation of C types, using DWARF identifiers.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-source-scope">
+<span id="id12"></span><h3>#/definitions/source_scope<a class="headerlink" href="#definitions-source-scope" title="Permalink to this headline">¶</a></h3>
+<p>Source scoping information using DWARF</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: The basename of the source file that this scope appears in</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">directory</span></code>: The directory of the source file that this scope appears in</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The scope’s name, if named</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linkage_name</span></code>: The scope’s linkage name, if available and named</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tag</span></code>: The DWARF tag corresponding to the scope kind</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parent_scope</span></code>: Source scoping information using DWARF: <a class="reference internal" href="#definitions-source-scope"><span class="std std-ref">#/definitions/source_scope</span></a></p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-dwarf-scope">
+<span id="id13"></span><h3>#/definitions/dwarf_scope<a class="headerlink" href="#definitions-dwarf-scope" title="Permalink to this headline">¶</a></h3>
+<p>A representation of the nearest enclosing lexical scope. The enclosing scope will also contain VA range information, unless it has been optimized away.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">tag</span></code>: The DWARF tag for this scope</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">line</span></code>: The source line that the scope starts on</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contiguous</span></code>: Whether the scope is laid out continuously in the binary</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inlined</span></code>: Whether the scope has been inlined</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va_start</span></code>: The start virtual address for the scope, if contiguous and not inlined</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va_end</span></code>: The end virtual address for the scope, if contiguous and not inlined</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">range_list</span></code>: A list of virtual address ranges, if the scope is non-contiguous and not inlined</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-source-location">
+<span id="id14"></span><h3>#/definitions/source_location<a class="headerlink" href="#definitions-source-location" title="Permalink to this headline">¶</a></h3>
+<p>The source location for a program feature</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">line</span></code>: The source line</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">column</span></code>: The source column</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">probably_optimized_away</span></code>: Whether this location was probably optimized away</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">llvm_func_name</span></code>: The LLVM-level name of the function that this location is in</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">func_name</span></code>: The binary-level name of the function that this location is in</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bb_operand</span></code>: The LLVM-level basic block operand that this location is in</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-llvm-type">
+<span id="id15"></span><h3>#/definitions/llvm_type<a class="headerlink" href="#definitions-llvm-type" title="Permalink to this headline">¶</a></h3>
+<p>A structured representation of types in the LLVM type system. See <a class="reference external" href="https://llvm.org/docs/LangRef.html#type-system">https://llvm.org/docs/LangRef.html#type-system</a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>attributes:</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-value">
+<span id="id16"></span><h3>#/definitions/value<a class="headerlink" href="#definitions-value" title="Permalink to this headline">¶</a></h3>
+<p>Generally an instance of LLVM’s ‘Value’ class, these have associated unstructured, human-readable string representations</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">pretty_string</span></code>: Generally an instance of LLVM’s ‘Value’ class, these have associated unstructured, human-readable string representations</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-symbol">
+<span id="id17"></span><h3>#/definitions/symbol<a class="headerlink" href="#definitions-symbol" title="Permalink to this headline">¶</a></h3>
+<p>A symbol in the compiled program’s symbol table (.symtab)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
+<li><p>attributes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: The symbol’s name</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">va</span></code>: The symbol’s target address</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size</span></code>: The size, in bytes, of the entity represented by this symbol</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">binding</span></code>: The symbol’s binding</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: The symbol’s type</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">visibility</span></code>: The symbol’s visibility</p>
+<ul>
+<li><p>type: <code class="docutils literal notranslate"><span class="pre">string</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="definitions-mod-ref-behavior">
+<span id="id18"></span><h3>#/definitions/mod_ref_behavior<a class="headerlink" href="#definitions-mod-ref-behavior" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../signatures.html" class="btn btn-neutral float-right" title="MATE Signatures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../overview.html" class="btn btn-neutral float-left" title="MATE System Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

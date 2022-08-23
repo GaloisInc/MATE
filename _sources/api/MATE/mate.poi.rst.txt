@@ -1,0 +1,23 @@
+mate.poi package
+================
+
+.. automodule:: mate.poi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.poi.analysis
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.poi.poi_types

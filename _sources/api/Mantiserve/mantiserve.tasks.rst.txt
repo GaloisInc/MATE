@@ -1,0 +1,18 @@
+mantiserve.tasks package
+========================
+
+.. automodule:: mantiserve.tasks
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mantiserve.tasks.docker_util
+   mantiserve.tasks.explore
+   mantiserve.tasks.reachability
+   mantiserve.tasks.util

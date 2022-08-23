@@ -1,0 +1,775 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate.build.tob_chess_utils.tools.aspirin module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate.build.tob_chess_utils.tools.margin module" href="mate.build.tob_chess_utils.tools.margin.html" />
+    <link rel="prev" title="mate.build.tob_chess_utils.tools package" href="mate.build.tob_chess_utils.tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATE API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate.html">mate package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATE API Reference</a> &raquo;</li>
+        
+          <li><a href="mate.html">mate package</a> &raquo;</li>
+        
+          <li><a href="mate.build.html">mate.build package</a> &raquo;</li>
+        
+          <li><a href="mate.build.tob_chess_utils.html">mate.build.tob_chess_utils package</a> &raquo;</li>
+        
+          <li><a href="mate.build.tob_chess_utils.tools.html">mate.build.tob_chess_utils.tools package</a> &raquo;</li>
+        
+      <li>mate.build.tob_chess_utils.tools.aspirin module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATE/mate.build.tob_chess_utils.tools.aspirin.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate.build.tob_chess_utils.tools.aspirin">
+<span id="mate-build-tob-chess-utils-tools-aspirin-module"></span><h1>mate.build.tob_chess_utils.tools.aspirin module<a class="headerlink" href="#module-mate.build.tob_chess_utils.tools.aspirin" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">AspirinContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dwarf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symtab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va_symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_program_pairings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va_line_entries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va_line_func_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_epilogue_begin_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_prologue_end_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vi_dicts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">machine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info_factory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>binary</strong> (<em>BinaryIO</em>) – </p></li>
+<li><p><strong>elf</strong> (<em>elftools.elf.elffile.ELFFile</em>) – </p></li>
+<li><p><strong>dwarf</strong> (<em>elftools.dwarf.dwarfinfo.DWARFInfo</em>) – </p></li>
+<li><p><strong>symtab</strong> (<em>elftools.elf.sections.SymbolTableSection</em>) – </p></li>
+<li><p><strong>va_symbols</strong> (<em>Dict</em><em>[</em><em>int</em><em>, </em><em>List</em><em>[</em><em>elftools.elf.sections.Symbol</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>line_program_pairings</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>va_line_entries</strong> (<em>Set</em><em>[</em><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry" title="mate.build.tob_chess_utils.tools.aspirin.VALineEntry"><em>mate.build.tob_chess_utils.tools.aspirin.VALineEntry</em></a><em>]</em>) – </p></li>
+<li><p><strong>va_line_func_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Set</em><em>[</em><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry" title="mate.build.tob_chess_utils.tools.aspirin.VALineEntry"><em>mate.build.tob_chess_utils.tools.aspirin.VALineEntry</em></a><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>func_epilogue_begin_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Set</em><em>[</em><em>int</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>func_prologue_end_map</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Set</em><em>[</em><em>int</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>vi_dicts</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em>) – </p></li>
+<li><p><strong>machine</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.MachineInfo" title="mate.build.tob_chess_utils.tools.aspirin.MachineInfo"><em>mate.build.tob_chess_utils.tools.aspirin.MachineInfo</em></a>) – </p></li>
+<li><p><strong>formatter</strong> (<em>_iced_x86_py.Formatter</em>) – </p></li>
+<li><p><strong>info_factory</strong> (<em>_iced_x86_py.InstructionInfoFactory</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.binary">
+<span class="sig-name descname"><span class="pre">binary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">BinaryIO</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.binary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.dwarf">
+<span class="sig-name descname"><span class="pre">dwarf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">elftools.dwarf.dwarfinfo.DWARFInfo</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.dwarf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.elf">
+<span class="sig-name descname"><span class="pre">elf</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">elftools.elf.elffile.ELFFile</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.elf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.formatter">
+<span class="sig-name descname"><span class="pre">formatter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">_iced_x86_py.Formatter</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 12</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.func_epilogue_begin_map">
+<span class="sig-name descname"><span class="pre">func_epilogue_begin_map</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.func_epilogue_begin_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 8</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.func_prologue_end_map">
+<span class="sig-name descname"><span class="pre">func_prologue_end_map</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.func_prologue_end_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 9</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.info_factory">
+<span class="sig-name descname"><span class="pre">info_factory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">_iced_x86_py.InstructionInfoFactory</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.info_factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 13</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.line_program_pairings">
+<span class="sig-name descname"><span class="pre">line_program_pairings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.line_program_pairings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.machine">
+<span class="sig-name descname"><span class="pre">machine</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.MachineInfo" title="mate.build.tob_chess_utils.tools.aspirin.MachineInfo"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.MachineInfo</span></a></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.machine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 11</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.symtab">
+<span class="sig-name descname"><span class="pre">symtab</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">elftools.elf.sections.SymbolTableSection</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.symtab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.va_line_entries">
+<span class="sig-name descname"><span class="pre">va_line_entries</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry" title="mate.build.tob_chess_utils.tools.aspirin.VALineEntry"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.VALineEntry</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.va_line_entries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 6</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.va_line_func_map">
+<span class="sig-name descname"><span class="pre">va_line_func_map</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry" title="mate.build.tob_chess_utils.tools.aspirin.VALineEntry"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.VALineEntry</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.va_line_func_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 7</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.va_symbols">
+<span class="sig-name descname"><span class="pre">va_symbols</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">elftools.elf.sections.Symbol</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.va_symbols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinContext.vi_dicts">
+<span class="sig-name descname"><span class="pre">vi_dicts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext.vi_dicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 10</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">AspirinRecordKind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.BasicBlock">
+<span class="sig-name descname"><span class="pre">BasicBlock</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bb'</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.BasicBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.Function">
+<span class="sig-name descname"><span class="pre">Function</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'function'</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.Function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.Global">
+<span class="sig-name descname"><span class="pre">Global</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'global'</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.Global" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.Local">
+<span class="sig-name descname"><span class="pre">Local</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'local'</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.Local" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.Module">
+<span class="sig-name descname"><span class="pre">Module</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'module'</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.Module" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.PLTStub">
+<span class="sig-name descname"><span class="pre">PLTStub</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'plt_stub'</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.PLTStub" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.VTable">
+<span class="sig-name descname"><span class="pre">VTable</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'vtable'</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinRecordKind.VTable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.MachineInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">MachineInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoder_bitness</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.MachineInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arch</strong> (<em>str</em>) – </p></li>
+<li><p><strong>addr_len</strong> (<em>int</em>) – </p></li>
+<li><p><strong>decoder_bitness</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.MachineInfo.addr_len">
+<span class="sig-name descname"><span class="pre">addr_len</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.MachineInfo.addr_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.MachineInfo.arch">
+<span class="sig-name descname"><span class="pre">arch</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.MachineInfo.arch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.MachineInfo.decoder_bitness">
+<span class="sig-name descname"><span class="pre">decoder_bitness</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.MachineInfo.decoder_bitness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.VALineEntry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">VALineEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">va</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_prologue_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_epilogue_begin</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>va</strong> (<em>int</em>) – </p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – </p></li>
+<li><p><strong>line</strong> (<em>int</em>) – </p></li>
+<li><p><strong>column</strong> (<em>int</em>) – </p></li>
+<li><p><strong>is_prologue_end</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>is_epilogue_begin</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.VALineEntry.column">
+<span class="sig-name descname"><span class="pre">column</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry.column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.VALineEntry.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.VALineEntry.is_epilogue_begin">
+<span class="sig-name descname"><span class="pre">is_epilogue_begin</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry.is_epilogue_begin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.VALineEntry.is_prologue_end">
+<span class="sig-name descname"><span class="pre">is_prologue_end</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry.is_prologue_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.VALineEntry.line">
+<span class="sig-name descname"><span class="pre">line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry.line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.VALineEntry.va">
+<span class="sig-name descname"><span class="pre">va</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry.va" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.aspirin">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">aspirin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">BinaryIO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vi_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_program</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.aspirin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>binary</strong> (<em>BinaryIO</em>) – </p></li>
+<li><p><strong>vi_dicts</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>line_program</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.aspirin_bb_end_record">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">aspirin_bb_end_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bb_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_migraine_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.aspirin_bb_end_record" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>bb_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>_migraine_id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>va</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.aspirin_bb_record">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">aspirin_bb_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">migraine_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.aspirin_bb_record" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>migraine_id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>va</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.aspirin_func_record">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">aspirin_func_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">va_dies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">elftools.dwarf.die.DIE</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">migraine_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.aspirin_func_record" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>va_dies</strong> (<em>Dict</em><em>[</em><em>int</em><em>, </em><em>Set</em><em>[</em><em>elftools.dwarf.die.DIE</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>migraine_id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>va</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.aspirin_global_records_for_name">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">aspirin_global_records_for_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dies</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">elftools.dwarf.die.DIE</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.aspirin_global_records_for_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>global_name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>dies</strong> (<em>List</em><em>[</em><em>elftools.dwarf.die.DIE</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.aspirin_module_record">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">aspirin_module_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.aspirin_module_record" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.aspirin_plt_stub_record">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">aspirin_plt_stub_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stub_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">va</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.aspirin_plt_stub_record" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>stub_name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>va</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.build_va_line_entries">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">build_va_line_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">elftools.elf.elffile.ELFFile</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry" title="mate.build.tob_chess_utils.tools.aspirin.VALineEntry"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.VALineEntry</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.build_va_line_entries" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>elf</strong> (<em>elftools.elf.elffile.ELFFile</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Set[<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.VALineEntry" title="mate.build.tob_chess_utils.tools.aspirin.VALineEntry">mate.build.tob_chess_utils.tools.aspirin.VALineEntry</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.lpe_filename">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">lpe_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lp_header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.lpe_filename" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_index</strong> (<em>int</em>) – </p></li>
+<li><p><strong>lp_header</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.main">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.main" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.pair_bb_instructions">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">pair_bb_instructions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bb_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.pair_bb_instructions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pair the given basic block record with information about each x86(_64) instruction within it,
+in order of appearance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>bb_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.pair_bb_line_entries">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">pair_bb_line_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bb_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.pair_bb_line_entries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pair the given basic block record with its line program entries, modifying the record in the
+process, if requested via <code class="docutils literal notranslate"><span class="pre">asp_ctx.line_program_pairings</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>bb_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.pair_function_line_entries">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">pair_function_line_entries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.pair_function_line_entries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pair the given function record with its line program entries.</p>
+<p>Adds the entries to the function record, if requested. Otherwise, updates
+<code class="docutils literal notranslate"><span class="pre">asp_ctx.va_line_func_map</span></code> and <code class="docutils literal notranslate"><span class="pre">asp_ctx.func_epilogue_begin_map</span></code> with the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>func_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.pair_global_type_information">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">pair_global_type_information</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_die</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">elftools.dwarf.die.DIE</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.pair_global_type_information" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>global_name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>var_die</strong> (<em>elftools.dwarf.die.DIE</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[Dict[str, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.pair_local_type_information">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">pair_local_type_information</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asp_ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.AspirinContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.pair_local_type_information" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asp_ctx</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.aspirin.AspirinContext" title="mate.build.tob_chess_utils.tools.aspirin.AspirinContext"><em>mate.build.tob_chess_utils.tools.aspirin.AspirinContext</em></a>) – </p></li>
+<li><p><strong>func_name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>var_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.aspirin.parse_migraine_addrs">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.aspirin.</span></span><span class="sig-name descname"><span class="pre">parse_migraine_addrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">migraine_addrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.aspirin.parse_migraine_addrs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>migraine_addrs</strong> (<em>bytes</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[Tuple[str, int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate.build.tob_chess_utils.tools.margin.html" class="btn btn-neutral float-right" title="mate.build.tob_chess_utils.tools.margin module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate.build.tob_chess_utils.tools.html" class="btn btn-neutral float-left" title="mate.build.tob_chess_utils.tools package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

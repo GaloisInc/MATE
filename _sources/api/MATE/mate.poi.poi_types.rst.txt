@@ -1,0 +1,7 @@
+mate.poi.poi\_types module
+==========================
+
+.. automodule:: mate.poi.poi_types
+   :members:
+   :undoc-members:
+   :show-inheritance:

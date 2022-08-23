@@ -1,0 +1,7 @@
+dwarfcore.plugins.heap\_common module
+=====================================
+
+.. automodule:: dwarfcore.plugins.heap_common
+   :members:
+   :undoc-members:
+   :show-inheritance:

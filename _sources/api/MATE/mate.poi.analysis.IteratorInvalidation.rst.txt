@@ -1,0 +1,7 @@
+mate.poi.analysis.IteratorInvalidation module
+=============================================
+
+.. automodule:: mate.poi.analysis.IteratorInvalidation
+   :members:
+   :undoc-members:
+   :show-inheritance:

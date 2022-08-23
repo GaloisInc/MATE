@@ -1,0 +1,7 @@
+mate.build.tob\_chess\_utils.range\_avl\_tree module
+====================================================
+
+.. automodule:: mate.build.tob_chess_utils.range_avl_tree
+   :members:
+   :undoc-members:
+   :show-inheritance:

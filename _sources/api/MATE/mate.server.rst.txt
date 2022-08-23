@@ -1,0 +1,15 @@
+mate.server package
+===================
+
+.. automodule:: mate.server
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.server.api

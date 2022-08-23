@@ -1,0 +1,7 @@
+mate.tasks.pipeline module
+==========================
+
+.. automodule:: mate.tasks.pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:

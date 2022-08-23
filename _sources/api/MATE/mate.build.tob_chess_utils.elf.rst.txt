@@ -1,0 +1,7 @@
+mate.build.tob\_chess\_utils.elf module
+=======================================
+
+.. automodule:: mate.build.tob_chess_utils.elf
+   :members:
+   :undoc-members:
+   :show-inheritance:

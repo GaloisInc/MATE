@@ -1,0 +1,7 @@
+mate.server.api.manticore module
+================================
+
+.. automodule:: mate.server.api.manticore
+   :members:
+   :undoc-members:
+   :show-inheritance:

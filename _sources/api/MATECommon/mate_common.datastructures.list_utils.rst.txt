@@ -1,0 +1,7 @@
+mate\_common.datastructures.list\_utils module
+==============================================
+
+.. automodule:: mate_common.datastructures.list_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

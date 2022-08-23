@@ -1,0 +1,7 @@
+mate\_common.models.challenge\_broker module
+============================================
+
+.. automodule:: mate_common.models.challenge_broker
+   :members:
+   :undoc-members:
+   :show-inheritance:

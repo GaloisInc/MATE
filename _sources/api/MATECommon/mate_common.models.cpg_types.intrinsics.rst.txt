@@ -1,0 +1,7 @@
+mate\_common.models.cpg\_types.intrinsics module
+================================================
+
+.. automodule:: mate_common.models.cpg_types.intrinsics
+   :members:
+   :undoc-members:
+   :show-inheritance:

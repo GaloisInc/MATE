@@ -1,0 +1,7 @@
+dwarfcore.plugins.dwarf\_track\_variables module
+================================================
+
+.. automodule:: dwarfcore.plugins.dwarf_track_variables
+   :members:
+   :undoc-members:
+   :show-inheritance:

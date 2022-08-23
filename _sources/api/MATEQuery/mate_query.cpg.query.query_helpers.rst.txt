@@ -1,0 +1,7 @@
+mate\_query.cpg.query.query\_helpers module
+===========================================
+
+.. automodule:: mate_query.cpg.query.query_helpers
+   :members:
+   :undoc-members:
+   :show-inheritance:

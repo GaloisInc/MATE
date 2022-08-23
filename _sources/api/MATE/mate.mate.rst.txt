@@ -1,0 +1,7 @@
+mate.mate module
+================
+
+.. automodule:: mate.mate
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,1528 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate_common.models.cpg_types.mate module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate_common.models.cpg_types.mc module" href="mate_common.models.cpg_types.mc.html" />
+    <link rel="prev" title="mate_common.models.cpg_types.llvm module" href="mate_common.models.cpg_types.llvm.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATECommon API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate_common.html">mate_common package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate_common.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate_common.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATECommon API Reference</a> &raquo;</li>
+        
+          <li><a href="mate_common.html">mate_common package</a> &raquo;</li>
+        
+          <li><a href="mate_common.models.html">mate_common.models package</a> &raquo;</li>
+        
+          <li><a href="mate_common.models.cpg_types.html">mate_common.models.cpg_types package</a> &raquo;</li>
+        
+      <li>mate_common.models.cpg_types.mate module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATECommon/mate_common.models.cpg_types.mate.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate_common.models.cpg_types.mate">
+<span id="mate-common-models-cpg-types-mate-module"></span><h1>mate_common.models.cpg_types.mate module<a class="headerlink" href="#module-mate_common.models.cpg_types.mate" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeJSON">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.cpg_types.mate.</span></span><span class="sig-name descname"><span class="pre">EdgeJSON</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>JSON attributes for edges.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeJSON.EDGE_KIND">
+<span class="sig-name descname"><span class="pre">EDGE_KIND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'edge_kind'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeJSON.EDGE_KIND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeJSON.OPERAND_NUMBER">
+<span class="sig-name descname"><span class="pre">OPERAND_NUMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'operand_number'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeJSON.OPERAND_NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.cpg_types.mate.</span></span><span class="sig-name descname"><span class="pre">EdgeKind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.ALLOCATES">
+<span class="sig-name descname"><span class="pre">ALLOCATES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Allocates'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.ALLOCATES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.ARGUMENT_TO_DWARF_ARGUMENT">
+<span class="sig-name descname"><span class="pre">ARGUMENT_TO_DWARF_ARGUMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ArgumentToDWARFArgument'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.ARGUMENT_TO_DWARF_ARGUMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_CONTROL_DEPENDENT_BLOCK">
+<span class="sig-name descname"><span class="pre">BLOCK_TO_CONTROL_DEPENDENT_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BlockToControlDependentBlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_CONTROL_DEPENDENT_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_ENTRY_INSTRUCTION">
+<span class="sig-name descname"><span class="pre">BLOCK_TO_ENTRY_INSTRUCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BlockToEntryInstruction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_ENTRY_INSTRUCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_PARENT_FUNCTION">
+<span class="sig-name descname"><span class="pre">BLOCK_TO_PARENT_FUNCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BlockToParentFunction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_PARENT_FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_SUCCESSOR_BLOCK">
+<span class="sig-name descname"><span class="pre">BLOCK_TO_SUCCESSOR_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BlockToSuccessorBlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_SUCCESSOR_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_TERMINATOR_INSTRUCTION">
+<span class="sig-name descname"><span class="pre">BLOCK_TO_TERMINATOR_INSTRUCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BlockToTerminatorInstruction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.BLOCK_TO_TERMINATOR_INSTRUCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.CALLGRAPH">
+<span class="sig-name descname"><span class="pre">CALLGRAPH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Callgraph'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.CALLGRAPH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.CALL_RETURN_TO_CALLER">
+<span class="sig-name descname"><span class="pre">CALL_RETURN_TO_CALLER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CallReturnToCaller'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.CALL_RETURN_TO_CALLER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.CALL_TO_FUNCTION">
+<span class="sig-name descname"><span class="pre">CALL_TO_FUNCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CallToFunction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.CALL_TO_FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.CALL_TO_PARAM_BINDING">
+<span class="sig-name descname"><span class="pre">CALL_TO_PARAM_BINDING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CallToParamBinding'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.CALL_TO_PARAM_BINDING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.CLOBBER_INSTRUCTION_TO_VALUE_LOAD">
+<span class="sig-name descname"><span class="pre">CLOBBER_INSTRUCTION_TO_VALUE_LOAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ClobberInstructionToValueLoad'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.CLOBBER_INSTRUCTION_TO_VALUE_LOAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.CONTAINS">
+<span class="sig-name descname"><span class="pre">CONTAINS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Contains'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.CONTAINS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.CONTROL_DATAFLOW_SIGNATURE">
+<span class="sig-name descname"><span class="pre">CONTROL_DATAFLOW_SIGNATURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ControlDataflowSignature'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.CONTROL_DATAFLOW_SIGNATURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.CREATES_VAR">
+<span class="sig-name descname"><span class="pre">CREATES_VAR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CreatesVar'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.CREATES_VAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DATAFLOW_SIGNATURE">
+<span class="sig-name descname"><span class="pre">DATAFLOW_SIGNATURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DataflowSignature'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DATAFLOW_SIGNATURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DATAFLOW_SIGNATURE_FOR_CALLSITE">
+<span class="sig-name descname"><span class="pre">DATAFLOW_SIGNATURE_FOR_CALLSITE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DataflowSignatureForCallSite'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DATAFLOW_SIGNATURE_FOR_CALLSITE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DATAFLOW_SIGNATURE_FOR_FUNCTION">
+<span class="sig-name descname"><span class="pre">DATAFLOW_SIGNATURE_FOR_FUNCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DataflowSignatureForFunction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DATAFLOW_SIGNATURE_FOR_FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DEFINITION_TO_VALUE_LOAD">
+<span class="sig-name descname"><span class="pre">DEFINITION_TO_VALUE_LOAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DefinitionToValueLoad'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DEFINITION_TO_VALUE_LOAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DIRECT_DATAFLOW_SIGNATURE">
+<span class="sig-name descname"><span class="pre">DIRECT_DATAFLOW_SIGNATURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DirectDataflowSignature'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DIRECT_DATAFLOW_SIGNATURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_BASE_TYPE">
+<span class="sig-name descname"><span class="pre">DWARF_TYPE_TO_BASE_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFTypeToBaseType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_BASE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_MEMBER_TYPE">
+<span class="sig-name descname"><span class="pre">DWARF_TYPE_TO_MEMBER_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFTypeToMemberType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_MEMBER_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_PARAM_TYPE">
+<span class="sig-name descname"><span class="pre">DWARF_TYPE_TO_PARAM_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFTypeToParamType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_PARAM_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_PARENT_TYPE">
+<span class="sig-name descname"><span class="pre">DWARF_TYPE_TO_PARENT_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFTypeToParentType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_PARENT_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_RECURSIVE_TYPE">
+<span class="sig-name descname"><span class="pre">DWARF_TYPE_TO_RECURSIVE_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFTypeToRecursiveType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_RECURSIVE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_RETURN_TYPE">
+<span class="sig-name descname"><span class="pre">DWARF_TYPE_TO_RETURN_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFTypeToReturnType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_RETURN_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_TEMPLATE_PARAM_TYPE">
+<span class="sig-name descname"><span class="pre">DWARF_TYPE_TO_TEMPLATE_PARAM_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFTypeToTemplateParamType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.DWARF_TYPE_TO_TEMPLATE_PARAM_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_ENTRY_TO_CONTROL_DEPENDENT_BLOCK">
+<span class="sig-name descname"><span class="pre">FUNCTION_ENTRY_TO_CONTROL_DEPENDENT_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FunctionEntryToControlDependentBlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_ENTRY_TO_CONTROL_DEPENDENT_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_ENTRY_TO_CONTROL_DEPENDENT_INSTRUCTION">
+<span class="sig-name descname"><span class="pre">FUNCTION_ENTRY_TO_CONTROL_DEPENDENT_INSTRUCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FunctionEntryToControlDependentInstruction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_ENTRY_TO_CONTROL_DEPENDENT_INSTRUCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_TO_ARGUMENT">
+<span class="sig-name descname"><span class="pre">FUNCTION_TO_ARGUMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FunctionToArgument'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_TO_ARGUMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_TO_ENTRY_BLOCK">
+<span class="sig-name descname"><span class="pre">FUNCTION_TO_ENTRY_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FunctionToEntryBlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_TO_ENTRY_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_TO_LOCAL_VARIABLE">
+<span class="sig-name descname"><span class="pre">FUNCTION_TO_LOCAL_VARIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FunctionToLocalVariable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_TO_LOCAL_VARIABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_TO_PLT_STUB">
+<span class="sig-name descname"><span class="pre">FUNCTION_TO_PLT_STUB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'FunctionToPLTStub'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.FUNCTION_TO_PLT_STUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.GLOBAL_TO_INITIALIZER">
+<span class="sig-name descname"><span class="pre">GLOBAL_TO_INITIALIZER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'GlobalToInitializer'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.GLOBAL_TO_INITIALIZER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.HAS_DWARF_TYPE">
+<span class="sig-name descname"><span class="pre">HAS_DWARF_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'HasDWARFType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.HAS_DWARF_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.HAS_LLVM_TYPE">
+<span class="sig-name descname"><span class="pre">HAS_LLVM_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'HasLLVMType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.HAS_LLVM_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.INDIRECT_DATAFLOW_SIGNATURE">
+<span class="sig-name descname"><span class="pre">INDIRECT_DATAFLOW_SIGNATURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IndirectDataflowSignature'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.INDIRECT_DATAFLOW_SIGNATURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.INSTRUCTION_TO_PARENT_BLOCK">
+<span class="sig-name descname"><span class="pre">INSTRUCTION_TO_PARENT_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'InstructionToParentBlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.INSTRUCTION_TO_PARENT_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.INSTRUCTION_TO_SUCCESSOR_INSTRUCTION">
+<span class="sig-name descname"><span class="pre">INSTRUCTION_TO_SUCCESSOR_INSTRUCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'InstructionToSuccessorInstruction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.INSTRUCTION_TO_SUCCESSOR_INSTRUCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.LOAD_MEMORY">
+<span class="sig-name descname"><span class="pre">LOAD_MEMORY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LoadMemory'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.LOAD_MEMORY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.LOAD_POINTER_TO_VALUE">
+<span class="sig-name descname"><span class="pre">LOAD_POINTER_TO_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LoadPointerToValue'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.LOAD_POINTER_TO_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.LOCAL_VARIABLE_TO_DWARF_LOCAL_VARIABLE">
+<span class="sig-name descname"><span class="pre">LOCAL_VARIABLE_TO_DWARF_LOCAL_VARIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LocalVariableToDWARFLocalVariable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.LOCAL_VARIABLE_TO_DWARF_LOCAL_VARIABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.MAY_ALIAS">
+<span class="sig-name descname"><span class="pre">MAY_ALIAS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MayAlias'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.MAY_ALIAS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.MI_BLOCK_TO_ASM_BLOCK">
+<span class="sig-name descname"><span class="pre">MI_BLOCK_TO_ASM_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MIBlockToASMBlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.MI_BLOCK_TO_ASM_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.MI_BLOCK_TO_IR_BLOCK">
+<span class="sig-name descname"><span class="pre">MI_BLOCK_TO_IR_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MIBlockToIRBlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.MI_BLOCK_TO_IR_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.MI_FUNCTION_TO_DWARF_ARGUMENT">
+<span class="sig-name descname"><span class="pre">MI_FUNCTION_TO_DWARF_ARGUMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MIFunctionToDWARFArgument'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.MI_FUNCTION_TO_DWARF_ARGUMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.MI_FUNCTION_TO_DWARF_LOCAL_VARIABLE">
+<span class="sig-name descname"><span class="pre">MI_FUNCTION_TO_DWARF_LOCAL_VARIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MIFunctionToDWARFLocalVariable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.MI_FUNCTION_TO_DWARF_LOCAL_VARIABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.MI_FUNCTION_TO_IR_FUNCTION">
+<span class="sig-name descname"><span class="pre">MI_FUNCTION_TO_IR_FUNCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MIFunctionToIRFunction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.MI_FUNCTION_TO_IR_FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.MI_FUNCTION_TO_VTABLE">
+<span class="sig-name descname"><span class="pre">MI_FUNCTION_TO_VTABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MIFunctionToVTable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.MI_FUNCTION_TO_VTABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.MODULE_TO_TRANSLATION_UNIT">
+<span class="sig-name descname"><span class="pre">MODULE_TO_TRANSLATION_UNIT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ModuleToTranslationUnit'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.MODULE_TO_TRANSLATION_UNIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.MUST_ALIAS">
+<span class="sig-name descname"><span class="pre">MUST_ALIAS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MustAlias'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.MUST_ALIAS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.OPERAND_TO_PARAM_BINDING">
+<span class="sig-name descname"><span class="pre">OPERAND_TO_PARAM_BINDING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'OperandToParamBinding'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.OPERAND_TO_PARAM_BINDING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.PARAM_BINDING_TO_ARG">
+<span class="sig-name descname"><span class="pre">PARAM_BINDING_TO_ARG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ParamBindingToArg'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.PARAM_BINDING_TO_ARG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.PLT_STUB_TO_VTABLE">
+<span class="sig-name descname"><span class="pre">PLT_STUB_TO_VTABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PLTStubToVTable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.PLT_STUB_TO_VTABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.POINTS_TO">
+<span class="sig-name descname"><span class="pre">POINTS_TO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PointsTo'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.POINTS_TO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.RETURN_INSTRUCTION_TO_CALL_RETURN">
+<span class="sig-name descname"><span class="pre">RETURN_INSTRUCTION_TO_CALL_RETURN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ReturnInstructionToCallReturn'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.RETURN_INSTRUCTION_TO_CALL_RETURN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.RETURN_VALUE_TO_CALL_RETURN">
+<span class="sig-name descname"><span class="pre">RETURN_VALUE_TO_CALL_RETURN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ReturnValueToCallReturn'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.RETURN_VALUE_TO_CALL_RETURN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.SAME_CALL">
+<span class="sig-name descname"><span class="pre">SAME_CALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SameCall'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.SAME_CALL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.STORE_MEMORY">
+<span class="sig-name descname"><span class="pre">STORE_MEMORY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'StoreMemory'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.STORE_MEMORY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.SUBREGION">
+<span class="sig-name descname"><span class="pre">SUBREGION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Subregion'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.SUBREGION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.TERMINATOR_INSTRUCTION_TO_CONTROL_DEPENDENT_INSTRUCTION">
+<span class="sig-name descname"><span class="pre">TERMINATOR_INSTRUCTION_TO_CONTROL_DEPENDENT_INSTRUCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'TerminatorInstructionToControlDependentInstruction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.TERMINATOR_INSTRUCTION_TO_CONTROL_DEPENDENT_INSTRUCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.VALUE_DEFINITION_TO_USE">
+<span class="sig-name descname"><span class="pre">VALUE_DEFINITION_TO_USE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ValueDefinitionToUse'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.VALUE_DEFINITION_TO_USE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.EdgeKind.VALUE_TO_STORE_POINTER">
+<span class="sig-name descname"><span class="pre">VALUE_TO_STORE_POINTER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ValueToStorePointer'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.EdgeKind.VALUE_TO_STORE_POINTER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.Endpoints">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.cpg_types.mate.</span></span><span class="sig-name descname"><span class="pre">Endpoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.cpg_types.mate.Endpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sources</strong> (<em>Set</em><em>[</em><a class="reference internal" href="#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>mate_common.models.cpg_types.mate.NodeKind</em></a><em>]</em>) – </p></li>
+<li><p><strong>targets</strong> (<em>Set</em><em>[</em><a class="reference internal" href="#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><em>mate_common.models.cpg_types.mate.NodeKind</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.Endpoints.sources">
+<span class="sig-name descname"><span class="pre">sources</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><span class="pre">mate_common.models.cpg_types.mate.NodeKind</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.Endpoints.sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.Endpoints.targets">
+<span class="sig-name descname"><span class="pre">targets</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#mate_common.models.cpg_types.mate.NodeKind" title="mate_common.models.cpg_types.mate.NodeKind"><span class="pre">mate_common.models.cpg_types.mate.NodeKind</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.Endpoints.targets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.MATEComponent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.cpg_types.mate.</span></span><span class="sig-name descname"><span class="pre">MATEComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.cpg_types.mate.MATEComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration of known node-generating components of MATE.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.MATEComponent.ASPIRIN">
+<span class="sig-name descname"><span class="pre">ASPIRIN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Aspirin'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.MATEComponent.ASPIRIN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.MATEComponent.AST_GRAPH_WRITER">
+<span class="sig-name descname"><span class="pre">AST_GRAPH_WRITER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ASTGraphWriter'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.MATEComponent.AST_GRAPH_WRITER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.MATEComponent.HEADACHE">
+<span class="sig-name descname"><span class="pre">HEADACHE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Headache'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.MATEComponent.HEADACHE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.MATEComponent.SIGNATURE">
+<span class="sig-name descname"><span class="pre">SIGNATURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Signature'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.MATEComponent.SIGNATURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.MATEComponent.WEDLOCK">
+<span class="sig-name descname"><span class="pre">WEDLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Wedlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.MATEComponent.WEDLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.cpg_types.mate.</span></span><span class="sig-name descname"><span class="pre">NodeJSON</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>JSON attributes of nodes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ABI_TYPE_ALIGNMENT">
+<span class="sig-name descname"><span class="pre">ABI_TYPE_ALIGNMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'abi_type_alignment'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ABI_TYPE_ALIGNMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ADDRESS_TAKEN">
+<span class="sig-name descname"><span class="pre">ADDRESS_TAKEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'address_taken'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ADDRESS_TAKEN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ALIAS_SET_IDENTIFIER">
+<span class="sig-name descname"><span class="pre">ALIAS_SET_IDENTIFIER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'alias_set_identifier'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ALIAS_SET_IDENTIFIER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ALIGNMENT">
+<span class="sig-name descname"><span class="pre">ALIGNMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'alignment'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ALIGNMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ALLOCATION_CONTEXT">
+<span class="sig-name descname"><span class="pre">ALLOCATION_CONTEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'allocation_context'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ALLOCATION_CONTEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ALLOCATION_SIZE_BITS">
+<span class="sig-name descname"><span class="pre">ALLOCATION_SIZE_BITS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'allocation_size_bits'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ALLOCATION_SIZE_BITS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ALLOCATION_SIZE_BYTES">
+<span class="sig-name descname"><span class="pre">ALLOCATION_SIZE_BYTES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'allocation_size_bytes'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ALLOCATION_SIZE_BYTES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ALLOCATION_TYPE">
+<span class="sig-name descname"><span class="pre">ALLOCATION_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'allocation_type'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ALLOCATION_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ALLOC_SIZE_IN_BITS">
+<span class="sig-name descname"><span class="pre">ALLOC_SIZE_IN_BITS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'alloc_size_in_bits'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ALLOC_SIZE_IN_BITS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ARG">
+<span class="sig-name descname"><span class="pre">ARG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'arg'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ARG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ARGUMENT_NUMBER">
+<span class="sig-name descname"><span class="pre">ARGUMENT_NUMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'argument_number'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ARGUMENT_NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ARG_OP_NUMBER">
+<span class="sig-name descname"><span class="pre">ARG_OP_NUMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'arg_op_number'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ARG_OP_NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ARTIFICIAL">
+<span class="sig-name descname"><span class="pre">ARTIFICIAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'artificial'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ARTIFICIAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ASM">
+<span class="sig-name descname"><span class="pre">ASM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'asm'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ASM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.CALLEE_CONTEXT">
+<span class="sig-name descname"><span class="pre">CALLEE_CONTEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'callee_context'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.CALLEE_CONTEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.CALLER_CONTEXT">
+<span class="sig-name descname"><span class="pre">CALLER_CONTEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'caller_context'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.CALLER_CONTEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.CAN_FALLTHROUGH">
+<span class="sig-name descname"><span class="pre">CAN_FALLTHROUGH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'can_fallthrough'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.CAN_FALLTHROUGH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.CAN_TRAP">
+<span class="sig-name descname"><span class="pre">CAN_TRAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'can_trap'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.CAN_TRAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.CLASS_NAME">
+<span class="sig-name descname"><span class="pre">CLASS_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'class_name'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.CLASS_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.CONSTANT_DATA_SUBCLASS">
+<span class="sig-name descname"><span class="pre">CONSTANT_DATA_SUBCLASS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'constant_data_subclass'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.CONSTANT_DATA_SUBCLASS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.CONSTANT_INT_VALUE">
+<span class="sig-name descname"><span class="pre">CONSTANT_INT_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'constant_int_value'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.CONSTANT_INT_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.CONTAINS_UNDEF">
+<span class="sig-name descname"><span class="pre">CONTAINS_UNDEF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'contains_undef'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.CONTAINS_UNDEF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.CONTEXT">
+<span class="sig-name descname"><span class="pre">CONTEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'context'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.CONTEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.DATA_LAYOUT">
+<span class="sig-name descname"><span class="pre">DATA_LAYOUT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'data_layout'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.DATA_LAYOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.DEALLOCATOR">
+<span class="sig-name descname"><span class="pre">DEALLOCATOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'deallocator'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.DEALLOCATOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.DEFINITION">
+<span class="sig-name descname"><span class="pre">DEFINITION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'definition'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.DEFINITION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.DEFINITION_LOCATION">
+<span class="sig-name descname"><span class="pre">DEFINITION_LOCATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'definition_location'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.DEFINITION_LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.DEMANGLED_NAME">
+<span class="sig-name descname"><span class="pre">DEMANGLED_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'demangled_name'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.DEMANGLED_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.DWARF_LOCATION">
+<span class="sig-name descname"><span class="pre">DWARF_LOCATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dwarf_location'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.DWARF_LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.DWARF_SCOPE">
+<span class="sig-name descname"><span class="pre">DWARF_SCOPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dwarf_scope'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.DWARF_SCOPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.DWARF_TYPE">
+<span class="sig-name descname"><span class="pre">DWARF_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dwarf_type'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.DWARF_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ENDS_IN_RETURN">
+<span class="sig-name descname"><span class="pre">ENDS_IN_RETURN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ends_in_return'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ENDS_IN_RETURN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.EPILOGUES">
+<span class="sig-name descname"><span class="pre">EPILOGUES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'epilogues'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.EPILOGUES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.FILENAME">
+<span class="sig-name descname"><span class="pre">FILENAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'filename'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.FILENAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.FLAGS">
+<span class="sig-name descname"><span class="pre">FLAGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'flags'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.FLAGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.FRAME_INFO">
+<span class="sig-name descname"><span class="pre">FRAME_INFO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'frame_info'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.FRAME_INFO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.FROM_VARIADIC_TEMPLATE">
+<span class="sig-name descname"><span class="pre">FROM_VARIADIC_TEMPLATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'from_variadic_template'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.FROM_VARIADIC_TEMPLATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.FUNC_OFFSET">
+<span class="sig-name descname"><span class="pre">FUNC_OFFSET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'func_offset'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.FUNC_OFFSET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.FUNC_REFERENCE">
+<span class="sig-name descname"><span class="pre">FUNC_REFERENCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'func_reference'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.FUNC_REFERENCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.HAS_INITIALIZER">
+<span class="sig-name descname"><span class="pre">HAS_INITIALIZER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'has_initializer'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.HAS_INITIALIZER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.HAS_INLINE_ASM">
+<span class="sig-name descname"><span class="pre">HAS_INLINE_ASM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'has_inline_asm'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.HAS_INLINE_ASM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.INSTRS">
+<span class="sig-name descname"><span class="pre">INSTRS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'instrs'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.INSTRS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.INTRINSIC">
+<span class="sig-name descname"><span class="pre">INTRINSIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'intrinsic'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.INTRINSIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_ALL_ONES_VALUE">
+<span class="sig-name descname"><span class="pre">IS_ALL_ONES_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_all_ones_value'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_ALL_ONES_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_CONSTANT">
+<span class="sig-name descname"><span class="pre">IS_CONSTANT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_constant'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_CONSTANT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_DECLARATION">
+<span class="sig-name descname"><span class="pre">IS_DECLARATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_declaration'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_DECLARATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_DIRECT">
+<span class="sig-name descname"><span class="pre">IS_DIRECT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_direct'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_DIRECT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_EPILOGUE_INSERTION_BLOCK">
+<span class="sig-name descname"><span class="pre">IS_EPILOGUE_INSERTION_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_epilogue_insertion_block'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_EPILOGUE_INSERTION_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_MANGLED">
+<span class="sig-name descname"><span class="pre">IS_MANGLED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_mangled'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_MANGLED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_NAN">
+<span class="sig-name descname"><span class="pre">IS_NAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_nan'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_NAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_NORMAL_FP">
+<span class="sig-name descname"><span class="pre">IS_NORMAL_FP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_normal_fp'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_NORMAL_FP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_NULL_VALUE">
+<span class="sig-name descname"><span class="pre">IS_NULL_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_null_value'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_NULL_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_ONE_VALUE">
+<span class="sig-name descname"><span class="pre">IS_ONE_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_one_value'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_ONE_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_PROLOGUE_INSERTION_BLOCK">
+<span class="sig-name descname"><span class="pre">IS_PROLOGUE_INSERTION_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_prologue_insertion_block'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_PROLOGUE_INSERTION_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.IS_ZERO_VALUE">
+<span class="sig-name descname"><span class="pre">IS_ZERO_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'is_zero_value'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.IS_ZERO_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.KIND">
+<span class="sig-name descname"><span class="pre">KIND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'kind'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.KIND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.LABEL">
+<span class="sig-name descname"><span class="pre">LABEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'label'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.LABEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.LINKAGE_NAME">
+<span class="sig-name descname"><span class="pre">LINKAGE_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'linkage_name'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.LINKAGE_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.LLVM_TYPE">
+<span class="sig-name descname"><span class="pre">LLVM_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'llvm_type'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.LLVM_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.LOCAL_TO_UNIT">
+<span class="sig-name descname"><span class="pre">LOCAL_TO_UNIT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'local_to_unit'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.LOCAL_TO_UNIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.LOCATION">
+<span class="sig-name descname"><span class="pre">LOCATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'location'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.MEMBERS">
+<span class="sig-name descname"><span class="pre">MEMBERS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'members'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.MEMBERS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.MIGHT_BE_NULL">
+<span class="sig-name descname"><span class="pre">MIGHT_BE_NULL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'might_be_null'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.MIGHT_BE_NULL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.MNEMONIC">
+<span class="sig-name descname"><span class="pre">MNEMONIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mnemonic'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.MNEMONIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.MODULE_NAME">
+<span class="sig-name descname"><span class="pre">MODULE_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'module_name'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.MODULE_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.MOD_REF_BEHAVIOR">
+<span class="sig-name descname"><span class="pre">MOD_REF_BEHAVIOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mod_ref_behavior'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.MOD_REF_BEHAVIOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.NAME">
+<span class="sig-name descname"><span class="pre">NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'name'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.NODE_KIND">
+<span class="sig-name descname"><span class="pre">NODE_KIND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'node_kind'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.NODE_KIND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.NUMBER">
+<span class="sig-name descname"><span class="pre">NUMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'number'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.OFFSET">
+<span class="sig-name descname"><span class="pre">OFFSET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'offset'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.OFFSET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.OPCODE">
+<span class="sig-name descname"><span class="pre">OPCODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'opcode'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.OPCODE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.OPERAND">
+<span class="sig-name descname"><span class="pre">OPERAND</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'operand'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.OPERAND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.ORIGINAL_NAME">
+<span class="sig-name descname"><span class="pre">ORIGINAL_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'original_name'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.ORIGINAL_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.PARAMETER">
+<span class="sig-name descname"><span class="pre">PARAMETER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'parameter'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.PARAMETER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.PARAMETER_INDEX">
+<span class="sig-name descname"><span class="pre">PARAMETER_INDEX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'parameter_index'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.PARAMETER_INDEX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.POSITION">
+<span class="sig-name descname"><span class="pre">POSITION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'position'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.POSITION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.PREDS">
+<span class="sig-name descname"><span class="pre">PREDS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'preds'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.PREDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.PRETTY_STRING">
+<span class="sig-name descname"><span class="pre">PRETTY_STRING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pretty_string'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.PRETTY_STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.PRODUCER">
+<span class="sig-name descname"><span class="pre">PRODUCER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'producer'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.PRODUCER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.PROLOGUES">
+<span class="sig-name descname"><span class="pre">PROLOGUES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'prologues'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.PROLOGUES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.RTTI_VA">
+<span class="sig-name descname"><span class="pre">RTTI_VA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rtti_va'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.RTTI_VA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SECTION">
+<span class="sig-name descname"><span class="pre">SECTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'section'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SECTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SIZE">
+<span class="sig-name descname"><span class="pre">SIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'size'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SIZE_IN_BITS">
+<span class="sig-name descname"><span class="pre">SIZE_IN_BITS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'size_in_bits'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SIZE_IN_BITS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SOURCE">
+<span class="sig-name descname"><span class="pre">SOURCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'source'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SOURCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SOURCE_CODE">
+<span class="sig-name descname"><span class="pre">SOURCE_CODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'source_code'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SOURCE_CODE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SOURCE_FILE">
+<span class="sig-name descname"><span class="pre">SOURCE_FILE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'source_file'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SOURCE_FILE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SOURCE_LANGUAGE">
+<span class="sig-name descname"><span class="pre">SOURCE_LANGUAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'source_language'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SOURCE_LANGUAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SOURCE_LOCATION">
+<span class="sig-name descname"><span class="pre">SOURCE_LOCATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'source_location'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SOURCE_LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SOURCE_SCOPE">
+<span class="sig-name descname"><span class="pre">SOURCE_SCOPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'source_scope'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SOURCE_SCOPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SSA_NAME">
+<span class="sig-name descname"><span class="pre">SSA_NAME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ssa_name'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SSA_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.STORE_SIZE_IN_BITS">
+<span class="sig-name descname"><span class="pre">STORE_SIZE_IN_BITS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'store_size_in_bits'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.STORE_SIZE_IN_BITS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.STRING_VALUE">
+<span class="sig-name descname"><span class="pre">STRING_VALUE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'string_value'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.STRING_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SUCCS">
+<span class="sig-name descname"><span class="pre">SUCCS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'succs'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SUCCS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SYMBOL">
+<span class="sig-name descname"><span class="pre">SYMBOL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'symbol'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SYMBOL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.SYMBOLS">
+<span class="sig-name descname"><span class="pre">SYMBOLS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'symbols'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.SYMBOLS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.TAGS">
+<span class="sig-name descname"><span class="pre">TAGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tags'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.TAGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.TARGET_TRIPLE">
+<span class="sig-name descname"><span class="pre">TARGET_TRIPLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'target_triple'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.TARGET_TRIPLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.TEMPLATE_INDEX">
+<span class="sig-name descname"><span class="pre">TEMPLATE_INDEX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'template_index'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.TEMPLATE_INDEX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.THREAD_LOCAL">
+<span class="sig-name descname"><span class="pre">THREAD_LOCAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'thread_local'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.THREAD_LOCAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.TYPE">
+<span class="sig-name descname"><span class="pre">TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'type'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.TYPE_ID">
+<span class="sig-name descname"><span class="pre">TYPE_ID</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'type_id'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.TYPE_ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.UNPAIRED">
+<span class="sig-name descname"><span class="pre">UNPAIRED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'unpaired'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.UNPAIRED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.UNROLLED_DWARF_TYPE">
+<span class="sig-name descname"><span class="pre">UNROLLED_DWARF_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'unrolled_dwarf_type'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.UNROLLED_DWARF_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.USED_MEMORY">
+<span class="sig-name descname"><span class="pre">USED_MEMORY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'used_memory'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.USED_MEMORY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.USED_REGISTERS">
+<span class="sig-name descname"><span class="pre">USED_REGISTERS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'used_registers'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.USED_REGISTERS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.VA">
+<span class="sig-name descname"><span class="pre">VA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'va'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.VA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.VARIADIC_INDEX">
+<span class="sig-name descname"><span class="pre">VARIADIC_INDEX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'variadic_index'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.VARIADIC_INDEX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.VA_END">
+<span class="sig-name descname"><span class="pre">VA_END</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'va_end'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.VA_END" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeJSON.VA_START">
+<span class="sig-name descname"><span class="pre">VA_START</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'va_start'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeJSON.VA_START" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.cpg_types.mate.</span></span><span class="sig-name descname"><span class="pre">NodeKind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Valid values for the <code class="docutils literal notranslate"><span class="pre">node_kind</span></code> attribute.</p>
+<p>These must match the map in ASTGraphWriter.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.ALLOCA">
+<span class="sig-name descname"><span class="pre">ALLOCA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Alloca'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.ALLOCA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.ARGUMENT">
+<span class="sig-name descname"><span class="pre">ARGUMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Argument'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.ARGUMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.ARRAY_TYPE">
+<span class="sig-name descname"><span class="pre">ARRAY_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ArrayType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.ARRAY_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.ASM_BLOCK">
+<span class="sig-name descname"><span class="pre">ASM_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ASMBlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.ASM_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.ASM_GLOBAL_VARIABLE">
+<span class="sig-name descname"><span class="pre">ASM_GLOBAL_VARIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ASMGlobalVariable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.ASM_GLOBAL_VARIABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.ASM_INST">
+<span class="sig-name descname"><span class="pre">ASM_INST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ASMInst'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.ASM_INST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.BASIC_TYPE">
+<span class="sig-name descname"><span class="pre">BASIC_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BasicType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.BASIC_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.BLOCK">
+<span class="sig-name descname"><span class="pre">BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Block'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.CALL">
+<span class="sig-name descname"><span class="pre">CALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Call'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.CALL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.CALL_RETURN">
+<span class="sig-name descname"><span class="pre">CALL_RETURN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CallReturn'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.CALL_RETURN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.CLASS_TYPE">
+<span class="sig-name descname"><span class="pre">CLASS_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ClassType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.CLASS_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.COMPOSITE_CACHED_TYPE">
+<span class="sig-name descname"><span class="pre">COMPOSITE_CACHED_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CompositeCachedType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.COMPOSITE_CACHED_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.COMPOSITE_TYPE">
+<span class="sig-name descname"><span class="pre">COMPOSITE_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CompositeType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.COMPOSITE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.CONSTANT">
+<span class="sig-name descname"><span class="pre">CONSTANT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Constant'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.CONSTANT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.CONSTANT_FP">
+<span class="sig-name descname"><span class="pre">CONSTANT_FP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantFP'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.CONSTANT_FP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.CONSTANT_INT">
+<span class="sig-name descname"><span class="pre">CONSTANT_INT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantInt'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.CONSTANT_INT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.CONSTANT_STRING">
+<span class="sig-name descname"><span class="pre">CONSTANT_STRING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantString'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.CONSTANT_STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.CONSTANT_UNDEF">
+<span class="sig-name descname"><span class="pre">CONSTANT_UNDEF</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ConstantUndef'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.CONSTANT_UNDEF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.DATAFLOW_SIGNATURE">
+<span class="sig-name descname"><span class="pre">DATAFLOW_SIGNATURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DataflowSignature'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.DATAFLOW_SIGNATURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.DERIVED_TYPE">
+<span class="sig-name descname"><span class="pre">DERIVED_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DerivedType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.DERIVED_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.DWARF_ARGUMENT">
+<span class="sig-name descname"><span class="pre">DWARF_ARGUMENT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFArgument'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.DWARF_ARGUMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.DWARF_LOCAL_VARIABLE">
+<span class="sig-name descname"><span class="pre">DWARF_LOCAL_VARIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFLocalVariable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.DWARF_LOCAL_VARIABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.DWARF_TYPE">
+<span class="sig-name descname"><span class="pre">DWARF_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'DWARFType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.DWARF_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.ENUM_TYPE">
+<span class="sig-name descname"><span class="pre">ENUM_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'EnumType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.ENUM_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.FUNCTION">
+<span class="sig-name descname"><span class="pre">FUNCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Function'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.GLOBAL_VARIABLE">
+<span class="sig-name descname"><span class="pre">GLOBAL_VARIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'GlobalVariable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.GLOBAL_VARIABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.INPUT_SIGNATURE">
+<span class="sig-name descname"><span class="pre">INPUT_SIGNATURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'InputSignature'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.INPUT_SIGNATURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.INSTRUCTION">
+<span class="sig-name descname"><span class="pre">INSTRUCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Instruction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.INSTRUCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.INVOKE">
+<span class="sig-name descname"><span class="pre">INVOKE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Invoke'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.INVOKE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.LLVM_TYPE">
+<span class="sig-name descname"><span class="pre">LLVM_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LLVMType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.LLVM_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.LOAD">
+<span class="sig-name descname"><span class="pre">LOAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Load'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.LOAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.LOCAL_VARIABLE">
+<span class="sig-name descname"><span class="pre">LOCAL_VARIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LocalVariable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.LOCAL_VARIABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.MACHINE_BASIC_BLOCK">
+<span class="sig-name descname"><span class="pre">MACHINE_BASIC_BLOCK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MachineBasicBlock'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.MACHINE_BASIC_BLOCK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.MACHINE_FUNCTION">
+<span class="sig-name descname"><span class="pre">MACHINE_FUNCTION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MachineFunction'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.MACHINE_FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.MACHINE_INSTR">
+<span class="sig-name descname"><span class="pre">MACHINE_INSTR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MachineInstr'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.MACHINE_INSTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.MEMCPY">
+<span class="sig-name descname"><span class="pre">MEMCPY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Memcpy'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.MEMCPY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.MEMORY_LOCATION">
+<span class="sig-name descname"><span class="pre">MEMORY_LOCATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'MemoryLocation'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.MEMORY_LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.MEMSET">
+<span class="sig-name descname"><span class="pre">MEMSET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Memset'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.MEMSET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.MODULE">
+<span class="sig-name descname"><span class="pre">MODULE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Module'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.MODULE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.OUTPUT_SIGNATURE">
+<span class="sig-name descname"><span class="pre">OUTPUT_SIGNATURE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'OutputSignature'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.OUTPUT_SIGNATURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.PARAM_BINDING">
+<span class="sig-name descname"><span class="pre">PARAM_BINDING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ParamBinding'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.PARAM_BINDING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.PLT_STUB">
+<span class="sig-name descname"><span class="pre">PLT_STUB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PLTStub'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.PLT_STUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.RESUME">
+<span class="sig-name descname"><span class="pre">RESUME</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Resume'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.RESUME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.RET">
+<span class="sig-name descname"><span class="pre">RET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Ret'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.RET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.STORE">
+<span class="sig-name descname"><span class="pre">STORE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Store'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.STORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.STRUCTURE_TYPE">
+<span class="sig-name descname"><span class="pre">STRUCTURE_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'StructureType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.STRUCTURE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.SUBROUTINE_TYPE">
+<span class="sig-name descname"><span class="pre">SUBROUTINE_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SubroutineType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.SUBROUTINE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.TRANSLATION_UNIT">
+<span class="sig-name descname"><span class="pre">TRANSLATION_UNIT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'TranslationUnit'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.TRANSLATION_UNIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.UNCLASSIFIED_NODE">
+<span class="sig-name descname"><span class="pre">UNCLASSIFIED_NODE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UnclassifiedNode'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.UNCLASSIFIED_NODE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.UNION_TYPE">
+<span class="sig-name descname"><span class="pre">UNION_TYPE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UnionType'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.UNION_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.VARIABLE">
+<span class="sig-name descname"><span class="pre">VARIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Variable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.VARIABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.NodeKind.VTABLE">
+<span class="sig-name descname"><span class="pre">VTABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'VTable'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.NodeKind.VTABLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.Relationship">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_common.models.cpg_types.mate.</span></span><span class="sig-name descname"><span class="pre">Relationship</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate_common.models.cpg_types.mate.Relationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.Relationship.MANY_TO_MANY">
+<span class="sig-name descname"><span class="pre">MANY_TO_MANY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'many-to-many'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.Relationship.MANY_TO_MANY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.Relationship.MANY_TO_ONE">
+<span class="sig-name descname"><span class="pre">MANY_TO_ONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'many-to-one'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.Relationship.MANY_TO_ONE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.Relationship.ONE_TO_MANY">
+<span class="sig-name descname"><span class="pre">ONE_TO_MANY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'one-to-many'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.Relationship.ONE_TO_MANY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_common.models.cpg_types.mate.Relationship.ONE_TO_ONE">
+<span class="sig-name descname"><span class="pre">ONE_TO_ONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'one-to-one'</span></em><a class="headerlink" href="#mate_common.models.cpg_types.mate.Relationship.ONE_TO_ONE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate_common.models.cpg_types.mc.html" class="btn btn-neutral float-right" title="mate_common.models.cpg_types.mc module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate_common.models.cpg_types.llvm.html" class="btn btn-neutral float-left" title="mate_common.models.cpg_types.llvm module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

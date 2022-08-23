@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate-cli Command Line Tool Overview &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Command-Line Tools Reference" href="cli.html" />
+    <link rel="prev" title="Starting Stand-alone MATE" href="getting-started.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">mate-cli Command Line Tool Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-mate-cli">Installing <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-mate-cli">Running <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-basic-workflow-with-mate-cli">A basic workflow with <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-oneshot-command">The <code class="docutils literal notranslate"><span class="pre">oneshot</span></code> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#helpful-mate-cli-recipes">Helpful <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#stop-all-currently-running-manticore-tasks">Stop all currently running Manticore tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-llvm-bitcode-for-a-cpg">Get the LLVM bitcode for a CPG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-the-canonical-binary-for-a-cpg">Get the “canonical” binary for a CPG</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>mate-cli Command Line Tool Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/mate-cli-overview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mate-cli-command-line-tool-overview">
+<h1>mate-cli Command Line Tool Overview<a class="headerlink" href="#mate-cli-command-line-tool-overview" title="Permalink to this headline">¶</a></h1>
+<p>MATE users interact with the system using the <a class="reference internal" href="user-workflow.html"><span class="doc">MATE User Workflow</span></a>.</p>
+<p>The Python APIs that <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> uses under the hood can be found under the
+<a class="reference external" href="api/MATERestClient/mate_rest_client.html#http://">MATE REST Client API documentation</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the detailed reference manual for <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> see <a class="reference internal" href="cli.html"><span class="doc">Command-Line Tools Reference</span></a>.</p>
+</div>
+<div class="section" id="installing-mate-cli">
+<h2>Installing <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code><a class="headerlink" href="#installing-mate-cli" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The steps below can be skipped entirely by using the version
+hosted on PyPI instead:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m pip install mate-cli
+<span class="gp">$ </span>mate-cli --help
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are running an interactive shell inside the <code class="docutils literal notranslate"><span class="pre">mate-dist</span></code> Docker
+environment, then <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> should already be available on your
+<code class="docutils literal notranslate"><span class="pre">$PATH</span></code>. You do not need to follow the steps below.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> is designed to be usable outside of the normal MATE runtime
+environment.</p>
+<p>This means that you can use it on your local development machine,
+<strong>without Docker</strong>, as long as you have a few basic runtime requirements:
+Python 3 (3.8+) and <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
+<p>Start from the MATE repository root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="c1"># create a new virtual environment, and enter it</span>
+$ python3 -m venv env
+$ <span class="nb">source</span> env/bin/activate
+<span class="o">(</span>env<span class="o">)</span> $ <span class="c1"># install mate-cli and its dependencies into the virtual environment</span>
+<span class="o">(</span>env<span class="o">)</span> $ pip install -r cli-requirements.txt
+<span class="o">(</span>env<span class="o">)</span> $ <span class="c1"># confirm that mate-cli is installed and functional</span>
+<span class="o">(</span>env<span class="o">)</span> $ mate-cli --help
+</pre></div>
+</div>
+<p>Once <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> is installed, you’ll be able to interact with any MATE server.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> will connect to <code class="docutils literal notranslate"><span class="pre">localhost:8666</span></code>. You can change this
+by specifying <code class="docutils literal notranslate"><span class="pre">--conn</span> <span class="pre">your-server:port</span></code> instead:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>env<span class="o">)</span> $ mate-cli --conn some-mate-host:8666 &lt;your-args...&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-mate-cli">
+<h2>Running <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code><a class="headerlink" href="#running-mate-cli" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> provides a number of subcommands, such as: <code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">artifact</span></code>, <code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">compile</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">build</span></code>, etc.</p>
+<p>These subcommands are usually followed by another subcommand such <code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">create</span></code> or <code class="docutils literal notranslate"><span class="pre">task</span></code>.
+For example, to find all compilations that have completed successfully in MATE, the invocation would
+look like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli compile get --state compiled
+</pre></div>
+</div>
+<p>When executing a command, the <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> tool will print out the response from the MATE server as
+a JSON structure. So a typical response will look like:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;compilation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5e092549f5a04a00b97bd9af738787a0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;build_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;compiled&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;source_artifact&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;artifact_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4a76ae25dcc24bd2822e0431e82bf123&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;compile-target:single&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;has_object&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;overflowable-allocations.c&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;build_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;compilation_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;5e092549f5a04a00b97bd9af738787a0&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;log_artifact&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;artifact_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;f697ef320def4e8b96190b78d2084d54&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;kind&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;compile-output:compile-log&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;has_object&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;compile.log&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;build_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;compilation_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;5e092549f5a04a00b97bd9af738787a0&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;artifact_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;4a76ae25dcc24bd2822e0431e82bf123&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;f697ef320def4e8b96190b78d2084d54&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;2a47bea363ca4df69b9dc4cded0b4056&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;4c652b2ca5b7455a9aad61fd4123cd6f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s2">&quot;90968eb954f546d19ad3bd344aada644&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;testbed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;containerized&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;experimental_embed_bitcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;docker_image&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;containerized_infer_build&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;make_targets&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;extra_compiler_flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>One important point to note is that <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> supports an optional top-level <code class="docutils literal notranslate"><span class="pre">--conn</span></code> argument
+to specify the MATE service to use. For MATE developers who are running MATE locally with the
+instructions <a class="reference external" href="getting-started.html#running-mate">here</a>, the default of <code class="docutils literal notranslate"><span class="pre">http://localhost:8666</span></code>
+will work fine however, users who wish to query an external MATE service will have to provide the
+connection details like so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli --conn http://YOUR_CHESS_SYSTEM:8666 &lt;subcommand&gt;
+</pre></div>
+</div>
+<p>To see the full set of subcommands and arguments, run <code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">--help</span></code> or refer to the reference
+manual at <a class="reference internal" href="cli.html"><span class="doc">Command-Line Tools Reference</span></a>.</p>
+</div>
+<div class="section" id="a-basic-workflow-with-mate-cli">
+<h2>A basic workflow with <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code><a class="headerlink" href="#a-basic-workflow-with-mate-cli" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For many use cases, <a class="reference internal" href="#mate-cli-oneshot"><span class="std std-ref">mate-cli oneshot</span></a> will be
+faster and simpler than the steps listed below.</p>
+</div>
+<p>If we’re analyzing our own program with MATE, most workflows will begin by uploading an artifact. We
+can do this with the <code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">artifact</span> <span class="pre">create</span></code> command like so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli artifact create compile-target:single ./frontend/test/programs/overflowable-allocations.c
+</pre></div>
+</div>
+<p>The response from the MATE server will tell us the ID of the artifact that we just created. In this
+case, it is <code class="docutils literal notranslate"><span class="pre">276d1771d6ee4532b89359eea2668482</span></code>.</p>
+<p>Now, we can send the artifact to MATE for compilation by providing the artifact ID we got from the
+previous step:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli compile create --wait --artifact-id 276d1771d6ee4532b89359eea2668482
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If we wanted to compile a challenge program instead of our own artifact, we could just as easily
+use the <code class="docutils literal notranslate"><span class="pre">--challenge-name</span></code> or <code class="docutils literal notranslate"><span class="pre">--challenge-id</span></code> arguments.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--wait</span></code> flag causes <code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">compile</span> <span class="pre">create</span></code> to block with a spinner
+until the compilation enters a terminal state (e.g., <code class="docutils literal notranslate"><span class="pre">compiled</span></code> or <code class="docutils literal notranslate"><span class="pre">failed</span></code>).</p>
+<p>Without the <code class="docutils literal notranslate"><span class="pre">--wait</span></code> flag, users should run <code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">compile</span> <span class="pre">get</span> <span class="pre">&lt;compilation-id&gt;</span></code>
+to determine to compilation’s status before proceeding.</p>
+</div>
+<p>When our compile job reaches the <code class="docutils literal notranslate"><span class="pre">compiled</span></code> state, we can then use the <code class="docutils literal notranslate"><span class="pre">build</span></code> subcommand and
+generate the CPG so that MATE analyses can be run on the program:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli build create 5e092549f5a04a00b97bd9af738787a0
+</pre></div>
+</div>
+<p>Following the same convention as the compilation subcommands, we can check on the progress of the
+MATE build by running <code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">build</span> <span class="pre">get</span></code>. Once the build is done, we can run the full set of
+MATE analyses on the program like so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli analysis run da4b7da519574ac3a1bef6bc39148372
+</pre></div>
+</div>
+<p>This will create a task for each analysis in the system (queryable with
+<code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">analysis</span> <span class="pre">task</span> <span class="pre">da4b7da519574ac3a1bef6bc39148372</span></code>).</p>
+<p>Once the analysis tasks have finished running, the generated POIs can be viewed by navigating to the
+MATE dashboard in a web browser. The MATE dashboard is the most convenient way to view this
+information, however <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> has some rudimentary functionality for exploring POIs.</p>
+<p>We can retrieve the list of generated POIs like so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli poi get
+</pre></div>
+</div>
+<p>The POI information usually contains UUIDs of nodes within the CPG which can then be used with the
+<code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">graph</span></code> subcommands to “view” parts of the CPG.</p>
+</div>
+<div class="section" id="the-oneshot-command">
+<span id="mate-cli-oneshot"></span><h2>The <code class="docutils literal notranslate"><span class="pre">oneshot</span></code> command<a class="headerlink" href="#the-oneshot-command" title="Permalink to this headline">¶</a></h2>
+<p>Creating compilations and builds for a given source with <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> is a fairly common occurrence.
+<code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> supports a subcommand called <code class="docutils literal notranslate"><span class="pre">oneshot</span></code> which is shorthand for this part of the
+workflow.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">oneshot</span></code> subcommand takes a single parameter describing either an artifact or a broker
+challenge, compiles it and creates build tasks for each target. The parameter can be a few different
+things and <code class="docutils literal notranslate"><span class="pre">oneshot</span></code> will try to “guess” what it is. Some examples are provided below:</p>
+<p>From a source file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli oneshot ./program.c
+</pre></div>
+</div>
+<p>From a tarball:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli oneshot ./program.tar.gz
+</pre></div>
+</div>
+<p>From a directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli oneshot ./program
+</pre></div>
+</div>
+<p>From an artifact ID:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli oneshot 2358423ccc7d4d0dba8477f9baf19420
+</pre></div>
+</div>
+<p>From a brokered challenge name (must be published on the CHESS challenge broker):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mate-cli oneshot challenge-1
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">oneshot</span></code> subcommand also supports the <code class="docutils literal notranslate"><span class="pre">-p</span></code>/<code class="docutils literal notranslate"><span class="pre">--run-all-pois</span></code> flag,
+which tells MATE to run all registered POI analyses once the CPG build completes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># the same as above, but also run POI analyses automatically</span>
+mate-cli oneshot -p ./program.c
+</pre></div>
+</div>
+</div>
+<div class="section" id="helpful-mate-cli-recipes">
+<h2>Helpful <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> recipes<a class="headerlink" href="#helpful-mate-cli-recipes" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">mate-cli</span></code> is designed to compose well with itself and common utility
+commands, like <code class="docutils literal notranslate"><span class="pre">xargs</span></code> and <code class="docutils literal notranslate"><span class="pre">jq</span></code>. Here are some useful recipes.</p>
+<div class="section" id="stop-all-currently-running-manticore-tasks">
+<h3>Stop all currently running Manticore tasks<a class="headerlink" href="#stop-all-currently-running-manticore-tasks" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mate-cli manticore get --state running <span class="se">\</span>
+    <span class="p">|</span> jq -r <span class="s1">&#39;.[] | .task_id&#39;</span> <span class="se">\</span>
+    <span class="p">|</span> xargs mate-cli manticore stop
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-the-llvm-bitcode-for-a-cpg">
+<h3>Get the LLVM bitcode for a CPG<a class="headerlink" href="#get-the-llvm-bitcode-for-a-cpg" title="Permalink to this headline">¶</a></h3>
+<p>Substitute <code class="docutils literal notranslate"><span class="pre">BUILD-ID</span></code> for the build you’d like.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mate-cli build get-bc BUILD-ID
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-the-canonical-binary-for-a-cpg">
+<h3>Get the “canonical” binary for a CPG<a class="headerlink" href="#get-the-canonical-binary-for-a-cpg" title="Permalink to this headline">¶</a></h3>
+<p>Substitute <code class="docutils literal notranslate"><span class="pre">BUILD-ID</span></code> for the build you’d like.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mate-cli build get BUILD-ID <span class="se">\</span>
+    <span class="p">|</span> jq -r <span class="s1">&#39;.artifact_ids | .[]&#39;</span> <span class="se">\</span>
+    <span class="p">|</span> xargs mate-cli artifact get --kind build-output:quotidian-canonical-binary <span class="se">\</span>
+    <span class="p">|</span> jq -r <span class="s1">&#39;.[] | .artifact_ids&#39;</span>
+    <span class="p">|</span> xargs mate-cli artifact dump &gt; binary.elf
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="cli.html" class="btn btn-neutral float-right" title="Command-Line Tools Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="getting-started.html" class="btn btn-neutral float-left" title="Starting Stand-alone MATE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

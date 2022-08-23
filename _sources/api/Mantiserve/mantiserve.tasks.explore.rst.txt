@@ -1,0 +1,7 @@
+mantiserve.tasks.explore module
+===============================
+
+.. automodule:: mantiserve.tasks.explore
+   :members:
+   :undoc-members:
+   :show-inheritance:

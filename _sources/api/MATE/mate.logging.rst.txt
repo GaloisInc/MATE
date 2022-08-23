@@ -1,0 +1,7 @@
+mate.logging module
+===================
+
+.. automodule:: mate.logging
+   :members:
+   :undoc-members:
+   :show-inheritance:

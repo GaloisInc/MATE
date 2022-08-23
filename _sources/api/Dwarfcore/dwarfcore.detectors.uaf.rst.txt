@@ -1,0 +1,7 @@
+dwarfcore.detectors.uaf module
+==============================
+
+.. automodule:: dwarfcore.detectors.uaf
+   :members:
+   :undoc-members:
+   :show-inheritance:

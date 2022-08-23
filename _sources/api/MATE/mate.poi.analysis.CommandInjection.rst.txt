@@ -1,0 +1,7 @@
+mate.poi.analysis.CommandInjection module
+=========================================
+
+.. automodule:: mate.poi.analysis.CommandInjection
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,27 @@
+dwarfcore package
+=================
+
+.. automodule:: dwarfcore
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   dwarfcore.detectors
+   dwarfcore.plugins
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   dwarfcore.dwarfcore
+   dwarfcore.helper
+   dwarfcore.logging
+   dwarfcore.utils

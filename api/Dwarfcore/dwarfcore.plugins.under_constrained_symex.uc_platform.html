@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>dwarfcore.plugins.under_constrained_symex.uc_platform module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="dwarfcore.plugins.under_constrained_symex.user_constraints module" href="dwarfcore.plugins.under_constrained_symex.user_constraints.html" />
+    <link rel="prev" title="dwarfcore.plugins.under_constrained_symex.smt module" href="dwarfcore.plugins.under_constrained_symex.smt.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Dwarfcore API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="dwarfcore.html">dwarfcore package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="dwarfcore.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dwarfcore.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">Dwarfcore API Reference</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.html">dwarfcore package</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.plugins.html">dwarfcore.plugins package</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.plugins.under_constrained_symex.html">dwarfcore.plugins.under_constrained_symex package</a> &raquo;</li>
+        
+      <li>dwarfcore.plugins.under_constrained_symex.uc_platform module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/Dwarfcore/dwarfcore.plugins.under_constrained_symex.uc_platform.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-dwarfcore.plugins.under_constrained_symex.uc_platform">
+<span id="dwarfcore-plugins-under-constrained-symex-uc-platform-module"></span><h1>dwarfcore.plugins.under_constrained_symex.uc_platform module<a class="headerlink" href="#module-dwarfcore.plugins.under_constrained_symex.uc_platform" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.GetTaints">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.</span></span><span class="sig-name descname"><span class="pre">GetTaints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.GetTaints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Custom visitor to get expression taints but discard taints in ITE conditions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.GetTaints.result">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.GetTaints.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.GetTaints.visit">
+<span class="sig-name descname"><span class="pre">visit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.GetTaints.visit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.</span></span><span class="sig-name descname"><span class="pre">MemObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">manticore.native.memory.SMemory64</span></code></p>
+<p>This class represents an unconstrained object allocated somewhere in memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uid</strong> (<em>int</em>) – </p></li>
+<li><p><strong>content_type_size</strong> (<em>int</em>) – </p></li>
+<li><p><strong>size</strong> (<em>int</em>) – </p></li>
+<li><p><strong>name</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.init">
+<span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">manticore.core.smtlib.expression.Expression</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill the memory object with its content.</p>
+<p>Should be called only once, it is separated from the __init__ constructor to make pickling
+easier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>content</strong> (<em>List</em><em>[</em><em>manticore.core.smtlib.expression.Expression</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.constraints.ConstraintSet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read ‘size’ bits at ‘offset’ in the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.read.params.offset"></span><strong>offset</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.read.params.offset">¶</a> – offset of the read within the object, in bytes</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.read.params.size"></span><strong>size</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.read.params.size">¶</a> – number of bits to read</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.read.params.constr"></span><strong>constr</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.read.params.constr">¶</a> – symbolic constraints</p></li>
+<li><p><strong>constr</strong> (<em>manticore.core.smtlib.constraints.ConstraintSet</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.constraints.ConstraintSet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write ‘value’ at ‘offset’ in the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.write.params.offset"></span><strong>offset</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.write.params.offset">¶</a> – offset of the write within the object, in bytes</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.write.params.value"></span><strong>value</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.write.params.value">¶</a> – the value to write</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.write.params.constr"></span><strong>constr</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject.write.params.constr">¶</a> – symbolic constraints</p></li>
+<li><p><strong>constr</strong> (<em>manticore.core.smtlib.constraints.ConstraintSet</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCLinux">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.</span></span><span class="sig-name descname"><span class="pre">UCLinux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">programs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbolic_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disasm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'capstone'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pure_symbolic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCLinux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">manticore.platforms.linux.SLinux</span></code></p>
+<p>Modifies the stock SLinux platform to use the custom memory model.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.</span></span><span class="sig-name descname"><span class="pre">UCMemory64</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">manticore.core.smtlib.constraints.ConstraintSet</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">manticore.native.memory.SMemory64</span></code></p>
+<p>Wrapper around regular memory that automatically dispatches memory accesses between the stock
+memory and the UC memory manager.</p>
+<p>It is also responsible for populating the UC memory on-the-fly when new objects are accessed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>constraints</strong> (<em>Optional</em><em>[</em><em>manticore.core.smtlib.constraints.ConstraintSet</em><em>]</em>) – </p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access">
+<span class="sig-name descname"><span class="pre">check_oob_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_oob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a memory access to an underconstrained memory object can be out of bounds. If
+the access can be out of bounds, an error is recorded in the error manager. If fix_oob is
+True, the method tries to add constraints to enforce the access to be valid. Otherwise a
+FatalSymexError exception is raised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access.params.access"></span><strong>access</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access.params.access">¶</a> – either “read” or “write”</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access.params.address"></span><strong>address</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access.params.address">¶</a> – memory address that is accessed</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access.params.size"></span><strong>size</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access.params.size">¶</a> – number of bytes to read/write</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access.params.fix_oob"></span><strong>fix_oob</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.check_oob_access.params.fix_oob">¶</a> – if set to True and if offset can be out of bounds, try to add a constraint to the
+constraint set such that to enforce ‘offset’ to be in within the bounds of ‘obj’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Memory read.</p>
+<p>If ‘address’ points to an underconstrained object, it is assumed that the access has been
+validated by a prior call to check_oob_access()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_base_has_object">
+<span class="sig-name descname"><span class="pre">uc_base_has_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_base_has_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True iff a MemObject was already allocated for this base.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>base</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_check_pointer_offset_integrity">
+<span class="sig-name descname"><span class="pre">uc_check_pointer_offset_integrity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_check_pointer_offset_integrity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that offset is a valid offset expression for a given base.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p></li>
+<li><p><strong>offset</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_dwarf_type_to_expr_list">
+<span class="sig-name descname"><span class="pre">uc_dwarf_type_to_expr_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dwarf_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><span class="pre">mate_query.cpg.models.node.dwarf.DWARFType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_obj_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">manticore.core.smtlib.expression.Expression</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_dwarf_type_to_expr_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a dwarf type to a list of symbolic expressions matching the type.</p>
+<p>If the type is a built-in type (int, char, …), a single expression is created.
+If the type is a complex struct or class, the list of expressions matching the
+structure layout is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_dwarf_type_to_expr_list.params.dwarf_type"></span><strong>dwarf_type</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_dwarf_type_to_expr_list.params.dwarf_type">¶</a> – The type of the object we need to fill</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_dwarf_type_to_expr_list.params.base_obj_name"></span><strong>base_obj_name</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_dwarf_type_to_expr_list.params.base_obj_name">¶</a> – The name of the parent object to use as a prefix to name the new
+symbolic variables</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_dwarf_type_to_expr_list.params.obj_count"></span><strong>obj_count</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_dwarf_type_to_expr_list.params.obj_count">¶</a> – Number of consecutive objects to create. This will always be 1</p></li>
+<li><p><strong>dwarf_type</strong> (<a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><em>mate_query.cpg.models.node.dwarf.DWARFType</em></a>) – </p></li>
+<li><p><strong>base_obj_name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>obj_count</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[manticore.core.smtlib.expression.Expression]</p>
+</dd>
+</dl>
+<p>except for dynamic arrays that are referenced by a raw pointer: (type*) ptr</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_fork_on_metavar">
+<span class="sig-name descname"><span class="pre">uc_fork_on_metavar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dwarfcore.plugins.under_constrained_symex.user_constraints.html#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar" title="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_fork_on_metavar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fork on possible values for an object meta variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base</strong> (<em>str</em>) – </p></li>
+<li><p><strong>metavar</strong> (<a class="reference internal" href="dwarfcore.plugins.under_constrained_symex.user_constraints.html#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar" title="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar"><em>dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_func_arg_to_expr">
+<span class="sig-name descname"><span class="pre">uc_func_arg_to_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_func_arg_to_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates an underconstrained function argument to a smt expression to be assigned to
+the corresponding register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>manticore.core.smtlib.expression.Expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_all_dwarf_type_members">
+<span class="sig-name descname"><span class="pre">uc_get_all_dwarf_type_members</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dwarf_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><span class="pre">mate_query.cpg.models.node.dwarf.DWARFType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_all_dwarf_type_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all the members of ‘dwarf_type’, including members inherited from parent classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_all_dwarf_type_members.params.dwarf_type"></span><strong>dwarf_type</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_all_dwarf_type_members.params.dwarf_type">¶</a> – The type for which to get all members. It MUST be</p></li>
+<li><p><strong>dwarf_type</strong> (<a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><em>mate_query.cpg.models.node.dwarf.DWARFType</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[int, List[Any]]</p>
+</dd>
+</dl>
+<p>a structure or a class
+:param _sphinx_paramlinks_dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_all_dwarf_type_members.additional_offset: Additional offset to add to offsets of ‘dwarf_type’ members.
+This is used to get the correct member layout for classes that inherit from multiple parent
+classes
+:return: A list of tuples (additional_offset, member_type) that contains all the
+member fileds for ‘dwarf_type’ in the correct order. For each tuple, ‘additional_offset’
+must be added to ‘member_type.common.offset’ to get the real offset of the field in
+a class instance memory layout</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_base_from_expr">
+<span class="sig-name descname"><span class="pre">uc_get_base_from_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_base_from_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the ‘base’ component of a pointer expression.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>expr</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_dwarf_type_by_uuid">
+<span class="sig-name descname"><span class="pre">uc_get_dwarf_type_by_uuid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><span class="pre">mate_query.cpg.models.node.dwarf.DWARFType</span></a></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_dwarf_type_by_uuid" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>resolve_base</strong> (<em>bool</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType">mate_query.cpg.models.node.dwarf.DWARFType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_metavar_from_object_name">
+<span class="sig-name descname"><span class="pre">uc_get_metavar_from_object_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dwarfcore.plugins.under_constrained_symex.user_constraints.html#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar" title="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_metavar_from_object_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the variable name for a given meta-variable of object named ‘obj_name’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metavar</strong> (<a class="reference internal" href="dwarfcore.plugins.under_constrained_symex.user_constraints.html#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar" title="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar"><em>dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar</em></a>) – </p></li>
+<li><p><strong>obj_name</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_new_base">
+<span class="sig-name descname"><span class="pre">uc_get_new_base</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_new_base" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_new_base_expr">
+<span class="sig-name descname"><span class="pre">uc_get_new_base_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr_type_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_uuid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_new_base_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a new abstract expression representing an unconstrained pointer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>manticore.core.smtlib.expression.Expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_new_data_expr">
+<span class="sig-name descname"><span class="pre">uc_get_new_data_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_new_data_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a new abstract expression representing unconstrained data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_new_data_expr.params.size"></span><strong>size</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_new_data_expr.params.size">¶</a> – Size in bits</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – </p></li>
+<li><p><strong>name</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>manticore.core.smtlib.expression.Expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_object_for_base">
+<span class="sig-name descname"><span class="pre">uc_get_object_for_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject" title="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject</span></a></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_object_for_base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the MemObject referenced by this base
+:return: MemObject if successful, None on failure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>base</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject" title="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject">dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_offset_from_expr">
+<span class="sig-name descname"><span class="pre">uc_get_offset_from_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">manticore.core.smtlib.expression.Expression</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_offset_from_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the ‘offset’ component of a pointer expression.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>expr</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Union[manticore.core.smtlib.expression.Expression, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_metavar_values">
+<span class="sig-name descname"><span class="pre">uc_get_possible_metavar_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metavar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dwarfcore.plugins.under_constrained_symex.user_constraints.html#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar" title="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxcnt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_metavar_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the possible values for meta-variables in the current state. This method should
+not be used for the $LEN variable. See uc_get_possible_object_lengths() instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_metavar_values.params.base"></span><strong>base</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_metavar_values.params.base">¶</a> – base of the object</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_metavar_values.params.metavar"></span><strong>metavar</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_metavar_values.params.metavar">¶</a> – which metavar of <a class="reference internal" href="../Dwarflang/dwarflang.eval.base.html#module-dwarflang.eval.base" title="dwarflang.eval.base"><code class="xref any py py-mod docutils literal notranslate"><span class="pre">base</span></code></a> object to get values for</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_metavar_values.params.maxcnt"></span><strong>maxcnt</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_metavar_values.params.maxcnt">¶</a> – maximum count of possible values to return</p></li>
+<li><p><strong>base</strong> (<em>str</em>) – </p></li>
+<li><p><strong>metavar</strong> (<a class="reference internal" href="dwarfcore.plugins.under_constrained_symex.user_constraints.html#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar" title="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar"><em>dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar</em></a>) – </p></li>
+<li><p><strong>maxcnt</strong> (<em>int</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>set of possible values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Set[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_object_lengths">
+<span class="sig-name descname"><span class="pre">uc_get_possible_object_lengths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxcnt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_object_lengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the possible lengths for object ‘base’ considered as an array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_object_lengths.params.base"></span><strong>base</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_object_lengths.params.base">¶</a> – base of the object to fill</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_object_lengths.params.maxcnt"></span><strong>maxcnt</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_possible_object_lengths.params.maxcnt">¶</a> – maximum count of possible lengths to return</p></li>
+<li><p><strong>base</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>set of possible sizes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_vtable_addr_for_class">
+<span class="sig-name descname"><span class="pre">uc_get_vtable_addr_for_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">class_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_get_vtable_addr_for_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the virtual address of the vtable for ‘class_name’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>class_name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_new_object_for_base">
+<span class="sig-name descname"><span class="pre">uc_new_object_for_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject" title="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject</span></a></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.uc_new_object_for_base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Effectively instanciate the object pointed to by the base.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>base</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject" title="dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject">dwarfcore.plugins.under_constrained_symex.uc_platform.MemObject</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.UCMemory64.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Memory write.</p>
+<p>If ‘address’ points to an underconstrained object, it is assumed that the access has been
+validated by a prior call to check_oob_access()</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.expr_to_data">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.</span></span><span class="sig-name descname"><span class="pre">expr_to_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.expr_to_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform an expression to a list of bytes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>expr</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.get_expr_bases">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.</span></span><span class="sig-name descname"><span class="pre">get_expr_bases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.get_expr_bases" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>expr</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.get_write_value_size">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.</span></span><span class="sig-name descname"><span class="pre">get_write_value_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.get_write_value_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the size in bytes of a value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.uc_platform.get_write_value_size.params.value"></span><strong>value</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.get_write_value_size.params.value">¶</a> – can be bytes or bitvector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.uc_platform.has_base">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.uc_platform.</span></span><span class="sig-name descname"><span class="pre">has_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.uc_platform.has_base" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>expr</strong> (<em>manticore.core.smtlib.expression.Expression</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dwarfcore.plugins.under_constrained_symex.user_constraints.html" class="btn btn-neutral float-right" title="dwarfcore.plugins.under_constrained_symex.user_constraints module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dwarfcore.plugins.under_constrained_symex.smt.html" class="btn btn-neutral float-left" title="dwarfcore.plugins.under_constrained_symex.smt module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

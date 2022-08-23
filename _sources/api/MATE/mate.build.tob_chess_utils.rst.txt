@@ -1,0 +1,27 @@
+mate.build.tob\_chess\_utils package
+====================================
+
+.. automodule:: mate.build.tob_chess_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.build.tob_chess_utils.tools
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.build.tob_chess_utils.dwarf
+   mate.build.tob_chess_utils.elf
+   mate.build.tob_chess_utils.logging
+   mate.build.tob_chess_utils.range_avl_tree
+   mate.build.tob_chess_utils.types

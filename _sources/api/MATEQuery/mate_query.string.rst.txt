@@ -1,0 +1,7 @@
+mate\_query.string module
+=========================
+
+.. automodule:: mate_query.string
+   :members:
+   :undoc-members:
+   :show-inheritance:

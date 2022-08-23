@@ -1,0 +1,7 @@
+mate\_common.datastructures.digraph module
+==========================================
+
+.. automodule:: mate_common.datastructures.digraph
+   :members:
+   :undoc-members:
+   :show-inheritance:

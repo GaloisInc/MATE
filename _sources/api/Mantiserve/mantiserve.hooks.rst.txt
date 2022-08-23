@@ -1,0 +1,7 @@
+mantiserve.hooks module
+=======================
+
+.. automodule:: mantiserve.hooks
+   :members:
+   :undoc-members:
+   :show-inheritance:

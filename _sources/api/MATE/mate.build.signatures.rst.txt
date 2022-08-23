@@ -1,0 +1,7 @@
+mate.build.signatures module
+============================
+
+.. automodule:: mate.build.signatures
+   :members:
+   :undoc-members:
+   :show-inheritance:

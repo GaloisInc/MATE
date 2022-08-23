@@ -1,0 +1,7 @@
+mate.poi.analysis.UserStringComparisonLength module
+===================================================
+
+.. automodule:: mate.poi.analysis.UserStringComparisonLength
+   :members:
+   :undoc-members:
+   :show-inheritance:

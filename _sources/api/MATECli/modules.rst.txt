@@ -1,0 +1,7 @@
+MATECli API Reference
+=====================
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_cli

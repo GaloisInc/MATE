@@ -1,0 +1,7 @@
+mate\_rest\_client.analyses module
+==================================
+
+.. automodule:: mate_rest_client.analyses
+   :members:
+   :undoc-members:
+   :show-inheritance:

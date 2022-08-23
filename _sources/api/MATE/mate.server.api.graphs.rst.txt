@@ -1,0 +1,16 @@
+mate.server.api.graphs package
+==============================
+
+.. automodule:: mate.server.api.graphs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.server.api.graphs.queries
+   mate.server.api.graphs.routes

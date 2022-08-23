@@ -1,0 +1,25 @@
+dwarfcore.plugins package
+=========================
+
+.. automodule:: dwarfcore.plugins
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   dwarfcore.plugins.under_constrained_symex
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   dwarfcore.plugins.dwarf_trace
+   dwarfcore.plugins.dwarf_track_variables
+   dwarfcore.plugins.heap_common

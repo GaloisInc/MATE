@@ -1,0 +1,32 @@
+mate package
+============
+
+.. automodule:: mate
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.build
+   mate.context
+   mate.integration
+   mate.poi
+   mate.server
+   mate.tasks
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.assertions
+   mate.config
+   mate.error
+   mate.logging
+   mate.mate

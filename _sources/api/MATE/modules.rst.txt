@@ -1,0 +1,7 @@
+MATE API Reference
+==================
+
+.. toctree::
+   :maxdepth: 0
+
+   mate

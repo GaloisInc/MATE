@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>dwarfcore.plugins.under_constrained_symex.user_constraints module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="dwarfcore.plugins.dwarf_trace module" href="dwarfcore.plugins.dwarf_trace.html" />
+    <link rel="prev" title="dwarfcore.plugins.under_constrained_symex.uc_platform module" href="dwarfcore.plugins.under_constrained_symex.uc_platform.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">Dwarfcore API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="dwarfcore.html">dwarfcore package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="dwarfcore.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dwarfcore.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">Dwarfcore API Reference</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.html">dwarfcore package</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.plugins.html">dwarfcore.plugins package</a> &raquo;</li>
+        
+          <li><a href="dwarfcore.plugins.under_constrained_symex.html">dwarfcore.plugins.under_constrained_symex package</a> &raquo;</li>
+        
+      <li>dwarfcore.plugins.under_constrained_symex.user_constraints module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/Dwarfcore/dwarfcore.plugins.under_constrained_symex.user_constraints.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-dwarfcore.plugins.under_constrained_symex.user_constraints">
+<span id="dwarfcore-plugins-under-constrained-symex-user-constraints-module"></span><h1>dwarfcore.plugins.under_constrained_symex.user_constraints module<a class="headerlink" href="#module-dwarfcore.plugins.under_constrained_symex.user_constraints" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.GetAllVariables">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">GetAllVariables</span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.GetAllVariables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">lark.visitors.Visitor</span></code></p>
+<p>Visitor that returns the names of all symbolic variables present in a parsed constraint
+tree.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.GetAllVariables.atom">
+<span class="sig-name descname"><span class="pre">atom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.GetAllVariables.atom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.InstanciateClassConstraintForType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">InstanciateClassConstraintForType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><span class="pre">mate_query.cpg.models.node.dwarf.DWARFType</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.InstanciateClassConstraintForType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">lark.visitors.Transformer</span></code></p>
+<p>See lark_instanciate_class_constraint_for_type() for documentation.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.InstanciateClassConstraintForType.typesize">
+<span class="sig-name descname"><span class="pre">typesize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.InstanciateClassConstraintForType.typesize" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">MakeVariablesSmtCompliant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visit_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">lark.visitors.Transformer</span></code></p>
+<p>Transformer that transforms symbolic variable names to make them SMT compliant.</p>
+<p>It replaces characters not supported by smtlib such as “[“, “]”, …</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant.CAPACITY_METAVAR">
+<span class="sig-name descname"><span class="pre">CAPACITY_METAVAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant.CAPACITY_METAVAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant.LEN_METAVAR">
+<span class="sig-name descname"><span class="pre">LEN_METAVAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant.LEN_METAVAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant.SIZE_METAVAR">
+<span class="sig-name descname"><span class="pre">SIZE_METAVAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant.SIZE_METAVAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant.VAR">
+<span class="sig-name descname"><span class="pre">VAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.MakeVariablesSmtCompliant.VAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">Metavar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Types of meta variables for objects.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar.CAPACITY">
+<span class="sig-name descname"><span class="pre">CAPACITY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CAPACITY'</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar.CAPACITY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar.LEN">
+<span class="sig-name descname"><span class="pre">LEN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LEN'</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar.LEN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar.SIZE">
+<span class="sig-name descname"><span class="pre">SIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SIZE'</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.Metavar.SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedClassConstraint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">ParsedClassConstraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><span class="pre">mate_common.models.manticore.UserDefinedConstraint</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.tree.Tree</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">NoneType</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_spec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">used_at_least_once</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedClassConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint" title="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>original_constraint</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><em>mate_common.models.manticore.UserDefinedConstraint</em></a>) – </p></li>
+<li><p><strong>tree</strong> (<em>Optional</em><em>[</em><em>lark.tree.Tree</em><em>]</em>) – </p></li>
+<li><p><strong>class_spec</strong> (<em>str</em>) – </p></li>
+<li><p><strong>used_at_least_once</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedClassConstraint.class_spec">
+<span class="sig-name descname"><span class="pre">class_spec</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedClassConstraint.class_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedClassConstraint.used_at_least_once">
+<span class="sig-name descname"><span class="pre">used_at_least_once</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedClassConstraint.used_at_least_once" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">ParsedConstraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><span class="pre">mate_common.models.manticore.UserDefinedConstraint</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.tree.Tree</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">NoneType</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>original_constraint</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><em>mate_common.models.manticore.UserDefinedConstraint</em></a>) – </p></li>
+<li><p><strong>tree</strong> (<em>Optional</em><em>[</em><em>lark.tree.Tree</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint.original_constraint">
+<span class="sig-name descname"><span class="pre">original_constraint</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><span class="pre">mate_common.models.manticore.UserDefinedConstraint</span></a></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint.original_constraint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint.tree">
+<span class="sig-name descname"><span class="pre">tree</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.tree.Tree</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint.tree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedPointsWithinConstraint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">ParsedPointsWithinConstraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><span class="pre">mate_common.models.manticore.UserDefinedConstraint</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.tree.Tree</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">NoneType</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_within</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedPointsWithinConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint" title="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint"><code class="xref py py-class docutils literal notranslate"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedConstraint</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>original_constraint</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><em>mate_common.models.manticore.UserDefinedConstraint</em></a>) – </p></li>
+<li><p><strong>tree</strong> (<em>Optional</em><em>[</em><em>lark.tree.Tree</em><em>]</em>) – </p></li>
+<li><p><strong>points_within</strong> (<em>Tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedPointsWithinConstraint.points_within">
+<span class="sig-name descname"><span class="pre">points_within</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ParsedPointsWithinConstraint.points_within" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">ReplacePatternInVariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">lark.visitors.Transformer</span></code></p>
+<p>Transformer replaces a string by another in all variable names.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables.CAPACITY_METAVAR">
+<span class="sig-name descname"><span class="pre">CAPACITY_METAVAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables.CAPACITY_METAVAR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables.LEN_METAVAR">
+<span class="sig-name descname"><span class="pre">LEN_METAVAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables.LEN_METAVAR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables.SIZE_METAVAR">
+<span class="sig-name descname"><span class="pre">SIZE_METAVAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables.SIZE_METAVAR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables.VAR">
+<span class="sig-name descname"><span class="pre">VAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.ReplacePatternInVariables.VAR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.SplitGenericClassConstraint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">SplitGenericClassConstraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visit_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.SplitGenericClassConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">lark.visitors.Transformer</span></code></p>
+<p>Transformer that splits a generic class constraint into the class specifier string and the
+actual parsed constraint.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.SplitGenericClassConstraint.CLASS_SPEC">
+<span class="sig-name descname"><span class="pre">CLASS_SPEC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.SplitGenericClassConstraint.CLASS_SPEC" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.SplitGenericClassConstraint.generic_class_constraint">
+<span class="sig-name descname"><span class="pre">generic_class_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.SplitGenericClassConstraint.generic_class_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">TranslateConstraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.constraints.ConstraintSet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">lark.visitors.Transformer</span></code></p>
+<p>Transformer that translates a parsed user constraint tree into an actual Expression object to
+be used by Manticore.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.CAPACITY_METAVAR">
+<span class="sig-name descname"><span class="pre">CAPACITY_METAVAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.CAPACITY_METAVAR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.LEN_METAVAR">
+<span class="sig-name descname"><span class="pre">LEN_METAVAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.LEN_METAVAR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.NUMBER">
+<span class="sig-name descname"><span class="pre">NUMBER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.OPERATOR_MAP">
+<span class="sig-name descname"><span class="pre">OPERATOR_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'op_add':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">add&gt;,</span> <span class="pre">'op_and':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">and_&gt;,</span> <span class="pre">'op_concat':</span> <span class="pre">&lt;function</span> <span class="pre">TranslateConstraint.&lt;lambda&gt;&gt;,</span> <span class="pre">'op_eq':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">eq&gt;,</span> <span class="pre">'op_ge':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">ge&gt;,</span> <span class="pre">'op_gt':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">gt&gt;,</span> <span class="pre">'op_inv':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">inv&gt;,</span> <span class="pre">'op_le':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">le&gt;,</span> <span class="pre">'op_lt':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">lt&gt;,</span> <span class="pre">'op_mod':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">mod&gt;,</span> <span class="pre">'op_mul':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">mul&gt;,</span> <span class="pre">'op_neg':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">neg&gt;,</span> <span class="pre">'op_neq':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">ne&gt;,</span> <span class="pre">'op_or':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">or_&gt;,</span> <span class="pre">'op_sar':</span> <span class="pre">&lt;function</span> <span class="pre">TranslateConstraint.&lt;lambda&gt;&gt;,</span> <span class="pre">'op_sdiv':</span> <span class="pre">&lt;function</span> <span class="pre">TranslateConstraint.&lt;lambda&gt;&gt;,</span> <span class="pre">'op_shl':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">lshift&gt;,</span> <span class="pre">'op_shr':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">rshift&gt;,</span> <span class="pre">'op_sub':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">sub&gt;,</span> <span class="pre">'op_uge':</span> <span class="pre">&lt;function</span> <span class="pre">TranslateConstraint.&lt;lambda&gt;&gt;,</span> <span class="pre">'op_ugt':</span> <span class="pre">&lt;function</span> <span class="pre">TranslateConstraint.&lt;lambda&gt;&gt;,</span> <span class="pre">'op_ule':</span> <span class="pre">&lt;function</span> <span class="pre">TranslateConstraint.&lt;lambda&gt;&gt;,</span> <span class="pre">'op_ult':</span> <span class="pre">&lt;function</span> <span class="pre">TranslateConstraint.&lt;lambda&gt;&gt;,</span> <span class="pre">'op_xor':</span> <span class="pre">&lt;built-in</span> <span class="pre">function</span> <span class="pre">xor&gt;}</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.OPERATOR_MAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.SIZE_METAVAR">
+<span class="sig-name descname"><span class="pre">SIZE_METAVAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.SIZE_METAVAR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.VAR">
+<span class="sig-name descname"><span class="pre">VAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.VAR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.atom">
+<span class="sig-name descname"><span class="pre">atom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.atom" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.binary_operation">
+<span class="sig-name descname"><span class="pre">binary_operation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.binary_operation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.constraint">
+<span class="sig-name descname"><span class="pre">constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.constraint" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.constraint_disjunction">
+<span class="sig-name descname"><span class="pre">constraint_disjunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.constraint_disjunction" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.expr">
+<span class="sig-name descname"><span class="pre">expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.expr" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.extract_operation">
+<span class="sig-name descname"><span class="pre">extract_operation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.extract_operation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.funclike_comparison">
+<span class="sig-name descname"><span class="pre">funclike_comparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.funclike_comparison" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.funclike_operation">
+<span class="sig-name descname"><span class="pre">funclike_operation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.funclike_operation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.points_within_constraint">
+<span class="sig-name descname"><span class="pre">points_within_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.points_within_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.regular_comparison">
+<span class="sig-name descname"><span class="pre">regular_comparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.regular_comparison" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.unary_operation">
+<span class="sig-name descname"><span class="pre">unary_operation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslateConstraint.unary_operation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslatePointsWithinConstraint">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">TranslatePointsWithinConstraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visit_tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslatePointsWithinConstraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">lark.visitors.Transformer</span></code></p>
+<p>Transformer that translates a parsed $POINTS_WITHIN constraint tree into an tuple
+(ptr_pointing_within_ptr2, ptr2)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslatePointsWithinConstraint.VAR">
+<span class="sig-name descname"><span class="pre">VAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.lexer.Token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslatePointsWithinConstraint.VAR" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>lark.lexer.Token</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.TranslatePointsWithinConstraint.points_within_constraint">
+<span class="sig-name descname"><span class="pre">points_within_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">lark.lexer.Token</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.TranslatePointsWithinConstraint.points_within_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tokens</strong> (<em>List</em><em>[</em><em>lark.lexer.Token</em><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">UserConstraintManager</span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class that manages constraints supplied by the user.</p>
+<p>Its intended usage is roughly:
+- Use add() to add user-defined constraints (which are just strings)
+- Use apply_constraints(&lt;var&gt;) to apply any pending parsed constraints that involves variable</p>
+<blockquote>
+<div><p>&lt;var&gt;. The parsed constraint tree is then translated into a Manticore Expression object
+and added to the Manticore state</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Example constraints:</dt><dd><p>a &lt; 10000
+ULE(a, b+1)
+arg1-&gt;x == arg2.y
+arg.array[5] &gt; 6
+$LEN(arg.array) &lt; 100
+a == 1 || b == 5
+Extract(d, 16, 32)</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.CONSTRAINT_GRAMMAR">
+<span class="sig-name descname"><span class="pre">CONSTRAINT_GRAMMAR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">%import</span> <span class="pre">common.WS\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">%ignore</span> <span class="pre">WS\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">constraint:</span> <span class="pre">regular_comparison\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">funclike_comparison\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;(&quot;</span> <span class="pre">constraint</span> <span class="pre">&quot;)&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">constraint_disjunction\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">constraint_disjunction:</span> <span class="pre">constraint</span> <span class="pre">&quot;||&quot;</span> <span class="pre">constraint\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">funclike_cmp_op:</span> <span class="pre">&quot;ULE&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_ule\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;ULT&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_ult\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;UGT&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_ugt\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;UGE&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_uge\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">funclike_comparison:</span> <span class="pre">funclike_cmp_op</span> <span class="pre">&quot;(&quot;</span> <span class="pre">expr</span> <span class="pre">&quot;,&quot;</span> <span class="pre">expr</span> <span class="pre">&quot;)&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">regular_comparison:</span> <span class="pre">expr</span> <span class="pre">cmp_op</span> <span class="pre">expr\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">expr:</span> <span class="pre">atom\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">binary_operation\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">unary_operation\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">funclike_operation\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">extract_operation\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;(&quot;</span> <span class="pre">expr</span> <span class="pre">&quot;)&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">special_operation\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">special_operation:</span> <span class="pre">&quot;$TYPESIZE(&quot;</span> <span class="pre">TEMPLATE_VAR</span> <span class="pre">&quot;)&quot;</span> <span class="pre">-&gt;</span> <span class="pre">typesize\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">funclike_op:</span> <span class="pre">&quot;CONCAT&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_concat\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;SDIV&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_sdiv\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;SAR&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_sar\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">funclike_operation:</span> <span class="pre">funclike_op</span> <span class="pre">&quot;(&quot;</span> <span class="pre">expr</span> <span class="pre">&quot;,&quot;</span> <span class="pre">expr</span> <span class="pre">&quot;)&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">extract_operation:</span> <span class="pre">&quot;EXTRACT&quot;</span> <span class="pre">&quot;(&quot;</span> <span class="pre">expr</span> <span class="pre">&quot;,&quot;</span> <span class="pre">NUMBER</span> <span class="pre">&quot;,&quot;</span> <span class="pre">NUMBER</span> <span class="pre">&quot;)&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">binary_operation:</span> <span class="pre">expr</span> <span class="pre">binop</span> <span class="pre">expr\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">unary_operation:</span> <span class="pre">unop</span> <span class="pre">expr\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">atom:</span> <span class="pre">VAR</span> <span class="pre">|</span> <span class="pre">NUMBER</span> <span class="pre">|</span> <span class="pre">LEN_METAVAR</span> <span class="pre">|</span> <span class="pre">CAPACITY_METAVAR</span> <span class="pre">|</span> <span class="pre">SIZE_METAVAR\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">cmp_op:</span> <span class="pre">&quot;==&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_eq\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;!=&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_neq\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;&lt;&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_lt\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;&lt;=&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_le\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;&gt;&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_gt\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;&gt;=&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_ge\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">binop:</span> <span class="pre">&quot;+&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_add\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;-&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_sub\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;*&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_mul\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;&amp;&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_and\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;|&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_or\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;^&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_xor\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;&gt;&gt;&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_shr\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;&lt;&lt;&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_shl\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;%&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_mod\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">unop:</span> <span class="pre">&quot;-&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_neg\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;~&quot;</span> <span class="pre">-&gt;</span> <span class="pre">op_inv\n\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">%import</span> <span class="pre">common.LETTER\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">%import</span> <span class="pre">common.DIGIT\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">//</span> <span class="pre">We</span> <span class="pre">add</span> <span class="pre">$OBJ.</span> <span class="pre">for</span> <span class="pre">variables</span> <span class="pre">in</span> <span class="pre">generic</span> <span class="pre">class</span> <span class="pre">constraints\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">VAR:</span> <span class="pre">((&quot;$OBJ.&quot;)?</span> <span class="pre">(&quot;_&quot;|LETTER)</span> <span class="pre">(&quot;_&quot;|&quot;.&quot;|&quot;-&gt;&quot;|LETTER|DIGIT|IDX)*)\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">|</span> <span class="pre">&quot;$OBJ&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">LEN_METAVAR:</span> <span class="pre">&quot;$LEN(&quot;</span> <span class="pre">VAR</span> <span class="pre">&quot;)&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">CAPACITY_METAVAR:</span> <span class="pre">&quot;$CAPACITY(&quot;</span> <span class="pre">VAR</span> <span class="pre">&quot;)&quot;\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">SIZE_METAVAR:</span> <span class="pre">&quot;$SIZE(&quot;</span> <span class="pre">VAR</span> <span class="pre">&quot;)&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">TEMPLATE_VAR:</span> <span class="pre">&quot;#&quot;</span> <span class="pre">(DIGIT)+\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">IDX:</span> <span class="pre">&quot;[&quot;</span> <span class="pre">(DIGIT)+</span> <span class="pre">&quot;]&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">%import</span> <span class="pre">common.SIGNED_INT\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">%import</span> <span class="pre">common.HEXDIGIT\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">NUMBER:</span> <span class="pre">SIGNED_INT</span> <span class="pre">|</span> <span class="pre">(&quot;0x&quot;</span> <span class="pre">(HEXDIGIT)+)\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">points_within_constraint:</span> <span class="pre">&quot;$POINTS_WITHIN(&quot;</span> <span class="pre">VAR</span> <span class="pre">&quot;,&quot;</span> <span class="pre">VAR</span> <span class="pre">&quot;)&quot;\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">generic_class_constraint:</span> <span class="pre">CLASS_SPEC</span> <span class="pre">&quot;:&quot;</span> <span class="pre">(constraint|points_within_constraint)\n\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">CLASS_SPEC:</span> <span class="pre">(&quot;_&quot;|LETTER)</span> <span class="pre">(CLASS_SPEC_CHAR)*\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">CLASS_SPEC_CHAR:</span> <span class="pre">&quot;::&quot;|&quot;,&quot;|&quot;_&quot;|&quot;&lt;&quot;|&quot;&gt;&quot;|&quot;#&quot;|LETTER|DIGIT|WS\n</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">'</span></em><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.CONSTRAINT_GRAMMAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><span class="pre">mate_common.models.manticore.UserDefinedConstraint</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add and parse a user-defined constraint.</p>
+<ul class="simple">
+<li><p>The user is parsed according to the constraint grammar and stored as a
+‘parsed constraint tree’ which is an intermediate representation on which
+we can easily run visitors</p></li>
+<li><p>The symbolic variable names in the constraint that aren’t smtlibv2-compliant
+are transformed (unique predefined strings replace non-compliant characters)</p></li>
+<li><p>The parsed constraint is added to an internal list of pending constraints
+that will later be applied to a Manticore state</p></li>
+</ul>
+<p>If a constraint is invalid and can not be parsed, this method raises an
+‘InputError’ exception</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.add.params.constraint"></span><strong>constraint</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.add.params.constraint">¶</a> – The user constraint to add and parse</p></li>
+<li><p><strong>constraint</strong> (<a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.UserDefinedConstraint" title="mate_common.models.manticore.UserDefinedConstraint"><em>mate_common.models.manticore.UserDefinedConstraint</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_class_constraints">
+<span class="sig-name descname"><span class="pre">apply_class_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><span class="pre">mate_query.cpg.models.node.dwarf.DWARFType</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_class_constraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply generic class constraints to an object, if applicable. This generates new
+constraints specific to that object, to be apply later by a call to apply_constraints()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_class_constraints.params.obj_name"></span><strong>obj_name</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_class_constraints.params.obj_name">¶</a> – The object name. It must include the field accessor operator or</p></li>
+<li><p><strong>obj_name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>obj_type</strong> (<a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><em>mate_query.cpg.models.node.dwarf.DWARFType</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p>the dereference operator (‘a.’) or (‘a-&gt;’)
+:param _sphinx_paramlinks_dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_class_constraints.obj_type: The DWARFType of the object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_constraints">
+<span class="sig-name descname"><span class="pre">apply_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.constraints.ConstraintSet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_constraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply pending user defined constraints related to a given expression to a constraint set.</p>
+<ul class="simple">
+<li><p>A parsed constraint is applied only if all the variables it contains are already
+defined in the ‘constraints’ constraint set (not only ‘var’)</p></li>
+<li><p>A parsed constraint being applied is translated into a Manticore Expression
+and then added to the constraint set</p></li>
+<li><p>Parsed constraints that are applied are removed from the list of pending
+parsed constraints</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_constraints.params.constraints"></span><strong>constraints</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_constraints.params.constraints">¶</a> – The constraint set to which to add user defined constraints</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_constraints.params.var"></span><strong>var</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.apply_constraints.params.var">¶</a> – The name of the variable to which user constraints must be related in order to</p></li>
+<li><p><strong>constraints</strong> (<em>manticore.core.smtlib.constraints.ConstraintSet</em>) – </p></li>
+<li><p><strong>var</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p>be added to the constraint set
+:return None:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.get_points_within_destination">
+<span class="sig-name descname"><span class="pre">get_points_within_destination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.get_points_within_destination" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>var_name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.get_unused_constraints">
+<span class="sig-name descname"><span class="pre">get_unused_constraints</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.get_unused_constraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of user constraints that were not used during execution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.is_generic_class_constraint">
+<span class="sig-name descname"><span class="pre">is_generic_class_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.is_generic_class_constraint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.is_points_within_constraint">
+<span class="sig-name descname"><span class="pre">is_points_within_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.is_points_within_constraint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.points_within_other_variable">
+<span class="sig-name descname"><span class="pre">points_within_other_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.points_within_other_variable" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>var_name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.variable_is_used">
+<span class="sig-name descname"><span class="pre">variable_is_used</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.UserConstraintManager.variable_is_used" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if ‘variable_name’ is used in at least one instanciated user constraint.</p>
+<p>This ignores generic class constraints that haven’t been instanciated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>variable_name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_get_all_variables">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">lark_get_all_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.tree.Tree</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_get_all_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all the names of symbolic variables present in a parsed constraint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parsed_constraint</strong> (<em>lark.tree.Tree</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Set[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_instanciate_class_constraint_for_type">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">lark_instanciate_class_constraint_for_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.tree.Tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><span class="pre">mate_query.cpg.models.node.dwarf.DWARFType</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">lark.tree.Tree</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_instanciate_class_constraint_for_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instanciate a generic class constraint for a given type. This method will replace special
+variables and special operators that are specific to generic class constraints, such as getting
+the size of template type arguments, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_instanciate_class_constraint_for_type.params.parsed_constraint"></span><strong>parsed_constraint</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_instanciate_class_constraint_for_type.params.parsed_constraint">¶</a> – the intermediate parsed constraint to instanciate for the given type</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_instanciate_class_constraint_for_type.params.obj_type"></span><strong>obj_type</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_instanciate_class_constraint_for_type.params.obj_type">¶</a> – type for which to instanciate the class constraint. In most cases,</p></li>
+<li><p><strong>parsed_constraint</strong> (<em>lark.tree.Tree</em>) – </p></li>
+<li><p><strong>obj_type</strong> (<a class="reference internal" href="../MATEQuery/mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><em>mate_query.cpg.models.node.dwarf.DWARFType</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>lark.tree.Tree</p>
+</dd>
+</dl>
+<p>‘obj_type’ will simply be the type specified by the generic constraint class specifier.
+But when dealing with templated types the same generic constraint can be instanciated
+for different combinations of template type arguments</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_make_variables_smt_compliant">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">lark_make_variables_smt_compliant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.tree.Tree</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">lark.tree.Tree</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_make_variables_smt_compliant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make all VAR tokens SMT compliant in a parsed constraint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parsed_constraint</strong> (<em>lark.tree.Tree</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>lark.tree.Tree</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_replace_pattern_in_variables">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">lark_replace_pattern_in_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.tree.Tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">lark.tree.Tree</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_replace_pattern_in_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace a given string in all variables in a parsed constraint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_replace_pattern_in_variables.params.old"></span><strong>old</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_replace_pattern_in_variables.params.old">¶</a> – string to replace</p></li>
+<li><p><span class="target" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_replace_pattern_in_variables.params.new"></span><strong>new</strong><a class="paramlink headerlink reference internal" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_replace_pattern_in_variables.params.new">¶</a> – string to substitute to ‘old’</p></li>
+<li><p><strong>parsed_constraint</strong> (<em>lark.tree.Tree</em>) – </p></li>
+<li><p><strong>old</strong> (<em>str</em>) – </p></li>
+<li><p><strong>new</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>lark.tree.Tree</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_split_generic_class_constraint">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">lark_split_generic_class_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.tree.Tree</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">lark.tree.Tree</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_split_generic_class_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split a generic class constraint into the class specifier string and the actual parsed
+constraint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parsed_constraint</strong> (<em>lark.tree.Tree</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[str, lark.tree.Tree]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_translate_constraint">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">lark_translate_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.tree.Tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constraints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">manticore.core.smtlib.constraints.ConstraintSet</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_translate_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a parsed user constraint tree into an actual Expression object to be used by
+Manticore.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parsed_constraint</strong> (<em>lark.tree.Tree</em>) – </p></li>
+<li><p><strong>constraints</strong> (<em>manticore.core.smtlib.constraints.ConstraintSet</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>manticore.core.smtlib.expression.Expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dwarfcore.plugins.under_constrained_symex.user_constraints.lark_translate_points_within_constraint">
+<span class="sig-prename descclassname"><span class="pre">dwarfcore.plugins.under_constrained_symex.user_constraints.</span></span><span class="sig-name descname"><span class="pre">lark_translate_points_within_constraint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parsed_constraint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">lark.tree.Tree</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">manticore.core.smtlib.expression.Expression</span></span></span><a class="headerlink" href="#dwarfcore.plugins.under_constrained_symex.user_constraints.lark_translate_points_within_constraint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a parsed $POINTS_WITHIN constraint into an tuple (ptr_pointing_within_ptr2,
+ptr2)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parsed_constraint</strong> (<em>lark.tree.Tree</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>manticore.core.smtlib.expression.Expression</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dwarfcore.plugins.dwarf_trace.html" class="btn btn-neutral float-right" title="dwarfcore.plugins.dwarf_trace module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dwarfcore.plugins.under_constrained_symex.uc_platform.html" class="btn btn-neutral float-left" title="dwarfcore.plugins.under_constrained_symex.uc_platform module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

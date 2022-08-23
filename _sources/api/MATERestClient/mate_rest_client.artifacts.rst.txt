@@ -1,0 +1,7 @@
+mate\_rest\_client.artifacts module
+===================================
+
+.. automodule:: mate_rest_client.artifacts
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+mate.build.tob\_chess\_utils.tools.aspirin module
+=================================================
+
+.. automodule:: mate.build.tob_chess_utils.tools.aspirin
+   :members:
+   :undoc-members:
+   :show-inheritance:

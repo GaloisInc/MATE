@@ -1,0 +1,7 @@
+mate.poi.analysis.UseAfterFree module
+=====================================
+
+.. automodule:: mate.poi.analysis.UseAfterFree
+   :members:
+   :undoc-members:
+   :show-inheritance:

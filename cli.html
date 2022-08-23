@@ -1,0 +1,1397 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Command-Line Tools Reference &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Dwarfcore" href="dwarfcore.html" />
+    <link rel="prev" title="mate-cli Command Line Tool Overview" href="mate-cli-overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command-Line Tools Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mate-cli">mate-cli</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-analysis">mate-cli analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-analysis-get">mate-cli analysis get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-analysis-run">mate-cli analysis run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-analysis-task">mate-cli analysis task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-artifact">mate-cli artifact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-artifact-create">mate-cli artifact create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-artifact-dump">mate-cli artifact dump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-artifact-get">mate-cli artifact get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-build">mate-cli build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-build-create">mate-cli build create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-build-get">mate-cli build get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-build-get-bc">mate-cli build get-bc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-compile">mate-cli compile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-compile-create">mate-cli compile create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-compile-get">mate-cli compile get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-graph">mate-cli graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-graph-function">mate-cli graph function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-graph-get">mate-cli graph get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-graph-node">mate-cli graph node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-graph-slice">mate-cli graph slice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-manticore">mate-cli manticore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-manticore-get">mate-cli manticore get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-manticore-stop">mate-cli manticore stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-oneshot">mate-cli oneshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-poi">mate-cli poi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-poi-get">mate-cli poi get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mate-cli-poi-set">mate-cli poi set</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#python3-m-mate-build-tob-chess-utils-tools-margin">python3 -m mate.build.tob_chess_utils.tools.margin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python3-m-mate-build-tob-chess-utils-tools-aspirin">python3 -m mate.build.tob_chess_utils.tools.aspirin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python3-m-mate-build-tob-chess-utils-tools-migraine">python3 -m mate.build.tob_chess_utils.tools.migraine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Command-Line Tools Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/cli.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-line-tools-reference">
+<h1>Command-Line Tools Reference<a class="headerlink" href="#command-line-tools-reference" title="Permalink to this headline">¶</a></h1>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>See <a class="reference internal" href="mate-cli-overview.html"><span class="doc">mate-cli Command Line Tool Overview</span></a> for an overview of these tools.</p>
+</div>
+<div class="section" id="mate-cli">
+<h2>mate-cli<a class="headerlink" href="#mate-cli" title="Permalink to this headline">¶</a></h2>
+<p>A CLI tool to interact with the MATE REST API</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli [-h] [--conn CONN]</span>
+<span class="go">                {artifact,build,compile,analysis,poi,graph,manticore,oneshot}</span>
+<span class="go">                ...</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-h">
+<span id="cmdoption-mate-cli-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-conn">
+<span class="sig-name descname"><span class="pre">--conn</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;conn&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-conn" title="Permalink to this definition">¶</a></dt>
+<dd><p>the connection string of the REST API</p>
+</dd></dl>
+
+<div class="section" id="mate-cli-analysis">
+<h3>mate-cli analysis<a class="headerlink" href="#mate-cli-analysis" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli analysis [-h] {get,task,run} ...</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-analysis-h">
+<span id="cmdoption-mate-cli-analysis-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-analysis-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-analysis-get">
+<h3>mate-cli analysis get<a class="headerlink" href="#mate-cli-analysis-get" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli analysis get [-h]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-analysis-get-h">
+<span id="cmdoption-mate-cli-analysis-get-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-analysis-get-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-analysis-run">
+<h3>mate-cli analysis run<a class="headerlink" href="#mate-cli-analysis-run" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli analysis run [-h] build_id [analysis_id]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-analysis-run-arg-build_id">
+<span id="cmdoption-mate-cli-analysis-run-arg-build-id"></span><span class="sig-name descname"><span class="pre">build_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-analysis-run-arg-build_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the build for which to run an analysis task</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-analysis-run-arg-analysis_id">
+<span id="cmdoption-mate-cli-analysis-run-arg-analysis-id"></span><span class="sig-name descname"><span class="pre">analysis_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-analysis-run-arg-analysis_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the analysis to run (defaults to running all analyses)</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-analysis-run-h">
+<span id="cmdoption-mate-cli-analysis-run-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-analysis-run-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-analysis-task">
+<h3>mate-cli analysis task<a class="headerlink" href="#mate-cli-analysis-task" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli analysis task [-h] [id]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-analysis-task-arg-id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-analysis-task-arg-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the build for which to query analysis tasks</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-analysis-task-h">
+<span id="cmdoption-mate-cli-analysis-task-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-analysis-task-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-artifact">
+<h3>mate-cli artifact<a class="headerlink" href="#mate-cli-artifact" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli artifact [-h] {create,dump,get} ...</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-h">
+<span id="cmdoption-mate-cli-artifact-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-artifact-create">
+<h3>mate-cli artifact create<a class="headerlink" href="#mate-cli-artifact-create" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli artifact create [-h]</span>
+<span class="go">                                {compile-target:single,compile-target:tarball,compile-target:bitcode,compile-target:brokered-challenge,blight:journal,compile-output:binary,compile-output:bitcode,compile-output:shared-library,compile-output:shared-library:bitcode,compile-output:static-library,compile-output:static-library:bitcode,compile-output:compile-log,build-output:merged-bitcode,build-output:canonical-bitcode,build-output:signatures,build-output:mate-jsonl,build-output:quotidian-headache-log,build-output:quotidian-wedlock-log,build-output:quotidian-canonical-binary,build-output:quotidian-jsonl,build-output:cpg-jsonl,build-output:debug-pointer-analysis,build-output:task-log,mantiserve-task:log}</span>
+<span class="go">                                path</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-create-arg-kind">
+<span class="sig-name descname"><span class="pre">kind</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-create-arg-kind" title="Permalink to this definition">¶</a></dt>
+<dd><p>the kind of artifact</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-create-arg-path">
+<span class="sig-name descname"><span class="pre">path</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-create-arg-path" title="Permalink to this definition">¶</a></dt>
+<dd><p>the path to the artifact file to be uploaded</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-create-h">
+<span id="cmdoption-mate-cli-artifact-create-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-create-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-artifact-dump">
+<h3>mate-cli artifact dump<a class="headerlink" href="#mate-cli-artifact-dump" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli artifact dump [-h] [-o OUTPUT] id</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-dump-arg-id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-dump-arg-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the artifact</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-dump-h">
+<span id="cmdoption-mate-cli-artifact-dump-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-dump-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-dump-o">
+<span id="cmdoption-mate-cli-artifact-dump-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-dump-o" title="Permalink to this definition">¶</a></dt>
+<dd><p>the file to dump to</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-artifact-get">
+<h3>mate-cli artifact get<a class="headerlink" href="#mate-cli-artifact-get" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli artifact get [-h]</span>
+<span class="go">                             [--kind {compile-target:single,compile-target:tarball,compile-target:bitcode,compile-target:brokered-challenge,blight:journal,compile-output:binary,compile-output:bitcode,compile-output:shared-library,compile-output:shared-library:bitcode,compile-output:static-library,compile-output:static-library:bitcode,compile-output:compile-log,build-output:merged-bitcode,build-output:canonical-bitcode,build-output:signatures,build-output:mate-jsonl,build-output:quotidian-headache-log,build-output:quotidian-wedlock-log,build-output:quotidian-canonical-binary,build-output:quotidian-jsonl,build-output:cpg-jsonl,build-output:debug-pointer-analysis,build-output:task-log,mantiserve-task:log}]</span>
+<span class="go">                             [artifact-id [artifact-id ...]]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-get-arg-artifact-id">
+<span class="sig-name descname"><span class="pre">artifact-id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-get-arg-artifact-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the artifact</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-get-h">
+<span id="cmdoption-mate-cli-artifact-get-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-get-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-artifact-get-kind">
+<span class="sig-name descname"><span class="pre">--kind</span></span><span class="sig-prename descclassname"> <span class="pre">{compile-target:single,compile-target:tarball,compile-target:bitcode,compile-target:brokered-challenge,blight:journal,compile-output:binary,compile-output:bitcode,compile-output:shared-library,compile-output:shared-library:bitcode,compile-output:static-library,compile-output:static-library:bitcode,compile-output:compile-log,build-output:merged-bitcode,build-output:canonical-bitcode,build-output:signatures,build-output:mate-jsonl,build-output:quotidian-headache-log,build-output:quotidian-wedlock-log,build-output:quotidian-canonical-binary,build-output:quotidian-jsonl,build-output:cpg-jsonl,build-output:debug-pointer-analysis,build-output:task-log,mantiserve-task:log}</span></span><a class="headerlink" href="#cmdoption-mate-cli-artifact-get-kind" title="Permalink to this definition">¶</a></dt>
+<dd><p>the kind of artifact to filter for</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-build">
+<h3>mate-cli build<a class="headerlink" href="#mate-cli-build" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli build [-h] {create,get,get-bc} ...</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-h">
+<span id="cmdoption-mate-cli-build-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-build-create">
+<h3>mate-cli build create<a class="headerlink" href="#mate-cli-build-create" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli build create [-h] [-p] [-w] [--target TARGET]</span>
+<span class="go">                             [--do-pointer-analysis]</span>
+<span class="go">                             [--no-do-pointer-analysis]</span>
+<span class="go">                             [--machine-code-mapping]</span>
+<span class="go">                             [--no-machine-code-mapping]</span>
+<span class="go">                             [--control-dependence] [--no-control-dependence]</span>
+<span class="go">                             [--llvm-memory-dependence]</span>
+<span class="go">                             [--no-llvm-memory-dependence]</span>
+<span class="go">                             [--llvm-pretty-strings]</span>
+<span class="go">                             [--no-llvm-pretty-strings]</span>
+<span class="go">                             [--translation-unit-nodes]</span>
+<span class="go">                             [--no-translation-unit-nodes] [--argument-edges]</span>
+<span class="go">                             [--no-argument-edges]</span>
+<span class="go">                             [--line-program-source-info]</span>
+<span class="go">                             [--no-line-program-source-info]</span>
+<span class="go">                             [--pointer-analysis {debug,subset-and-unification,subset,unification}]</span>
+<span class="go">                             [--context-sensitivity {insensitive,1-callsite,2-callsite,3-callsite,4-callsite,5-callsite,6-callsite,7-callsite,8-callsite,9-callsite,1-caller,2-caller,3-caller,4-caller,5-caller,6-caller,7-caller,8-caller,9-caller,1-file,2-file,3-file,4-file,5-file,6-file,7-file,8-file,9-file}]</span>
+<span class="go">                             [--memory-limit-mb BUILDOPTIONS_MEMORY_LIMIT_MB]</span>
+<span class="go">                             [--extra-linker-flags BUILDOPTIONS_EXTRA_LINKER_FLAGS]</span>
+<span class="go">                             [--time-llvm-passes] [--no-time-llvm-passes]</span>
+<span class="go">                             [--schema-validation] [--no-schema-validation]</span>
+<span class="go">                             [--merge-library-bitcode]</span>
+<span class="go">                             [--no-merge-library-bitcode]</span>
+<span class="go">                             [--merge-bitcode-only-needed]</span>
+<span class="go">                             [--no-merge-bitcode-only-needed]</span>
+<span class="go">                             [--merge-bitcode-internalize]</span>
+<span class="go">                             [--no-merge-bitcode-internalize]</span>
+<span class="go">                             [--debug-pointer-analysis]</span>
+<span class="go">                             [--no-debug-pointer-analysis]</span>
+<span class="go">                             [--debug-mate-jsonl] [--no-debug-mate-jsonl]</span>
+<span class="go">                             [--debug-quotidian-jsonl]</span>
+<span class="go">                             [--no-debug-quotidian-jsonl] [--debug-cpg-jsonl]</span>
+<span class="go">                             [--no-debug-cpg-jsonl]</span>
+<span class="go">                             id</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-arg-id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-arg-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the compilation to build</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-h">
+<span id="cmdoption-mate-cli-build-create-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-p">
+<span id="cmdoption-mate-cli-build-create-run-all-pois"></span><span class="sig-name descname"><span class="pre">-p</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--run-all-pois</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-p" title="Permalink to this definition">¶</a></dt>
+<dd><p>run all POI analysis on each build</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-w">
+<span id="cmdoption-mate-cli-build-create-wait"></span><span class="sig-name descname"><span class="pre">-w</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--wait</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-w" title="Permalink to this definition">¶</a></dt>
+<dd><p>wait until all builds finish</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-target">
+<span class="sig-name descname"><span class="pre">--target</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;target&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-target" title="Permalink to this definition">¶</a></dt>
+<dd><p>the binary to target</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-do-pointer-analysis">
+<span class="sig-name descname"><span class="pre">--do-pointer-analysis</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-do-pointer-analysis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-do-pointer-analysis">
+<span class="sig-name descname"><span class="pre">--no-do-pointer-analysis</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-do-pointer-analysis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-machine-code-mapping">
+<span class="sig-name descname"><span class="pre">--machine-code-mapping</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-machine-code-mapping" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-machine-code-mapping">
+<span class="sig-name descname"><span class="pre">--no-machine-code-mapping</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-machine-code-mapping" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-control-dependence">
+<span class="sig-name descname"><span class="pre">--control-dependence</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-control-dependence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-control-dependence">
+<span class="sig-name descname"><span class="pre">--no-control-dependence</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-control-dependence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-llvm-memory-dependence">
+<span class="sig-name descname"><span class="pre">--llvm-memory-dependence</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-llvm-memory-dependence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-llvm-memory-dependence">
+<span class="sig-name descname"><span class="pre">--no-llvm-memory-dependence</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-llvm-memory-dependence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-llvm-pretty-strings">
+<span class="sig-name descname"><span class="pre">--llvm-pretty-strings</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-llvm-pretty-strings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-llvm-pretty-strings">
+<span class="sig-name descname"><span class="pre">--no-llvm-pretty-strings</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-llvm-pretty-strings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-translation-unit-nodes">
+<span class="sig-name descname"><span class="pre">--translation-unit-nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-translation-unit-nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-translation-unit-nodes">
+<span class="sig-name descname"><span class="pre">--no-translation-unit-nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-translation-unit-nodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-argument-edges">
+<span class="sig-name descname"><span class="pre">--argument-edges</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-argument-edges" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-argument-edges">
+<span class="sig-name descname"><span class="pre">--no-argument-edges</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-argument-edges" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-line-program-source-info">
+<span class="sig-name descname"><span class="pre">--line-program-source-info</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-line-program-source-info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-line-program-source-info">
+<span class="sig-name descname"><span class="pre">--no-line-program-source-info</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-line-program-source-info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-pointer-analysis">
+<span class="sig-name descname"><span class="pre">--pointer-analysis</span></span><span class="sig-prename descclassname"> <span class="pre">{debug,subset-and-unification,subset,unification}</span></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-pointer-analysis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-context-sensitivity">
+<span class="sig-name descname"><span class="pre">--context-sensitivity</span></span><span class="sig-prename descclassname"> <span class="pre">{insensitive,1-callsite,2-callsite,3-callsite,4-callsite,5-callsite,6-callsite,7-callsite,8-callsite,9-callsite,1-caller,2-caller,3-caller,4-caller,5-caller,6-caller,7-caller,8-caller,9-caller,1-file,2-file,3-file,4-file,5-file,6-file,7-file,8-file,9-file}</span></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-context-sensitivity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-memory-limit-mb">
+<span class="sig-name descname"><span class="pre">--memory-limit-mb</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;buildoptions_memory_limit_mb&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-memory-limit-mb" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-extra-linker-flags">
+<span class="sig-name descname"><span class="pre">--extra-linker-flags</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;buildoptions_extra_linker_flags&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-extra-linker-flags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-time-llvm-passes">
+<span class="sig-name descname"><span class="pre">--time-llvm-passes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-time-llvm-passes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-time-llvm-passes">
+<span class="sig-name descname"><span class="pre">--no-time-llvm-passes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-time-llvm-passes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-schema-validation">
+<span class="sig-name descname"><span class="pre">--schema-validation</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-schema-validation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-schema-validation">
+<span class="sig-name descname"><span class="pre">--no-schema-validation</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-schema-validation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-merge-library-bitcode">
+<span class="sig-name descname"><span class="pre">--merge-library-bitcode</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-merge-library-bitcode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-merge-library-bitcode">
+<span class="sig-name descname"><span class="pre">--no-merge-library-bitcode</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-merge-library-bitcode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-merge-bitcode-only-needed">
+<span class="sig-name descname"><span class="pre">--merge-bitcode-only-needed</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-merge-bitcode-only-needed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-merge-bitcode-only-needed">
+<span class="sig-name descname"><span class="pre">--no-merge-bitcode-only-needed</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-merge-bitcode-only-needed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-merge-bitcode-internalize">
+<span class="sig-name descname"><span class="pre">--merge-bitcode-internalize</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-merge-bitcode-internalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-merge-bitcode-internalize">
+<span class="sig-name descname"><span class="pre">--no-merge-bitcode-internalize</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-merge-bitcode-internalize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-debug-pointer-analysis">
+<span class="sig-name descname"><span class="pre">--debug-pointer-analysis</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-debug-pointer-analysis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-debug-pointer-analysis">
+<span class="sig-name descname"><span class="pre">--no-debug-pointer-analysis</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-debug-pointer-analysis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-debug-mate-jsonl">
+<span class="sig-name descname"><span class="pre">--debug-mate-jsonl</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-debug-mate-jsonl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-debug-mate-jsonl">
+<span class="sig-name descname"><span class="pre">--no-debug-mate-jsonl</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-debug-mate-jsonl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-debug-quotidian-jsonl">
+<span class="sig-name descname"><span class="pre">--debug-quotidian-jsonl</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-debug-quotidian-jsonl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-debug-quotidian-jsonl">
+<span class="sig-name descname"><span class="pre">--no-debug-quotidian-jsonl</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-debug-quotidian-jsonl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-debug-cpg-jsonl">
+<span class="sig-name descname"><span class="pre">--debug-cpg-jsonl</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-debug-cpg-jsonl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-create-no-debug-cpg-jsonl">
+<span class="sig-name descname"><span class="pre">--no-debug-cpg-jsonl</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-create-no-debug-cpg-jsonl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="mate-cli-build-get">
+<h3>mate-cli build get<a class="headerlink" href="#mate-cli-build-get" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli build get [-h]</span>
+<span class="go">                          [--state {created,building,inserting,built,failed}]</span>
+<span class="go">                          [id]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-get-arg-id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-get-arg-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the build</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-get-h">
+<span id="cmdoption-mate-cli-build-get-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-get-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-get-state">
+<span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">{created,building,inserting,built,failed}</span></span><a class="headerlink" href="#cmdoption-mate-cli-build-get-state" title="Permalink to this definition">¶</a></dt>
+<dd><p>the state of build we want to filter for</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-build-get-bc">
+<h3>mate-cli build get-bc<a class="headerlink" href="#mate-cli-build-get-bc" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli build get-bc [-h] id</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-get-bc-arg-id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-get-bc-arg-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the build</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-build-get-bc-h">
+<span id="cmdoption-mate-cli-build-get-bc-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-build-get-bc-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-compile">
+<h3>mate-cli compile<a class="headerlink" href="#mate-cli-compile" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli compile [-h] {create,get} ...</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-h">
+<span id="cmdoption-mate-cli-compile-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-compile-create">
+<h3>mate-cli compile create<a class="headerlink" href="#mate-cli-compile-create" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli compile create [-h] [-w]</span>
+<span class="go">                               [--artifact-id ARTIFACT_ID | --challenge-name CHALLENGE_NAME | --challenge-id CHALLENGE_ID | --target-id TARGET_ID]</span>
+<span class="go">                               [--testbed] [--no-testbed] [--containerized]</span>
+<span class="go">                               [--no-containerized]</span>
+<span class="go">                               [--experimental-embed-bitcode]</span>
+<span class="go">                               [--no-experimental-embed-bitcode]</span>
+<span class="go">                               [--docker-image COMPILEOPTIONS_DOCKER_IMAGE]</span>
+<span class="go">                               [--containerized-infer-build]</span>
+<span class="go">                               [--no-containerized-infer-build]</span>
+<span class="go">                               [--make-targets COMPILEOPTIONS_MAKE_TARGETS]</span>
+<span class="go">                               [--extra-compiler-flags COMPILEOPTIONS_EXTRA_COMPILER_FLAGS]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-h">
+<span id="cmdoption-mate-cli-compile-create-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-w">
+<span id="cmdoption-mate-cli-compile-create-wait"></span><span class="sig-name descname"><span class="pre">-w</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--wait</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-w" title="Permalink to this definition">¶</a></dt>
+<dd><p>wait until the compilation finishes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-artifact-id">
+<span class="sig-name descname"><span class="pre">--artifact-id</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;artifact_id&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-artifact-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the artifact to compile</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-challenge-name">
+<span class="sig-name descname"><span class="pre">--challenge-name</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;challenge_name&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-challenge-name" title="Permalink to this definition">¶</a></dt>
+<dd><p>the name of the challenge to compile</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-challenge-id">
+<span class="sig-name descname"><span class="pre">--challenge-id</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;challenge_id&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-challenge-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the challenge to compile</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-target-id">
+<span class="sig-name descname"><span class="pre">--target-id</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;target_id&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-target-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID of the challenge target to compile</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-testbed">
+<span class="sig-name descname"><span class="pre">--testbed</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-testbed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-no-testbed">
+<span class="sig-name descname"><span class="pre">--no-testbed</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-no-testbed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-containerized">
+<span class="sig-name descname"><span class="pre">--containerized</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-containerized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-no-containerized">
+<span class="sig-name descname"><span class="pre">--no-containerized</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-no-containerized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-experimental-embed-bitcode">
+<span class="sig-name descname"><span class="pre">--experimental-embed-bitcode</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-experimental-embed-bitcode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-no-experimental-embed-bitcode">
+<span class="sig-name descname"><span class="pre">--no-experimental-embed-bitcode</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-no-experimental-embed-bitcode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-docker-image">
+<span class="sig-name descname"><span class="pre">--docker-image</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;compileoptions_docker_image&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-docker-image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-containerized-infer-build">
+<span class="sig-name descname"><span class="pre">--containerized-infer-build</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-containerized-infer-build" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-no-containerized-infer-build">
+<span class="sig-name descname"><span class="pre">--no-containerized-infer-build</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-no-containerized-infer-build" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-make-targets">
+<span class="sig-name descname"><span class="pre">--make-targets</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;compileoptions_make_targets&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-make-targets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-create-extra-compiler-flags">
+<span class="sig-name descname"><span class="pre">--extra-compiler-flags</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;compileoptions_extra_compiler_flags&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-compile-create-extra-compiler-flags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="mate-cli-compile-get">
+<h3>mate-cli compile get<a class="headerlink" href="#mate-cli-compile-get" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli compile get [-h]</span>
+<span class="go">                            [--state {created,compiling,compiled,failed,rejected}]</span>
+<span class="go">                            [id]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-get-arg-id">
+<span class="sig-name descname"><span class="pre">id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-get-arg-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the compilation</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-get-h">
+<span id="cmdoption-mate-cli-compile-get-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-compile-get-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-compile-get-state">
+<span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">{created,compiling,compiled,failed,rejected}</span></span><a class="headerlink" href="#cmdoption-mate-cli-compile-get-state" title="Permalink to this definition">¶</a></dt>
+<dd><p>the state of compilation we want to filter for</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-graph">
+<h3>mate-cli graph<a class="headerlink" href="#mate-cli-graph" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli graph [-h] {get,node,slice,function} ...</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-h">
+<span id="cmdoption-mate-cli-graph-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-graph-function">
+<h3>mate-cli graph function<a class="headerlink" href="#mate-cli-graph-function" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli graph function [-h] build_id</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-function-arg-build_id">
+<span id="cmdoption-mate-cli-graph-function-arg-build-id"></span><span class="sig-name descname"><span class="pre">build_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-function-arg-build_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the build for which to get function nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-function-h">
+<span id="cmdoption-mate-cli-graph-function-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-function-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-graph-get">
+<h3>mate-cli graph get<a class="headerlink" href="#mate-cli-graph-get" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli graph get [-h]</span>
+<span class="go">                          build_id</span>
+<span class="go">                          {forward_dataflow,reverse_dataflow,forward_control_flow,reverse_control_flow,forward_control_dependence,reverse_control_dependence,callsites,callers,callees,operands,uses,forward_points_to,reverse_points_to,forward_points_to_reachable,reverse_points_to_reachable,forward_allocation,reverse_allocation,forward_memory_subregion,reverse_memory_subregion,aliased_memory_locations,signatures}</span>
+<span class="go">                          origin_node_ids [origin_node_ids ...]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-get-arg-build_id">
+<span id="cmdoption-mate-cli-graph-get-arg-build-id"></span><span class="sig-name descname"><span class="pre">build_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-get-arg-build_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the build to get graphs</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-get-arg-kind">
+<span class="sig-name descname"><span class="pre">kind</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-get-arg-kind" title="Permalink to this definition">¶</a></dt>
+<dd><p>the type of graph to retrieve</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-get-arg-origin_node_ids">
+<span id="cmdoption-mate-cli-graph-get-arg-origin-node-ids"></span><span class="sig-name descname"><span class="pre">origin_node_ids</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-get-arg-origin_node_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>the origin nodes for which to start looking for graphs</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-get-h">
+<span id="cmdoption-mate-cli-graph-get-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-get-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-graph-node">
+<h3>mate-cli graph node<a class="headerlink" href="#mate-cli-graph-node" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli graph node [-h] build_id node_id</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-node-arg-build_id">
+<span id="cmdoption-mate-cli-graph-node-arg-build-id"></span><span class="sig-name descname"><span class="pre">build_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-node-arg-build_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the build for which to get nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-node-arg-node_id">
+<span id="cmdoption-mate-cli-graph-node-arg-node-id"></span><span class="sig-name descname"><span class="pre">node_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-node-arg-node_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the node to retrieve</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-node-h">
+<span id="cmdoption-mate-cli-graph-node-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-node-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-graph-slice">
+<h3>mate-cli graph slice<a class="headerlink" href="#mate-cli-graph-slice" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli graph slice [-h] [--avoid-node-id AVOID_NODE_IDS]</span>
+<span class="go">                            [--focus-node-ids FOCUS_NODE_IDS]</span>
+<span class="go">                            build_id source_id sink_id</span>
+<span class="go">                            {forward_dataflow,reverse_dataflow,forward_control_flow,reverse_control_flow,forward_control_dependence,reverse_control_dependence,callsites,callers,callees,operands,uses,forward_points_to,reverse_points_to,forward_points_to_reachable,reverse_points_to_reachable,forward_allocation,reverse_allocation,forward_memory_subregion,reverse_memory_subregion,aliased_memory_locations,signatures}</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-slice-arg-build_id">
+<span id="cmdoption-mate-cli-graph-slice-arg-build-id"></span><span class="sig-name descname"><span class="pre">build_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-slice-arg-build_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the build from which to retrieve the slice</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-slice-arg-source_id">
+<span id="cmdoption-mate-cli-graph-slice-arg-source-id"></span><span class="sig-name descname"><span class="pre">source_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-slice-arg-source_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the node at which to start the slice</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-slice-arg-sink_id">
+<span id="cmdoption-mate-cli-graph-slice-arg-sink-id"></span><span class="sig-name descname"><span class="pre">sink_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-slice-arg-sink_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the node at which to end the slice</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-slice-arg-kind">
+<span class="sig-name descname"><span class="pre">kind</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-slice-arg-kind" title="Permalink to this definition">¶</a></dt>
+<dd><p>the type of slice to retrieve</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-slice-h">
+<span id="cmdoption-mate-cli-graph-slice-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-graph-slice-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-slice-avoid-node-id">
+<span class="sig-name descname"><span class="pre">--avoid-node-id</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;avoid_node_ids&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-graph-slice-avoid-node-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the slice will exclude paths through these nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-graph-slice-focus-node-ids">
+<span class="sig-name descname"><span class="pre">--focus-node-ids</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;focus_node_ids&gt;</span></span><a class="headerlink" href="#cmdoption-mate-cli-graph-slice-focus-node-ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>the slice will include only paths through these nodes</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-manticore">
+<h3>mate-cli manticore<a class="headerlink" href="#mate-cli-manticore" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli manticore [-h] {get,stop} ...</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-manticore-h">
+<span id="cmdoption-mate-cli-manticore-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-manticore-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-manticore-get">
+<h3>mate-cli manticore get<a class="headerlink" href="#mate-cli-manticore-get" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli manticore get [-h]</span>
+<span class="go">                              [--state {created,running,completed,failed}]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-manticore-get-h">
+<span id="cmdoption-mate-cli-manticore-get-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-manticore-get-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-manticore-get-state">
+<span class="sig-name descname"><span class="pre">--state</span></span><span class="sig-prename descclassname"> <span class="pre">{created,running,completed,failed}</span></span><a class="headerlink" href="#cmdoption-mate-cli-manticore-get-state" title="Permalink to this definition">¶</a></dt>
+<dd><p>the state of Manticore task we want to filter for</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-manticore-stop">
+<h3>mate-cli manticore stop<a class="headerlink" href="#mate-cli-manticore-stop" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli manticore stop [-h] task-id [task-id ...]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-manticore-stop-arg-task-id">
+<span class="sig-name descname"><span class="pre">task-id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-manticore-stop-arg-task-id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the Manticore task to stop</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-manticore-stop-h">
+<span id="cmdoption-mate-cli-manticore-stop-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-manticore-stop-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-oneshot">
+<h3>mate-cli oneshot<a class="headerlink" href="#mate-cli-oneshot" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli oneshot [-h] [-p] [-d] source_handle</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-oneshot-arg-source_handle">
+<span id="cmdoption-mate-cli-oneshot-arg-source-handle"></span><span class="sig-name descname"><span class="pre">source_handle</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-oneshot-arg-source_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>describes a source, can be either a source file, tarball, directory, artifact ID or broker challenge name</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-oneshot-h">
+<span id="cmdoption-mate-cli-oneshot-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-oneshot-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-oneshot-p">
+<span id="cmdoption-mate-cli-oneshot-run-all-pois"></span><span class="sig-name descname"><span class="pre">-p</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--run-all-pois</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-oneshot-p" title="Permalink to this definition">¶</a></dt>
+<dd><p>run all POI analysis on each build</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-oneshot-d">
+<span id="cmdoption-mate-cli-oneshot-debug"></span><span class="sig-name descname"><span class="pre">-d</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--debug</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-oneshot-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>enable all debugging outputs during the CPG build</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-poi">
+<h3>mate-cli poi<a class="headerlink" href="#mate-cli-poi" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli poi [-h] {get,set} ...</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-poi-h">
+<span id="cmdoption-mate-cli-poi-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-poi-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-poi-get">
+<h3>mate-cli poi get<a class="headerlink" href="#mate-cli-poi-get" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli poi get [-h] [build_id]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-poi-get-arg-build_id">
+<span id="cmdoption-mate-cli-poi-get-arg-build-id"></span><span class="sig-name descname"><span class="pre">build_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-poi-get-arg-build_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the build for which to find POIs for (defaults to returning all POIs)</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-poi-get-h">
+<span id="cmdoption-mate-cli-poi-get-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-poi-get-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="mate-cli-poi-set">
+<h3>mate-cli poi set<a class="headerlink" href="#mate-cli-poi-set" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: mate-cli poi set [-h] [--done] [--not-done] [--flagged] [--not-flagged]</span>
+<span class="go">                        [poi_id]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-poi-set-arg-poi_id">
+<span id="cmdoption-mate-cli-poi-set-arg-poi-id"></span><span class="sig-name descname"><span class="pre">poi_id</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-poi-set-arg-poi_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>the ID of the POI of which to modify</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-poi-set-h">
+<span id="cmdoption-mate-cli-poi-set-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-poi-set-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-poi-set-done">
+<span class="sig-name descname"><span class="pre">--done</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-poi-set-done" title="Permalink to this definition">¶</a></dt>
+<dd><p>mark the POI as done</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-poi-set-not-done">
+<span class="sig-name descname"><span class="pre">--not-done</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-poi-set-not-done" title="Permalink to this definition">¶</a></dt>
+<dd><p>mark the POI as not done</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-poi-set-flagged">
+<span class="sig-name descname"><span class="pre">--flagged</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-poi-set-flagged" title="Permalink to this definition">¶</a></dt>
+<dd><p>mark the POI as flagged</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mate-cli-poi-set-not-flagged">
+<span class="sig-name descname"><span class="pre">--not-flagged</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-mate-cli-poi-set-not-flagged" title="Permalink to this definition">¶</a></dt>
+<dd><p>mark the POI as not flagged</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mate.build.tob_chess_utils.tools</span></code> CLIs are legacy interfaces that should not be
+used directly. They are in the process of being removed. MATE does not use
+these CLIs and does not test their functionality.</p>
+</div>
+<div class="section" id="python3-m-mate-build-tob-chess-utils-tools-margin">
+<h2>python3 -m mate.build.tob_chess_utils.tools.margin<a class="headerlink" href="#python3-m-mate-build-tob-chess-utils-tools-margin" title="Permalink to this headline">¶</a></h2>
+<p>Flatten ToB JSONL into MATE-compatible JSONL</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: python3 -m mate.build.tob_chess_utils.tools.margin [-h] -w WEDLOCK -a</span>
+<span class="go">                                                          ASPIRIN -t</span>
+<span class="go">                                                          HEADACHE_TI -c</span>
+<span class="go">                                                          HEADACHE_CU -o</span>
+<span class="go">                                                          OUTPUT [-S] [-Xs]</span>
+<span class="go">                                                          [-Xc] [-Xt] [-Xg]</span>
+<span class="go">                                                          [-Xw] [-Xp] [-Xv]</span>
+<span class="go">                                                          [-Xi] [-xe]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-h">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-h"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-help"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-w">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-w"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-wedlock"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-wedlock"></span><span class="sig-name descname"><span class="pre">-w</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;wedlock&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--wedlock</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;wedlock&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wedlock input</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-a">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-a"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-aspirin"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-aspirin"></span><span class="sig-name descname"><span class="pre">-a</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;aspirin&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--aspirin</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;aspirin&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aspirin input</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-t">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-t"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-headache_ti"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-headache-ti"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;headache_ti&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--headache_ti</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;headache_ti&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Headache TI input</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-c">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-c"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-headache_cu"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-headache-cu"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;headache_cu&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--headache_cu</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;headache_cu&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Headache CU input</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-o">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-o"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-output"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-o" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output JSONL</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-S">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-s"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-sanity_checks"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-sanity-checks"></span><span class="sig-name descname"><span class="pre">-S</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--sanity_checks</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-S" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform input sanity checks</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xs">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-xs"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-omit_plt_stub_nodes"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-omit-plt-stub-nodes"></span><span class="sig-name descname"><span class="pre">-Xs</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--omit_plt_stub_nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t emit PLT function stub nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xc">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-xc"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-omit_translation_unit_nodes"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-omit-translation-unit-nodes"></span><span class="sig-name descname"><span class="pre">-Xc</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--omit_translation_unit_nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t emit translation unit nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xt">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-xt"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-omit_type_nodes"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-omit-type-nodes"></span><span class="sig-name descname"><span class="pre">-Xt</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--omit_type_nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t emit type nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xg">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-xg"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-omit_global_nodes"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-omit-global-nodes"></span><span class="sig-name descname"><span class="pre">-Xg</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--omit_global_nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t emit global variable nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xw">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-xw"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-omit_wedlock_function_nodes"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-omit-wedlock-function-nodes"></span><span class="sig-name descname"><span class="pre">-Xw</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--omit_wedlock_function_nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t emit Wedlock function nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xp">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-xp"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-omit_param_nodes"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-omit-param-nodes"></span><span class="sig-name descname"><span class="pre">-Xp</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--omit_param_nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t emit function parameter nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xv">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-xv"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-omit_var_nodes"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-omit-var-nodes"></span><span class="sig-name descname"><span class="pre">-Xv</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--omit_var_nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t emit function local variable nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xi">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-xi"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-omit_asm_inst_nodes"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-omit-asm-inst-nodes"></span><span class="sig-name descname"><span class="pre">-Xi</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--omit_asm_inst_nodes</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-Xi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t emit ASM instruction nodes</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-xe">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-xe"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-emit_arg_edges"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-margin-emit-arg-edges"></span><span class="sig-name descname"><span class="pre">-xe</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--emit_arg_edges</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.margin-xe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do emit Argument &lt;-&gt; DWARFArgument edges</p>
+</dd></dl>
+
+</div>
+<div class="section" id="python3-m-mate-build-tob-chess-utils-tools-aspirin">
+<h2>python3 -m mate.build.tob_chess_utils.tools.aspirin<a class="headerlink" href="#python3-m-mate-build-tob-chess-utils-tools-aspirin" title="Permalink to this headline">¶</a></h2>
+<p>Extract variable information and basic block addresses from a migraine-instrumented binary and the output of the headache pass</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: python3 -m mate.build.tob_chess_utils.tools.aspirin [-h] -b BINARY -H</span>
+<span class="go">                                                           HEADACHE_VI</span>
+<span class="go">                                                           [-o OUTPUT] [-Xl]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-h">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-aspirin-h"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-help"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-aspirin-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-b">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-aspirin-b"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-binary"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-aspirin-binary"></span><span class="sig-name descname"><span class="pre">-b</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;binary&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--binary</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;binary&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-b" title="Permalink to this definition">¶</a></dt>
+<dd><p>ELF input</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-H">
+<span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-headache_vi"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-aspirin-headache-vi"></span><span class="sig-name descname"><span class="pre">-H</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;headache_vi&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--headache_vi</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;headache_vi&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-H" title="Permalink to this definition">¶</a></dt>
+<dd><p>Headache VI input</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-o">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-aspirin-o"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-output"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-aspirin-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-o" title="Permalink to this definition">¶</a></dt>
+<dd><p>JSONL output</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-Xl">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-aspirin-xl"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-omit_line_program"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-aspirin-omit-line-program"></span><span class="sig-name descname"><span class="pre">-Xl</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--omit_line_program</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.aspirin-Xl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t emit source line pairings that come from the line program</p>
+</dd></dl>
+
+</div>
+<div class="section" id="python3-m-mate-build-tob-chess-utils-tools-migraine">
+<h2>python3 -m mate.build.tob_chess_utils.tools.migraine<a class="headerlink" href="#python3-m-mate-build-tob-chess-utils-tools-migraine" title="Permalink to this headline">¶</a></h2>
+<p>Generate an assembly patch for storing program feature addresses in a section</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">usage: python3 -m mate.build.tob_chess_utils.tools.migraine</span>
+<span class="go">       [-h] -w WEDLOCK [-o OUTPUT]</span>
+</pre></div>
+</div>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.migraine-h">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-migraine-h"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.migraine-help"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-migraine-help"></span><span class="sig-name descname"><span class="pre">-h</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.migraine-h" title="Permalink to this definition">¶</a></dt>
+<dd><p>show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.migraine-w">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-migraine-w"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.migraine-wedlock"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-migraine-wedlock"></span><span class="sig-name descname"><span class="pre">-w</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;wedlock&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--wedlock</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;wedlock&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.migraine-w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wedlock input</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.migraine-o">
+<span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-migraine-o"></span><span id="cmdoption-python3-m-mate.build.tob_chess_utils.tools.migraine-output"></span><span id="cmdoption-python3-m-mate-build-tob-chess-utils-tools-migraine-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-python3-m-mate.build.tob_chess_utils.tools.migraine-o" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output file</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dwarfcore.html" class="btn btn-neutral float-right" title="Dwarfcore" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate-cli-overview.html" class="btn btn-neutral float-left" title="mate-cli Command Line Tool Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

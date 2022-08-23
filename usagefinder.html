@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>UsageFinder &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mantiserve" href="mantiserve.html" />
+    <link rel="prev" title="MATE Python Notebooks" href="using-notebooks.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">UsageFinder</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-usagefinder">Accessing UsageFinder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#identifying-functions-of-interest">Identifying Functions of Interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analysis-and-visualization">Analysis and Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-features-table">API Features Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collapsed-graphs">Collapsed Graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conditionals">Conditionals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#detailed-reports">Detailed Reports</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>UsageFinder</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/usagefinder.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="usagefinder">
+<h1>UsageFinder<a class="headerlink" href="#usagefinder" title="Permalink to this headline">¶</a></h1>
+<p>UsageFinder is a tool for finding vulnerabilities that result from incorrect usage of internal or external APIs.
+It is designed to assist with understanding the relationship between different features and functionalities in a program.</p>
+<p>A user of UsageFinder selects functions of interest (an “API” – regardless of whether the original developer intended it as such or not), and UsageFinder answers questions like:</p>
+<ul class="simple">
+<li><p>How and where are calls to this API used? How are they used together?</p></li>
+<li><p>How do API calls relate to each other? By:</p>
+<ul>
+<li><p>Control Flow?</p></li>
+<li><p>Operating on the same Values?</p></li>
+<li><p>Operating on related Data (Dataflow)?</p></li>
+</ul>
+</li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">f()</span></code> is called, what <em>relevant</em> conditionals control whether or not <code class="docutils literal notranslate"><span class="pre">g()</span></code> is called next?</p></li>
+</ul>
+<p>While UsageFinder is included with MATE, it is built entirely as a self-contained Jupyter Notebook App.
+It serves as an example of a custom app that can be developed on the MATE platform without requiring any modifications to MATE.
+Because the entire implementation is in the notebook, it can be easily inspected and modified.
+The UsageFinder UI leverages the built-in <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/">Jupyter widgets</a>.</p>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="_images/usagefinder-widgets.png"><img alt="_images/usagefinder-widgets.png" src="_images/usagefinder-widgets.png" style="width: 563.5px; height: 403.2px;" /></a>
+<p class="caption"><span class="caption-text">UsageFinder is used entirely using UI widgets</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="accessing-usagefinder">
+<h2>Accessing UsageFinder<a class="headerlink" href="#accessing-usagefinder" title="Permalink to this headline">¶</a></h2>
+<p>UsageFinder is included with MATE, and is available from the <code class="docutils literal notranslate"><span class="pre">For</span> <span class="pre">Expert-&gt;Notebooks</span></code> link on the MATE dashboard: <a class="reference external" href="http://YOUR_CHESS_SYSTEM:8050/">http://YOUR_CHESS_SYSTEM:8050/</a></p>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="_images/mate-dashboard-notebooks.png"><img alt="_images/mate-dashboard-notebooks.png" src="_images/mate-dashboard-notebooks.png" style="width: 431.2px; height: 114.8px;" /></a>
+<p class="caption"><span class="caption-text">Access MATE Notebooks from the Dashboard</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Then in the Jupyter interface (also available via <a class="reference external" href="http://YOUR_CHESS_SYSTEM:8889/">http://YOUR_CHESS_SYSTEM:8889/</a>), open <code class="docutils literal notranslate"><span class="pre">examples/usage-finder.ipynb</span></code>:</p>
+<div class="figure align-default" id="id3">
+<a class="reference internal image-reference" href="_images/jupyter-list-usagefinder.png"><img alt="_images/jupyter-list-usagefinder.png" src="_images/jupyter-list-usagefinder.png" style="width: 172.2px; height: 180.6px;" /></a>
+<p class="caption"><span class="caption-text">Open the UsageFinder notebook</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>In the UsageFinder notebook, activate the contents of the notebook by choosing “Run All” and confirm “Restart kernel and Run All Cells”:</p>
+<div class="figure align-default" id="id4">
+<a class="reference internal image-reference" href="_images/usagefinder-run-all.png"><img alt="_images/usagefinder-run-all.png" src="_images/usagefinder-run-all.png" style="width: 432.59999999999997px; height: 162.39999999999998px;" /></a>
+<p class="caption"><span class="caption-text">Activate UsageFinder by clicking Restart kernel and Run All Cells</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>Now UsageFinder is ready for use.</p>
+</div>
+<div class="section" id="identifying-functions-of-interest">
+<h2>Identifying Functions of Interest<a class="headerlink" href="#identifying-functions-of-interest" title="Permalink to this headline">¶</a></h2>
+<p>The are two sections to the UsageFinder notebook.
+The first section is the implementation of the app itself.
+Users of UsageFinder should skip to the second section by clicking the “CLICK HERE” links at either the top or bottom of the notebook to jump to the “UsageFinder Users: START HERE” section marking the beginning of the UI widgets for actually using the tool.</p>
+<div class="figure align-default" id="id5">
+<a class="reference internal image-reference" href="_images/usagefinder-start-here.png"><img alt="_images/usagefinder-start-here.png" src="_images/usagefinder-start-here.png" style="width: 560.0px; height: 139.29999999999998px;" /></a>
+<p class="caption"><span class="caption-text">The UsageFinder banner marks the start of the UsageFinder user interface</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>The general workflow for interacting with the UsageFinder UI is:</p>
+<ol class="arabic simple">
+<li><p>scroll down to the next blue button and click it</p></li>
+<li><p>interact with the UI widget(s) in the cell as desired</p></li>
+<li><p>continue to the next blue button and repeat</p></li>
+</ol>
+<p>For example, the first step is to select the desired target program CPG:</p>
+<div class="figure align-default" id="id6">
+<a class="reference internal image-reference" href="_images/usagefinder-select-cpg.png"><img alt="_images/usagefinder-select-cpg.png" src="_images/usagefinder-select-cpg.png" style="width: 422.79999999999995px; height: 113.39999999999999px;" /></a>
+<p class="caption"><span class="caption-text">Click the “Refresh list of CPGs button” then select the CPG of interest (listed by target name, analysis options, and build ID)</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>Next, click the “Show Functions for selected CPG” button and UsageFinder will show a list of all functions used by the target program along with information about the number of distinct program locations that invoke that function, and the (LLVM) function signature.
+Functions are separated into “internal” (implemented within the target program) and “external” lists.
+These are <strong>multi-select</strong> widgets, so click and drag, or Control/Command-click to make multiple selections.</p>
+<div class="figure align-default" id="id7">
+<a class="reference internal image-reference" href="_images/usagefinder-function-selection.png"><img alt="_images/usagefinder-function-selection.png" src="_images/usagefinder-function-selection.png" style="width: 577.5px; height: 419.29999999999995px;" /></a>
+<p class="caption"><span class="caption-text">Click “Show Functions for selected CPG” then use Command/Control-click to multi-select internal and/or external functions of interest</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>The next blue button is “Show Available API Features.”
+Click this and UsageFinder will show a multi-select box with a line for each argument and return value for each of the selected functions.
+By default UsageFinder generates API Feature tables that use all of these features so there is no need to make any selections here, but if some are known to be not of interest then you can select them here and UsageFinder will generate additional tables that leave those features out of its analysis.</p>
+<p>Click the next blue button labeled “Show places where API is used,” which will produce a multi-select box with the names of functions with more than one callsite invoking an API function.
+This box is sorted by function name, and includes the calling context for the analysis of the function behavior.
+Select one or more functions of interest.</p>
+<div class="figure align-default" id="id8">
+<a class="reference internal image-reference" href="_images/usagefinder-select-location.png"><img alt="_images/usagefinder-select-location.png" src="_images/usagefinder-select-location.png" style="width: 702.0999999999999px; height: 147.7px;" /></a>
+<p class="caption"><span class="caption-text">Select one or more of the functions that make multiple API calls</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="analysis-and-visualization">
+<h2>Analysis and Visualization<a class="headerlink" href="#analysis-and-visualization" title="Permalink to this headline">¶</a></h2>
+<p>After selecting API calls of interest and portions of the target program that use the selected API, the next step is to generate visualizations of the UsageFinder analysis:</p>
+<div class="figure align-default" id="id9">
+<a class="reference internal image-reference" href="_images/usagefinder-start-visualization.png"><img alt="_images/usagefinder-start-visualization.png" src="_images/usagefinder-start-visualization.png" style="width: 133.0px; height: 95.19999999999999px;" /></a>
+<p class="caption"><span class="caption-text">Check/Uncheck Entry/Return nodes, then click “Visualize API Usage”</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<p>UsageFinder will iterate through all of the Locations selected above (functions that make calls to API functions) and produce the following types of visualizations:</p>
+<div class="section" id="api-features-table">
+<h3>API Features Table<a class="headerlink" href="#api-features-table" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id10">
+<a class="reference internal image-reference" href="_images/usagefinder-all-features-table.png"><img alt="_images/usagefinder-all-features-table.png" src="_images/usagefinder-all-features-table.png" style="width: 595.1px; height: 696.3000000000001px;" /></a>
+<p class="caption"><span class="caption-text">Example API Features Table for use of SSL functions in <code class="docutils literal notranslate"><span class="pre">get_ssl</span></code> function</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<p>The goal of this table is to show a dense summarized view of the sequencing of API calls in the function, and how these functions are related by operating on the same values and data.</p>
+<p>In the table above, a cell corresponding to row <code class="docutils literal notranslate"><span class="pre">f()</span></code> and column <code class="docutils literal notranslate"><span class="pre">g()</span></code> is filled with green/blue/gray if after API function callsite <code class="docutils literal notranslate"><span class="pre">f()</span></code> is executed, the next API call may be the callsite of <code class="docutils literal notranslate"><span class="pre">g()</span></code> (without any other calls to API functions).
+The meaning of the colors are as follows:</p>
+<ul class="simple">
+<li><p>green: both calls <code class="docutils literal notranslate"><span class="pre">f()</span></code> and <code class="docutils literal notranslate"><span class="pre">g()</span></code> operate on some same LLVM Value (e.g. either an argument or return value from <code class="docutils literal notranslate"><span class="pre">f()</span></code> is the same value as an argument to <code class="docutils literal notranslate"><span class="pre">g()</span></code>)</p></li>
+<li><p>blue: <code class="docutils literal notranslate"><span class="pre">f()</span></code> and <code class="docutils literal notranslate"><span class="pre">g()</span></code> do not operate on these Value, but do have shared dataflow via their argument(s) and/or return values</p></li>
+<li><p>(dark) gray: <code class="docutils literal notranslate"><span class="pre">f()</span></code> and <code class="docutils literal notranslate"><span class="pre">g()</span></code> do not have either a Value or Dataflow relationship</p></li>
+</ul>
+<p>The Value relation has priority over Dataflow (if both are present, the table will show the Value relation) as that is a “stronger” relation in some sense.
+Similarly the Dataflow relation has priority over the Control Flow relation in the colors used in this table.</p>
+<p>The cell text of <code class="docutils literal notranslate"><span class="pre">v</span></code>, <code class="docutils literal notranslate"><span class="pre">d</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> correspond to value, dataflow, and control-flow relations.
+Functions related by value or dataflow but not by direct control flow sequencing have <code class="docutils literal notranslate"><span class="pre">v</span></code> or <code class="docutils literal notranslate"><span class="pre">d</span></code> as appropriate as the text of the cell, but no cell background color.</p>
+</div>
+<div class="section" id="collapsed-graphs">
+<h3>Collapsed Graphs<a class="headerlink" href="#collapsed-graphs" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id11">
+<a class="reference internal image-reference" href="_images/usagefinder-collapsed.png"><img alt="_images/usagefinder-collapsed.png" src="_images/usagefinder-collapsed.png" style="width: 459.55px; height: 475.15000000000003px;" /></a>
+<p class="caption"><span class="caption-text">Example: collapsed graph summary of API Features table above</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<p>This visualization summarizes the relation between functions in the API Features Table.
+In this view, multiple call sites to the same API function (if any) are “collapsed” into a single node in this visualization.</p>
+<p>UsageFinder also produces an additional summary graph showing only dataflow relation between these nodes.</p>
+</div>
+<div class="section" id="conditionals">
+<h3>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id12">
+<a class="reference internal image-reference" href="_images/usagefinder-relevant-conditionals.png"><img alt="_images/usagefinder-relevant-conditionals.png" src="_images/usagefinder-relevant-conditionals.png" style="width: 603.35px; height: 739.2px;" /></a>
+<p class="caption"><span class="caption-text">Example: relevant conditionals between callsites of SSL functions</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>In this visualization, blue nodes represent calls to API functions.
+Edges represent one API call being able to follow another (without any other API call in between) in the control flow of the containing function.
+Edges between API nodes are labeled with the relevant source lines (and line numbers) of conditionals that control whether or not the node pointed to is executed or not.
+These results leverage MATE’s control-dependence analysis in addition to its control-flow analysis.</p>
+<p>The “Include Entry node” and “Include Return nodes” checkboxes control whether these items are shown in the graph.
+Edges from the entry node are given a yellow/tan color, and edges to Return nodes are purple.
+Node labels include CPG node IDs, for further investigation in a MATE notebook or Flowfinder, if desired.</p>
+</div>
+</div>
+<div class="section" id="detailed-reports">
+<h2>Detailed Reports<a class="headerlink" href="#detailed-reports" title="Permalink to this headline">¶</a></h2>
+<p>UsageFinder also provides more detailed views between (control-flow sequenced) API callsite pairs.
+Select pairs of interest by clicking the “Refresh list…” button an interact with the multi-select box:</p>
+<div class="figure align-default" id="id13">
+<a class="reference internal image-reference" href="_images/usagefinder-select-pairs.png"><img alt="_images/usagefinder-select-pairs.png" src="_images/usagefinder-select-pairs.png" style="width: 547.4px; height: 123.89999999999999px;" /></a>
+<p class="caption"><span class="caption-text">Example: list of pairs of callsites available for deeper analysis</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+<p>Then click the “Visualize callsite-pair relationships” button and UsageFinder will produce a table like the following for each selected callsite pair:</p>
+<div class="figure align-default" id="id14">
+<a class="reference internal image-reference" href="_images/usagefinder-zoom-table.png"><img alt="_images/usagefinder-zoom-table.png" src="_images/usagefinder-zoom-table.png" style="width: 703.5px; height: 319.2px;" /></a>
+<p class="caption"><span class="caption-text">Example: showing the value returned from <code class="docutils literal notranslate"><span class="pre">SSL_new</span></code> is used as the first argument to <code class="docutils literal notranslate"><span class="pre">SSL_set_fd</span></code></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+<p>This table is like the “API Feature” table but shows how arguments and return values relate between the two callsites.
+It also shows the relation between dereferenced values, as appropriate.
+The source line of code and the LLVM instruction associated with both callsites are printed above each table.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mantiserve.html" class="btn btn-neutral float-right" title="Mantiserve" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="using-notebooks.html" class="btn btn-neutral float-left" title="MATE Python Notebooks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

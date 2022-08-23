@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate.server.api.common module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate.server.api.compilations module" href="mate.server.api.compilations.html" />
+    <link rel="prev" title="mate.server.api.builds module" href="mate.server.api.builds.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATE API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate.html">mate package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATE API Reference</a> &raquo;</li>
+        
+          <li><a href="mate.html">mate package</a> &raquo;</li>
+        
+          <li><a href="mate.server.html">mate.server package</a> &raquo;</li>
+        
+          <li><a href="mate.server.api.html">mate.server.api package</a> &raquo;</li>
+        
+      <li>mate.server.api.common module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATE/mate.server.api.common.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate.server.api.common">
+<span id="mate-server-api-common-module"></span><h1>mate.server.api.common module<a class="headerlink" href="#module-mate.server.api.common" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.has_artifact">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">has_artifact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">populated</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.artifacts.html#mate_common.models.artifacts.ArtifactKind" title="mate_common.models.artifacts.ArtifactKind"><span class="pre">mate_common.models.artifacts.ArtifactKind</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Artifact" title="mate_query.db.Artifact"><span class="pre">mate_query.db.Artifact</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.server.api.common.has_artifact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to provide REST endpoint handlers with direct access to a particular
+artifact.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">populated</span></code> parameter can be used to return an artifact only if it’s populated (<code class="docutils literal notranslate"><span class="pre">True</span></code>)
+or unpopulated (<code class="docutils literal notranslate"><span class="pre">False</span></code>). By default, the artifact is returned without checking.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">kind</span></code> parameter can be used to return an artifact only if it’s of the specified
+<code class="docutils literal notranslate"><span class="pre">ArtifactKind</span></code>. By default, the artifact is returned without checking.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>populated</strong> (<em>Optional</em><em>[</em><em>bool</em><em>]</em>) – </p></li>
+<li><p><strong>kind</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.artifacts.html#mate_common.models.artifacts.ArtifactKind" title="mate_common.models.artifacts.ArtifactKind"><em>mate_common.models.artifacts.ArtifactKind</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Callable[[…], <a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Artifact" title="mate_query.db.Artifact">mate_query.db.Artifact</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.has_build">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">has_build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.builds.html#mate_common.models.builds.BuildState" title="mate_common.models.builds.BuildState"><span class="pre">mate_common.models.builds.BuildState</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Build" title="mate_query.db.Build"><span class="pre">mate_query.db.Build</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.server.api.common.has_build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to provide REST endpoint handlers with direct access to a particular build.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">state</span></code> parameter can be used to return a build if and only if it’s in the specified
+state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.builds.html#mate_common.models.builds.BuildState" title="mate_common.models.builds.BuildState"><em>mate_common.models.builds.BuildState</em></a><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Callable[[…], <a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Build" title="mate_query.db.Build">mate_query.db.Build</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.has_compilation">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">has_compilation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.compilations.html#mate_common.models.compilations.CompilationState" title="mate_common.models.compilations.CompilationState"><span class="pre">mate_common.models.compilations.CompilationState</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Compilation" title="mate_query.db.Compilation"><span class="pre">mate_query.db.Compilation</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.server.api.common.has_compilation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to provide REST endpoint handlers with direct access to a particular
+compilation.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">state</span></code> parameter can be used to return a build if and only if it’s in the specified
+state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.compilations.html#mate_common.models.compilations.CompilationState" title="mate_common.models.compilations.CompilationState"><em>mate_common.models.compilations.CompilationState</em></a><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Callable[[…], <a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Compilation" title="mate_query.db.Compilation">mate_query.db.Compilation</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.has_cpg">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">has_cpg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(has_db)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Build" title="mate_query.db.Build"><span class="pre">mate_query.db.Build</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(_has_build)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph"><span class="pre">mate_query.db.Graph</span></a></span></span><a class="headerlink" href="#mate.server.api.common.has_cpg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to provide REST endpoint handlers with direct access to a particular CPG,
+identified by its build ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session</strong> (<em>sqlalchemy.orm.session.Session</em>) – </p></li>
+<li><p><strong>build</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Build" title="mate_query.db.Build"><em>mate_query.db.Build</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Graph" title="mate_query.db.Graph">mate_query.db.Graph</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.has_db">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">has_db</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">sqlalchemy.orm.session.Session</span></span></span><a class="headerlink" href="#mate.server.api.common.has_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to provide REST endpoint handlers with a database session.</p>
+<p>This function should only be used in the type annotation of a session object in an endpoint
+handler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>sqlalchemy.orm.session.Session</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.has_flowfinder_snapshot">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">has_flowfinder_snapshot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snapshot_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(has_db)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.FlowFinderSnapshot" title="mate_query.db.FlowFinderSnapshot"><span class="pre">mate_query.db.FlowFinderSnapshot</span></a></span></span><a class="headerlink" href="#mate.server.api.common.has_flowfinder_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to provide REST endpoint handlers with direct access to a particular
+snapshot, identified by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snapshot_id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>session</strong> (<em>sqlalchemy.orm.session.Session</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.FlowFinderSnapshot" title="mate_query.db.FlowFinderSnapshot">mate_query.db.FlowFinderSnapshot</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.has_mantiserve_task">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">has_mantiserve_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.MantiserveTaskState" title="mate_common.models.manticore.MantiserveTaskState"><span class="pre">mate_common.models.manticore.MantiserveTaskState</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.MantiserveTask" title="mate_query.db.MantiserveTask"><span class="pre">mate_query.db.MantiserveTask</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.server.api.common.has_mantiserve_task" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to provide REST endpoint handlers with direct access to a particular
+Mantiserve task, identified by its ID.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">state</span></code> parameter can be used to return a Mantiserve task if and only if it’s in the
+specified state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="../MATECommon/mate_common.models.manticore.html#mate_common.models.manticore.MantiserveTaskState" title="mate_common.models.manticore.MantiserveTaskState"><em>mate_common.models.manticore.MantiserveTaskState</em></a><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Callable[[…], <a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.MantiserveTask" title="mate_query.db.MantiserveTask">mate_query.db.MantiserveTask</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.has_poi_analysis">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">has_poi_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">analysis_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#mate.server.api.common.has_poi_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to provide REST endpoint handlers with direct access to a particular
+registered POI analysis, identified by its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>analysis_name</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.has_poi_result">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">has_poi_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poi_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">sqlalchemy.orm.session.Session</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Depends(has_db)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.POIResult" title="mate_query.db.POIResult"><span class="pre">mate_query.db.POIResult</span></a></span></span><a class="headerlink" href="#mate.server.api.common.has_poi_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to provide REST endpoint handlers with direct access to a particular POI
+result, identified by its POI result ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>poi_id</strong> (<em>str</em>) – </p></li>
+<li><p><strong>session</strong> (<em>sqlalchemy.orm.session.Session</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.POIResult" title="mate_query.db.POIResult">mate_query.db.POIResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.server.api.common.save_file_to_server">
+<span class="sig-prename descclassname"><span class="pre">mate.server.api.common.</span></span><span class="sig-name descname"><span class="pre">save_file_to_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">fastapi.datastructures.UploadFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate.server.api.common.save_file_to_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Persists temporary UploadFiles to <code class="docutils literal notranslate"><span class="pre">server_path</span></code>.</p>
+<p>Note: if this operation fails fastapi will automatically log the traceback
+and return a 500 internal server error, so we don’t need a try/catch block here.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>fastapi.datastructures.UploadFile</em>) – </p></li>
+<li><p><strong>server_path</strong> (<em>pathlib.Path</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate.server.api.compilations.html" class="btn btn-neutral float-right" title="mate.server.api.compilations module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate.server.api.builds.html" class="btn btn-neutral float-left" title="mate.server.api.builds module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

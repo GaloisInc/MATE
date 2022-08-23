@@ -1,0 +1,7 @@
+mate\_common.config module
+==========================
+
+.. automodule:: mate_common.config
+   :members:
+   :undoc-members:
+   :show-inheritance:

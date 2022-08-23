@@ -1,0 +1,7 @@
+mate.tasks.compile module
+=========================
+
+.. automodule:: mate.tasks.compile
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,20 @@
+mate\_common.models.cpg\_types package
+======================================
+
+.. automodule:: mate_common.models.cpg_types
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_common.models.cpg_types.bin
+   mate_common.models.cpg_types.dwarf
+   mate_common.models.cpg_types.intrinsics
+   mate_common.models.cpg_types.llvm
+   mate_common.models.cpg_types.mate
+   mate_common.models.cpg_types.mc

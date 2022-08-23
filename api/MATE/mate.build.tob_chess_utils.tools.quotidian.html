@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate.build.tob_chess_utils.tools.quotidian module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate.build.tob_chess_utils.dwarf module" href="mate.build.tob_chess_utils.dwarf.html" />
+    <link rel="prev" title="mate.build.tob_chess_utils.tools.migraine module" href="mate.build.tob_chess_utils.tools.migraine.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATEQuery/modules.html">MATEQuery API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATE API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate.html">mate package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATE API Reference</a> &raquo;</li>
+        
+          <li><a href="mate.html">mate package</a> &raquo;</li>
+        
+          <li><a href="mate.build.html">mate.build package</a> &raquo;</li>
+        
+          <li><a href="mate.build.tob_chess_utils.html">mate.build.tob_chess_utils package</a> &raquo;</li>
+        
+          <li><a href="mate.build.tob_chess_utils.tools.html">mate.build.tob_chess_utils.tools package</a> &raquo;</li>
+        
+      <li>mate.build.tob_chess_utils.tools.quotidian module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATE/mate.build.tob_chess_utils.tools.quotidian.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate.build.tob_chess_utils.tools.quotidian">
+<span id="mate-build-tob-chess-utils-tools-quotidian-module"></span><h1>mate.build.tob_chess_utils.tools.quotidian module<a class="headerlink" href="#module-mate.build.tob_chess_utils.tools.quotidian" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.QuotidianContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">QuotidianContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options:</span> <span class="pre">mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_artifacts:</span> <span class="pre">List[mate_query.db.Artifact]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>options</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions" title="mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions"><em>mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions</em></a>) – </p></li>
+<li><p><strong>new_artifacts</strong> (<em>List</em><em>[</em><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Artifact" title="mate_query.db.Artifact"><em>mate_query.db.Artifact</em></a><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.QuotidianContext.new_artifacts">
+<span class="sig-name descname"><span class="pre">new_artifacts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Artifact" title="mate_query.db.Artifact"><span class="pre">mate_query.db.Artifact</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianContext.new_artifacts" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of new artifacts created through Quotidian’s internal steps.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.QuotidianContext.options">
+<span class="sig-name descname"><span class="pre">options</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions" title="mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions</span></a></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianContext.options" title="Permalink to this definition">¶</a></dt>
+<dd><p>The options that this run of Quotidian was started with.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.QuotidianError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">QuotidianError</span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../MATECommon/mate_common.error.html#mate_common.error.MateError" title="mate_common.error.MateError"><code class="xref py py-class docutils literal notranslate"><span class="pre">mate_common.error.MateError</span></code></a></p>
+<p>A generic error, internal to <code class="docutils literal notranslate"><span class="pre">quotidian</span></code>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">QuotidianOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">build:</span> <span class="pre">mate_query.db.Build</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_program:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_linker_flags:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A collection of behavioral settings and metadata for <code class="docutils literal notranslate"><span class="pre">quotidian.quotidian</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>build</strong> (<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Build" title="mate_query.db.Build"><em>mate_query.db.Build</em></a>) – </p></li>
+<li><p><strong>image</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>line_program</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>extra_linker_flags</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions.build">
+<span class="sig-name descname"><span class="pre">build</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Build" title="mate_query.db.Build"><span class="pre">mate_query.db.Build</span></a></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">mate.db.Build</span></code> associated with the Quotidian run.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions.extra_linker_flags">
+<span class="sig-name descname"><span class="pre">extra_linker_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions.extra_linker_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any additional flags to pass to the linker during recompilation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions.image">
+<span class="sig-name descname"><span class="pre">image</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Docker image to use for containerized recompilation, if any.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions.line_program">
+<span class="sig-name descname"><span class="pre">line_program</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions.line_program" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to emit line program information.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.build_common_compiler_flags">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">build_common_compiler_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_cu_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_triple</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.build_common_compiler_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a set containing all unique compiler flags used by all compilation units in the input,
+attempts to construct a (minimal) list of flags for recompilation and relinking.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>all_cu_flags</strong> (<em>Set</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>target_triple</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[List[str], Set[str], List[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.container_run">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">container_run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">docker.client.DockerClient</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">docker.models.images.Image</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.container_run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the given command in a container created from the given image, using the supplied Docker
+client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>docker.client.DockerClient</em>) – </p></li>
+<li><p><strong>image</strong> (<em>docker.models.images.Image</em>) – </p></li>
+<li><p><strong>command</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.extract_compiler_and_flags">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">extract_compiler_and_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cu_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.extract_compiler_and_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a Headache-extracted compilation unit information file, returns a tuple of (compiler,
+compiler_flags, linker_flags, target_flags) suitable for recompiling the bitcode.</p>
+<p>Note: The results of this function are later augmented by
+<code class="docutils literal notranslate"><span class="pre">infer_linker_flags_from_externals</span></code> and <code class="docutils literal notranslate"><span class="pre">linker_flags_from_build_record</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cu_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[pathlib.Path, List[str], List[str], List[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.infer_compiler">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">infer_compiler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.infer_compiler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a set of DWARF language IDs, infer an appropriate compiler frontend (i.e., <code class="docutils literal notranslate"><span class="pre">clang</span></code> or
+<code class="docutils literal notranslate"><span class="pre">clang++</span></code>) to invoke for recompilation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>source_ids</strong> (<em>Set</em><em>[</em><em>int</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.infer_linker_flags_from_externals">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">infer_linker_flags_from_externals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">externals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.infer_linker_flags_from_externals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a set of all external symbols that appear in all compilation units of the program,
+attempts to infer linker flags that would be implicit during the normal compilation pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>externals</strong> (<em>Set</em><em>[</em><em>str</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Set[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.linker_flags_from_build_record">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">linker_flags_from_build_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">build_record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.linker_flags_from_build_record" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a “build record” (i.e., a list of individual compile tool invocations), attempt to suss
+out additional flags that look like they belong to the linker.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>build_record</strong> (<em>List</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.quotidian">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">quotidian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bitcode_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bdist_root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions" title="mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Artifact" title="mate_query.db.Artifact"><span class="pre">mate_query.db.Artifact</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.quotidian" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bitcode_file</strong> (<em>pathlib.Path</em>) – </p></li>
+<li><p><strong>bdist_root</strong> (<em>pathlib.Path</em>) – </p></li>
+<li><p><strong>options</strong> (<a class="reference internal" href="#mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions" title="mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions"><em>mate.build.tob_chess_utils.tools.quotidian.QuotidianOptions</em></a>) – </p></li>
+<li><p><strong>margin_options</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[Iterator[Dict[str, Any]], List[<a class="reference internal" href="../MATEQuery/mate_query.db.html#mate_query.db.Artifact" title="mate_query.db.Artifact">mate_query.db.Artifact</a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mate.build.tob_chess_utils.tools.quotidian.run">
+<span class="sig-prename descclassname"><span class="pre">mate.build.tob_chess_utils.tools.quotidian.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">argv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">subprocess.CompletedProcess</span></span></span><a class="headerlink" href="#mate.build.tob_chess_utils.tools.quotidian.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the given command, updating the environment with a mapping supplied by <code class="docutils literal notranslate"><span class="pre">env</span></code>, if
+any.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>kwargs</strong> (<em>Any</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>subprocess.CompletedProcess</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate.build.tob_chess_utils.dwarf.html" class="btn btn-neutral float-right" title="mate.build.tob_chess_utils.dwarf module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate.build.tob_chess_utils.tools.migraine.html" class="btn btn-neutral float-left" title="mate.build.tob_chess_utils.tools.migraine module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

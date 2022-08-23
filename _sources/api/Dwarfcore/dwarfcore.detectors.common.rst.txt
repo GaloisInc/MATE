@@ -1,0 +1,7 @@
+dwarfcore.detectors.common module
+=================================
+
+.. automodule:: dwarfcore.detectors.common
+   :members:
+   :undoc-members:
+   :show-inheritance:

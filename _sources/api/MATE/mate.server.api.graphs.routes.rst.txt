@@ -1,0 +1,7 @@
+mate.server.api.graphs.routes module
+====================================
+
+.. automodule:: mate.server.api.graphs.routes
+   :members:
+   :undoc-members:
+   :show-inheritance:

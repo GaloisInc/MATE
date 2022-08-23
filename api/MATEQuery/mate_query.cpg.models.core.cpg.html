@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>mate_query.cpg.models.core.cpg module &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mate_query.cpg.models.core.edge module" href="mate_query.cpg.models.core.edge.html" />
+    <link rel="prev" title="mate_query.cpg.models.core.base module" href="mate_query.cpg.models.core.base.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">For MATE Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-workflow.html">MATE User Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vulnerability-types.html">Vulnerability Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-flowfinder.html">Using Flowfinder</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Power Users</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../using-rest-api.html">Using the REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../under-constrained-manticore.html">Under-constrained Manticore</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Troubleshooting Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../debugging-builds.html">Debugging Challenge Build Failures</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">MATE Implementation Details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">MATE System Overview</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysis.html">MATE POI Analyses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">For MATE Developers</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Writing and running MATE’s tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture.html">MATE Tooling Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chess-system.html">Working with the CHESS System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Starting Stand-alone MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mate-cli-overview.html">mate-cli Command Line Tool Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../standalonepa.html">cclyzer++</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trace.html">MATE Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATE API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MATECommon/modules.html">MATECommon API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATERestClient/modules.html">MATERestClient API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MATECli/modules.html">MATECli API Reference</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">MATEQuery API Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mate_query.html">mate_query package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mate_query.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mate_query.html#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../MATE/modules.html">MATE API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarfcore/modules.html">Dwarfcore API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Dwarflang/modules.html">Dwarflang API Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Mantiserve/modules.html">Mantiserve API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../legal.html">Legal</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">MATE API Documentation</a> &raquo;</li>
+        
+          <li><a href="modules.html">MATEQuery API Reference</a> &raquo;</li>
+        
+          <li><a href="mate_query.html">mate_query package</a> &raquo;</li>
+        
+          <li><a href="mate_query.cpg.html">mate_query.cpg package</a> &raquo;</li>
+        
+          <li><a href="mate_query.cpg.models.html">mate_query.cpg.models package</a> &raquo;</li>
+        
+          <li><a href="mate_query.cpg.models.core.html">mate_query.cpg.models.core package</a> &raquo;</li>
+        
+      <li>mate_query.cpg.models.core.cpg module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/api/MATEQuery/mate_query.cpg.models.core.cpg.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mate_query.cpg.models.core.cpg">
+<span id="mate-query-cpg-models-core-cpg-module"></span><h1>mate_query.cpg.models.core.cpg module<a class="headerlink" href="#module-mate_query.cpg.models.core.cpg" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mate_query.cpg.models.core.cpg.</span></span><span class="sig-name descname"><span class="pre">BaseCPG</span></span><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ASMBlock">
+<span class="sig-name descname"><span class="pre">ASMBlock</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.bin.html#mate_query.cpg.models.node.ast.bin.ASMBlock" title="mate_query.cpg.models.node.ast.bin.ASMBlock"><span class="pre">mate_query.cpg.models.node.ast.bin.ASMBlock</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ASMBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ASMGlobalVariable">
+<span class="sig-name descname"><span class="pre">ASMGlobalVariable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.bin.html#mate_query.cpg.models.node.ast.bin.ASMGlobalVariable" title="mate_query.cpg.models.node.ast.bin.ASMGlobalVariable"><span class="pre">mate_query.cpg.models.node.ast.bin.ASMGlobalVariable</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ASMGlobalVariable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ASMInst">
+<span class="sig-name descname"><span class="pre">ASMInst</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.bin.html#mate_query.cpg.models.node.ast.bin.ASMInst" title="mate_query.cpg.models.node.ast.bin.ASMInst"><span class="pre">mate_query.cpg.models.node.ast.bin.ASMInst</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ASMInst" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Alloca">
+<span class="sig-name descname"><span class="pre">Alloca</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Alloca" title="mate_query.cpg.models.node.ast.llvm.Alloca"><span class="pre">mate_query.cpg.models.node.ast.llvm.Alloca</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Alloca" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Argument">
+<span class="sig-name descname"><span class="pre">Argument</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Argument" title="mate_query.cpg.models.node.ast.llvm.Argument"><span class="pre">mate_query.cpg.models.node.ast.llvm.Argument</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Argument" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ArrayType">
+<span class="sig-name descname"><span class="pre">ArrayType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.ArrayType" title="mate_query.cpg.models.node.dwarf.ArrayType"><span class="pre">mate_query.cpg.models.node.dwarf.ArrayType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ArrayType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.BasicType">
+<span class="sig-name descname"><span class="pre">BasicType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.BasicType" title="mate_query.cpg.models.node.dwarf.BasicType"><span class="pre">mate_query.cpg.models.node.dwarf.BasicType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.BasicType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Block">
+<span class="sig-name descname"><span class="pre">Block</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Block" title="mate_query.cpg.models.node.ast.llvm.Block"><span class="pre">mate_query.cpg.models.node.ast.llvm.Block</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Block" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Call">
+<span class="sig-name descname"><span class="pre">Call</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Call" title="mate_query.cpg.models.node.ast.llvm.Call"><span class="pre">mate_query.cpg.models.node.ast.llvm.Call</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Call" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.CallReturn">
+<span class="sig-name descname"><span class="pre">CallReturn</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.CallReturn" title="mate_query.cpg.models.node.ast.llvm.CallReturn"><span class="pre">mate_query.cpg.models.node.ast.llvm.CallReturn</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.CallReturn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.CallSite">
+<span class="sig-name descname"><span class="pre">CallSite</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.CallSite" title="mate_query.cpg.models.node.ast.llvm.CallSite"><span class="pre">mate_query.cpg.models.node.ast.llvm.CallSite</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.CallSite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ClassType">
+<span class="sig-name descname"><span class="pre">ClassType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.ClassType" title="mate_query.cpg.models.node.dwarf.ClassType"><span class="pre">mate_query.cpg.models.node.dwarf.ClassType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ClassType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.CompositeCachedType">
+<span class="sig-name descname"><span class="pre">CompositeCachedType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.CompositeCachedType" title="mate_query.cpg.models.node.dwarf.CompositeCachedType"><span class="pre">mate_query.cpg.models.node.dwarf.CompositeCachedType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.CompositeCachedType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.CompositeType">
+<span class="sig-name descname"><span class="pre">CompositeType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.CompositeType" title="mate_query.cpg.models.node.dwarf.CompositeType"><span class="pre">mate_query.cpg.models.node.dwarf.CompositeType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.CompositeType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Constant">
+<span class="sig-name descname"><span class="pre">Constant</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Constant" title="mate_query.cpg.models.node.ast.llvm.Constant"><span class="pre">mate_query.cpg.models.node.ast.llvm.Constant</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Constant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ConstantFP">
+<span class="sig-name descname"><span class="pre">ConstantFP</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.ConstantFP" title="mate_query.cpg.models.node.ast.llvm.ConstantFP"><span class="pre">mate_query.cpg.models.node.ast.llvm.ConstantFP</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ConstantFP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ConstantInt">
+<span class="sig-name descname"><span class="pre">ConstantInt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.ConstantInt" title="mate_query.cpg.models.node.ast.llvm.ConstantInt"><span class="pre">mate_query.cpg.models.node.ast.llvm.ConstantInt</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ConstantInt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ConstantString">
+<span class="sig-name descname"><span class="pre">ConstantString</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.ConstantString" title="mate_query.cpg.models.node.ast.llvm.ConstantString"><span class="pre">mate_query.cpg.models.node.ast.llvm.ConstantString</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ConstantString" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ConstantUndef">
+<span class="sig-name descname"><span class="pre">ConstantUndef</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.ConstantUndef" title="mate_query.cpg.models.node.ast.llvm.ConstantUndef"><span class="pre">mate_query.cpg.models.node.ast.llvm.ConstantUndef</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ConstantUndef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.DWARFArgument">
+<span class="sig-name descname"><span class="pre">DWARFArgument</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFArgument" title="mate_query.cpg.models.node.dwarf.DWARFArgument"><span class="pre">mate_query.cpg.models.node.dwarf.DWARFArgument</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.DWARFArgument" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.DWARFLocalVariable">
+<span class="sig-name descname"><span class="pre">DWARFLocalVariable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFLocalVariable" title="mate_query.cpg.models.node.dwarf.DWARFLocalVariable"><span class="pre">mate_query.cpg.models.node.dwarf.DWARFLocalVariable</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.DWARFLocalVariable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.DWARFType">
+<span class="sig-name descname"><span class="pre">DWARFType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DWARFType" title="mate_query.cpg.models.node.dwarf.DWARFType"><span class="pre">mate_query.cpg.models.node.dwarf.DWARFType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.DWARFType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.DataflowSignature">
+<span class="sig-name descname"><span class="pre">DataflowSignature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.analysis.html#mate_query.cpg.models.node.analysis.DataflowSignature" title="mate_query.cpg.models.node.analysis.DataflowSignature"><span class="pre">mate_query.cpg.models.node.analysis.DataflowSignature</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.DataflowSignature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.DerivedType">
+<span class="sig-name descname"><span class="pre">DerivedType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.DerivedType" title="mate_query.cpg.models.node.dwarf.DerivedType"><span class="pre">mate_query.cpg.models.node.dwarf.DerivedType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.DerivedType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Edge">
+<span class="sig-name descname"><span class="pre">Edge</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.core.edge.html#mate_query.cpg.models.core.edge.Edge" title="mate_query.cpg.models.core.edge.Edge"><span class="pre">mate_query.cpg.models.core.edge.Edge</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Edge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.EnumType">
+<span class="sig-name descname"><span class="pre">EnumType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.EnumType" title="mate_query.cpg.models.node.dwarf.EnumType"><span class="pre">mate_query.cpg.models.node.dwarf.EnumType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.EnumType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Function">
+<span class="sig-name descname"><span class="pre">Function</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Function" title="mate_query.cpg.models.node.ast.llvm.Function"><span class="pre">mate_query.cpg.models.node.ast.llvm.Function</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Function" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.GlobalVariable">
+<span class="sig-name descname"><span class="pre">GlobalVariable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.GlobalVariable" title="mate_query.cpg.models.node.ast.llvm.GlobalVariable"><span class="pre">mate_query.cpg.models.node.ast.llvm.GlobalVariable</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.GlobalVariable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.InputSignature">
+<span class="sig-name descname"><span class="pre">InputSignature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.analysis.html#mate_query.cpg.models.node.analysis.InputSignature" title="mate_query.cpg.models.node.analysis.InputSignature"><span class="pre">mate_query.cpg.models.node.analysis.InputSignature</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.InputSignature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Instruction">
+<span class="sig-name descname"><span class="pre">Instruction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Instruction" title="mate_query.cpg.models.node.ast.llvm.Instruction"><span class="pre">mate_query.cpg.models.node.ast.llvm.Instruction</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Instruction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Intrinsic">
+<span class="sig-name descname"><span class="pre">Intrinsic</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Intrinsic" title="mate_query.cpg.models.node.ast.llvm.Intrinsic"><span class="pre">mate_query.cpg.models.node.ast.llvm.Intrinsic</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Intrinsic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Invoke">
+<span class="sig-name descname"><span class="pre">Invoke</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Invoke" title="mate_query.cpg.models.node.ast.llvm.Invoke"><span class="pre">mate_query.cpg.models.node.ast.llvm.Invoke</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Invoke" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.LLVMType">
+<span class="sig-name descname"><span class="pre">LLVMType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.LLVMType" title="mate_query.cpg.models.node.ast.llvm.LLVMType"><span class="pre">mate_query.cpg.models.node.ast.llvm.LLVMType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.LLVMType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Load">
+<span class="sig-name descname"><span class="pre">Load</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Load" title="mate_query.cpg.models.node.ast.llvm.Load"><span class="pre">mate_query.cpg.models.node.ast.llvm.Load</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.LocalVariable">
+<span class="sig-name descname"><span class="pre">LocalVariable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.LocalVariable" title="mate_query.cpg.models.node.ast.llvm.LocalVariable"><span class="pre">mate_query.cpg.models.node.ast.llvm.LocalVariable</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.LocalVariable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.MachineBasicBlock">
+<span class="sig-name descname"><span class="pre">MachineBasicBlock</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.mc.html#mate_query.cpg.models.node.ast.mc.MachineBasicBlock" title="mate_query.cpg.models.node.ast.mc.MachineBasicBlock"><span class="pre">mate_query.cpg.models.node.ast.mc.MachineBasicBlock</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.MachineBasicBlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.MachineFunction">
+<span class="sig-name descname"><span class="pre">MachineFunction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.mc.html#mate_query.cpg.models.node.ast.mc.MachineFunction" title="mate_query.cpg.models.node.ast.mc.MachineFunction"><span class="pre">mate_query.cpg.models.node.ast.mc.MachineFunction</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.MachineFunction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.MachineInstr">
+<span class="sig-name descname"><span class="pre">MachineInstr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.mc.html#mate_query.cpg.models.node.ast.mc.MachineInstr" title="mate_query.cpg.models.node.ast.mc.MachineInstr"><span class="pre">mate_query.cpg.models.node.ast.mc.MachineInstr</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.MachineInstr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Memcpy">
+<span class="sig-name descname"><span class="pre">Memcpy</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Memcpy" title="mate_query.cpg.models.node.ast.llvm.Memcpy"><span class="pre">mate_query.cpg.models.node.ast.llvm.Memcpy</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Memcpy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.MemoryLocation">
+<span class="sig-name descname"><span class="pre">MemoryLocation</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.analysis.html#mate_query.cpg.models.node.analysis.MemoryLocation" title="mate_query.cpg.models.node.analysis.MemoryLocation"><span class="pre">mate_query.cpg.models.node.analysis.MemoryLocation</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.MemoryLocation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Memset">
+<span class="sig-name descname"><span class="pre">Memset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Memset" title="mate_query.cpg.models.node.ast.llvm.Memset"><span class="pre">mate_query.cpg.models.node.ast.llvm.Memset</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Memset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Module">
+<span class="sig-name descname"><span class="pre">Module</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Module" title="mate_query.cpg.models.node.ast.llvm.Module"><span class="pre">mate_query.cpg.models.node.ast.llvm.Module</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Module" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Node">
+<span class="sig-name descname"><span class="pre">Node</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.core.node.html#mate_query.cpg.models.core.node.Node" title="mate_query.cpg.models.core.node.Node"><span class="pre">mate_query.cpg.models.core.node.Node</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Node" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.OutputSignature">
+<span class="sig-name descname"><span class="pre">OutputSignature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.analysis.html#mate_query.cpg.models.node.analysis.OutputSignature" title="mate_query.cpg.models.node.analysis.OutputSignature"><span class="pre">mate_query.cpg.models.node.analysis.OutputSignature</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.OutputSignature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.PLTStub">
+<span class="sig-name descname"><span class="pre">PLTStub</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.bin.html#mate_query.cpg.models.node.ast.bin.PLTStub" title="mate_query.cpg.models.node.ast.bin.PLTStub"><span class="pre">mate_query.cpg.models.node.ast.bin.PLTStub</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.PLTStub" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.ParamBinding">
+<span class="sig-name descname"><span class="pre">ParamBinding</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.ParamBinding" title="mate_query.cpg.models.node.ast.llvm.ParamBinding"><span class="pre">mate_query.cpg.models.node.ast.llvm.ParamBinding</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.ParamBinding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Resume">
+<span class="sig-name descname"><span class="pre">Resume</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Resume" title="mate_query.cpg.models.node.ast.llvm.Resume"><span class="pre">mate_query.cpg.models.node.ast.llvm.Resume</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Resume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Ret">
+<span class="sig-name descname"><span class="pre">Ret</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Ret" title="mate_query.cpg.models.node.ast.llvm.Ret"><span class="pre">mate_query.cpg.models.node.ast.llvm.Ret</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Ret" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Store">
+<span class="sig-name descname"><span class="pre">Store</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Store" title="mate_query.cpg.models.node.ast.llvm.Store"><span class="pre">mate_query.cpg.models.node.ast.llvm.Store</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Store" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.StructureType">
+<span class="sig-name descname"><span class="pre">StructureType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.StructureType" title="mate_query.cpg.models.node.dwarf.StructureType"><span class="pre">mate_query.cpg.models.node.dwarf.StructureType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.StructureType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.SubroutineType">
+<span class="sig-name descname"><span class="pre">SubroutineType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.SubroutineType" title="mate_query.cpg.models.node.dwarf.SubroutineType"><span class="pre">mate_query.cpg.models.node.dwarf.SubroutineType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.SubroutineType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.TranslationUnit">
+<span class="sig-name descname"><span class="pre">TranslationUnit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.translation_unit.html#mate_query.cpg.models.node.translation_unit.TranslationUnit" title="mate_query.cpg.models.node.translation_unit.TranslationUnit"><span class="pre">mate_query.cpg.models.node.translation_unit.TranslationUnit</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.TranslationUnit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.UnclassifiedNode">
+<span class="sig-name descname"><span class="pre">UnclassifiedNode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.UnclassifiedNode" title="mate_query.cpg.models.node.ast.llvm.UnclassifiedNode"><span class="pre">mate_query.cpg.models.node.ast.llvm.UnclassifiedNode</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.UnclassifiedNode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.UnionType">
+<span class="sig-name descname"><span class="pre">UnionType</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.dwarf.html#mate_query.cpg.models.node.dwarf.UnionType" title="mate_query.cpg.models.node.dwarf.UnionType"><span class="pre">mate_query.cpg.models.node.dwarf.UnionType</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.UnionType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.VTable">
+<span class="sig-name descname"><span class="pre">VTable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.bin.html#mate_query.cpg.models.node.ast.bin.VTable" title="mate_query.cpg.models.node.ast.bin.VTable"><span class="pre">mate_query.cpg.models.node.ast.bin.VTable</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.VTable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mate_query.cpg.models.core.cpg.BaseCPG.Variable">
+<span class="sig-name descname"><span class="pre">Variable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="mate_query.cpg.models.node.ast.llvm.html#mate_query.cpg.models.node.ast.llvm.Variable" title="mate_query.cpg.models.node.ast.llvm.Variable"><span class="pre">mate_query.cpg.models.node.ast.llvm.Variable</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mate_query.cpg.models.core.cpg.BaseCPG.Variable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="mate_query.cpg.models.core.edge.html" class="btn btn-neutral float-right" title="mate_query.cpg.models.core.edge module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mate_query.cpg.models.core.base.html" class="btn btn-neutral float-left" title="mate_query.cpg.models.core.base module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

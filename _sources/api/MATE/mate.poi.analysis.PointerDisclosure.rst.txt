@@ -1,0 +1,7 @@
+mate.poi.analysis.PointerDisclosure module
+==========================================
+
+.. automodule:: mate.poi.analysis.PointerDisclosure
+   :members:
+   :undoc-members:
+   :show-inheritance:

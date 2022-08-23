@@ -1,0 +1,7 @@
+dwarflang.fold module
+=====================
+
+.. automodule:: dwarflang.fold
+   :members:
+   :undoc-members:
+   :show-inheritance:

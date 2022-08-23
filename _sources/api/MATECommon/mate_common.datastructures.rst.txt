@@ -1,0 +1,18 @@
+mate\_common.datastructures package
+===================================
+
+.. automodule:: mate_common.datastructures
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate_common.datastructures.dict_utils
+   mate_common.datastructures.digraph
+   mate_common.datastructures.list_utils
+   mate_common.datastructures.priority_queue

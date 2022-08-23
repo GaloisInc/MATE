@@ -1,0 +1,7 @@
+mate\_common.models.artifacts module
+====================================
+
+.. automodule:: mate_common.models.artifacts
+   :members:
+   :undoc-members:
+   :show-inheritance:

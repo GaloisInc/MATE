@@ -1,0 +1,7 @@
+mate.assertions module
+======================
+
+.. automodule:: mate.assertions
+   :members:
+   :undoc-members:
+   :show-inheritance:

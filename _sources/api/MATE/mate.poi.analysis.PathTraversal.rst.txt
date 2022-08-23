@@ -1,0 +1,7 @@
+mate.poi.analysis.PathTraversal module
+======================================
+
+.. automodule:: mate.poi.analysis.PathTraversal
+   :members:
+   :undoc-members:
+   :show-inheritance:

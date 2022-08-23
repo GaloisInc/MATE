@@ -1,0 +1,7 @@
+mate\_common.state\_machine module
+==================================
+
+.. automodule:: mate_common.state_machine
+   :members:
+   :undoc-members:
+   :show-inheritance:

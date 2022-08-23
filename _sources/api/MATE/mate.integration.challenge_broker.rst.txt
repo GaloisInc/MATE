@@ -1,0 +1,7 @@
+mate.integration.challenge\_broker package
+==========================================
+
+.. automodule:: mate.integration.challenge_broker
+   :members:
+   :undoc-members:
+   :show-inheritance:

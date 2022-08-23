@@ -1,0 +1,7 @@
+mate\_common.models.analyses module
+===================================
+
+.. automodule:: mate_common.models.analyses
+   :members:
+   :undoc-members:
+   :show-inheritance:

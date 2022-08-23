@@ -1,0 +1,7 @@
+mate.server.api.common module
+=============================
+
+.. automodule:: mate.server.api.common
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+dwarflang.decoder module
+========================
+
+.. automodule:: dwarflang.decoder
+   :members:
+   :undoc-members:
+   :show-inheritance:

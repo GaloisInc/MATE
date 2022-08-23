@@ -1,0 +1,24 @@
+mate.poi.analysis package
+=========================
+
+.. automodule:: mate.poi.analysis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   mate.poi.analysis.CommandInjection
+   mate.poi.analysis.IteratorInvalidation
+   mate.poi.analysis.OverflowableAllocations
+   mate.poi.analysis.PathTraversal
+   mate.poi.analysis.PointerDisclosure
+   mate.poi.analysis.TruncatedInteger
+   mate.poi.analysis.UninitializedStackMemory
+   mate.poi.analysis.UseAfterFree
+   mate.poi.analysis.UserStringComparisonLength
+   mate.poi.analysis.VariableLengthStackObject

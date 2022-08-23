@@ -1,0 +1,7 @@
+mate\_query.cpg.models.node.ast.llvm module
+===========================================
+
+.. automodule:: mate_query.cpg.models.node.ast.llvm
+   :members:
+   :undoc-members:
+   :show-inheritance:

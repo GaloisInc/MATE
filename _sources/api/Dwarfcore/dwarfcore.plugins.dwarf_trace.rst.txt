@@ -1,0 +1,7 @@
+dwarfcore.plugins.dwarf\_trace module
+=====================================
+
+.. automodule:: dwarfcore.plugins.dwarf_trace
+   :members:
+   :undoc-members:
+   :show-inheritance:

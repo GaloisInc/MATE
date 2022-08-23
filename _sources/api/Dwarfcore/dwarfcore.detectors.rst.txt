@@ -1,0 +1,20 @@
+dwarfcore.detectors package
+===========================
+
+.. automodule:: dwarfcore.detectors
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 0
+
+   dwarfcore.detectors.common
+   dwarfcore.detectors.dwarf_variables
+   dwarfcore.detectors.heap_oob
+   dwarfcore.detectors.testing
+   dwarfcore.detectors.uaf
+   dwarfcore.detectors.uninitialized_stack_variable

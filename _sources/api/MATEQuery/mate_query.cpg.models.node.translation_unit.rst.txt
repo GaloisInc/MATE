@@ -1,0 +1,7 @@
+mate\_query.cpg.models.node.translation\_unit module
+====================================================
+
+.. automodule:: mate_query.cpg.models.node.translation_unit
+   :members:
+   :undoc-members:
+   :show-inheritance:
