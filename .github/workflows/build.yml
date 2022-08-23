@@ -55,3 +55,24 @@ jobs:
           sudo chmod a+r -R .out/
 
           ./ci/gha-docker-build "dist" "mate-dist"
+
+      - name: Build the docs
+        run: |
+          # See above comment
+          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+            ref="${ACTUAL_GITHUB_SHA_ON_PULL_REQUEST}"
+          else
+            ref="${GITHUB_SHA}"
+          fi
+
+          docker run \
+            --rm -v $(pwd):/mate \
+            "ghcr.io/galoisinc/mate-dev:${ref}" \
+            ./shake.sh -j doc
+
+      - name: Upload docs to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        # if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .out/bdist/local/doc/html
