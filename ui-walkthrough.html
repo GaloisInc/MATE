@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>The Code Property Graph &mdash; MATE 0.1.0.0 documentation</title>
+  <title>UI Walkthrough &mdash; MATE 0.1.0.0 documentation</title>
   
 
   
@@ -42,8 +42,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Debugging Program Build Failures" href="debugging-builds.html" />
-    <link rel="prev" title="CLI Overview" href="cli-overview.html" /> 
+    <link rel="next" title="Flowfinder Tutorial" href="tutorial-flowfinder.html" />
+    <link rel="prev" title="Quick Start" href="quickstart.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,10 +89,10 @@
             
             
               <p class="caption" role="heading"><span class="caption-text">Start Here</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ui-walkthrough.html">UI Walkthrough</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">UI Walkthrough</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
@@ -100,15 +100,11 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorial-notebooks.html">Notebook Tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli-overview.html">CLI Overview</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">The Code Property Graph</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#general-guidelines">General Guidelines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#provenance">Provenance</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="cpg.html">The Code Property Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Program Build Failures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
@@ -182,13 +178,13 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>The Code Property Graph</li>
+      <li>UI Walkthrough</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/cpg.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/ui-walkthrough.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -201,71 +197,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="the-code-property-graph">
-<h1>The Code Property Graph<a class="headerlink" href="#the-code-property-graph" title="Permalink to this headline">¶</a></h1>
-<p>MATE primarily finds vulnerabilities by static program analysis over the
-target’s CPG, which combines representations of a program’s syntax,
-control-flow, and dependencies into a unified graph structure that can be
-queried to identify potential flaws. The MATE CPG consists of the target’s:</p>
-<ul class="simple">
-<li><p>abstract syntax tree (AST)</p></li>
-<li><p>call graph (CG)</p></li>
-<li><p>control-flow graph (CFG)</p></li>
-<li><p>inter-procedural control-flow graph (ICFG)</p></li>
-<li><p>inter-procedural dataflow-graph (DFG)</p></li>
-<li><p>control-dependence graph (CDG)</p></li>
-<li><p>points-to graph (PTG)</p></li>
-<li><p>source-code to machine-code mapping</p></li>
-<li><p>memory layout and DWARF type graph</p></li>
-</ul>
-<p>The CPG is a <em>labeled property graph</em>, meaning a graph where every node or edge
-has a collection of <em>attributes</em>, i.e. key/value pairs. For example, many of the
-nodes in the CPG represent parts of the syntax of the input program, like
-<code class="docutils literal notranslate"><span class="pre">Function</span></code> nodes. <code class="docutils literal notranslate"><span class="pre">Function</span></code> nodes have attributes like “name”, which can be
-accessed through the <a class="reference external" href="overview_query">Python query API</a>.</p>
-<p>See <a class="reference internal" href="schemata/cpg.html"><span class="doc">CPG Schema</span></a> for detailed information about the various kinds of
-nodes, edges, and attributes in the CPG.</p>
-<p>The CPG is stored in a PostgreSQL database.</p>
-<div class="section" id="general-guidelines">
-<h2>General Guidelines<a class="headerlink" href="#general-guidelines" title="Permalink to this headline">¶</a></h2>
-<p>One of the central features of the MATE CPG is a comprehensive and accurate
-mapping between program representations that occur at different phases of
-compilation, from the source level (LLVM bitcode), through the LLVM middle-end,
-all the way to the binary and its embedded DWARF debugging information.
-Thus, the CPG contains three different representations of the input program
-corresponding to the following stages of compilation:</p>
-<ul class="simple">
-<li><p>LLVM IR</p></li>
-<li><p>LLVM middle-end (nodes and edges that start with “MI”)</p></li>
-<li><p>Binary (nodes and edges that start with “MC” and “ASM”)</p></li>
-<li><p>DWARF (nodes and edges that start with “DWARF”)</p></li>
-</ul>
-<p>The LLVM IR is considered the “default” representation, since it is most similar
-to the source language (C/C++). Therefore, generic names like <code class="docutils literal notranslate"><span class="pre">Function</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Block</span></code>, <code class="docutils literal notranslate"><span class="pre">Instruction</span></code>, and <code class="docutils literal notranslate"><span class="pre">Argument</span></code> refer to LLVM IR constructs. Nodes
-representing LLVM middle-end constructs have kinds prefixed by <code class="docutils literal notranslate"><span class="pre">Machine</span></code>, and
-binary-level node kinds are prefixed by <code class="docutils literal notranslate"><span class="pre">ASM</span></code>.</p>
-</div>
-<div class="section" id="provenance">
-<span id="cpg-provenance"></span><h2>Provenance<a class="headerlink" href="#provenance" title="Permalink to this headline">¶</a></h2>
-<p>The various “layers” of the CPG are constructed by different tools.</p>
-<ul class="simple">
-<li><p>abstract syntax tree (AST): <a class="reference internal" href="architecture.html#llvm-passes-desc"><span class="std std-ref">ASTGraphWriter</span></a></p></li>
-<li><p>call graph (CG): <a class="reference internal" href="architecture.html#points-to-desc"><span class="std std-ref">pointer analysis</span></a>
-(see also <a class="reference internal" href="architecture.html#llvm-passes-desc"><span class="std std-ref">LLVM middle-end passes</span></a>)</p></li>
-<li><p>control-flow graph (CFG): <a class="reference internal" href="architecture.html#llvm-passes-desc"><span class="std std-ref">ASTGraphWriter</span></a> for
-intra-procedural control-flow</p></li>
-<li><p>inter-procedural control-flow graph (ICFG):
-<a class="reference internal" href="architecture.html#points-to-desc"><span class="std std-ref">pointer analysis</span></a></p></li>
-<li><p>inter-procedural dataflow-graph (DFG):
-<a class="reference internal" href="architecture.html#points-to-desc"><span class="std std-ref">pointer analysis</span></a> for flows through memory and
-calls) and <a class="reference internal" href="architecture.html#llvm-passes-desc"><span class="std std-ref">ASTGraphWriter</span></a> for intra-procedural flows</p></li>
-<li><p>control-dependence graph (CDG): <a class="reference internal" href="architecture.html#llvm-passes-desc"><span class="std std-ref">ASTGraphWriter</span></a></p></li>
-<li><p>points-to graph (PTG): <a class="reference internal" href="architecture.html#points-to-desc"><span class="std std-ref">pointer analysis</span></a></p></li>
-<li><p>source-code to machine-code mapping: <a class="reference internal" href="architecture.html#machine-desc"><span class="std std-ref">machine-code mapping</span></a></p></li>
-<li><p>memory layout and DWARF type graph: <a class="reference internal" href="architecture.html#machine-desc"><span class="std std-ref">machine-code mapping</span></a></p></li>
-</ul>
-</div>
+  <div class="section" id="ui-walkthrough">
+<h1>UI Walkthrough<a class="headerlink" href="#ui-walkthrough" title="Permalink to this headline">¶</a></h1>
+<p>This video walks through some of the elements of the MATE web UI.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/49vdZe2jRbg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>If you can’t see the video, try this link: <a class="reference external" href="https://www.youtube.com/watch?v=49vdZe2jRbg&amp;feature=youtu.be">https://www.youtube.com/watch?v=49vdZe2jRbg&amp;feature=youtu.be</a></p>
 </div>
 
 
@@ -274,8 +210,8 @@ calls) and <a class="reference internal" href="architecture.html#llvm-passes-des
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="debugging-builds.html" class="btn btn-neutral float-right" title="Debugging Program Build Failures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="cli-overview.html" class="btn btn-neutral float-left" title="CLI Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial-flowfinder.html" class="btn btn-neutral float-right" title="Flowfinder Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

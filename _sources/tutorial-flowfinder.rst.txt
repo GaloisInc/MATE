@@ -7,6 +7,18 @@ This tutorial will guide you through finding a bug with
 
 .. include:: include/tutorial-shared.rst
 
+*****
+Video
+*****
+
+This tutorial is also available in video format.
+
+.. raw:: html
+   :file: include/tutorial-iframe.html
+
+
+If you can't see the video, try this link: https://www.youtube.com/watch?v=IFdl1Hsk9q0
+
 ********
 Tutorial
 ********
