@@ -25,6 +25,12 @@ explore a program, see :doc:`quickstart`. Contributors should read
 
 .. toctree::
    :hidden:
+   :caption: Tutorials
+
+   tutorial-flowfinder
+
+.. toctree::
+   :hidden:
    :caption: Reference
 
    architecture
