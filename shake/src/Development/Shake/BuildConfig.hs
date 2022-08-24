@@ -1,6 +1,6 @@
 {-
 Module           : Development.Shake.BuildConfig
-Copyright        : (c) Galois, Inc 2020
+Copyright        : (c) Galois, Inc 2022
 Maintainer       : Langston Barrett <langston@galois.com>
 Stability        : provisional
 
