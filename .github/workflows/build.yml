@@ -55,6 +55,8 @@ jobs:
           sudo chmod a+r -R .out/
 
           ./ci/gha-docker-build "dist" "mate-dist"
+          ./ci/gha-docker-build "notebook" "mate-notebook"
+          ./ci/gha-docker-build "ui" "mate-ui"
 
       - name: Build the docs
         run: |
