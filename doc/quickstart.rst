@@ -33,7 +33,33 @@ Get the source code:
     git clone --recurse-submodules https://github.com/GaloisInc/MATE
     cd MATE
 
-Build Docker images with the MATE tools (this may take a long time, see
+Install the CLI. (Run this from the MATE source root. You can install this into a
+`virtual environment <https://docs.python.org/3/tutorial/venv.html>`_ if
+desired):
+
+.. code-block:: bash
+
+    pip install -r cli-requirements.txt
+
+There are two ways to obtain the requisite Docker images: pulling them pre-built
+from Github Container Registry (GHCR), or building them yourself.
+
+Pulling Images from GHCR
+========================
+
+To pull pre-built Docker images from GHCR:
+
+.. code-block:: bash
+
+    docker pull ghcr.io/galoisinc/mate-dev:main
+    docker pull ghcr.io/galoisinc/mate-dist:main
+    docker pull ghcr.io/galoisinc/mate-notebook:main
+    docker pull ghcr.io/galoisinc/mate-ui:main
+
+Building the Docker Images
+==========================
+
+To build Docker images with the MATE tools (this may take a long time, see
 :ref:`Docker Images and Compositions <docker>` for more information):
 
 ..
@@ -57,20 +83,24 @@ Build Docker images with the MATE tools (this may take a long time, see
     may have some luck with reducing the build's parallelism (e.g. with ``-j2``
     instead of ``-j``) or removing ``-j`` entirely.
 
-Spin up the MATE services (database, REST API, UI, etc., see :doc:`architecture`
-for details):
+Running MATE
+============
+
+You're ready to spin up the MATE services (database, REST API, UI, etc., see
+:doc:`architecture` for details).
+
+If you pulled pre-built images:
+
+.. code-block:: bash
+
+    docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
+
+If you built images locally, you'll have to override the variables set in
+``.env``:
 
 .. code-block:: bash
 
     MATE_DOCKER_TAG=:local docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
-
-Install the CLI. (Run this from the MATE source root. You can install this into a
-`virtual environment <https://docs.python.org/3/tutorial/venv.html>`_ if
-desired):
-
-.. code-block:: bash
-
-    pip install -r cli-requirements.txt
 
 ****************
 Upload a Program
