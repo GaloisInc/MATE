@@ -34,6 +34,9 @@ representations of code and data as needed and creating and
 manipulating visualizations of high-level flows between different
 components.
 
+See :doc:`tutorial-flowfinder` for a hands-on guide to finding a bug with
+Flowfinder.
+
 ******************
 Interface overview
 ******************

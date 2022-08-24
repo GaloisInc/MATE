@@ -32,6 +32,12 @@ The `source code <https://github.com/GaloisInc/MATE>`_ and `documentation
 
 .. toctree::
    :hidden:
+   :caption: Tutorials
+
+   tutorial-flowfinder
+
+.. toctree::
+   :hidden:
    :caption: Reference
 
    architecture

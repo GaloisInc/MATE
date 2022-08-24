@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Flowfinder Tutorial &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Architecture" href="architecture.html" />
+    <link rel="prev" title="Quick Start" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Start Here</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Flowfinder Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial">Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exploring-a-function">Exploring a Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exploring-the-cfg">Exploring the CFG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exploring-the-dfg">Exploring the DFG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#signatures">Signatures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli-overview.html">CLI Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpg.html">The Code Property Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Program Build Failures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pois.html">Points of Interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Flowfinder Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/tutorial-flowfinder.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="flowfinder-tutorial">
+<h1>Flowfinder Tutorial<a class="headerlink" href="#flowfinder-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial will guide you through finding a bug with
+<a class="reference internal" href="using-flowfinder.html"><span class="doc">Flowfinder</span></a>.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>First, get a MATE system running and install the CLI (see <a class="reference internal" href="quickstart.html"><span class="doc">Quick Start</span></a>).
+Then,</p>
+<ul class="simple">
+<li><p>Download
+<a class="reference external" href="https://github.com/GaloisInc/MATE/blob/main/frontend/test/programs/notes.c">notes.c</a>,
+or copy it from the MATE source root: <code class="docutils literal notranslate"><span class="pre">cp</span>
+<span class="pre">$MATE_SOURCE/frontend/test/programs/notes.c</span> <span class="pre">.</span></code></p></li>
+<li><p>Upload <code class="docutils literal notranslate"><span class="pre">notes.c</span></code> to MATE: <code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">oneshot</span> <span class="pre">-p</span> <span class="pre">notes.c</span></code></p></li>
+<li><p>Navigate to the builds page (at <a class="reference external" href="http://localhost:3000/builds">http://localhost:3000/builds</a>) to check
+the status of the build; it should complete in less than a minute</p></li>
+</ul>
+</div>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>The target program is a simple server that allows users to create notes
+(i.e., store binary blobs). When a note is written, the user is given a
+completely random key. They can retrieve the note using this key.</p>
+<p>The server supports three commands, <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>, and <code class="docutils literal notranslate"><span class="pre">quit</span></code>.</p>
+<p>Example use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ clang -Wall -Werror -o notes -O1 -g notes.c
+$ ./notes
+Listening on port 8894
+</pre></div>
+</div>
+<p>In a separate terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nc localhost 8894
+notes&gt; write very secret data
+&lt;server will send back a long alphanumeric key here&gt;
+notes&gt; read &lt;key that the server sent back&gt;
+very secret data
+</pre></div>
+</div>
+<p>Notably, we’ll use MATE to find a bug that <em>can’t be found by a fuzzer</em>. The
+<code class="docutils literal notranslate"><span class="pre">notes.c</span></code> program contains tests and a fuzzing harness, all of which can
+be run with <a class="reference external" href="https://valgrind.org/docs/manual/mc-manual.html">Valgrind</a>,
+<a class="reference external" href="https://clang.llvm.org/docs/AddressSanitizer.html">ASan</a>, and
+<a class="reference external" href="https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html">UBSan</a>
+without detecting any errors.</p>
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
+<p>First, open the program in Flowfinder by clicking the “analyze in Flowfinder”
+link. You should see a mostly empty screen with a sidebar on the right.</p>
+<div class="section" id="exploring-a-function">
+<h3>Exploring a Function<a class="headerlink" href="#exploring-a-function" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start by looking at where user input enters the program from the network,
+via <code class="docutils literal notranslate"><span class="pre">recv</span></code>. Use the “Select a Function Node to Start…” box to add the <code class="docutils literal notranslate"><span class="pre">recv</span></code>
+function to the screen. Then, find add all the callsites of <code class="docutils literal notranslate"><span class="pre">recv</span></code> to see how
+user input can enter the program.</p>
+<ul class="simple">
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">recv</span></code> into the “Select a Function Node to Start…” box</p></li>
+<li><p>Click the “Add Node” button. You should see a box labeled <code class="docutils literal notranslate"><span class="pre">recv</span></code>.</p></li>
+<li><p>Right-click the <code class="docutils literal notranslate"><span class="pre">recv</span></code> box and select “Show callsites”.</p></li>
+</ul>
+<p>Feel free to re-arrange nodes and edges at any point by dragging and dropping
+them. Some nodes can be collapsed or expanded by double-clicking them.</p>
+<p>At this point, you should see an arrow from a large box labeled <code class="docutils literal notranslate"><span class="pre">handle_loop</span></code>
+to a small box labeled <code class="docutils literal notranslate"><span class="pre">recv</span></code>, indicating that the instruction <code class="docutils literal notranslate"><span class="pre">%t8</span> <span class="pre">=</span> <span class="pre">call</span>
+<span class="pre">i64</span> <span class="pre">&#64;recv</span> <span class="pre">...</span></code> in <code class="docutils literal notranslate"><span class="pre">handle_loop</span></code> calls <code class="docutils literal notranslate"><span class="pre">recv</span></code>.</p>
+</div>
+<div class="section" id="exploring-the-cfg">
+<h3>Exploring the CFG<a class="headerlink" href="#exploring-the-cfg" title="Permalink to this headline">¶</a></h3>
+<p>Now we know that network input enters the program at this call to <code class="docutils literal notranslate"><span class="pre">recv</span></code> in
+<code class="docutils literal notranslate"><span class="pre">handle_loop</span></code>. What happens after that? Try taking a look at the slice of the
+<em>control-flow graph</em> that follows this call: right-click the call instruction
+and select “Show control flow from this node”.</p>
+<p>At this point, you should see a fairly large graph. What’s going on here? If you
+follow enough arrows, you should be able to convince yourself that the <code class="docutils literal notranslate"><span class="pre">recv</span></code>
+is inside of a loop, and so the control-flow graph following the call is exactly
+the CFG of thee <code class="docutils literal notranslate"><span class="pre">handle_loop</span></code> function, which consists entirely of this loop.</p>
+<p>Hide or remove the control-flow slice by pressing the “x” or the slider in the
+upper left or upper right hand corner of the corresponding card (the card should
+have “Kind: Control flow” on it).</p>
+</div>
+<div class="section" id="exploring-the-dfg">
+<h3>Exploring the DFG<a class="headerlink" href="#exploring-the-dfg" title="Permalink to this headline">¶</a></h3>
+<p>The CFG was a little overwhelming, with a suboptimal signal-to-noise ratio.
+Let’s just look at the places where the data from the <code class="docutils literal notranslate"><span class="pre">recv</span></code> call gets used.
+Right-click on the call to <code class="docutils literal notranslate"><span class="pre">recv</span></code> and click “Show uses”. You should see a
+single <code class="docutils literal notranslate"><span class="pre">store</span></code> instruction show up. This isn’t too helpful - we’ve just taken
+a single step through the <em>dataflow graph</em>. Let’s try taking a few at once.</p>
+<p>Try adding the slice of the dataflow graph that starts at this call to <code class="docutils literal notranslate"><span class="pre">recv</span></code>:
+right-click the call instruction and select “Show data flow from this node”.</p>
+<p>This graph seems a little sparse. First of all, the targets are all in
+<code class="docutils literal notranslate"><span class="pre">handle_loop</span></code>, but surely user-provided data flows to other functions. If you
+examine the source lines carefully, you can see that this slice actually shows
+the data flow from <em>the return value</em> of <code class="docutils literal notranslate"><span class="pre">recv</span></code>. If we want to look for how
+user-provided data flows through the program, we’ll have to try something else.</p>
+<p>Hide or remove all the “Dataflow” and “Uses” cards.</p>
+</div>
+<div class="section" id="signatures">
+<h3>Signatures<a class="headerlink" href="#signatures" title="Permalink to this headline">¶</a></h3>
+<p>The problem is that we really want to track the flow of data originating
+<em>outside</em> of the program. The mechanism MATE uses for this purpose is called an
+<a class="reference internal" href="signatures.html"><span class="doc">“input signature”</span></a>. There are also corresponding “output
+signatures” which represent the effect of the program on the external world
+(printing messages, creating files, etc.).</p>
+<p>Try right-clicking the call to <code class="docutils literal notranslate"><span class="pre">recv</span></code> and select “Show dataflow and I/O
+signatures”. Right-click the leftmost input signature that appears (the node is
+pentagonal and pink), and click “Show data flow from this node”. You should now
+see a much more interesting data flow graph. Can you see the vulnerability?
+Hint: it’s a path traversal.</p>
+<p>The problem is that the user input from this call to <code class="docutils literal notranslate"><span class="pre">recv</span></code> flows to the path
+argument of a call to <code class="docutils literal notranslate"><span class="pre">fopen</span></code>: the key that the user gives to the <code class="docutils literal notranslate"><span class="pre">read</span></code>
+command is used as a path, with no sanitization. This means the user can input a
+key like <code class="docutils literal notranslate"><span class="pre">../../../super/secret/file</span></code> and read the contents of that path.</p>
+<p>Right-click the output signature for <code class="docutils literal notranslate"><span class="pre">fopen</span></code> (which represents the file that
+may be created by <code class="docutils literal notranslate"><span class="pre">fopen</span></code>), and click “show callsites”. You should be able to
+see that the vulnerable call occurs in the <code class="docutils literal notranslate"><span class="pre">cmd_read</span></code> function.
+Congratulations, you found the vulnerability!</p>
+<p>If you’d like to understand how the data flows from the <code class="docutils literal notranslate"><span class="pre">recv</span></code> to the
+<code class="docutils literal notranslate"><span class="pre">fopen</span></code> in more detail, try disabling the “Hide Nodes - memory” slider in the
+sidebar. A circular, green node labeled <code class="docutils literal notranslate"><span class="pre">nil*stack_alloc&#64;handle_loop[[1024</span> <span class="pre">x</span>
+<span class="pre">i8]*</span> <span class="pre">%t1][0][*]</span></code> should appear between the input signature for <code class="docutils literal notranslate"><span class="pre">recv</span></code> and the
+output signature for <code class="docutils literal notranslate"><span class="pre">fopen</span></code>, which indicates that the data flows through a
+stack allocation of size 1024 that was allocated in <code class="docutils literal notranslate"><span class="pre">handle_loop</span></code>. You can
+right-click the memory node and click “Show allocation site” to show the LLVM
+<code class="docutils literal notranslate"><span class="pre">alloca</span></code> instruction which allocates this buffer (corresponding to a local
+variable at the C level). If you “Show operands” on the <code class="docutils literal notranslate"><span class="pre">call</span></code> to <code class="docutils literal notranslate"><span class="pre">recv</span></code> and
+then “Show operands” on the <code class="docutils literal notranslate"><span class="pre">getelementptr</span></code> instruction, you can see that this
+is the buffer passed as the second argument of <code class="docutils literal notranslate"><span class="pre">recv</span></code>. (You could also try
+establishing this by walking the other direction in the dataflow graph, by
+clicking “Show uses” on the <code class="docutils literal notranslate"><span class="pre">alloca</span></code> and so on.) Nice!</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="architecture.html" class="btn btn-neutral float-right" title="Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
