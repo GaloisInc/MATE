@@ -41,11 +41,11 @@ Build Docker images with the MATE tools (this may take a long time, see
 
 .. code-block:: bash
 
-    docker build --target dev --tag mate-dev .
-    docker run --rm -v $(pwd):/mate -it mate-dev ./shake.sh -j bdist
-    docker build --target dist --tag mate-dist .
-    docker build --target notebook --tag mate-notebook .
-    docker build --target ui --tag mate-ui .
+    docker build --target dev --tag ghcr.io/galoisinc/mate-dev:local .
+    docker run --rm -v $(pwd):/mate -it ghcr.io/galoisinc/mate-dev:local ./shake.sh -j bdist
+    docker build --target dist --tag ghcr.io/galoisinc/mate-dist:local .
+    docker build --target notebook --tag ghcr.io/galoisinc/mate-notebook:local .
+    docker build --target ui --tag ghcr.io/galoisinc/mate-ui:local .
 
 .. important::
 
@@ -62,7 +62,7 @@ for details):
 
 .. code-block:: bash
 
-    docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
+    MATE_DOCKER_TAG=:local docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
 
 Install the CLI. (Run this from the MATE source root. You can install this into a
 `virtual environment <https://docs.python.org/3/tutorial/venv.html>`_ if

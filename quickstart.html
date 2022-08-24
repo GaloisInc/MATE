@@ -245,11 +245,11 @@ of the documentation.</p>
 </div>
 <p>Build Docker images with the MATE tools (this may take a long time, see
 <a class="reference internal" href="architecture.html#docker"><span class="std std-ref">Docker Images and Compositions</span></a> for more information):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build --target dev --tag mate-dev .
-docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/mate -it mate-dev ./shake.sh -j bdist
-docker build --target dist --tag mate-dist .
-docker build --target notebook --tag mate-notebook .
-docker build --target ui --tag mate-ui .
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build --target dev --tag ghcr.io/galoisinc/mate-dev:local .
+docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/mate -it ghcr.io/galoisinc/mate-dev:local ./shake.sh -j bdist
+docker build --target dist --tag ghcr.io/galoisinc/mate-dist:local .
+docker build --target notebook --tag ghcr.io/galoisinc/mate-notebook:local .
+docker build --target ui --tag ghcr.io/galoisinc/mate-ui:local .
 </pre></div>
 </div>
 <div class="admonition important">
@@ -263,7 +263,7 @@ instead of <code class="docutils literal notranslate"><span class="pre">-j</span
 </div>
 <p>Spin up the MATE services (database, REST API, UI, etc., see <a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a>
 for details):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MATE_DOCKER_TAG</span><span class="o">=</span>:local docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
 </pre></div>
 </div>
 <p>Install the CLI. (Run this from the MATE source root. You can install this into a
