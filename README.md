@@ -1,12 +1,17 @@
 # MATE
 
-See the documentation in [`doc/`](./doc/), which is published to https://mate.galois.com/ by CI.
+<!-- 
+The following paragraph is duplicated in doc/index.rst and doc/overview.rst;
+updates to one should be reflected in the other(s).
+-->
 
-Places to start:
+MATE is a suite of tools for interactive program analysis with a focus on
+hunting for bugs in C and C++ code. MATE unifies application-specific and
+low-level vulnerability analysis using code property graphs (CPGs), enabling the
+discovery of highly application-specific vulnerabilities that depend on both
+implementation details and the high-level semantics of target C/C++ programs.
 
-- [MATE User Workflow](https://mate.galois.com/master/user-workflow.html) (built from [doc/user-workflow.rst](doc/user-workflow.rst))
-- [MATE System Overview](https://mate.galois.com/master/overview.html) (built from [doc/overview.rst](doc/overview.rst))
-- If you are a developer of MATE: [Hacking on MATE](https://mate.galois.com/master/hacking.html) (built from [doc/hacking.rst](doc/hacking.rst))
+See [the online documentation][docs] for more information.
 
 ## Acknowledgements
 
@@ -16,3 +21,5 @@ Contract No. FA8750-19-C-0004. Any opinions, findings and conclusions or
 recommendations expressed in this material are those of the author(s) and do
 not necessarily reflect the views of the United States Air Force or DARPA.
 Approved for Public Release, Distribution Unlimited.
+
+[docs]: https://galoisinc.github.io/MATE/
