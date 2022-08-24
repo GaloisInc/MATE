@@ -96,6 +96,7 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial-flowfinder.html">Flowfinder Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial-notebooks.html">Notebook Tutorial</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul class="current">
@@ -202,7 +203,7 @@
             
   <div class="section" id="mate-python-notebooks">
 <h1>MATE Python Notebooks<a class="headerlink" href="#mate-python-notebooks" title="Permalink to this headline">¶</a></h1>
-<p>MATE has <a href="#id1"><span class="problematic" id="id2">:ref:`a Python API &lt;query_desc&gt;`_</span></a> for querying <a class="reference internal" href="cpg.html"><span class="doc">the CPG</span></a> and
+<p>MATE has <a class="reference internal" href="architecture.html#query-desc"><span class="std std-ref">a Python API</span></a> for querying <a class="reference internal" href="cpg.html"><span class="doc">the CPG</span></a> and
 exposes browser-based, interactive Jupyter notebooks with this query interface
 pre-loaded. These notebooks can be used to write complex, recursive,
 whole-program queries that answer detailed questions like “What sequences of
@@ -213,17 +214,19 @@ routines?” These notebooks can be used for one-off explorations, or as a
 platform for users to build reusable apps on the MATE platform (such as
 <a class="reference internal" href="usagefinder.html"><span class="doc">UsageFinder</span></a>).</p>
 <p>The MATE notebook server is exposed via web interface at <a class="reference external" href="http://localhost:8889/">http://localhost:8889/</a>.</p>
+<p>See <a class="reference internal" href="tutorial-notebooks.html"><span class="doc">Notebook Tutorial</span></a> for a hands-on guide to finding a bug with MATE
+notebooks.</p>
 <div class="section" id="create-a-notebook">
 <h2>Create a notebook<a class="headerlink" href="#create-a-notebook" title="Permalink to this headline">¶</a></h2>
 <p>Navigate to the MATE notebook server at <a class="reference external" href="http://localhost:8889/">http://localhost:8889/</a> and use the “New” dropdown to create a new Python3 notebook.</p>
-<div class="figure align-default" id="id4">
+<div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="_images/create-notebook.png"><img alt="_images/create-notebook.png" src="_images/create-notebook.png" style="width: 604.0999999999999px; height: 216.29999999999998px;" /></a>
-<p class="caption"><span class="caption-text">Create a new Python3 notebook</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Create a new Python3 notebook</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>Optional: click the notebook name (initially “Untitled”) to give it a more descriptive name.</p>
-<div class="figure align-default" id="id5">
+<div class="figure align-default" id="id3">
 <img alt="_images/rename-notebook.jpg" src="_images/rename-notebook.jpg" />
-<p class="caption"><span class="caption-text">Rename the notebook</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Rename the notebook</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="load-the-desired-code-property-graph">
@@ -231,9 +234,9 @@ platform for users to build reusable apps on the MATE platform (such as
 <p>Within a Python notebook, you need to identify the Code Property Graph you wish to query.
 You’ll need the Build Id for the target you’re interested in.
 You can copy it from the MATE dashboard: <a class="reference external" href="http://localhost:8050/">http://localhost:8050/</a></p>
-<div class="figure align-default" id="id6">
+<div class="figure align-default" id="id4">
 <a class="reference internal image-reference" href="_images/get-build-id.png"><img alt="_images/get-build-id.png" src="_images/get-build-id.png" style="width: 744.0999999999999px; height: 120.39999999999999px;" /></a>
-<p class="caption"><span class="caption-text">The BuildID for a target</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">The BuildID for a target</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 <p>Now, in your MATE notebook enter the following into the first cell, replacing the placeholder Build Id with the one copied from the MATE dashboard:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">session</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">new_session</span><span class="p">()</span>
@@ -246,9 +249,9 @@ You can copy it from the MATE dashboard: <a class="reference external" href="htt
 </pre></div>
 </div>
 <p>You’ll know it’s working if you get nonzero number of nodes and edges as output.</p>
-<div class="figure align-default" id="id7">
+<div class="figure align-default" id="id5">
 <img alt="_images/notebook-load-graph.jpg" src="_images/notebook-load-graph.jpg" />
-<p class="caption"><span class="caption-text">Loading a CPG in a notebook</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Loading a CPG in a notebook</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="query-the-code-property-graph">
@@ -284,9 +287,9 @@ Some useful utility functions:</p>
    <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="p">))</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="figure align-default" id="id8">
+<div class="figure align-default" id="id6">
 <a class="reference internal image-reference" href="_images/notebook-node-example.png"><img alt="_images/notebook-node-example.png" src="_images/notebook-node-example.png" style="width: 642.5999999999999px; height: 438.9px;" /></a>
-<p class="caption"><span class="caption-text">Example: Using the functions above to print LLVM for a function, and using this to access a Node (corresponding to a call to <code class="docutils literal notranslate"><span class="pre">fprintf</span></code>)</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Example: Using the functions above to print LLVM for a function, and using this to access a Node (corresponding to a call to <code class="docutils literal notranslate"><span class="pre">fprintf</span></code>)</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>

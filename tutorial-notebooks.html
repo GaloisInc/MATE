@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Notebook Tutorial &mdash; MATE 0.1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/sphinx_paramlinks.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Architecture" href="architecture.html" />
+    <link rel="prev" title="Flowfinder Tutorial" href="tutorial-flowfinder.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MATE
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Start Here</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial-flowfinder.html">Flowfinder Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Notebook Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial">Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exploring-a-function">Exploring a Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exploring-the-cfg">Exploring the CFG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exploring-the-dfg">Exploring the DFG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#signatures">Signatures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Tools Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli-overview.html">CLI Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpg.html">The Code Property Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-builds.html">Debugging Program Build Failures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dwarfcore.html">Dwarfcore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables in the MATE container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mantiserve.html">Mantiserve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pois.html">Points of Interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schemata/cpg.html">CPG Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="signatures.html">MATE Signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trace.html">Traces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="under-constrained-manticore.html">Under-constrained Manticore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usagefinder.html">UsageFinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-flowfinder.html">Using Flowfinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-notebooks.html">MATE Python Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using-rest-api.html">Using the REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">MATE API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html#indices-and-tables">Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference external" href="api.html#http://">MATE REST API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on MATE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Writing and running MATE’s tests</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATE</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Notebook Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/tutorial-notebooks.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="notebook-tutorial">
+<h1>Notebook Tutorial<a class="headerlink" href="#notebook-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial will guide you through finding a bug with
+<a class="reference internal" href="using-notebooks.html"><span class="doc">MATE Notebooks</span></a>.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>First, get a MATE system running and install the CLI (see <a class="reference internal" href="quickstart.html"><span class="doc">Quick Start</span></a>).
+Then,</p>
+<ul class="simple">
+<li><p>Download
+<a class="reference external" href="https://github.com/GaloisInc/MATE/blob/main/frontend/test/programs/notes.c">notes.c</a>,
+or copy it from the MATE source root: <code class="docutils literal notranslate"><span class="pre">cp</span>
+<span class="pre">$MATE_SOURCE/frontend/test/programs/notes.c</span> <span class="pre">.</span></code></p></li>
+<li><p>Upload <code class="docutils literal notranslate"><span class="pre">notes.c</span></code> to MATE: <code class="docutils literal notranslate"><span class="pre">mate-cli</span> <span class="pre">oneshot</span> <span class="pre">-p</span> <span class="pre">notes.c</span></code></p></li>
+<li><p>Navigate to the builds page (at <a class="reference external" href="http://localhost:3000/builds">http://localhost:3000/builds</a>) to check
+the status of the build; it should complete in less than a minute</p></li>
+</ul>
+</div>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>The target program is a simple server that allows users to create notes
+(i.e., store binary blobs). When a note is written, the user is given a
+completely random key. They can retrieve the note using this key.</p>
+<p>The server supports three commands, <code class="docutils literal notranslate"><span class="pre">write</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>, and <code class="docutils literal notranslate"><span class="pre">quit</span></code>.</p>
+<p>Example use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ clang -Wall -Werror -o notes -O1 -g notes.c
+$ ./notes
+Listening on port 8894
+</pre></div>
+</div>
+<p>In a separate terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nc localhost 8894
+notes&gt; write very secret data
+&lt;server will send back a long alphanumeric key here&gt;
+notes&gt; read &lt;key that the server sent back&gt;
+very secret data
+</pre></div>
+</div>
+<p>Notably, we’ll use MATE to find a bug that <em>can’t be found by a fuzzer</em>. The
+<code class="docutils literal notranslate"><span class="pre">notes.c</span></code> program contains tests and a fuzzing harness, all of which can
+be run with <a class="reference external" href="https://valgrind.org/docs/manual/mc-manual.html">Valgrind</a>,
+<a class="reference external" href="https://clang.llvm.org/docs/AddressSanitizer.html">ASan</a>, and
+<a class="reference external" href="https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html">UBSan</a>
+without detecting any errors.</p>
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
+<p>First, open the program in a notebook by clicking the “Open Jupyter Notebook”
+button. Highlight the first cell and click “Run” or press Shift+Enter to run
+the first cell. You should see the number of nodes in the CPG printed out.</p>
+<p>This tutorial will present the Python code to enter into your notebook, followed
+by an example output. Some parts may not exactly match your notebook, such as
+the build ID and number of nodes here, or specific node IDs in the rest of the
+tutorial.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">session</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">new_session</span><span class="p">()</span>
+<span class="n">cpg</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">graph_from_build</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Build</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;47dda0abe95c426f97dcae314e1d55a7&quot;</span><span class="p">))</span>
+<span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cpg</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3088</span>
+</pre></div>
+</div>
+<div class="section" id="exploring-a-function">
+<h3>Exploring a Function<a class="headerlink" href="#exploring-a-function" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start by looking at where user input enters the program from the network,
+via <code class="docutils literal notranslate"><span class="pre">recv</span></code>. Grab the <code class="docutils literal notranslate"><span class="pre">Function</span></code> node representing <code class="docutils literal notranslate"><span class="pre">recv</span></code> from the CPG:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recv</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cpg</span><span class="o">.</span><span class="n">Function</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;recv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@recv</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>What can we do with this node? Take a look at <code class="docutils literal notranslate"><span class="pre">help(recv)</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Help</span> <span class="n">on</span> <span class="n">Function</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">mate_query</span><span class="o">.</span><span class="n">cpg</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">cpg</span> <span class="nb">object</span><span class="p">:</span>
+
+<span class="k">class</span> <span class="nc">Function</span><span class="p">(</span><span class="n">mate_query</span><span class="o">.</span><span class="n">cpg</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">ast</span><span class="o">.</span><span class="n">llvm</span><span class="o">.</span><span class="n">Function</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="o">|</span>  <span class="n">Function</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="o">|</span>
+<span class="o">|</span>  <span class="n">LLVM</span> <span class="n">IR</span> <span class="n">functions</span>
+<span class="o">|</span>
+<span class="o">|</span>  <span class="n">Method</span> <span class="n">resolution</span> <span class="n">order</span><span class="p">:</span>
+<span class="o">|</span>      <span class="n">Function</span>
+<span class="o">|</span>      <span class="o">...</span>
+<span class="o">|</span>
+<span class="o">|</span>  <span class="n">Methods</span> <span class="n">defined</span> <span class="n">here</span><span class="p">:</span>
+<span class="o">|</span>      <span class="o">...</span>
+<span class="o">|</span>
+<span class="o">|</span>  <span class="o">----------------------------------------------------------------------</span>
+<span class="o">|</span>  <span class="n">Data</span> <span class="n">descriptors</span> <span class="n">defined</span> <span class="n">here</span><span class="p">:</span>
+<span class="o">|</span>
+<span class="o">|</span>  <span class="o">...</span>
+<span class="o">|</span>
+<span class="o">|</span>  <span class="n">callsites</span>
+<span class="o">|</span>      <span class="n">This</span> <span class="n">edge</span> <span class="n">relates</span> <span class="n">a</span> <span class="n">function</span> <span class="n">to</span> <span class="n">the</span> <span class="s1">&#39;call&#39;</span> <span class="ow">or</span> <span class="s1">&#39;invoke&#39;</span> <span class="n">instructions</span> <span class="n">that</span> <span class="n">call</span> <span class="n">it</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">pointer</span> <span class="n">analysis</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>(We could find a nicer looking version of this same information by searching for
+<code class="docutils literal notranslate"><span class="pre">Function</span></code> in the <a class="reference internal" href="api/index.html#mate-api-documentation"><span class="std std-ref">API docs</span></a>.)</p>
+<p><code class="docutils literal notranslate"><span class="pre">recv</span></code> is an instance of <code class="docutils literal notranslate"><span class="pre">Function</span></code>, which has a bunch of attributes. Let’s
+look at the <em>callsites</em> attribute of <code class="docutils literal notranslate"><span class="pre">recv</span></code> to see where it’s called (i.e.,
+where user input can enter the program):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recv</span><span class="o">.</span><span class="n">callsites</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">Call</span><span class="p">(</span><span class="mi">727</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This is a list with a single <code class="docutils literal notranslate"><span class="pre">Call</span></code> instruction in it. Let’s take a closer
+look:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">call</span> <span class="o">=</span> <span class="n">recv</span><span class="o">.</span><span class="n">callsites</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">help</span><span class="p">(</span><span class="n">call</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+</pre></div>
+</div>
+<p>You can see what this instruction looks like at the LLVM level with
+<code class="docutils literal notranslate"><span class="pre">.pretty_string</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">call</span><span class="o">.</span><span class="n">pretty_string</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;  %t8 = call i64 @recv(i32 %t6, i8* %t7, i64 1023, i32 0), !dbg !117&#39;</span>
+</pre></div>
+</div>
+<p>But where is this call happening? Look at the function the call is in:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">caller</span> <span class="o">=</span> <span class="n">call</span><span class="o">.</span><span class="n">parent_block</span><span class="o">.</span><span class="n">parent_function</span>
+<span class="n">caller</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@handle_loop</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exploring-the-cfg">
+<h3>Exploring the CFG<a class="headerlink" href="#exploring-the-cfg" title="Permalink to this headline">¶</a></h3>
+<p>Now we know that network input enters the program at this call to <code class="docutils literal notranslate"><span class="pre">recv</span></code> in
+<code class="docutils literal notranslate"><span class="pre">handle_loop</span></code>. What happens after that? Look at the <em>successors</em> (i.e.,
+instructions immediately following) this call:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">caller</span><span class="o">.</span><span class="n">successors</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">Store</span><span class="p">(</span><span class="mi">730</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This isn’t too helpful - we’ve just taken a single step through the <em>control
+flow graph</em> (CFG). Let’s try taking a few at once. This recursive query will
+build the slice of the CFG that follows this call (essentially, the transitive
+closure of <code class="docutils literal notranslate"><span class="pre">.successors</span></code> and function calls):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">PathBuilder</span><span class="p">(</span><span class="n">cfl</span><span class="o">.</span><span class="n">ForwardCFGPath</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">starting_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">Node</span><span class="p">:</span> <span class="n">Node</span><span class="o">.</span><span class="n">uuid</span> <span class="o">==</span> <span class="n">call</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">limited_to</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">cpg</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cpg</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">target</span> <span class="o">==</span> <span class="n">cpg</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">Call</span><span class="p">(</span><span class="mi">727</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">Store</span><span class="p">(</span><span class="mi">730</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">Load</span><span class="p">(</span><span class="mi">731</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">Instruction</span><span class="p">(</span><span class="mi">732</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">...</span>
+</pre></div>
+</div>
+<p><em>Woah</em>, that’s a lot of nodes! A few hundred, at least:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cpg</span><span class="o">.</span><span class="n">Node</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">target</span> <span class="o">==</span> <span class="n">cpg</span><span class="o">.</span><span class="n">Node</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">678</span>
+</pre></div>
+</div>
+<p>That’s not very helpful.</p>
+</div>
+<div class="section" id="exploring-the-dfg">
+<h3>Exploring the DFG<a class="headerlink" href="#exploring-the-dfg" title="Permalink to this headline">¶</a></h3>
+<p>The CFG was overwhelming. Let’s just look at the places where the data from the
+<code class="docutils literal notranslate"><span class="pre">recv</span></code> call gets used.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">call</span><span class="o">.</span><span class="n">used_by</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">Store</span><span class="p">(</span><span class="mi">730</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Again, we’ve just taken a single step through the graph and it sure didn’t get
+us very far. Let’s try taking a few at once, and this time let’s print something
+a bit more useful.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">PathBuilder</span><span class="p">(</span><span class="n">cfl</span><span class="o">.</span><span class="n">CSThinDataflowPath</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">starting_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">Node</span><span class="p">:</span> <span class="n">Node</span><span class="o">.</span><span class="n">uuid</span> <span class="o">==</span> <span class="n">call</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">limited_to</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">cpg</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cpg</span><span class="o">.</span><span class="n">Instruction</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">target</span> <span class="o">==</span> <span class="n">cpg</span><span class="o">.</span><span class="n">Instruction</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">opcode</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">parent_block</span><span class="o">.</span><span class="n">parent_function</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Opcode</span><span class="o">.</span><span class="n">CALL</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">STORE</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">LOAD</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">LOAD</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">LOAD</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">LOAD</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">LOAD</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">LOAD</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">SUB</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">SUB</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">GETELEMENTPTR</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">ICMP</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">ICMP</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">ICMP</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">GETELEMENTPTR</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">GETELEMENTPTR</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">BR</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">BR</span> <span class="p">:</span> <span class="n">handle_loop</span>
+<span class="n">Opcode</span><span class="o">.</span><span class="n">BR</span> <span class="p">:</span> <span class="n">handle_loop</span>
+</pre></div>
+</div>
+<p>Ah, that’s not so bad! In fact… it seems a little sparse. First of all, the
+targets are all in <code class="docutils literal notranslate"><span class="pre">handle_loop</span></code>, but surely user-provided data flows to other
+functions. Actually, we’re looking at the data flow from <em>the return value</em> of
+<code class="docutils literal notranslate"><span class="pre">recv</span></code>. If we want to look for how user-provided data flows through the
+program, we’ll have to try something else.</p>
+</div>
+<div class="section" id="signatures">
+<h3>Signatures<a class="headerlink" href="#signatures" title="Permalink to this headline">¶</a></h3>
+<p>The problem is that we really want to track the flow of data originating
+<em>outside</em> of the program. The mechanism MATE uses for this purpose is called an
+<a class="reference internal" href="signatures.html"><span class="doc">“input signature”</span></a>. There are also corresponding “output
+signatures” which represent the effect of the program on the external world
+(printing messages, creating files, etc.).</p>
+<p>Look at the (callees of the) calls to which user input flows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ins</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">uuid</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">recv</span><span class="o">.</span><span class="n">signatures</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cpg</span><span class="o">.</span><span class="n">InputSignature</span><span class="p">)]</span>
+<span class="n">path</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">PathBuilder</span><span class="p">(</span><span class="n">cfl</span><span class="o">.</span><span class="n">CSDataflowPath</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">starting_at</span><span class="p">(</span><span class="k">lambda</span> <span class="n">Node</span><span class="p">:</span> <span class="n">Node</span><span class="o">.</span><span class="n">uuid</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">ins</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">limited_to</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">cpg</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">cpg</span><span class="o">.</span><span class="n">Call</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path</span><span class="o">.</span><span class="n">target</span> <span class="o">==</span> <span class="n">cpg</span><span class="o">.</span><span class="n">Call</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">callees</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@recv</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@strchr</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@strcmp</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@strcmp</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@strcmp</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@strlen</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@fopen</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@fprintf</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@fclose</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@fgets</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@strlen</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@send</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@new_cmd</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@free</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@parse</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@cmd_write</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@cmd_read</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@free</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@handle</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span><span class="o">&gt;</span><span class="p">:</span><span class="n">llvm</span><span class="o">-</span><span class="n">link</span><span class="p">:</span><span class="nd">@free</span><span class="p">)</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Can you see the vulnerability? There’s a lot there, but consider: For which of
+these functions would it be a <em>problem</em> if its arguments were influenced by user
+input? A further hint: it’s a path traversal vulnerability.</p>
+<p>The problem is that the user input from this call to <code class="docutils literal notranslate"><span class="pre">recv</span></code> flows to the path
+argument of a call to <code class="docutils literal notranslate"><span class="pre">fopen</span></code>: the key that the user gives to the <code class="docutils literal notranslate"><span class="pre">read</span></code>
+command is used as a path, with no sanitization. This means the user can input a
+key like <code class="docutils literal notranslate"><span class="pre">../../../super/secret/file</span></code> and read the contents of that path.</p>
+<p>Nice, you found the vulnerability! The <a class="reference internal" href="tutorial-flowfinder.html"><span class="doc">Flowfinder Tutorial</span></a> walks through
+finding the same bug with <a class="reference internal" href="using-flowfinder.html"><span class="doc">Flowfinder</span></a>. Try comparing
+the two approaches!</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="architecture.html" class="btn btn-neutral float-right" title="Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tutorial-flowfinder.html" class="btn btn-neutral float-left" title="Flowfinder Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019-2022, The MATE Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

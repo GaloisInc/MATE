@@ -5,56 +5,7 @@ Flowfinder Tutorial
 This tutorial will guide you through finding a bug with
 :doc:`Flowfinder <using-flowfinder>`.
 
-*****
-Setup
-*****
-
-First, get a MATE system running and install the CLI (see :doc:`quickstart`).
-Then,
-
-- Download
-  `notes.c
-  <https://github.com/GaloisInc/MATE/blob/main/frontend/test/programs/notes.c>`__,
-  or copy it from the MATE source root: ``cp
-  $MATE_SOURCE/frontend/test/programs/notes.c .``
-- Upload ``notes.c`` to MATE: ``mate-cli oneshot -p notes.c``
-- Navigate to the builds page (at `<http://localhost:3000/builds>`_) to check
-  the status of the build; it should complete in less than a minute
-
-**********
-Background
-**********
-
-The target program is a simple server that allows users to create notes
-(i.e., store binary blobs). When a note is written, the user is given a
-completely random key. They can retrieve the note using this key.
-
-The server supports three commands, ``write``, ``read``, and ``quit``.
-
-Example use:
-
-::
-
-   $ clang -Wall -Werror -o notes -O1 -g notes.c
-   $ ./notes
-   Listening on port 8894
-
-In a separate terminal:
-
-::
-
-   $ nc localhost 8894
-   notes> write very secret data
-   <server will send back a long alphanumeric key here>
-   notes> read <key that the server sent back>
-   very secret data
-
-Notably, we'll use MATE to find a bug that *can't be found by a fuzzer*. The
-``notes.c`` program contains tests and a fuzzing harness, all of which can
-be run with `Valgrind <https://valgrind.org/docs/manual/mc-manual.html>`_,
-`ASan <https://clang.llvm.org/docs/AddressSanitizer.html>`_, and
-`UBSan <https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html>`_
-without detecting any errors.
+.. include:: include/tutorial-shared.rst
 
 ********
 Tutorial
@@ -156,4 +107,8 @@ variable at the C level). If you "Show operands" on the ``call`` to ``recv`` and
 then "Show operands" on the ``getelementptr`` instruction, you can see that this
 is the buffer passed as the second argument of ``recv``. (You could also try
 establishing this by walking the other direction in the dataflow graph, by
-clicking "Show uses" on the ``alloca`` and so on.) Nice!
+clicking "Show uses" on the ``alloca`` and so on.)
+
+Nice, you found the vulnerability! The :doc:`tutorial-notebooks` walks through
+finding the same bug with :doc:`MATE Notebooks <using-notebooks>`. Try comparing
+the two approaches!
