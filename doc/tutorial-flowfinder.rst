@@ -49,6 +49,13 @@ In a separate terminal:
    notes> read <key that the server sent back>
    very secret data
 
+Notably, we'll use MATE to find a bug that *can't be found by a fuzzer*. The
+``notes.c`` program contains tests and a fuzzing harness, all of which can
+be run with `Valgrind <https://valgrind.org/docs/manual/mc-manual.html>`_,
+`ASan <https://clang.llvm.org/docs/AddressSanitizer.html>`_, and
+`UBSan <https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html>`_
+without detecting any errors.
+
 ********
 Tutorial
 ********
