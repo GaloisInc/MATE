@@ -755,6 +755,43 @@ Several components were de-prioritized during development, such as:
 Furthermore, some features of the CI system and development flow have not been
 ported over to Github.
 
+Contributors
+============
+
+The following individuals contributed to the initial development of MATE during
+the DARPA CHESS program:
+
+- Aaron Bembenek
+- Alex Cameron
+- Andrei Stefanescu
+- Andrew Kent
+- Ankita Singh
+- Annie Cherkaev
+- Artem Dinaburg
+- Ben Davis
+- Ben Selfridge
+- Boyan Milanov
+- Brad Swain
+- Carson Harmon
+- Eric Hennenfent
+- Eric Kilmer
+- Jason Graalum
+- Karl Smeltzer
+- Kevin Zhang
+- Langston Barrett
+- Michelle Cheatham
+- Niki Carroll
+- P.C. Shyamshankar
+- Richard Jones
+- Rory Mackie
+- Scott Moore
+- Sonya Schriner
+- Stephen Chong
+- Ted Hille
+- Trent Brunson
+- Weston Hopkins
+- William Woodruff
+
 *******************
 CI and Git Branches
 *******************
