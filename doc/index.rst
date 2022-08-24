@@ -29,6 +29,7 @@ The `source code <https://github.com/GaloisInc/MATE>`_ and `documentation
 
    overview
    quickstart
+   ui-walkthrough
 
 .. toctree::
    :hidden:

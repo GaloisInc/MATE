@@ -481,7 +481,7 @@ main =
     rstFiles <- getDirectoryFiles sourceRoot ["doc/*.rst"]
     pyFiles <- getDirectoryFiles sourceRoot ["doc//*.py"]
     assetFiles <- getDirectoryFiles sourceRoot ["doc/assets/*"]
-    includeFiles <- getDirectoryFiles sourceRoot ["doc/include/*.rst"]
+    includeFiles <- getDirectoryFiles sourceRoot ["doc/include/*"]
     mateCommonPackageFiles <- mateCommonPackage
     mateRestClientPackageFiles <- mateRestClientPackage
     mateCliPackageFiles <- mateCliPackage
