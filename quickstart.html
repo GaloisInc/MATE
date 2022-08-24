@@ -93,7 +93,12 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#build-and-run-mate">Build and Run MATE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-and-run-mate">Build and Run MATE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pulling-images-from-ghcr">Pulling Images from GHCR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-docker-images">Building the Docker Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-mate">Running MATE</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#upload-a-program">Upload a Program</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#analyze-with-mate">Analyze with MATE</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pois">POIs</a></li>
@@ -244,7 +249,27 @@ of the documentation.</p>
 <span class="nb">cd</span> MATE
 </pre></div>
 </div>
-<p>Build Docker images with the MATE tools (this may take a long time, see
+<p>Install the CLI. (Run this from the MATE source root. You can install this into a
+<a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">virtual environment</a> if
+desired):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r cli-requirements.txt
+</pre></div>
+</div>
+<p>There are two ways to obtain the requisite Docker images: pulling them pre-built
+from Github Container Registry (GHCR), or building them yourself.</p>
+<div class="section" id="pulling-images-from-ghcr">
+<h3>Pulling Images from GHCR<a class="headerlink" href="#pulling-images-from-ghcr" title="Permalink to this headline">¶</a></h3>
+<p>To pull pre-built Docker images from GHCR:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker pull ghcr.io/galoisinc/mate-dev:main
+docker pull ghcr.io/galoisinc/mate-dist:main
+docker pull ghcr.io/galoisinc/mate-notebook:main
+docker pull ghcr.io/galoisinc/mate-ui:main
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-docker-images">
+<h3>Building the Docker Images<a class="headerlink" href="#building-the-docker-images" title="Permalink to this headline">¶</a></h3>
+<p>To build Docker images with the MATE tools (this may take a long time, see
 <a class="reference internal" href="architecture.html#docker"><span class="std std-ref">Docker Images and Compositions</span></a> for more information):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker build --target dev --tag ghcr.io/galoisinc/mate-dev:local .
 docker run --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/mate -it ghcr.io/galoisinc/mate-dev:local ./shake.sh -j bdist
@@ -262,16 +287,20 @@ machine (or Docker environment) doesn’t have sufficient memory.</p>
 may have some luck with reducing the build’s parallelism (e.g. with <code class="docutils literal notranslate"><span class="pre">-j2</span></code>
 instead of <code class="docutils literal notranslate"><span class="pre">-j</span></code>) or removing <code class="docutils literal notranslate"><span class="pre">-j</span></code> entirely.</p>
 </div>
-<p>Spin up the MATE services (database, REST API, UI, etc., see <a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a>
-for details):</p>
+</div>
+<div class="section" id="running-mate">
+<h3>Running MATE<a class="headerlink" href="#running-mate" title="Permalink to this headline">¶</a></h3>
+<p>You’re ready to spin up the MATE services (database, REST API, UI, etc., see
+<a class="reference internal" href="architecture.html"><span class="doc">Architecture</span></a> for details).</p>
+<p>If you pulled pre-built images:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
+</pre></div>
+</div>
+<p>If you built images locally, you’ll have to override the variables set in
+<code class="docutils literal notranslate"><span class="pre">.env</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">MATE_DOCKER_TAG</span><span class="o">=</span>:local docker-compose -f docker-compose.yml -f docker-compose.ui.yml -f docker-compose.notebook.yml up
 </pre></div>
 </div>
-<p>Install the CLI. (Run this from the MATE source root. You can install this into a
-<a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">virtual environment</a> if
-desired):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r cli-requirements.txt
-</pre></div>
 </div>
 </div>
 <div class="section" id="upload-a-program">
