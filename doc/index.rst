@@ -11,6 +11,9 @@ For a high-level overview of MATE, see :doc:`overview`. To start using MATE to
 explore a program, see :doc:`quickstart`. Contributors should read
 :doc:`hacking`.
 
+The `source code <https://github.com/GaloisInc/MATE>`_ and `documentation
+<https://galoisinc.github.io/MATE/>`_ are available online.
+
 ..
    HACK(ww): https://stackoverflow.com/a/31820846
    HACK(ww): The above comment doesn't work in the toctree context, where
