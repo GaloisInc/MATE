@@ -6,7 +6,7 @@ MATE Python Notebooks
    The first paragraph is duplicated in overview.rst, and the first sentence is
    in quickstart.rst. Updates to one should be reflected in the others.
 
-MATE has :ref:`a Python API <query_desc>`_ for querying :doc:`the CPG <cpg>` and
+MATE has :ref:`a Python API <query_desc>` for querying :doc:`the CPG <cpg>` and
 exposes browser-based, interactive Jupyter notebooks with this query interface
 pre-loaded. These notebooks can be used to write complex, recursive,
 whole-program queries that answer detailed questions like "What sequences of
@@ -18,6 +18,9 @@ platform for users to build reusable apps on the MATE platform (such as
 :doc:`usagefinder`).
 
 The MATE notebook server is exposed via web interface at `<http://localhost:8889/>`_.
+
+See :doc:`tutorial-notebooks` for a hands-on guide to finding a bug with MATE
+notebooks.
 
 *****************
 Create a notebook

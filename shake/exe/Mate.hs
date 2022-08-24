@@ -481,6 +481,7 @@ main =
     rstFiles <- getDirectoryFiles sourceRoot ["doc/*.rst"]
     pyFiles <- getDirectoryFiles sourceRoot ["doc//*.py"]
     assetFiles <- getDirectoryFiles sourceRoot ["doc/assets/*"]
+    includeFiles <- getDirectoryFiles sourceRoot ["doc/include/*.rst"]
     mateCommonPackageFiles <- mateCommonPackage
     mateRestClientPackageFiles <- mateRestClientPackage
     mateCliPackageFiles <- mateCliPackage
@@ -500,6 +501,7 @@ main =
         , rstFiles
         , pyFiles
         , assetFiles
+        , includeFiles
         , mateCommonPackageFiles
         , mateRestClientPackageFiles
         , mateCliPackageFiles
@@ -514,6 +516,8 @@ main =
       \file -> copyFile' file (buildRoot </> "doc" </> takeFileName file)
     forP_ assetFiles $
       \file -> copyFile' file (buildRoot </> "doc/assets" </> takeFileName file)
+    forP_ includeFiles $
+      \file -> copyFile' file (buildRoot </> "doc/include" </> takeFileName file)
     numProcs <- shakeThreads <$> getShakeOptions
     let sphinxBuild = cmd_
                         [Cwd (buildRoot </> "doc"), addBDistToPythonPath, addBDistBinsToPath]

@@ -35,6 +35,7 @@ The `source code <https://github.com/GaloisInc/MATE>`_ and `documentation
    :caption: Tutorials
 
    tutorial-flowfinder
+   tutorial-notebooks
 
 .. toctree::
    :hidden:
