@@ -1,6 +1,10 @@
 MATE: Merged Analysis To prevent Exploits
 =========================================
 
+..
+   The following paragraph is duplicated in ../README.md and overview.rst;
+   updates to one should be reflected in the other(s).
+
 MATE is a suite of tools for interactive program analysis with a focus on
 hunting for bugs in C and C++ code. MATE unifies application-specific and
 low-level vulnerability analysis using code property graphs (CPGs), enabling the

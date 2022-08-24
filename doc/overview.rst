@@ -8,6 +8,10 @@ Overview
   This page provides a high-level overview of MATE. To get started using MATE
   right away, see :doc:`quickstart`.
 
+..
+   The following paragraph is duplicated in ../README.md and index.rst;
+   updates to one should be reflected in the other(s).
+
 MATE is a suite of tools for interactive program analysis with a focus on
 hunting for bugs in C and C++ code. MATE unifies application-specific and
 low-level vulnerability analysis using code property graphs (CPGs), enabling the
