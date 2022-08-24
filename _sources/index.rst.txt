@@ -1,6 +1,10 @@
 MATE: Merged Analysis To prevent Exploits
 =========================================
 
+..
+   The following paragraph is duplicated in ../README.md and overview.rst;
+   updates to one should be reflected in the other(s).
+
 MATE is a suite of tools for interactive program analysis with a focus on
 hunting for bugs in C and C++ code. MATE unifies application-specific and
 low-level vulnerability analysis using code property graphs (CPGs), enabling the
@@ -10,6 +14,9 @@ implementation details and the high-level semantics of target C/C++ programs.
 For a high-level overview of MATE, see :doc:`overview`. To start using MATE to
 explore a program, see :doc:`quickstart`. Contributors should read
 :doc:`hacking`.
+
+The `source code <https://github.com/GaloisInc/MATE>`_ and `documentation
+<https://galoisinc.github.io/MATE/>`_ are available online.
 
 ..
    HACK(ww): https://stackoverflow.com/a/31820846
