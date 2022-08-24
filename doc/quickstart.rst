@@ -139,7 +139,7 @@ can start Flowfinder from a POI as described above, but you can also start
 Flowfinder without viewing a particular POI by clicking "analyze in Flowfinder"
 from the builds page.
 
-See :doc:`using-flowfinder` for more details.
+See :doc:`using-flowfinder` and :doc:`tutorial-flowfinder` for more information.
 
 Notebooks
 =========
