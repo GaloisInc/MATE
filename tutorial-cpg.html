@@ -457,20 +457,6 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1790</span><span class="o">/</span><span class="mf">3950505715.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">mate_common.models.artifacts</span> <span class="kn">import</span> <span class="n">ArtifactKind</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">session</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">new_session</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">build</span> <span class="o">=</span> <span class="p">(</span>
-
-<span class="ne">NameError</span>: name &#39;db&#39; is not defined
-</pre></div>
-</div>
-</div>
 </div>
 <p>With the CPG connected to the notebook, let’s start exploring the CPG with some graph visualizations. The following cell implements a graphviz-based visualization function that takes as input queries defining the nodes and edges to visualize, along with options for configuring the output.</p>
 <p>It is very complex and you don’t need to understand it to complete the tutorial—just run the block to make the definitions available in the cells that follow. In the future, you might find this code useful to re-use or modify when writing your own CPG exploration tools.</p>
