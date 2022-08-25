@@ -512,6 +512,7 @@ main =
     liftIO $ createDirectoryIfMissing True (buildRoot </> "doc/api")
     copyFile' "doc/api/index.rst" (buildRoot </> "doc/api/index.rst")
     copyFile' "llvm/PointerAnalysis/README.rst" (buildRoot </> "doc/standalonepa.rst")
+    copyFile' "jupyter/examples/cpg-tutorial-no-solutions.ipynb" (buildRoot </> "doc/tutorial-cpg.ipynb")
     forP_ (rstFiles ++ pyFiles) $
       \file -> copyFile' file (buildRoot </> "doc" </> takeFileName file)
     forP_ assetFiles $
