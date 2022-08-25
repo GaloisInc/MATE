@@ -1,0 +1,57 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 1269, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/util.py", line 85, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/util.py", line 60, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 707, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 1025, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.8/dist-packages/nbclient/client.py", line 919, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from mate_common.models.artifacts import ArtifactKind
+
+session = db.new_session()
+
+build = (
+    session.query(db.Build)
+    .join(db.Artifact, db.Build.artifacts)
+    .filter(
+        db.Artifact.kind == ArtifactKind.CompileOutputBitcode,
+        db.Artifact.attributes['binary_filename'].astext == "guessing-game.bin"
+    )
+    .with_entities(db.Build)
+    .first()
+)
+
+if build is None:
+    print("\x1b[31mPlease build a CPG for the guess-game.c program before continuing.")
+    print("\nYou can build the CPG using the `mate-cli` command line tool by downloading")
+    print("`guessing-game.c` and then running the command `mate-cli oneshot guessing-game.c.`")
+    print("\nYou may need to supply a connection string argument to `mate-cli` depending on")
+    print("your network and MATE configuration.")
+    print("\nOnce you have built a CPG for the guessing game, please run this cell again.\x1b[0m")
+else:
+    cpg = session.graph_from_build(build)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m/tmp/ipykernel_1801/3950505715.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mfrom[0m [0mmate_common[0m[0;34m.[0m[0mmodels[0m[0;34m.[0m[0martifacts[0m [0;32mimport[0m [0mArtifactKind[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0;34m[0m[0m
+[0;32m----> 3[0;31m [0msession[0m [0;34m=[0m [0mdb[0m[0;34m.[0m[0mnew_session[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m build = (
+
+[0;31mNameError[0m: name 'db' is not defined
+NameError: name 'db' is not defined
+
