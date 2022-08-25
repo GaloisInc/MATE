@@ -87,3 +87,8 @@ html_theme = "sphinx_rtd_theme"
 html_static_path = []
 
 # -- Extension configuration -------------------------------------------------
+
+# Do not attempt to execute iPython notebooks, as it will fail.
+#
+# https://myst-nb.readthedocs.io/en/latest/configuration.html#execution
+nb_execution_mode = "off"
