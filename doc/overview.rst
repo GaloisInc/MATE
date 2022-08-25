@@ -195,6 +195,20 @@ program under analysis.
 
 See :ref:`Points-to analysis <points_to_desc>` for more information.
 
+***************************
+Comparison to Related Tools
+***************************
+
+We built MATE with two primary use-cases in mind:
+
+- Use by security researchers to find bugs in C and C++ programs
+- Integration of the CPG and corresponding Python API into other applications
+
+The following table compares MATE to tools with similar goals:
+
+.. raw:: html
+   :file: include/comparison-table.html
+
 ***********
 Limitations
 ***********
