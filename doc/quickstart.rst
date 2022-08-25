@@ -134,6 +134,16 @@ Wait and refresh the page until the status of the build has changed from
 of seconds, for larger programs it can take hours. See :doc:`debugging-builds`
 for troubleshooting tips.
 
+*********
+Tutorials
+*********
+
+At this point, you may want to check out one of the tutorials:
+
+- :doc:`tutorial-cpg`
+- :doc:`tutorial-flowfinder`
+- :doc:`tutorial-notebooks`
+
 *****************
 Analyze with MATE
 *****************
