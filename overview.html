@@ -112,6 +112,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#pointer-analysis">Pointer Analysis</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#comparison-to-related-tools">Comparison to Related Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#project-status">Project Status</a></li>
 </ul>
@@ -353,6 +354,134 @@ allows for accurate, narrow tracking of data- and control-flow through the
 program under analysis.</p>
 <p>See <a class="reference internal" href="architecture.html#points-to-desc"><span class="std std-ref">Points-to analysis</span></a> for more information.</p>
 </div>
+</div>
+<div class="section" id="comparison-to-related-tools">
+<h2>Comparison to Related Tools<a class="headerlink" href="#comparison-to-related-tools" title="Permalink to this headline">¶</a></h2>
+<p>We built MATE with two primary use-cases in mind:</p>
+<ul class="simple">
+<li><p>Use by security researchers to find bugs in C and C++ programs</p></li>
+<li><p>Integration of the CPG and corresponding Python API into other applications</p></li>
+</ul>
+<p>The following table compares MATE to tools with similar goals:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Advantages over MATE</th>
+      <th>Disadvantages vs MATE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>GitHub/Semmle CodeQL</strong>
+        <ul>
+          <li>Commercial code analysis for C/C++, Java, etc.</li>
+          <li>Custom logic-based query language</li>
+          <li>Library of detectors for vulnerabilities and flaws</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Robust commercial implementation</li>
+          <li>Faster whole-program analysis</li>
+          <li>Large library of provided and community-authored vulnerability and code quality checks</li>
+          <li>IDE integration</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Does not explicitly model memory relationships</li>
+          <li>Less comprehensive dataflow analyses</li>
+          <li>Limited support for interactive exploration and visualization</li>
+          <li>Difficult to integrate queries into custom workflows or applications</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Joern</strong>
+        <ul>
+          <li>Open source CPG analysis</li>
+          <li>Custom query language DSL</li>
+          <li>Coverage of wide range of languages</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Fuzzy parsing approach gives best-effort results on most programs without significant effort</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Limited support for inter-procedural dataflow analysis</li>
+          <li>Limited support for interactive exploration and visualization</li>
+          <li>Difficult to integrate queries into custom workflows or app</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Semgrep/weggli</strong>
+        <ul>
+          <li>AST-aware grep for code</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Fast, low-latency interactions</li>
+          <li>Syntax-focused analysis works on all programs without pre-processing</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Limited support for inter-procedural dataflow analysis</li>
+          <li>Limited support for interactive exploration and visualization</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Other SAST tools, e.g., Coverity, CodeSonar, Veracode, Infer, Clang Static Analyzer</strong>
+      </td>
+      <td>
+        <ul>
+          <li>Robust implementations</li>
+          <li>Large libraries of provided and community-authored vulnerability and code quality checks</li>
+          <li>IDE integration</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Limited support for interactive exploration and visualization</li>
+          <li>Difficult to integrate queries into custom workflows or app</li>
+        </ul>
+      </td>
+      <td>
+        <ul></ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Interactive binary-level bug-hunting tools, e.g., IDA Pro, Binary Ninja, and angr management</strong>
+        <ul></ul>
+      </td>
+      <td>
+        <ul>
+          <li>Robust commercial implementation</li>
+          <li>Can work without source code</li>
+          <li>Community support and features (e.g., community-authored plugins)</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Limited support for inter-procedural dataflow analysis</li>
+          <li>Limited support for high-level (source-level) semantics</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </div>
 <div class="section" id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
