@@ -47,7 +47,7 @@ class CommandInjection(Analysis):
         include SQL queries, HTTP requests, and "system" commands.
 
         When command sequences are built up using string functions, command injection
-        can occur: a malicious user can provide inputs that thew target interprets
+        can occur: a malicious user can provide inputs that the target interprets
         as instructions, rather than as data.
 
         For example, the following pseudocode to query a user by ID:

@@ -180,6 +180,7 @@ def _setup_compile_parser(subparsers: argparse._SubParsersAction) -> None:
     create_source_flags.add_argument(
         "--artifact-id", type=str, default=None, help="the ID of the artifact to compile"
     )
+    # See doc/hacking.rst#History.
     create_source_flags.add_argument(
         "--challenge-name", type=str, default=None, help="the name of the challenge to compile"
     )

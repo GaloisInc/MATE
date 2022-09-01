@@ -1,134 +1,241 @@
-####################
-MATE System Overview
-####################
+########
+Overview
+########
 
 .. image:: assets/mate-architecture.jpg
 
-Merged Analysis To Prevent Exploits (MATE) is a set of tools for finding
-vulnerabilities in C and C++ programs. MATE unifies application-specific and
-low-level vulnerability analysis using code property graphs (CPGs), enabling
-the discovery of highly application-specific vulnerabilities that depend on
-both implementation details and the high-level semantics of target C/C++
-programs.
+.. NOTE::
+  This page provides a high-level overview of MATE. To get started using MATE
+  right away, see :doc:`quickstart`.
 
-*****************
-The MATE Workflow
-*****************
+..
+   The following paragraph is duplicated in ../README.md and index.rst;
+   updates to one should be reflected in the other(s).
 
-Given a C/C++ program MATE performs both whole program static and dynamic
-analyses which can be combined in search of vulnerabilities.
+MATE is a suite of tools for interactive program analysis with a focus on
+hunting for bugs in C and C++ code. MATE unifies application-specific and
+low-level vulnerability analysis using code property graphs (CPGs), enabling the
+discovery of highly application-specific vulnerabilities that depend on both
+implementation details and the high-level semantics of target C/C++ programs.
 
-The static analyses works by first compiling the target program to a single
-``.ll`` or ``.bc`` LLVM Intermediate Representation (IR) file using
-`GLLVM <https://github.com/SRI-CSL/gllvm>`_. MATE
-then constructs a CPG from the IR by compiling it with a custom build of LLVM.
-The database can be queried using a Python query interface (see below) which
-provides relevant domain-specific query abilities, such as searching for
-control-flow paths with certain properties.
+..
+   The following paragraph is duplicated in cpg.rst; updates to one should be
+   reflected in the other.
 
-When a program is built with MATE, MATE performs a collection of built-in
-analyses for common vulnerabilities types, and reports findings as Points of
-Interest. See the :doc:`POI Analyses <analysis>` documentation for details.
+MATE primarily finds vulnerabilities by static program analysis over the
+target's :doc:`CPG <cpg>`, which combines representations of a program’s syntax,
+control-flow, and dependencies into a unified graph structure that can be
+queried to identify potential flaws. The MATE CPG consists of the target’s:
 
-To enable users to effectively explore potential vulnerabilities
-discovered by MATE's automated analyses and apply their insights to
-find concrete evidence of exploitability, MATE includes a custom
-graphical user interface component Flowfinder. Flowfinder allows users to
-explore the CPG by interacting with a point-and-click graph
-visualization of the program, rather than manually reviewing source
-code or writing complex analysis queries.
+- abstract syntax tree (AST)
+- call graph (CG)
+- control-flow graph (CFG)
+- inter-procedural control-flow graph (ICFG)
+- inter-procedural dataflow-graph (DFG)
+- control-dependence graph (CDG)
+- points-to graph (PTG)
+- source-code to machine-code mapping
+- memory layout and DWARF type graph
 
-To answer more complex questions about the program, users can also access an
-interactive notebook service that gives programmatic access to the full CPG
-representation via a domain-specific query language. These notebooks can be used
-for one-off explorations, or as a platform for users to build reusable apps on
-the MATE platform. MATE includes the :doc:`UsageFinder <usagefinder>` app for
-finding vulnerabilities that result from incorrect usage of internal or external
-APIs.
+At a very high level, here's how MATE is used:
 
-MATE includes the `Manticore <https://github.com/trailofbits/manticore>`_
-symbolic execution engine, which can be used to complement MATE's static
-analysis capabilities with dynamic analysis for further exploration and
-validation of the behavior of the target program.
+- The user inputs the source code of a C or C++ program
+- MATE compiles and analyzes the program, creating one CPG per binary
+- The user attempts to find vulnerabilities in the program by using :ref:`the
+  MATE tools <overview_tools>`
 
-*************
-MATE Features
-*************
 
-The MATE Code Property Graph
-============================
+.. _overview_tools:
 
-MATE combines representations of a program's syntax, control-flow, data-flow,
-and the results of static analyses into a CPG that can be queried to identify
-potential flaws. One of the central features of the MATE CPG is a comprehensive
-and accurate mapping between program representations that occur at different
-phases of compilation, from the source level (LLVM bitcode), through the LLVM
-middle-end, all the way to the binary and its embedded DWARF debugging
-information. For more information on the CPG, see :doc:`schema <schemata/cpg>`.
+**********
+MATE Tools
+**********
+
+..
+   The idea is that each section here has about a one- or two-paragraph
+   description and an optional screenshot, plus a link to the full documentation
+   for each component. For comparison, quickstart.rst has one- or two-sentence
+   descriptions, a description of how to start up the component from the builds
+   page, plus a link to the component documentation.
+
+   The descriptions are generally taken from the first few paragraphs of the
+   respective documentation page, so updates to one should be reflected in the
+   other.
+
+MATE provides several tools for exploring and analyzing the program's code
+property graph (CPG).
+
+.. _overview_flowfinder:
+
+Flowfinder
+==========
+
+.. image:: assets/flowfinder-overview.jpg
+
+Flowfinder is an interactive, graphical, browser-based user interface for
+exploring a program's CPG. Given a potential vulnerability discovered via
+:ref:`MATE's automated analyses <overview_pois>`, Flowfinder displays relevant
+fragments of the CPG that explain relationships between program inputs, outputs,
+and computations. Similar to other program analysis tools such as IDA Pro,
+Binary Ninja, and angr management, Flowfinder is designed to help answer
+questions such as "How does this data get from here to there and how is it
+changed along the way" or "If I can control this buffer, what effect can I have
+on the execution of the program?" By leveraging the detailed information in the
+MATE CPG, Flowfinder is intended to enable interprocedural analysis of program
+dataflows at a relatively high level of abstraction. Rather than navigating by
+scrolling or jumping between detailed level views of the program's disassembly
+or source code, Flowfinder is designed to support expanding and contracting
+representations of code and data as needed and creating and manipulating
+visualizations of high-level flows between different components.
+
+See :doc:`using-flowfinder` for more information.
+
+.. _overview_pois:
+
+POI Queries
+===========
+
+.. image:: assets/flowfinder-base.png
+
+MATE ships with a number of automated analyses that detect potential
+vulnerabilities, called Points of Interest (POIs). These detectors are written
+using the MATE :ref:`Python query API <overview_query>`; it's easy to write
+additional application-, domain-, or API-specific detectors. Potential
+vulnerabilities found by these queries can be viewed in :ref:`Flowfinder
+<overview_flowfinder>` for collaboration and triage.
+
+See :doc:`pois` for more information.
+
+.. _overview_notebooks:
+
+Notebooks
+=========
+
+.. image:: assets/notebook-overview.jpg
+
+MATE has :ref:`a Python API <overview_query>` for querying the CPG and exposes
+browser-based, interactive Jupyter notebooks with this query interface
+pre-loaded. These notebooks can be used to write complex, recursive,
+whole-program queries that answer detailed questions like "What sequences of
+function calls can lead from point A to point B in this program?" or "Can user
+input flow into a memory location with a specific struct type, and from there to
+some particular function without passing through one of these three sanitization
+routines?" These notebooks can be used for one-off explorations, or as a
+platform for users to build reusable apps on the MATE platform (such as
+:doc:`usagefinder`).
+
+See :doc:`using-notebooks` for more information.
+
+Under-Constrained Manticore
+===========================
+
+.. image:: assets/uc-manticore.jpg
+
+MATE provides a web UI for exploring programs with the `Manticore
+<https://github.com/trailofbits/manticore>`_ symbolic execution engine in an
+*under-constrained* mode. Unlike traditional symbolic execution which begins at
+the program entry point and executes until the program exits, under-constrained
+symbolic execution starts at an arbitrary function. This specificity means that
+under-constrained symbolic execution can analyze parts of programs that would be
+too large or complex for traditional symbolic execution.
+
+Symbolic execution enables bit-precise local reasoning about memory and
+arithmetic, which complements MATE's higher-level inter-procedural data- and
+control-flow analyses.
+
+See :doc:`under-constrained-manticore` for more information.
+
+UsageFinder
+===========
+
+UsageFinder is a tool for finding vulnerabilities that result from incorrect
+usage of internal or external APIs.
+
+See :doc:`usagefinder` for more details.
+
+.. _overview_internals:
+
+*********************
+Other MATE Components
+*********************
+
+..
+   These are likely less important to users, and so have shorter descriptions.
+
+In addition to the above user-facing tools, the following are a few components
+of MATE that can be used to build other tools. For a comprehensive list of
+MATE's components, see :doc:`architecture`.
+
+.. _overview_query:
+
+The Query Interface
+===================
+
+MATE provides a `SQLAlchemy <https://docs.sqlalchemy.org/en/13/>`_-based Domain
+Specific Language (DSL) for querying the CPG, embedded in Python. It has
+abstractions relevant to program analysis, for example, control- and data-flow
+path queries.
+
+See :ref:`CPG Query API <query_desc>` for more information.
+
+REST API and CLI
+================
+
+Much of MATE's functionality is exposed via :doc:`a REST API <using-rest-api>`,
+and there is :doc:`a CLI <cli-overview>` for interacting with this API.
+
+.. _overview_pointer:
 
 Pointer Analysis
 ================
 
 MATE uses a precise, context-sensitive pointer analysis for C and C++ that
 allows for accurate, narrow tracking of data- and control-flow through the
-program under analysis. For more on the pointer analysis in MATE, see :doc:`the
-documentation <standalonepa>`.
+program under analysis.
 
-The Query Interface
-===================
+See :ref:`Points-to analysis <points_to_desc>` for more information.
 
-MATE provides a SQLAlchemy-based Domain Specific Language (DSL) for querying the
-CPG, embedded in Python. It has abstractions relevant to program analysis, for
-example, control- and data-flow path queries. See the
-:doc:`API documentation <api/MATE/modules>` for more information.
+***************************
+Comparison to Related Tools
+***************************
 
-POI Queries
-===========
+We built MATE with two primary use-cases in mind:
 
-POI (Point-Of-Interest) queries are CPG queries written by MATE users and
-developers that identify potentially problematic spots in a code base. These
-can then be triaged with human assistance or examined using directed symbolic
-execution. See :doc:`Vulnerability Types <vulnerability-types>` for
-more information.
+- Use by security researchers to find bugs in C and C++ programs
+- Integration of the CPG and corresponding Python API into other applications
 
-Flowfinder
-==========
+The following table compares MATE to tools with similar goals:
 
-Flowfinder is an interactive, graphical user interface for exploring a
-program's code property graph. Given a potential vulnerability
-discovered via MATE's automated analyses, Flowfinder displays relevant
-fragments of the CPG that explain relationships between program inputs,
-outputs, and computations. Users can deepen their understanding of the
-potential vulnerability by viewing additional fragments of the CPG
-that answer specific questions about program elements, such as data
-flows or control dependencies that influence specific statements. By
-exploring a potential vulnerability using Flowfinder, users can apply
-their high-level insights about the program's semantics and security
-requirements to eliminate analysis false positives or develop concrete
-inputs that demonstrate the insecurity of the program. See :doc:`Using Flowfinder
-<using-flowfinder>` for more information.
+.. raw:: html
+   :file: include/comparison-table.html
 
-Symbolic Execution with Manticore
-=================================
+***********
+Limitations
+***********
 
-One of the goals of the CHESS program is to not only find bugs, but generate
-proofs of vulnerability (PoVs) that demonstrate the problems in the target
-programs. MATE's approach to assisted PoV generation uses binary-level symbolic
-execution with Manticore (developed by Trail of Bits). While MATE must have
-access to the program source and does extensive analysis at that level,
-binary-level symbolic execution helps ensure that MATE only generates true
-exploits.
+MATE has several important limitations:
 
-Symbolic execution is incredibly powerful, in that it can solve complicated
-constraints and generate inputs to a program that cause very specific behavior.
-This precision comes at the cost of performance; it's prohibitively expensive
-to explore all paths in a large program using a tool like Manticore. The MATE
-solution is to identify possible bugs using a range of methods
-(manual inspection, POI queries, fuzzing), and then to use *directed* symbolic
-execution to generate PoVs. Directed symbolic execution is when the engine
-(Manticore) is provided with additional constraints telling it where to look,
-rather then exploring the program state space freely.
+- MATE analyzes only statically-linked code, so it can't find bugs or follow
+  control- and data-flows in dynamically-linked libraries without users writing
+  detailed :doc:`signatures` for external code.
+- MATE analyzes LLVM bitcode. In practice, obtaining LLVM bitcode requires
+  access to the source code, that the project can be compiled using
+  clang/clang++, and may require some mucking around with the build system.
+  Additionally, it’s much easier to use and understand MATE given familiarity
+  with the LLVM language, but such familiarity is fairly uncommon.
+- MATE's static analysis is fairly heavy-weight. The :ref:`pointer analysis
+  <overview_pointer>` in particular requires a significant amount of time and
+  RAM, on the order of hours and up to dozens of GB for large programs.
+  Furthermore, these requirements don’t relate predictably to program size or
+  other features.
+- MATE is still research-grade software. We have worked hard to make it robust,
+  but not all of MATE's tools and features will work well on all programs.
 
-See the :doc:`Under-constrained Manticore <under-constrained-manticore>` and
-:doc:`Mantiserve <mantiserve>` documentation for more information on accessing
-symbolic execution functionality within MATE.
+.. _status:
+
+**************
+Project Status
+**************
+
+MATE is not actively developed by Galois, Inc. Please reach out to the email
+address "mate at galois dot com" if you'd like to discuss further work on MATE!

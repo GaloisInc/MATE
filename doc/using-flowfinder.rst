@@ -2,6 +2,11 @@
 Using Flowfinder
 ################
 
+..
+   These first two paragraphs are duplicated and combined in overview.rst, and
+   the first sentence is in quickstart.rst. Updates to one should be reflected
+   in the others.
+
 Flowfinder is an interactive, graphical user interface for exploring a
 program's code property graph. Given a potential vulnerability
 discovered via MATE's automated analyses, Flowfinder displays relevant
@@ -15,13 +20,13 @@ their high-level insights about the program's semantics and security
 requirements to eliminate analysis false positives or develop concrete
 inputs that demonstrate the insecurity of the program.
 
-Similar to other program analysis tools such as IDA pro, Binary Ninja, and
+Similar to other program analysis tools such as IDA Pro, Binary Ninja, and
 angr management, Flowfinder is designed to help answer questions such
-as "how does this data get from here to there and how is it changed
-along the way" or "if I can control this buffer, what effect can I have on
+as "How does this data get from here to there and how is it changed
+along the way" or "If I can control this buffer, what effect can I have on
 the execution of the program?" By leveraging the detailed information
 in the MATE CPG, Flowfinder is intended to enable interprocedural
-analysis of program dataflows at relatively high-levels of
+analysis of program dataflows at a relatively high level of
 abstraction. Rather than navigating by scrolling or jumping between
 detailed level views of the program's disassembly or source code,
 Flowfinder is designed to support expanding and contracting
@@ -29,12 +34,15 @@ representations of code and data as needed and creating and
 manipulating visualizations of high-level flows between different
 components.
 
+See :doc:`tutorial-flowfinder` for a hands-on guide to finding a bug with
+Flowfinder.
+
 ******************
 Interface overview
 ******************
 
 When you click the analyze button on the Points of Interest page it
-will take you to the flowfinder user interface.
+will take you to the Flowfinder user interface.
 
 .. important::
    Loading Points of Interest can some times take a minute or two,
@@ -257,7 +265,7 @@ G:
     The background panel provides information about the general
     vulnerability class that this  point of interest belongs to. The
     background panel also provides directions and specific suggestions
-    of what to look for and what to try with this flowfinder
+    of what to look for and what to try with this Flowfinder
     interface.
 
 .. _slice-tool:

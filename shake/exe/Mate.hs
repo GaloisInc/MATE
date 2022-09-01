@@ -481,6 +481,7 @@ main =
     rstFiles <- getDirectoryFiles sourceRoot ["doc/*.rst"]
     pyFiles <- getDirectoryFiles sourceRoot ["doc//*.py"]
     assetFiles <- getDirectoryFiles sourceRoot ["doc/assets/*"]
+    includeFiles <- getDirectoryFiles sourceRoot ["doc/include/*"]
     mateCommonPackageFiles <- mateCommonPackage
     mateRestClientPackageFiles <- mateRestClientPackage
     mateCliPackageFiles <- mateCliPackage
@@ -500,6 +501,7 @@ main =
         , rstFiles
         , pyFiles
         , assetFiles
+        , includeFiles
         , mateCommonPackageFiles
         , mateRestClientPackageFiles
         , mateCliPackageFiles
@@ -510,10 +512,13 @@ main =
     liftIO $ createDirectoryIfMissing True (buildRoot </> "doc/api")
     copyFile' "doc/api/index.rst" (buildRoot </> "doc/api/index.rst")
     copyFile' "llvm/PointerAnalysis/README.rst" (buildRoot </> "doc/standalonepa.rst")
+    copyFile' "jupyter/examples/cpg-tutorial-no-solutions.ipynb" (buildRoot </> "doc/tutorial-cpg.ipynb")
     forP_ (rstFiles ++ pyFiles) $
       \file -> copyFile' file (buildRoot </> "doc" </> takeFileName file)
     forP_ assetFiles $
       \file -> copyFile' file (buildRoot </> "doc/assets" </> takeFileName file)
+    forP_ includeFiles $
+      \file -> copyFile' file (buildRoot </> "doc/include" </> takeFileName file)
     numProcs <- shakeThreads <$> getShakeOptions
     let sphinxBuild = cmd_
                         [Cwd (buildRoot </> "doc"), addBDistToPythonPath, addBDistBinsToPath]
@@ -669,14 +674,6 @@ main =
     numProcs <- shakeThreads <$> getShakeOptions
     callPytest False $ concat $
       [ [ "tests/mantiserve", "tests/integration/mantiserve", "--benchmark-disable" ]
-      , if numProcs > 1 then [ "-n", show numProcs ] else []
-      , arguments
-      ]
-
-  "challenge-tests" ~> do
-    numProcs <- shakeThreads <$> getShakeOptions
-    callPytest False $ concat $
-      [ [ "tests/integration/challenge", "--benchmark-disable" ]
       , if numProcs > 1 then [ "-n", show numProcs ] else []
       , arguments
       ]

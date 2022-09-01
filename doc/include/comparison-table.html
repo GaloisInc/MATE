@@ -1,0 +1,119 @@
+<table>
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Advantages over MATE</th>
+      <th>Disadvantages vs MATE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>GitHub/Semmle CodeQL</strong>
+        <ul>
+          <li>Commercial code analysis for C/C++, Java, etc.</li>
+          <li>Custom logic-based query language</li>
+          <li>Library of detectors for vulnerabilities and flaws</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Robust commercial implementation</li>
+          <li>Faster whole-program analysis</li>
+          <li>Large library of provided and community-authored vulnerability and code quality checks</li>
+          <li>IDE integration</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Does not explicitly model memory relationships</li>
+          <li>Less comprehensive dataflow analyses</li>
+          <li>Limited support for interactive exploration and visualization</li>
+          <li>Difficult to integrate queries into custom workflows or applications</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Joern</strong>
+        <ul>
+          <li>Open source CPG analysis</li>
+          <li>Custom query language DSL</li>
+          <li>Coverage of wide range of languages</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Fuzzy parsing approach gives best-effort results on most programs without significant effort</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Limited support for inter-procedural dataflow analysis</li>
+          <li>Limited support for interactive exploration and visualization</li>
+          <li>Difficult to integrate queries into custom workflows or app</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Semgrep/weggli</strong>
+        <ul>
+          <li>AST-aware grep for code</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Fast, low-latency interactions</li>
+          <li>Syntax-focused analysis works on all programs without pre-processing</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Limited support for inter-procedural dataflow analysis</li>
+          <li>Limited support for interactive exploration and visualization</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Other SAST tools, e.g., Coverity, CodeSonar, Veracode, Infer, Clang Static Analyzer</strong>
+      </td>
+      <td>
+        <ul>
+          <li>Robust implementations</li>
+          <li>Large libraries of provided and community-authored vulnerability and code quality checks</li>
+          <li>IDE integration</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Limited support for interactive exploration and visualization</li>
+          <li>Difficult to integrate queries into custom workflows or app</li>
+        </ul>
+      </td>
+      <td>
+        <ul></ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Interactive binary-level bug-hunting tools, e.g., IDA Pro, Binary Ninja, and angr management</strong>
+        <ul></ul>
+      </td>
+      <td>
+        <ul>
+          <li>Robust commercial implementation</li>
+          <li>Can work without source code</li>
+          <li>Community support and features (e.g., community-authored plugins)</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Limited support for inter-procedural dataflow analysis</li>
+          <li>Limited support for high-level (source-level) semantics</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -3,7 +3,7 @@ Command-Line Tools Reference
 ############################
 
 .. TIP::
-  See :doc:`mate-cli-overview` for an overview of these tools.
+  See :doc:`cli-overview` for an overview of these tools.
 
 .. autoprogram:: mate_cli.cli:parser
   :prog: mate-cli

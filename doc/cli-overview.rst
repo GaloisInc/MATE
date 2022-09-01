@@ -1,14 +1,13 @@
-###################################
-mate-cli Command Line Tool Overview
-###################################
+############
+CLI Overview
+############
 
-MATE users interact with the system using the :doc:`user-workflow`.
-
+``mate-cli`` is a CLI for interacting with the :doc:`REST API <using-rest-api>`.
 The Python APIs that ``mate-cli`` uses under the hood can be found under the
-`MATE REST Client API documentation <api/MATERestClient/mate_rest_client.html#http://>`_.
+`MATE REST Client API documentation
+<api/MATERestClient/mate_rest_client.html#http://>`_.
 
-.. NOTE::
-    For the detailed reference manual for ``mate-cli`` see :doc:`cli`.
+For the detailed reference manual for ``mate-cli`` see :doc:`cli`.
 
 ***********************
 Installing ``mate-cli``
@@ -50,7 +49,8 @@ Start from the MATE repository root:
     (env) $ mate-cli --help
 
 
-Once ``mate-cli`` is installed, you'll be able to interact with any MATE server.
+Once ``mate-cli`` is installed, you'll be able to interact with any MATE server
+(see :doc:`quickstart` for how to start a server).
 
 By default, ``mate-cli`` will connect to ``localhost:8666``. You can change this
 by specifying ``--conn your-server:port`` instead:
@@ -135,10 +135,12 @@ connection details like so:
 
 .. code-block:: bash
 
-    mate-cli --conn http://YOUR_CHESS_SYSTEM:8666 <subcommand>
+    mate-cli --conn http://localhost:8666 <subcommand>
 
 To see the full set of subcommands and arguments, run ``mate-cli --help`` or refer to the reference
 manual at :doc:`cli`.
+
+.. _mate_cli_basic:
 
 **********************************
 A basic workflow with ``mate-cli``
@@ -149,12 +151,21 @@ A basic workflow with ``mate-cli``
     For many use cases, :ref:`mate-cli oneshot <mate_cli_oneshot>` will be
     faster and simpler than the steps listed below.
 
-If we're analyzing our own program with MATE, most workflows will begin by uploading an artifact. We
+Most workflows will begin by uploading an artifact. We
 can do this with the ``mate-cli artifact create`` command like so:
 
 .. code-block:: bash
 
     mate-cli artifact create compile-target:single ./frontend/test/programs/overflowable-allocations.c
+
+MATE currently supports two types of compilation targets:
+
+#. Standalone C or C++ files (``foo.c`` or ``foo.cpp``);
+#. Program tarballs that contain a ``make``-based build (``foo.tar.gz``);
+
+You can construct a suitable tarball for a Make-based build with the ``tar`` command::
+
+  tar czf program.tar.gz program/
 
 The response from the MATE server will tell us the ID of the artifact that we just created. In this
 case, it is ``276d1771d6ee4532b89359eea2668482``.
@@ -167,10 +178,6 @@ previous step:
     mate-cli compile create --wait --artifact-id 276d1771d6ee4532b89359eea2668482
 
 .. NOTE::
-   If we wanted to compile a challenge program instead of our own artifact, we could just as easily
-   use the ``--challenge-name`` or ``--challenge-id`` arguments.
-
-.. NOTE::
 
     The ``--wait`` flag causes ``mate-cli compile create`` to block with a spinner
     until the compilation enters a terminal state (e.g., ``compiled`` or ``failed``).
@@ -179,8 +186,12 @@ previous step:
     to determine to compilation's status before proceeding.
 
 
-When our compile job reaches the ``compiled`` state, we can then use the ``build`` subcommand and
-generate the CPG so that MATE analyses can be run on the program:
+The top-level unit of analysis in MATE is a *CPG build*, or *build* for short. A
+build is typically associated with a particular binary produced by a compilation
+process. A compilation process can produce multiple binaries, and so a single
+compilation can produce multiple CPG builds. When our compile job reaches the
+``compiled`` state, we can then use the ``build`` subcommand and generate the
+CPG:
 
 .. code-block:: bash
 
@@ -220,9 +231,10 @@ Creating compilations and builds for a given source with ``mate-cli`` is a fairl
 ``mate-cli`` supports a subcommand called ``oneshot`` which is shorthand for this part of the
 workflow.
 
-The ``oneshot`` subcommand takes a single parameter describing either an artifact or a broker
-challenge, compiles it and creates build tasks for each target. The parameter can be a few different
-things and ``oneshot`` will try to "guess" what it is. Some examples are provided below:
+The ``oneshot`` subcommand takes a single parameter describing an artifact,
+compiles it and creates build tasks for each target. The parameter can be a few
+different things and ``oneshot`` will try to "guess" what it is. Some examples
+are provided below:
 
 From a source file:
 
@@ -240,19 +252,13 @@ From a directory:
 
 .. code-block:: bash
 
-    mate-cli oneshot ./program
+    mate-cli oneshot ./program/
 
 From an artifact ID:
 
 .. code-block:: bash
 
     mate-cli oneshot 2358423ccc7d4d0dba8477f9baf19420
-
-From a brokered challenge name (must be published on the CHESS challenge broker):
-
-.. code-block:: bash
-
-    mate-cli oneshot challenge-1
 
 The ``oneshot`` subcommand also supports the ``-p``/``--run-all-pois`` flag,
 which tells MATE to run all registered POI analyses once the CPG build completes:
