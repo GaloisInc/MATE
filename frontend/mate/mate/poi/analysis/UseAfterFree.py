@@ -265,7 +265,8 @@ def compute_use_after_free(
         )
         .join(
             AliasEdge,
-            (AliasEdge.source == BaseAllocation.uuid) & (AliasEdge.kind == EdgeKind.MAY_ALIAS),
+            (AliasEdge.source == BaseAllocation.uuid)
+            & (AliasEdge.kind.in_([EdgeKind.MAY_ALIAS, EdgeKind.CONTAINS])),
         )
         .join(
             LoadEdge,
@@ -311,7 +312,8 @@ def compute_use_after_free(
             )
             .join(
                 AliasEdge,
-                (AliasEdge.source == BaseAllocation.uuid) & (AliasEdge.kind == EdgeKind.MAY_ALIAS),
+                (AliasEdge.source == BaseAllocation.uuid)
+                & (AliasEdge.kind.in_([EdgeKind.MAY_ALIAS, EdgeKind.CONTAINS])),
             )
             .join(
                 StoreEdge,
@@ -356,7 +358,8 @@ def compute_use_after_free(
             )
             .join(
                 AliasEdge,
-                (AliasEdge.source == BaseAllocation.uuid) & (AliasEdge.kind == EdgeKind.MAY_ALIAS),
+                (AliasEdge.source == BaseAllocation.uuid)
+                & (AliasEdge.kind.in_([EdgeKind.MAY_ALIAS, EdgeKind.CONTAINS])),
             )
             .join(
                 DataflowEdge,
