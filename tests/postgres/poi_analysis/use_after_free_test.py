@@ -57,5 +57,5 @@ def test_poi_use_after_free_ntu(cpg_db_v2):
         for (free, usage, _, _) in compute_use_after_free(cpg.session, cpg)
     }
 
-    expected = {(76, 95)}
+    expected = {(69, 88)}
     assert results == expected
