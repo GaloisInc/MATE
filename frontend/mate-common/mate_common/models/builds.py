@@ -23,7 +23,6 @@ class PointerAnalysis(str, enum.Enum):
     """
 
     DEBUG = "debug"
-    SUBSET_AND_UNIFICATION = "subset-and-unification"
     SUBSET = "subset"
     UNIFICATION = "unification"
 

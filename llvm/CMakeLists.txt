@@ -35,7 +35,10 @@ find_program(
   NAMES "clang-format"
   DOC "Path to clang-format executable.")
 
+# cclyzer++ builds against LLVM 11 by default, override this.
+set(LLVM_MAJOR_VERSION 10)
 add_subdirectory(PointerAnalysis)
+
 add_subdirectory(MATE)
 add_subdirectory(headache)
 add_subdirectory(nomina)
