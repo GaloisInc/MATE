@@ -2,6 +2,8 @@
 
 # gha-docker-build: build a MATE Docker image with some caching help
 
+set -e
+
 # This script only works in CI.
 if [[ -z "${GITHUB_ACTIONS}" ]]; then
   >&2 echo "Fatal: Only works in GitHub Actions."
@@ -49,6 +51,14 @@ docker build \
   .
 
 docker push "${full_image_name}:${ref}"
+
+# Also tag it with the current workflow run ID, to make reuse in subsequent
+# CI steps easier (no need to track the commit ref).
+docker tag \
+  "${full_image_name}:${ref}" \
+  "${full_image_name}:${GITHUB_RUN_ID}"
+
+docker push "${full_image_name}:${GITHUB_RUN_ID}"
 
 # Additionally, if we're on main or we're doing a manually triggered build,
 # tag the image as ":main".

@@ -33,20 +33,20 @@ jobs:
 
       - name: Build the MATE bdist
         run: |
-          # Extremely annoying: the `pull_request` event creates a merge commit,
-          # which means that `GITHUB_SHA` is completely useless to key off of.
-          # We have to do some additional sleuthing for these events to get the right
-          # commit.
-          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-            ref="${ACTUAL_GITHUB_SHA_ON_PULL_REQUEST}"
-          else
-            ref="${GITHUB_SHA}"
-          fi
-
           docker run \
             --rm -v $(pwd):/mate \
-            "ghcr.io/galoisinc/mate-dev:${ref}" \
+            "ghcr.io/galoisinc/mate-dev:${GITHUB_RUN_ID}" \
             ./shake.sh -j bdist
+
+      - name: Compress the MATE bdist
+        run: |
+          tar czf mate-bdist.tar.gz ./.out/bdist
+
+      - name: Upload the MATE bdist
+        uses: actions/upload-artifact@v3
+        with:
+          name: mate-bdist
+          path: mate-bdist.tar.gz
 
       - name: Build and push the mate-dist image
         run: |
@@ -60,16 +60,9 @@ jobs:
 
       - name: Build the docs
         run: |
-          # See above comment
-          if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-            ref="${ACTUAL_GITHUB_SHA_ON_PULL_REQUEST}"
-          else
-            ref="${GITHUB_SHA}"
-          fi
-
           docker run \
             --rm -v $(pwd):/mate \
-            "ghcr.io/galoisinc/mate-dev:${ref}" \
+            "ghcr.io/galoisinc/mate-dev:${GITHUB_RUN_ID}" \
             ./shake.sh -j doc
 
       - name: Upload docs to Github Pages
@@ -78,3 +71,41 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .out/bdist/local/doc/html
+
+  test-legacy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Login to Packages Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull mate-dev
+        run: |
+          docker pull "ghcr.io/galoisinc/mate-dev:${GITHUB_RUN_ID}"
+
+      # - name: Fetch the MATE bdist
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: mate-bdist
+
+      # - name: Extract the MATE bdist
+      #   run: |
+      #     tar xzf mate-dist.tar.gz
+
+      - name: Run legacy tests
+        run: |
+          # TODO: Figure out the right way to plumb the integration test setting.
+          docker run \
+            -e MATE_INTEGRATION_TESTS=0 \
+            --rm -v $(pwd):/mate \
+            "ghcr.io/galoisinc/mate-dev:${GITHUB_RUN_ID}" \
+              ./shake.sh --skip=build pytests -- -- -n logical -x
+
